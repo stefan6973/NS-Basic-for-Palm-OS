@@ -2,7 +2,7 @@
 
 ## My Attempt
 
-I try tu reanimate this code bas for my personal use only. I'm not interested in provide new versions. If you need one then try it self.
+I'm trying to reanimate this code for my personal use only. I am not interested in providing new versions. If you need one, try it yourself.
 
 ## Original Readme
 
