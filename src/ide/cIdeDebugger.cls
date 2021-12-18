@@ -28,7 +28,7 @@ Attribute m_tcp.VB_VarHelpID = -1
 
 Private m_connectionState As enConnectionState 'lokale Kopie
 
-'Um dieses Ereignis auszulösen, verwenden Sie RaiseEvent mit der folgenden Syntax:
+'Um dieses Ereignis auszulï¿½sen, verwenden Sie RaiseEvent mit der folgenden Syntax:
 'RaiseEvent afterConnected[(arg1, arg2, ... , argn)]
 Public Event afterConnected(ByVal state As enConnectionState)
 Public Event afterDisconnected(ByVal state As enConnectionState)
@@ -61,16 +61,11 @@ Public Function Initialize() As cIdeDebugger
    End If
    Set Initialize = Me
    
-   'Set m_tcp = New Winsock
 End Function
 
 '--------------------------------------------------
-' singleton constructor
+' constructor
 '--------------------------------------------------
 Private Sub Class_Initialize()
-
-   'If Not Me Is cIdeDebugger Then
-   '   err.Raise vbObjectError, "Debugger", "No multiple instances of Debugger class are allowed."
-   'End If
-   
+   'Set m_tcp = New Winsock
 End Sub

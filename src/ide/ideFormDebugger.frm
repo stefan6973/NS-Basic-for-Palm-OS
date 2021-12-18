@@ -1,13 +1,13 @@
 VERSION 5.00
 Begin VB.Form ideFormDebugger 
    Caption         =   "Debugger"
-   ClientHeight    =   5310
-   ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   7695
+   ClientWidth     =   7500
+   ClientHeight    =   500
+   ClientTop       =   350
+   ClientLeft      =   100
    BeginProperty Font 
       Name            =   "Comic Sans MS"
-      Size            =   9.75
+      Size            =   10
       Charset         =   0
       Weight          =   400
       Underline       =   0   'False
@@ -17,25 +17,42 @@ Begin VB.Form ideFormDebugger
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5310
-   ScaleWidth      =   7695
+   ScaleWidth      =   7500
+   ScaleHeight     =   5000
    StartUpPosition =   1  'Fenstermitte
-   Begin VB.CommandButton btnTest 
-      Caption         =   "&Test"
+   Begin VB.CommandButton btnConnect 
+      Caption         =   "&Connect"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Comic Sans MS"
+         Size            =   10
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   615
-      Left            =   240
-      TabIndex        =   0
-      Top             =   240
-      Width           =   1455
+      Width           =   1500
+      Height          =   500
+      Left            =   250
+      Top             =   250
+      TabIndex        =   1
+   End
+   Begin VB.CommandButton btnDisconnect 
+      Caption         =   "&Disconnect"
+      BeginProperty Font 
+         Name            =   "Comic Sans MS"
+         Size            =   10
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Width           =   1500
+      Height          =   500
+      Left            =   250
+      Top             =   500
+      TabIndex        =   2
    End
 End
 Attribute VB_Name = "ideFormDebugger"
@@ -50,12 +67,13 @@ Private WithEvents m_debugger As cIdeDebugger
 Public Property Get Debugger() As cIdeDebugger
    If m_debugger Is Nothing Then
       Set m_debugger = New cIdeDebugger
-      m_debugger.Initialize
+      Set Debugger = m_debugger.Initialize()
+   Else
+      Set Debugger = m_debugger
    End If
-   Set Debugger = m_debugger
 End Property
 
-Private Sub btnTest_Click()
+Private Sub btnConnect_Click()
    With Debugger
       If .Status = connected Then
          .Status = disconnected
@@ -63,10 +81,12 @@ Private Sub btnTest_Click()
    End With
 End Sub
 
-Private Sub Form_Initialize()
-   If Not Debugger.Status = connected Then
-      Debugger.Status = connected
-   End If
+Private Sub btnDisconnect_Click()
+   With Debugger
+      If Not .Status = connected Then
+         .Status = connected
+      End If
+   End With
 End Sub
 
 Private Sub m_debugger_afterConnected(ByVal state As enConnectionState)
