@@ -1,4 +1,10 @@
-# NS-Basic-for-Palm-OS
+# NS-Basic-for-Palm-OS reanimated
+
+## My Attempt
+
+I try tu reanimate this code bas for my personal use only. I'm not interested in provide new versions. If you need one then try it self.
+
+## Original Readme
 
 It's a miracle this even exists.
 
