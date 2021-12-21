@@ -182,7 +182,7 @@ End Property
 '
 '------------------------------------------------------------
 Private Sub butEdit_click()
-Dim fCode As New frmCode
+	Dim fCode As New frmCode
 
    If outlMenu.ListIndex < 0 Then
       MsgBox "No item selected."
@@ -203,7 +203,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butApply_Click()
-Dim strCaption As String
+	Dim strCaption As String
    
    If outlMenu.ListIndex = -1 Then
       strCaption = fldCaption.Text
@@ -224,7 +224,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butDelete_Click()
-Dim i As Integer
+	Dim i As Integer
 
    If outlMenu.ListIndex < 0 Then
       MsgBox "No item selected."
@@ -267,7 +267,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub insert_menuelem()
-Dim mnuElem As New CMenuElem
+	Dim mnuElem As New CMenuElem
 
    'Create MenuElem, add to project and MenuBar
    mnuElem.IdNo = m_Project.GetNextSeqNo
@@ -288,7 +288,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butAdd_Click()
-Dim mnuElem As New CMenuElem
+	Dim mnuElem As New CMenuElem
 
    m_Project.Dirty = True
    mnuElem.IdNo = m_Project.GetNextSeqNo
@@ -332,7 +332,7 @@ Private Sub Form_Paint()
 'Dim m As Integer
 'Dim i As Integer
 'Dim work As String
-Dim mnuElem As CMenuElem
+	Dim mnuElem As CMenuElem
 
    outlMenu.fontName = gLabelFontName
    fldCaption.fontName = gLabelFontName

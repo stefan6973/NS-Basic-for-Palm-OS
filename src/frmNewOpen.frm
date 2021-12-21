@@ -236,8 +236,8 @@ Private m_iExistCOunt As Long
 '
 '------------------------------------------------------------
 Public Function SetBackwardFocus() As Long
-Dim CurHnd As Long
-Dim NewHnd As Long
+	Dim CurHnd As Long
+	Dim NewHnd As Long
 
    CurHnd = GetFocusAPI()
         
@@ -289,10 +289,10 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub SetControlPos(ByVal hd As Long, ByVal SFlags As Long, Optional ByVal lID As Long = -1)
-Dim tdr As RECT
-Dim wLp As POINTAPI
-Dim lShiftX As Long
-Dim lShiftY As Long
+	Dim tdr As RECT
+	Dim wLp As POINTAPI
+	Dim lShiftX As Long
+	Dim lShiftY As Long
  
    GetWindowRect hd, tdr
    ScreenToClient m_hwnd, wLp
@@ -323,8 +323,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function SetForwardFocus() As Long
-Dim CurHnd As Long
-Dim NewHnd As Long
+	Dim CurHnd As Long
+	Dim NewHnd As Long
     
    CurHnd = GetFocusAPI()
  
@@ -401,8 +401,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub cD_FolderChange(ByVal hDlg As Long)
-Static DoOnce As Boolean
-Dim hd As Long
+	Static DoOnce As Boolean
+	Dim hd As Long
  
    If Not DoOnce Then
       'We do this because the file listvw was not_
@@ -425,9 +425,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub cD_InitDialog(ByVal hDlg As Long)
-Dim hd As Long
-Dim tR As RECT, tTR As RECT
-Dim lW As Long, lH As Long
+	Dim hd As Long
+	Dim tR As RECT, tTR As RECT
+	Dim lW As Long, lH As Long
     
    m_hDlg = hDlg
    ' For Open/Save dialog we need the parent of the supplied dialog handle:
@@ -586,8 +586,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Load()
-Dim itmX As ListItem
-Dim i As Long
+	Dim itmX As ListItem
+	Dim i As Long
    LoadResStrings Me
    'Signal default of cancelled:
    m_bCancel = True
@@ -746,8 +746,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub tabMain_Click()
-Dim iTab As String
-Dim hd  As Long
+	Dim iTab As String
+	Dim hd  As Long
 
    'Show the relevant picture box for the
    'selected tab:

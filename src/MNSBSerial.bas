@@ -18,11 +18,11 @@ End Function
 '
 '------------------------------------------------------------
 Public Function CheckSerial(ByVal astrSerial As String, ByRef anProduct As Integer) As Long
-Dim nProduct As Integer
-Dim nMod As Integer
-Dim nCustNum As Long
-Dim nPad1 As Integer, nPad2 As Integer
-Dim nCheck As Integer
+	Dim nProduct As Integer
+	Dim nMod As Integer
+	Dim nCustNum As Long
+	Dim nPad1 As Integer, nPad2 As Integer
+	Dim nCheck As Integer
 'MsgBox "1: " & astrSerial & " " & anProduct
    ' Prod | Dig4 | Dig3 | Pad1 | Dig0 | Pad2 | Dig2 | Dig1 | Chk
    'Product Code: a-f = Prod #1, g-l = Prod #2, m-r = Prod #3, s-x = Prod #4
@@ -75,11 +75,11 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GenSerial(ByVal anProduct As Integer, ByVal anCustNum As Long) As String
-Dim nProduct As Integer
-Dim nMod As Integer
-Dim strCustNum As String
-Dim nPad1 As Integer
-Dim nPad2 As Integer
+	Dim nProduct As Integer
+	Dim nMod As Integer
+	Dim strCustNum As String
+	Dim nPad1 As Integer
+	Dim nPad2 As Integer
 
    If anProduct < 1 Or anProduct > 4 Then Exit Function
    nProduct = (anProduct - 1) * 6 + Int(Rnd() * 6)

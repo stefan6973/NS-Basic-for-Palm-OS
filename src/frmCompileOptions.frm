@@ -171,12 +171,12 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butDone_Click()
-Dim oldPath As String
-Dim res As Boolean
-Dim FatBoolean As String
-Dim strAutoKey As String
-Dim strPOSErun As String
-Dim strHiRes As String
+	Dim oldPath As String
+	Dim res As Boolean
+	Dim FatBoolean As String
+	Dim strAutoKey As String
+	Dim strPOSErun As String
+	Dim strHiRes As String
    
    oldPath = GlobalPath
    GlobalPath = txtGlobalPath

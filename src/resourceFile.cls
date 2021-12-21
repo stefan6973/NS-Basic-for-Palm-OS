@@ -32,7 +32,7 @@ Private Const kResStrings As Integer = 2201
 '
 '------------------------------------------------------------
 Public Sub class_initialize()
-Dim i As Integer
+	Dim i As Integer
 
    Name = "Resource"
    filename = ""
@@ -57,8 +57,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
-Dim version As Integer
-Dim nID As Integer
+	Dim version As Integer
+	Dim nID As Integer
 
    Input #nFileNumber, version
    If version <> kVersion Then
@@ -144,8 +144,8 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
-Dim nIndex As Integer
+	Static nProp As Integer
+	Dim nIndex As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -188,8 +188,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim bmp As CResourceFile
-Dim x As Integer
+	Dim bmp As CResourceFile
+	Dim x As Integer
 
    ValidateProperty = True
    Select Case strProp
@@ -232,9 +232,9 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GuessName()
-Dim nameSoFar As String
-Dim k As Integer
-Dim bite As Byte
+	Dim nameSoFar As String
+	Dim k As Integer
+	Dim bite As Byte
 
     On Error GoTo fileNotFound
     
@@ -265,14 +265,14 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut(pathname)
-Dim bite As Byte
-Dim k As Integer
-Dim nRecords As Integer
-Dim localChunkID As Long
-Dim correctID As Long
-Dim foo As String
-Dim i As Integer
-Dim typ As String
+	Dim bite As Byte
+	Dim k As Integer
+	Dim nRecords As Integer
+	Dim localChunkID As Long
+	Dim correctID As Long
+	Dim foo As String
+	Dim i As Integer
+	Dim typ As String
 
 '#If NSBSymbian Then
 '   Exit Sub 'On Symbian, resources are installed as files, not embedded in .prc

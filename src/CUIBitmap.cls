@@ -45,7 +45,7 @@ Private Const kProperties As String = "Left-Top"
 Private Const kMethods As String = "Hide-Show"
 
 Private Sub class_initialize()
-Dim trace As Boolean
+	Dim trace As Boolean
 trace = True
 
    If trace Then MsgBox "CUIBitmap:class_initialize 1"
@@ -85,14 +85,14 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim c As Byte
-Dim i As Integer
-Dim vw As CForm
-Dim ob As Object
-Dim bmp As bitmapOut
-Dim bfl As CBitmapFile
-Dim bValid As Boolean
-Dim bBitmapOk As Boolean
+	Dim c As Byte
+	Dim i As Integer
+	Dim vw As CForm
+	Dim ob As Object
+	Dim bmp As bitmapOut
+	Dim bfl As CBitmapFile
+	Dim bValid As Boolean
+	Dim bBitmapOk As Boolean
 
    If obj.Usable Then
       bmp.Usable = &H80
@@ -188,8 +188,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim proplist() As String
-Dim i As Integer
+	Dim proplist() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "bmp" Then
@@ -223,10 +223,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim filename As String
-Dim w As Integer
-Dim h As Integer
-Dim properties() As String
+	Dim filename As String
+	Dim w As Integer
+	Dim h As Integer
+	Dim properties() As String
    Const cCaption = 0
    Const cAlignment = 1
    Const cGradientColor1 = 2
@@ -591,7 +591,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -754,11 +754,11 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim nResID As Integer
-Dim bmp As CBitmapFile
-Dim frm As CForm
-Dim o As Object
-Dim i As Long
+	Dim nResID As Integer
+	Dim bmp As CBitmapFile
+	Dim frm As CForm
+	Dim o As Object
+	Dim i As Long
 
    ValidateProperty = True
    Select Case strProp

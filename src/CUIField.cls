@@ -61,10 +61,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim c As Byte
-Dim fld As FieldOut
-Dim scr As scrollbarOut
-Dim templen As Integer
+	Dim c As Byte
+	Dim fld As FieldOut
+	Dim scr As scrollbarOut
+	Dim templen As Integer
 
    fld.id.w = cvtWord(obj.IdNo)
    fld.RECT.topleft.x = cvtWord(obj.OrigLeft)
@@ -165,7 +165,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim temp As String
+	Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -180,8 +180,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "fld" Then
@@ -217,9 +217,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim i As Integer
-Dim nolines As Integer
-Dim line As String
+	Dim i As Integer
+	Dim nolines As Integer
+	Dim line As String
 
    If obj.Control Is Nothing Then Exit Sub
    If Editable Then
@@ -393,7 +393,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -455,7 +455,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim n As Double
+	Dim n As Double
 
    ValidateProperty = True
    Select Case strProp

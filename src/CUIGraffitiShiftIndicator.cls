@@ -39,8 +39,8 @@ End Sub
 '
 '------------------------------------------------------------
 Sub PrcOut()
-Dim c As Byte
-Dim si As shiftIndicOut
+	Dim c As Byte
+	Dim si As shiftIndicOut
 
    si.pos.x = cvtWord(obj.OrigLeft)
    si.pos.y = cvtWord(obj.OrigTop)
@@ -91,8 +91,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "shf" Then
@@ -118,7 +118,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim i As Integer, h As Integer, w As Integer
+	Dim i As Integer, h As Integer, w As Integer
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -143,7 +143,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""

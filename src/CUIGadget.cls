@@ -39,8 +39,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim gad As gadgetOut
-Dim c As Byte
+	Dim gad As gadgetOut
+	Dim c As Byte
 
    gad.id.w = cvtWord(obj.IdNo)
    If obj.Usable Then
@@ -99,8 +99,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "gad" Then
@@ -140,7 +140,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""

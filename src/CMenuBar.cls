@@ -49,7 +49,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim mElem As CMenuElem
+	Dim mElem As CMenuElem
 
    Copy = Quote("menubar") & vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -64,10 +64,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String, ByVal proj As CProject)
-Dim tokens() As String
-Dim i As Integer, nCount As Integer
-Dim oldIdNo As Integer
-Dim mElem As CMenuElem
+	Dim tokens() As String
+	Dim i As Integer, nCount As Integer
+	Dim oldIdNo As Integer
+	Dim mElem As CMenuElem
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) = "menuelem" Then
@@ -108,11 +108,11 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub restore()
-Dim ignore As String
-Dim version As Integer
-Dim i As Integer
-Dim cnt As Integer
-Dim mElem As CMenuElem
+	Dim ignore As String
+	Dim version As Integer
+	Dim i As Integer
+	Dim cnt As Integer
+	Dim mElem As CMenuElem
 
    Input #nFileNumber, ignore 'menu
    Input #nFileNumber, version
@@ -161,7 +161,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""

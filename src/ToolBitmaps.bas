@@ -20,10 +20,10 @@ Public Const IMAGE_BITMAP = 0
 '------------------------------------------------------------
 Public Sub MakeFileTrans(ImgPic As Object, ByVal FileName As String)
 'You'll need to add an NT 4.0 procedure
-Dim BitMapLong As Long
-Dim TempLong As Long
-Dim hfile As Integer
-Dim bytResData() As Byte
+	Dim BitMapLong As Long
+	Dim TempLong As Long
+	Dim hfile As Integer
+	Dim bytResData() As Byte
 
    hfile = FreeFile
    bytResData = LoadResData(114, "CUSTOM")

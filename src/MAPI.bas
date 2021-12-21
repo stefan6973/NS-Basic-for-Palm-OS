@@ -470,21 +470,21 @@ Declare Function ChooseColor Lib "comdlg32.dll" Alias "ChooseColorA" _
 Declare Function OleTranslateColor Lib "oleaut32.dll" (ByVal lOleColor _
     As Long, ByVal lHPalette As Long, lColorRef As Long) As Long
     
-Const CC_RGBINIT = &H1&
-Const CC_FULLOPEN = &H2&
-Const CC_PREVENTFULLOPEN = &H4&
-Const CC_SHOWHELP = &H8&
-Const CC_ENABLEHOOK = &H10&
-Const CC_ENABLETEMPLATE = &H20&
-Const CC_ENABLETEMPLATEHANDLE = &H40&
-Const CC_SOLIDCOLOR = &H80&
-Const CC_ANYCOLOR = &H100&
-Const CLR_INVALID = &HFFFF
+	Const CC_RGBINIT = &H1&
+	Const CC_FULLOPEN = &H2&
+	Const CC_PREVENTFULLOPEN = &H4&
+	Const CC_SHOWHELP = &H8&
+	Const CC_ENABLEHOOK = &H10&
+	Const CC_ENABLETEMPLATE = &H20&
+	Const CC_ENABLETEMPLATEHANDLE = &H40&
+	Const CC_SOLIDCOLOR = &H80&
+	Const CC_ANYCOLOR = &H100&
+	Const CLR_INVALID = &HFFFF
 
 Public Function GetTemporaryPath() As String
-Dim strPath As String
+	Dim strPath As String
 strPath = String(MAX_PATH, 0)
-Dim lngResult As Long
+	Dim lngResult As Long
 
    lngResult = GetTempPath(MAX_PATH, strPath)
    If lngResult > 0 Then
@@ -562,9 +562,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Get GetCDlgFileName(ByVal hDlg As Long) As String
-Dim sBuf As String
-Dim iPos As Long
-Dim hWnd As Long
+	Dim sBuf As String
+	Dim iPos As Long
+	Dim hWnd As Long
    hWnd = GetParent(hDlg)
    sBuf = String$(MAX_PATH, 0)
    SendMessageString hWnd, CDM_GETFILEPATH, 260, sBuf
@@ -725,9 +725,9 @@ End Function
 '------------------------------------------------------------
 Public Function ReadFile(astrFile As String, ByRef astrText As String) As Boolean
 
-Dim hFile As Long
-Dim FBuf() As Byte
-Dim bytesRead As Long
+	Dim hFile As Long
+	Dim FBuf() As Byte
+	Dim bytesRead As Long
 
 hFile = CreateFile(astrFile, GENERIC_READ, FILE_SHARE_READ, ByVal 0&, OPEN_EXISTING, 0, 0)
 If hFile <> INVALID_HANDLE_VALUE Then

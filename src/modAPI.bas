@@ -297,9 +297,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Get GetCDlgFileName(ByVal hDlg As Long) As String
-Dim sBuf As String
-Dim iPos As Long
-Dim hwnd As Long
+	Dim sBuf As String
+	Dim iPos As Long
+	Dim hwnd As Long
    hwnd = GetParent(hDlg)
    sBuf = String$(MAX_PATH, 0)
    SendMessageString hwnd, CDM_GETFILEPATH, 260, sBuf

@@ -37,7 +37,7 @@ Global gFirstSubName As String
 Global gCorrection As Long
 Global gsCurrentFormGlobalID As String
 
-Dim bracket_mode As Boolean
+	Dim bracket_mode As Boolean
 Global LastSubFuncParsed As String   '06102002 added
 Global startingParagCount As Integer  'added 4/07/2001  ****
 Global allowArrayNames As Boolean     'added 805 ************
@@ -2024,19 +2024,19 @@ End Function
 '
 '------------------------------------------------------------
 Function locate_data_tbl() As Integer  'locate data elem by name
-Dim lvl As Integer
-Dim save_term As String
-Dim i As Integer
-Dim j As Integer
-Dim k As Integer
-Dim c As Integer
-Dim cnt As Integer
-Dim have_period As Integer
-Dim Dgt_Bef As Integer
-Dim nnn As Double
+	Dim lvl As Integer
+	Dim save_term As String
+	Dim i As Integer
+	Dim j As Integer
+	Dim k As Integer
+	Dim c As Integer
+	Dim cnt As Integer
+	Dim have_period As Integer
+	Dim Dgt_Bef As Integer
+	Dim nnn As Double
 'aView  * view2=null_ptr
-Dim one_num As Double
-Dim one_string As String
+	Dim one_num As Double
+	Dim one_string As String
 'sgBox "at locate_data term=" + term + "   type=" + str$(termType)
 
    If (termType = 4) Then GoTo loc_data_name
@@ -2307,7 +2307,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub get_dataname()  '/*--- find next data name--------------*/
-Dim save_data As New CDataElement
+	Dim save_data As New CDataElement
     
    get_dataname_nosubs
    If (err_code = 0) Then
@@ -3407,30 +3407,30 @@ End Function
 '
 '------------------------------------------------------------
 Function compile_all() As Integer
-Dim saveHighestSeqNo As Long
+	Dim saveHighestSeqNo As Long
    saveHighestSeqNo = gTarget.HighestSeqNo
    ''above must be before 'New' declarations
-Dim wkstr As String
-Dim ii As Integer
-Dim status As Long                '*****revised 3/13/2001 **************
+	Dim wkstr As String
+	Dim ii As Integer
+	Dim status As Long                '*****revised 3/13/2001 **************
 
-Dim para As CParaTbl
-Dim temp As New CDataElement
+	Dim para As CParaTbl
+	Dim temp As New CDataElement
    Set temp = dataelem_null_ptr
-Dim aView_save As New CForm
-Dim view2 As New CForm
+	Dim aView_save As New CForm
+	Dim view2 As New CForm
    Set view2 = aView_null_ptr
-Dim Data2  As New CDataElement
+	Dim Data2  As New CDataElement
    Set Data2 = dataelem_null_ptr
-Dim o As Object
+	Dim o As Object
    Set o = object_null_ptr
    'QRYNAV *n=null_ptr
-Dim old_aView As CForm
-Dim view3 As CForm      'added 12182002 *******
+	Dim old_aView As CForm
+	Dim view3 As CForm      'added 12182002 *******
    Set old_aView = aView
-Dim i As Integer
-Dim codeIn As String
-Dim projectDir
+	Dim i As Integer
+	Dim codeIn As String
+	Dim projectDir
 
 'sgBox "at compile all"
    compiler_debug = False
@@ -3765,14 +3765,14 @@ End Sub
 '
 '------------------------------------------------------------
 Function compile_one_script(script As String) As Long    '***revised 3/13/2001**************
-Dim ii As Integer
-Dim work As String
-Dim err As Integer
-Dim Msg As String
-Dim jmpval As Integer
-Dim final_para As CParaTbl
-Dim p As CParaTbl
-Dim scriptTitle As String
+	Dim ii As Integer
+	Dim work As String
+	Dim err As Integer
+	Dim Msg As String
+	Dim jmpval As Integer
+	Dim final_para As CParaTbl
+	Dim p As CParaTbl
+	Dim scriptTitle As String
 
 'George: The next line is kind of evil.  Script procedures can use parens optionally
 'Sub HelloWorld will throw, but Sub HelloWorld() will not, because this ShowStatus
@@ -3863,16 +3863,16 @@ End Sub
 '
 '------------------------------------------------------------
 Sub Main()
-Dim index As Integer
-Dim userID As Long
-Dim username As String
-Dim itemIndex As Integer
-Dim reg As String
-Dim i As Integer
-Dim count As Long
-Dim randNo As Long
-Dim strSN As String
-Dim trace As Boolean
+	Dim index As Integer
+	Dim userID As Long
+	Dim username As String
+	Dim itemIndex As Integer
+	Dim reg As String
+	Dim i As Integer
+	Dim count As Long
+	Dim randNo As Long
+	Dim strSN As String
+	Dim trace As Boolean
 trace = True
    
 '   projectDirty = False
@@ -4144,7 +4144,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub openOutput()
-Dim wk As String
+	Dim wk As String
 
    wk = DownloadPath + gTarget.Name + ".prc"
    If Not Dir(wk) = "" Then
@@ -6205,7 +6205,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub func_tablegetselectedrow()
-Dim a As CSynElem
+	Dim a As CSynElem
    Dim b As CSynElem
    Dim c As CSynElem
    Dim z As CSynElem
@@ -6261,7 +6261,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub func_getselectedcol()
-Dim a As CSynElem
+	Dim a As CSynElem
    Dim b As CSynElem
    Dim c As CSynElem
    Dim z As CSynElem
@@ -6318,7 +6318,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub func_getnorows()
-Dim a As CSynElem
+	Dim a As CSynElem
    Dim b As CSynElem
    Dim c As CSynElem
    Dim z As CSynElem
@@ -8115,11 +8115,11 @@ End Sub
 '
 '------------------------------------------------------------
 Sub eliminateNegConstants()
-Dim Prev As CSynElem
-Dim temp As CSynElem
-Dim saveTerm As String
-Dim saveTermtype As Integer
-Dim res As Integer
+	Dim Prev As CSynElem
+	Dim temp As CSynElem
+	Dim saveTerm As String
+	Dim saveTermtype As Integer
+	Dim res As Integer
 
    If first_se Is se_null_ptr Then Exit Sub
    Set se = first_se
@@ -8202,22 +8202,22 @@ Sub substituteForObjNotation()
 '       obj.property = .....
 '       x= obj.property
 '       obj.method params
-Dim Name As Variant
-Dim objname As String
-Dim methodProp As String
-Dim pos As Integer
-Dim view2 As CForm
-Dim t As CTypeElem
-Dim wk As String
-Dim temp As CSynElem
-Dim seSave As CSynElem  'added 06102002
-Dim cnt As Integer      'added 06102002
-Dim oTemp As Object
-Dim nProc As Integer
-Dim nArgs As Integer
-Dim generalVerb As Boolean        'added 08222002
-Dim generalVerbSE As CSynElem      'added 08222002
-Dim x As CSynElem
+	Dim Name As Variant
+	Dim objname As String
+	Dim methodProp As String
+	Dim pos As Integer
+	Dim view2 As CForm
+	Dim t As CTypeElem
+	Dim wk As String
+	Dim temp As CSynElem
+	Dim seSave As CSynElem  'added 06102002
+	Dim cnt As Integer      'added 06102002
+	Dim oTemp As Object
+	Dim nProc As Integer
+	Dim nArgs As Integer
+	Dim generalVerb As Boolean        'added 08222002
+	Dim generalVerbSE As CSynElem      'added 08222002
+	Dim x As CSynElem
 
    Set se = first_se
    
@@ -11216,11 +11216,11 @@ End Function
 '
 '------------------------------------------------------------
 Public Function parseTheScript() As Integer
-Dim save_proc_offset As Long
-Dim pp As CParaTbl
-Dim i As Integer
-Dim p As CParaTbl
-Dim tempBuffer As String
+	Dim save_proc_offset As Long
+	Dim pp As CParaTbl
+	Dim i As Integer
+	Dim p As CParaTbl
+	Dim tempBuffer As String
 
 'dbug "at parse"
    quote_mode = 0
@@ -11316,9 +11316,9 @@ End Sub
 '
 '------------------------------------------------------------
 Sub parse_it()
-Dim work As String
-Dim tempSe As CSynElem
-Dim res As Integer
+	Dim work As String
+	Dim tempSe As CSynElem
+	Dim res As Integer
 
 proc_loop:
    If Not first_se Is se_null_ptr Then
@@ -11543,30 +11543,30 @@ Sub parse_let()
 'Dim save_rel_1 As String
 'Dim save_rel_tbl_1 As Integer
 'sgBox "at parse_let"
-Dim round As Integer
-Dim save_a, save_1, save_2, save_3 As Integer
-Dim saveTerm As String
-Dim saveTermtype As Integer
-Dim wkde1 As CDataElement
-Dim wkde2 As CDataElement
-Dim de1 As CDataElement
-Dim de2 As CDataElement
-Dim Data1 As CDataElement
-Dim Data2 As CDataElement
-Dim saveData As CDataElement
-Dim typ As New CTypeDef
-Dim t As New CTypeElem
-Dim wk As String
-Dim data2occ1 As Integer
-Dim data2occ2 As Integer
-Dim data2occ3 As Integer
-Dim data1occ1 As Integer
-Dim data1occ2 As Integer
-Dim data1occ3 As Integer
-Dim Shift As Integer
-Dim ii As Integer
-Dim jj As Integer
-Dim kk As Integer
+	Dim round As Integer
+	Dim save_a, save_1, save_2, save_3 As Integer
+	Dim saveTerm As String
+	Dim saveTermtype As Integer
+	Dim wkde1 As CDataElement
+	Dim wkde2 As CDataElement
+	Dim de1 As CDataElement
+	Dim de2 As CDataElement
+	Dim Data1 As CDataElement
+	Dim Data2 As CDataElement
+	Dim saveData As CDataElement
+	Dim typ As New CTypeDef
+	Dim t As New CTypeElem
+	Dim wk As String
+	Dim data2occ1 As Integer
+	Dim data2occ2 As Integer
+	Dim data2occ3 As Integer
+	Dim data1occ1 As Integer
+	Dim data1occ2 As Integer
+	Dim data1occ3 As Integer
+	Dim Shift As Integer
+	Dim ii As Integer
+	Dim jj As Integer
+	Dim kk As Integer
 
 'sgBox "aT PARSE_LET"
    get_dataname
@@ -12278,7 +12278,7 @@ End Function
 '
 '------------------------------------------------------------
 Sub parse_typeStmt()
-Dim typename As String
+	Dim typename As String
  
    get_term
    If locate_data_tbl() = 1 Then
@@ -13959,7 +13959,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub parse_select()
-Dim cs As New CSelectObj
+	Dim cs As New CSelectObj
 
    get_term
 'sgBox "in select     term=" + term
@@ -13984,11 +13984,11 @@ End Sub
 '
 '------------------------------------------------------------
 Sub parse_case()
-Dim save_term As String
-Dim cs As CSelectObj
-Dim n As CSynElem
-Dim e As CSynElem
-Dim z As CSynElem
+	Dim save_term As String
+	Dim cs As CSelectObj
+	Dim n As CSynElem
+	Dim e As CSynElem
+	Dim z As CSynElem
 
    If gTarget.SelectCollection.count = 0 Then
       print_err gStringTable(3200) '"CASE without SELECT CASE preceeding"
@@ -15972,7 +15972,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub SearchControlName(t As String)
-Dim view2 As CForm
+	Dim view2 As CForm
 
    If Not ALPHALIT Then SYNTAX 199
    For Each view2 In gTarget.FormCollection
@@ -16071,7 +16071,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub CheckSerialNumber()
-Dim serNo As Long
+	Dim serNo As Long
 #If NSBSymbian Then
    serNo = CheckSerial(glSerialNumber, 4)
    If serNo = 64 Then serNo = 0 'stolen card - zorro08@gmail.com
@@ -16233,9 +16233,9 @@ End Sub
 '------------------------------------------------------------
 Public Sub CollectFuncs()
 'this collects all functions and returns DEFINE statements for them
-Dim cMod As CCodeModule
-Dim frm As CForm
-Dim ob As Object
+	Dim cMod As CCodeModule
+	Dim frm As CForm
+	Dim ob As Object
 gDefineStmts = "define settheme as integer" & vbCrLf
 gFirstSubName = ""
 ShowStatus "Collecting Function Definitions"
@@ -16291,8 +16291,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub CollectFuncsOnList(stmt As String, startupScript As Boolean)
-Dim p1 As Long
-Dim p2 As Long
+	Dim p1 As Long
+	Dim p2 As Long
 
    stmt = Trim$(LCase$(stmt))
    If gFirstSubName = "" And startupScript Then 'get name of first subroutine - it's the startup code
@@ -16323,10 +16323,10 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function DefineFuncsInStartupCode(codeIn As String) As String
-Dim i As Long
-Dim themeCode As String
-Dim p As Integer
-Dim theme As String
+	Dim i As Long
+	Dim themeCode As String
+	Dim p As Integer
+	Dim theme As String
 
    theme = gTarget.theme
    p = InStrRev(theme, "\")
@@ -16354,7 +16354,7 @@ End Function
 '
 '------------------------------------------------------------
 Private Function DefineSetThemeFunction() As String
-Dim s As String
+	Dim s As String
  s = "Function SetTheme(filename as string) as Integer" & vbCrLf
  s = s & "Dim ResTypeInt as Integer" & vbCrLf
  s = s & "Dim ResID as Short" & vbCrLf
@@ -16410,8 +16410,8 @@ End Function
 '
 '------------------------------------------------------------
 Private Function dbCreateDatases() As String
-Dim s As String
-Dim res As CResourceFile
+	Dim s As String
+	Dim res As CResourceFile
 
    'Palm does not automatically extract theme files, so it has to be done here.
    For Each res In gTarget.ResourceCollection

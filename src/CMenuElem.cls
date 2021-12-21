@@ -46,7 +46,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
-Dim strTemp As String
+	Dim strTemp As String
 
    Write #nFileNumber, "menu"
    Write #nFileNumber, kVersion
@@ -60,7 +60,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim strTemp As String
+	Dim strTemp As String
 
    Copy = Quote("menuelem") & vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -74,10 +74,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
-Dim oldIdNo As Integer
-Dim nScriptEnd As Integer
+	Dim tokens() As String
+	Dim i As Integer
+	Dim oldIdNo As Integer
+	Dim nScriptEnd As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "menuelem" Then
@@ -183,7 +183,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
-Dim proj As CProject
+	Dim proj As CProject
    menu_script = strText
    Set proj = LocateProject(GlobalID)
    proj.Dirty = True
@@ -193,8 +193,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
-Dim i As Integer
+	Static nProp As Integer
+	Dim i As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -244,7 +244,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim strCommand As String
+	Dim strCommand As String
 
    ValidateProperty = True
    Select Case strProp
@@ -287,8 +287,8 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Let caption(ByVal strCaption As String)
-Dim strFont As String
-Dim nFontSize As Integer
+	Dim strFont As String
+	Dim nFontSize As Integer
 
    m_strCaption = strCaption
    strFont = frmMain.picBox.fontName

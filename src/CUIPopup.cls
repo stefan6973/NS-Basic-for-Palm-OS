@@ -53,10 +53,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim c As Byte
-Dim pop As ctlOut
-Dim popup As popupOut
-Dim templen As Integer
+	Dim c As Byte
+	Dim pop As ctlOut
+	Dim popup As popupOut
+	Dim templen As Integer
 
    BuildControlPrc pop, obj
    pop.style.s = &H3
@@ -98,17 +98,17 @@ End Sub
 '
 '------------------------------------------------------------
 Sub PutOutListElem()
-Dim cnt As Integer
-Dim c As Byte
-Dim lst As listOut
-Dim s As Variant
-Dim ss As String
-Dim templen As Integer
-Dim Items As New Collection
-Dim i As Integer
-Dim listHeight As Integer
-Dim strTemp As String
-Dim arrList() As String
+	Dim cnt As Integer
+	Dim c As Byte
+	Dim lst As listOut
+	Dim s As Variant
+	Dim ss As String
+	Dim templen As Integer
+	Dim Items As New Collection
+	Dim i As Integer
+	Dim listHeight As Integer
+	Dim strTemp As String
+	Dim arrList() As String
 
    'Examine the list and make sure it contains enough items to satisy VisibleItems, padding with
    'a " " item where necessary
@@ -255,8 +255,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "pop" Then
@@ -287,9 +287,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim i As Integer
-Const kDropArrowWidth = 8
-Const kDropArrowSpace = 2
+	Dim i As Integer
+	Const kDropArrowWidth = 8
+	Const kDropArrowSpace = 2
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -368,7 +368,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""
@@ -434,15 +434,15 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim nResID As Integer
-Dim bmp As CBitmapFile
-Dim frm As CForm
-Dim o As Object
-Dim n As Integer
-Dim arrList() As String
-Dim i As Integer
-Dim j As Integer
-Dim arrItems() As String
+	Dim nResID As Integer
+	Dim bmp As CBitmapFile
+	Dim frm As CForm
+	Dim o As Object
+	Dim n As Integer
+	Dim arrList() As String
+	Dim i As Integer
+	Dim j As Integer
+	Dim arrItems() As String
 
    ValidateProperty = True
    Select Case strProp

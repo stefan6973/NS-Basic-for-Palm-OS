@@ -81,7 +81,7 @@ Public obj_code_len As Long
 Public termin_obj_code As String
 Public termin_obj_code_len As Long
 'Dim formTOCLoc3 As Long
-Dim TOCLoc3 As Long
+	Dim TOCLoc3 As Long
 'Dim TOCLoc4 As Long
 
 'IDE variables
@@ -1637,10 +1637,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddNewForm() As CForm
-Dim frm As New CForm
-Dim tempForm As CForm
-Dim i As Integer
-Dim strTitle As String
+	Dim frm As New CForm
+	Dim tempForm As CForm
+	Dim i As Integer
+	Dim strTitle As String
 
    frm.obj_code_id = GetNextSeqNo
    frm.IdNo = GetNextSeqNo
@@ -1668,7 +1668,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveForm(ByVal strGlobalID As String)
-Dim i As Integer
+	Dim i As Integer
 
    For i = 1 To FormCollection.count
       If FormCollection(i).GlobalID = strGlobalID Then
@@ -1685,7 +1685,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddNewBitmap(ByRef strFilename As String) As CBitmapFile
-Dim bmp As New CBitmapFile
+	Dim bmp As New CBitmapFile
 
    bmp.IdNo = GetNextSeqNo
    bmp.SetFileName strFilename
@@ -1699,7 +1699,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveBitmap(ByVal strGlobalID As String)
-Dim i As Integer
+	Dim i As Integer
 
    For i = 1 To BitmapCollection.count
       If BitmapCollection(i).GlobalID = strGlobalID Then
@@ -1714,7 +1714,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddNewResource(ByRef strFilename As String) As CResourceFile
-Dim bmp As New CResourceFile
+	Dim bmp As New CResourceFile
 
    bmp.IdNo = GetNextSeqNo
    bmp.SetFileName strFilename
@@ -1728,7 +1728,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveResource(ByVal strGlobalID As String)
-Dim i As Integer
+	Dim i As Integer
 
    For i = 1 To ResourceCollection.count
       If ResourceCollection(i).GlobalID = strGlobalID Then
@@ -1743,10 +1743,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddModule(Optional ByRef strFilename As String = "") As CCodeModule
-Dim cMod As New CCodeModule
-Dim cmod2 As CCodeModule
-Dim strModule As String
-Dim i As Integer
+	Dim cMod As New CCodeModule
+	Dim cmod2 As CCodeModule
+	Dim strModule As String
+	Dim i As Integer
 
    If Len(strFilename) <> 0 Then
       If Dir(strFilename, vbNormal) = "" Then
@@ -1782,7 +1782,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveModule(ByVal strGlobalID As String)
-Dim i As Integer
+	Dim i As Integer
 
    For i = 1 To CodeCollection.count
       If CodeCollection(i).GlobalID = strGlobalID Then
@@ -1845,27 +1845,27 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub GenMenuTBAR(mn As CMenu, eno As Integer)
-Dim mBar As PPmenuBar
-Dim pull As menuPulldown
-Dim itm As menuItem
-Dim mnu As CMenuElem
-Dim mnu2 As CMenuElem
-Dim temp As Long
-Dim p As Long
-Dim i As Long
-Dim startPull As Long
-Dim startItem As Long
-Dim startStrings As Long
-Dim startMBAR As Long
-Dim icnt As Integer
-Dim pcnt As Integer
-Dim n As Integer
-Dim knt As Integer
-Dim m As Integer
-Dim titleOffset As Integer
-Dim maxlen As Integer
-Dim drop As Integer
-Dim byte00 As Byte
+	Dim mBar As PPmenuBar
+	Dim pull As menuPulldown
+	Dim itm As menuItem
+	Dim mnu As CMenuElem
+	Dim mnu2 As CMenuElem
+	Dim temp As Long
+	Dim p As Long
+	Dim i As Long
+	Dim startPull As Long
+	Dim startItem As Long
+	Dim startStrings As Long
+	Dim startMBAR As Long
+	Dim icnt As Integer
+	Dim pcnt As Integer
+	Dim n As Integer
+	Dim knt As Integer
+	Dim m As Integer
+	Dim titleOffset As Integer
+	Dim maxlen As Integer
+	Dim drop As Integer
+	Dim byte00 As Byte
 
    byte00 = &H0
    wordBound 3
@@ -2207,7 +2207,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -2313,10 +2313,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim strWork As String
-Dim proj As CProject
-Dim n As Integer
-Dim frm As Form
+	Dim strWork As String
+	Dim proj As CProject
+	Dim n As Integer
+	Dim frm As Form
 
    ValidateProperty = True
    Select Case strProp
@@ -2474,7 +2474,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Property Get Form(nID As Integer) As CForm
-Dim frm As CForm
+	Dim frm As CForm
 
    For Each frm In FormCollection
       If frm.IdNo = nID Then
@@ -2488,7 +2488,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get Bitmap(nID As Integer) As CBitmapFile
-Dim bmp As CBitmapFile
+	Dim bmp As CBitmapFile
 
    For Each bmp In BitmapCollection
       If bmp.IdNo = nID Then
@@ -2502,7 +2502,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get resource(nID As Integer) As CResourceFile
-Dim bmp As CResourceFile
+	Dim bmp As CResourceFile
 
    For Each bmp In ResourceCollection
       If bmp.IdNo = nID Then
@@ -2516,7 +2516,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get Module(nID As Integer) As CCodeModule
-Dim cm As CCodeModule
+	Dim cm As CCodeModule
 
    For Each cm In CodeCollection
       If cm.IdNo = nID Then
@@ -2576,11 +2576,11 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub WriteOutBitmaps()
-Dim bmp As CBitmapFile
-Dim frm As Object
-Dim obj As Object
-Dim filename As String
-Dim res As Double
+	Dim bmp As CBitmapFile
+	Dim frm As Object
+	Dim obj As Object
+	Dim filename As String
+	Dim res As Double
 
    For Each bmp In BitmapCollection
       If CheckBitmap(bmp.PathName1) And CheckBitmap(bmp.PathName2) And CheckBitmap(bmp.PathName4) And CheckBitmap(bmp.PathName8) And CheckBitmap(bmp.PathName16) And _
@@ -2617,7 +2617,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub WriteOutResources()
-Dim resource As CResourceFile
+	Dim resource As CResourceFile
    For Each resource In ResourceCollection
          'ResIn resource.IdNo
    Next
@@ -2646,13 +2646,13 @@ End Function
 '
 '------------------------------------------------------------
 Public Function BuildMap() As String()
-Dim strMap As String
-Dim frm As CForm
-Dim mnu As CMenu
-Dim mBar As CMenuBar
-Dim mElem As CMenuElem
-Dim cMod As CCodeModule
-Const kSep As String = ">"
+	Dim strMap As String
+	Dim frm As CForm
+	Dim mnu As CMenu
+	Dim mBar As CMenuBar
+	Dim mElem As CMenuElem
+	Dim cMod As CCodeModule
+	Const kSep As String = ">"
 
    strMap = Join(Array(GlobalID & "|startup", GlobalID & "|termination"), kSep)
    For Each frm In FormCollection
@@ -2677,7 +2677,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GetObjectType(astrName As String) As String
-Dim frm As CForm
+	Dim frm As CForm
 
    For Each frm In FormCollection
       GetObjectType = frm.GetObjectType(astrName)

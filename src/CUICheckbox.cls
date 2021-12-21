@@ -46,9 +46,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim c As Byte
-Dim chk As ctlOut
-Dim templen As Integer
+	Dim c As Byte
+	Dim chk As ctlOut
+	Dim templen As Integer
 
    BuildControlPrc chk, obj
    chk.style.s = &H2
@@ -101,7 +101,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim temp As String
+	Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -114,8 +114,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "chk" Then
@@ -145,7 +145,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim boxWidth As Integer, w As Integer, h As Integer
+	Dim boxWidth As Integer, w As Integer, h As Integer
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -223,7 +223,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""
@@ -273,61 +273,67 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim o As Object
+	Dim o As Object
 
    ValidateProperty = True
    Select Case strProp
-   Case "Anchor Left": AnchorLeft = strVal
-   Case "Group ID"
-      If Val(strVal) < 0 Or Val(strVal) > 255 Then
-         ValidateProperty = False
-         MsgBox gStringTable(2702), vbInformation
-         Exit Function
-      End If
-      If Selected Then
-         For Each o In obj.Form.ObjectCollection
-            If Not o Is Me Then
-               If StrComp(o.obj.Kind, obj.Kind, vbTextCompare) = 0 Then
-                  If o.GroupId = Val(strVal) And o.Selected Then
-                     Select Case MsgBox(gStringTable(kResStrings), vbYesNoCancel)
-                     Case vbYes
-                        o.Selected = False
-                        GroupId = Val(strVal)
-                     Case vbNo
-                        Selected = False
-                        GroupId = Val(strVal)
-                     Case vbCancel
-                        ValidateProperty = False
-                     End Select
-                     Exit Function
+
+      Case "Anchor Left": AnchorLeft = strVal
+
+      Case "Group ID"
+         If Val(strVal) < 0 Or Val(strVal) > 255 Then
+            ValidateProperty = False
+            MsgBox gStringTable(2702), vbInformation
+            Exit Function
+         End If
+         If Selected Then
+            For Each o In obj.Form.ObjectCollection
+               If Not o Is Me Then
+                  If StrComp(o.obj.Kind, obj.Kind, vbTextCompare) = 0 Then
+                     If o.GroupId = Val(strVal) And o.Selected Then
+                        Select Case MsgBox(gStringTable(kResStrings), vbYesNoCancel)
+                           Case vbYes
+                              o.Selected = False
+                              GroupId = Val(strVal)
+                           Case vbNo
+                              Selected = False
+                              GroupId = Val(strVal)
+                           Case vbCancel
+                              ValidateProperty = False
+                        End Select
+                        Exit Function
+                     End If
                   End If
                End If
-            End If
-         Next
-      End If
-      GroupId = Val(strVal)
-   Case "Selected"
-      Selected = strVal
-      If strVal Like g_strTrue Then
-         For Each o In obj.Form.ObjectCollection
-            If Not o Is Me Then
-               If StrComp(o.obj.Kind, obj.Kind, vbTextCompare) = 0 Then
-                  If o.GroupId = strVal And o.Selected Then
-                     Select Case MsgBox(gStringTable(kResStrings), vbYesNoCancel)
-                     Case vbYes
-                        o.Selected = False
-                        Selected = True
-                     Case vbNo
-                        Selected = False
-                     Case vbCancel
-                        ValidateProperty = False
-                     End Select
+            Next
+         End If
+         GroupId = Val(strVal)
+
+      Case "Selected"
+         Selected = strVal
+         If strVal Like g_strTrue Then
+            For Each o In obj.Form.ObjectCollection
+               If Not o Is Me Then
+                  If StrComp(o.obj.Kind, obj.Kind, vbTextCompare) = 0 Then
+                     If o.GroupId = strVal And o.Selected Then
+                        Select Case MsgBox(gStringTable(kResStrings), vbYesNoCancel)
+                           Case vbYes
+                              o.Selected = False
+                              Selected = True
+                           Case vbNo
+                              Selected = False
+                           Case vbCancel
+                              ValidateProperty = False
+                        End Select
+                     End If
                   End If
                End If
-            End If
-         Next
-      End If
-   Case Else: ValidateProperty = obj.ValidateProperty(strProp, strVal)
+            Next
+         End If
+
+      Case Else
+         ValidateProperty = obj.ValidateProperty(strProp, strVal)
+
    End Select
 End Function
 

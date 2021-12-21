@@ -8,7 +8,7 @@ Global Const CM_NSB_EDITFIND = 4401
 Global cmGlobals As CodeMax4Ctl.Globals
 Global cmLanguage As New CodeMax4Ctl.Language
 
-Const kKeywords = " Let If Then Else ElseIf EndIf Do Loop Exit For Next GoTo" & _
+	Const kKeywords = " Let If Then Else ElseIf EndIf Do Loop Exit For Next GoTo" & _
 " GoSub Return NextScreen NextForm Select Case Stop Where" & _
 " Sub Function End Call" & _
 " CreateWindow DestroyWindow DrawBitmap DrawChars DrawLine" & _
@@ -22,15 +22,15 @@ Const kKeywords = " Let If Then Else ElseIf EndIf Do Loop Exit For Next GoTo" & 
 " nsbKeyOrButton nsbPenDown nsbPenUp nsbWait nsbNoWait nsbSerialIn nsbHandEraJog" & _
 " nsbYes nsbNo"
 
-Const kOperators = "^  -  *  /  \  +  =  <>  <  >  <=  >=  Mod  Is  Like  And  Eqv  Imp  Not  Or  Xor"
-Const kIntrinsics = "bmp but chk fld gad shf grd lbl lst pop cho rpt scr sel sli"
+	Const kOperators = "^  -  *  /  \  +  =  <>  <  >  <=  >=  Mod  Is  Like  And  Eqv  Imp  Not  Or  Xor"
+	Const kIntrinsics = "bmp but chk fld gad shf grd lbl lst pop cho rpt scr sel sli"
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Sub CreateLanguage()
-Dim trace As Boolean
-trace = True
+	Dim trace As Boolean
+   trace = True
    If trace Then MsgBox "CreateLanguage " & 1
    '------------------------------------------------------------
    ' create A new language
@@ -403,8 +403,8 @@ End Sub
 '
 '------------------------------------------------------------
 Sub MNSBCodeMax_Initialize()
-Dim hotKey As New CodeMax4Ctl.hotKey
-Dim trace As Boolean
+	Dim hotKey As New CodeMax4Ctl.hotKey
+	Dim trace As Boolean
 trace = True
    
    If trace Then MsgBox "MNSBCodeMax_Initialize " & 1
@@ -588,7 +588,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub MNSBCodeMax_SavePrefs(scriptObj As CodeMax4Ctl.CodeMax)
-Dim key As String
+	Dim key As String
    #If NSBSymbian Then
       key = "HKCU\Software\NSBasic\Symbian\Editor"
    #Else
@@ -603,7 +603,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub MNSBCodeMax_SetScriptPrefs(ByRef scriptObj As CodeMax4Ctl.CodeMax)
-Dim key As String
+	Dim key As String
 'Dim oldhKey As Long
 'Dim oldSubKey As String
 

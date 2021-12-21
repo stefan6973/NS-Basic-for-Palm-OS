@@ -30,10 +30,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
-Dim version As Integer
-Dim i As Integer
-Dim cnt As Integer
-Dim mBar As CMenuBar
+   Dim version As Integer
+   Dim i As Integer
+   Dim cnt As Integer
+   Dim mBar As CMenuBar
 
    Input #nFileNumber, version
    If version > kVersion Then
@@ -74,7 +74,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim mBar As CMenuBar
+	Dim mBar As CMenuBar
 
    Copy = Quote("mnu") & vbCrLf
    Copy = Copy & kVersion & "," & Quote(Name) & vbCrLf
@@ -89,10 +89,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String, ByVal proj As CProject)
-Dim tokens() As String
-Dim i As Integer, nCount As Integer
-Dim oldIdNo As Integer
-Dim mBar As CMenuBar
+	Dim tokens() As String
+	Dim i As Integer, nCount As Integer
+	Dim oldIdNo As Integer
+	Dim mBar As CMenuBar
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) = "menubar" Then
@@ -156,7 +156,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -210,10 +210,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub MoveElement(ByVal Elem As CMenuElem, moveDir As Long)
-Dim mBar As CMenuBar
-Dim mElem As CMenuElem
-Dim i As Integer
-Dim j As Integer
+	Dim mBar As CMenuBar
+	Dim mElem As CMenuElem
+	Dim i As Integer
+	Dim j As Integer
 
    'Locate which Menu Bar contains the element
    For i = 1 To MenuBars.count
@@ -248,8 +248,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub MoveBar(ByVal bar As CMenuBar, moveDir As Long)
-Dim mBar As CMenuBar
-Dim i As Integer
+	Dim mBar As CMenuBar
+	Dim i As Integer
 
    'Locate the Menu Bar
    For i = 1 To MenuBars.count

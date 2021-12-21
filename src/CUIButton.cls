@@ -46,9 +46,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim but As ctlOut
-Dim c As Byte
-Dim templen As Integer
+	Dim but As ctlOut
+	Dim c As Byte
+	Dim templen As Integer
 
    BuildControlPrc but, obj
    but.style.s = &H0
@@ -106,8 +106,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim version As Integer
-Dim temp As String
+	Dim version As Integer
+	Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -120,8 +120,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "but" Then
@@ -151,9 +151,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim rad As Integer
-Dim w As Integer, h As Integer, dw As Integer
-Const PI = 3.14159265
+	Dim rad As Integer
+	Dim w As Integer, h As Integer, dw As Integer
+	Const PI = 3.14159265
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -236,7 +236,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""

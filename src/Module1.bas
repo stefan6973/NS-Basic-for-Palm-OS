@@ -5,9 +5,9 @@ Option Explicit
 '
 '------------------------------------------------------------
 Sub LoadStringTable()
-Dim message As String
-Dim i As Integer
-Dim chan As Integer
+	Dim message As String
+	Dim i As Integer
+	Dim chan As Integer
    
    chan = 98
    Open ProgramsDirectory & "\Lang\StrTable_English.txt" For Input As #chan
@@ -48,11 +48,11 @@ End Sub
 '
 '------------------------------------------------------------
 Sub LoadResStrings(frm As Form, Optional bLoadFont As Boolean = True)
-Dim ctl As Control
-Dim obj As Object
-Dim fnt As Object
-Dim sCtlType As String
-Dim nVal As Integer
+	Dim ctl As Control
+	Dim obj As Object
+	Dim fnt As Object
+	Dim sCtlType As String
+	Dim nVal As Integer
 
    On Error Resume Next
    

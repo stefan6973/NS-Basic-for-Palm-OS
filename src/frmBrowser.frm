@@ -81,7 +81,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public StartingAddress As String
-Dim mbDontNavigateNow As Boolean
+	Dim mbDontNavigateNow As Boolean
 
 '------------------------------------------------------------
 '

@@ -189,13 +189,13 @@ Public Function CreateBitmapPicture(ByVal hBmp As Long, _
 '    - Returns a Picture object containing the bitmap
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '
-Dim r   As Long
-Dim Pic As PicBmp
+	Dim r   As Long
+	Dim Pic As PicBmp
 '
 ' IPicture requires a reference to "Standard OLE Types"
 '
-Dim IPic          As IPicture
-Dim IID_IDispatch As GUID
+	Dim IPic          As IPicture
+	Dim IID_IDispatch As GUID
 '
 ' Fill in with IDispatch Interface ID
 '

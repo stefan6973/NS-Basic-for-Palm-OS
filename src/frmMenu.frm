@@ -626,7 +626,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Declare Function SendMessage Lib "User32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Any) As Long
-Const EM_UNDO = &HC7
+	Const EM_UNDO = &HC7
 
 '------------------------------------------------------------
 '

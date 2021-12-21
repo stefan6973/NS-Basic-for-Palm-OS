@@ -120,8 +120,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function CMaxFindNext(ByVal cMax As CodeMax4Ctl.CodeMax) As Boolean
-Dim range1 As CodeMax4Ctl.range
-Dim range2 As CodeMax4Ctl.range
+	Dim range1 As CodeMax4Ctl.range
+	Dim range2 As CodeMax4Ctl.range
 
    CMaxPrepFindReplace cMax
 
@@ -165,8 +165,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Function FindNext() As Boolean
-Dim frm As frmCode
-Dim sel As range
+	Dim frm As frmCode
+	Dim sel As range
 
    CMaxPrepFindReplace frmMain.cmaxFind
    frmMain.cmaxFind.Text = GetScript(garrSearchMap(gnSearchLoc))
@@ -263,9 +263,9 @@ End Sub
 '
 '------------------------------------------------------------
 Function LocateProject(ByVal strGID As String) As CProject
-Dim arrGID() As String
-Dim proj As CProject
-Dim cMod As CCodeModule
+	Dim arrGID() As String
+	Dim proj As CProject
+	Dim cMod As CCodeModule
 
    arrGID = Split(strGID, "|")
    Select Case arrGID(0)
@@ -292,9 +292,9 @@ End Function
 '
 '------------------------------------------------------------
 Function LocateObject(ByVal strGID As String) As Object
-Dim arrGID() As String
-Dim proj As CProject
-Dim obj As Object, o2 As Object, o3 As Object
+	Dim arrGID() As String
+	Dim proj As CProject
+	Dim obj As Object, o2 As Object, o3 As Object
 
    arrGID = Split(strGID, "|")
    Select Case arrGID(0)
@@ -367,8 +367,8 @@ End Function
 '
 '------------------------------------------------------------
 Sub ProjectAddForm(Optional ByVal proj As CProject = Nothing)
-Dim frm As CForm
-Dim fPalmScreen As New frmPalmScreen
+	Dim frm As CForm
+	Dim fPalmScreen As New frmPalmScreen
 
    If proj Is Nothing Then Set proj = gTarget
    Set frm = proj.AddNewForm
@@ -383,8 +383,8 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectRemoveForm(ByVal frm As CForm, Optional ByVal proj As CProject)
-Dim f As Form
-Dim ob As Object
+	Dim f As Form
+	Dim ob As Object
 If MsgBox(gStringTable(3442) & frm.Title & "?", vbYesNo) = vbYes Then
 
    'First close the Palm Screen displaying the form and any of its code windows
@@ -410,7 +410,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectAddMenu(Optional ByVal proj As CProject = Nothing)
-Dim fMenuEditor As New frmMenuEditor
+	Dim fMenuEditor As New frmMenuEditor
 
    If proj Is Nothing Then Set proj = gTarget
    If Not proj.AddMenu Then Exit Sub
@@ -434,7 +434,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectAddMenuBar(ByVal mnu As CMenu, Optional ByVal proj As CProject = Nothing)
-Dim mBar As New CMenuBar
+	Dim mBar As New CMenuBar
 
    If proj Is Nothing Then Set proj = gTarget
    If gLanguage <> "nippon" Then
@@ -454,8 +454,8 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectRemoveMenuBar(ByVal mBar As CMenuBar, Optional ByVal proj As CProject = Nothing)
-Dim mnu As CMenu
-Dim mBar2 As CMenuBar
+	Dim mnu As CMenu
+	Dim mBar2 As CMenuBar
 
    On Error Resume Next
    If proj Is Nothing Then Set proj = gTarget
@@ -474,7 +474,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectAddMenuElem(ByVal mBar As CMenuBar, Optional ByVal proj As CProject = Nothing)
-Dim mElem As New CMenuElem
+	Dim mElem As New CMenuElem
 
    If proj Is Nothing Then Set proj = gTarget
    If gLanguage <> "Nippon" Then
@@ -494,9 +494,9 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectRemoveMenuElem(ByVal mElem As CMenuElem, Optional ByVal proj As CProject = Nothing)
-Dim mnu As CMenu
-Dim mBar As CMenuBar
-Dim mElem2 As CMenuElem
+	Dim mnu As CMenu
+	Dim mBar As CMenuBar
+	Dim mElem2 As CMenuElem
 
    On Error Resume Next
    If proj Is Nothing Then Set proj = gTarget
@@ -517,12 +517,12 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectAddBitmap(Optional ByVal proj As CProject = Nothing)
-Dim bmp As CBitmapFile
-Dim filename As String
-Dim names() As String
-Dim Name As Variant
-Dim i As Integer
-Dim j As Integer
+	Dim bmp As CBitmapFile
+	Dim filename As String
+	Dim names() As String
+	Dim Name As Variant
+	Dim i As Integer
+	Dim j As Integer
 
    On Error GoTo gotCancel
    frmMain.dlgCommonDialog.CancelError = True
@@ -553,12 +553,12 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectAddResource(Optional ByVal proj As CProject = Nothing)
-Dim res As CResourceFile
-Dim filename As String
-Dim names() As String
-Dim Name As Variant
-Dim i As Integer
-Dim j As Integer
+	Dim res As CResourceFile
+	Dim filename As String
+	Dim names() As String
+	Dim Name As Variant
+	Dim i As Integer
+	Dim j As Integer
 
    On Error GoTo gotCancel
    frmMain.dlgCommonDialog.CancelError = True
@@ -596,7 +596,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectAddModuleNew(Optional ByVal proj As CProject = Nothing)
-Dim cMod As CCodeModule
+	Dim cMod As CCodeModule
 
    If proj Is Nothing Then Set proj = gTarget
    Set cMod = proj.AddModule
@@ -608,7 +608,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectAddModuleExisting(Optional ByVal proj As CProject = Nothing)
-Dim cMod As CCodeModule
+	Dim cMod As CCodeModule
 
    On Error GoTo gotCancel
    frmMain.dlgCommonDialog.CancelError = True
@@ -639,7 +639,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ProjectRemoveModule(ByVal cMod As CCodeModule, Optional ByVal proj As CProject)
-Dim f As Form
+	Dim f As Form
 
    'Make sure we have a project
    If proj Is Nothing Then Set proj = gTarget
@@ -656,7 +656,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub FormRemoveObject(ByVal frm As CForm, ByVal obj As Object)
-Dim f As Form
+	Dim f As Form
 
    'First close the object's code window
    Set f = frmMain.RemoveMDIChild(obj.obj.GlobalID & "|code")
@@ -720,7 +720,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidClipboard() As Integer
-Dim strClip As String
+	Dim strClip As String
 
    ValidClipboard = 0
    If Clipboard.GetFormat(vbCFText) Then
@@ -826,7 +826,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub SaveImages(p1 As String, p2 As String, p3 As String, p4 As String, p5 As String, p1h As String, p2h As String, p3h As String, p4h As String, p5h As String)
-Dim paths(9) As String
+	Dim paths(9) As String
    
    If (p2 = "") And (p3 = "") And (p4 = "") And (p5 = "") And (p1h = "") And (p2h = "") And (p3h = "") And (p4h = "") And (p5h = "") Then
       Write #nFileNumber, GetRelativePath(gTarget.pathname, p1)
@@ -849,8 +849,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub RestoreImages(ByRef p1 As String, ByRef p2 As String, ByRef p3 As String, ByRef p4 As String, ByRef p5 As String, ByRef p1h As String, ByRef p2h As String, ByRef p3h As String, ByRef p4h As String, ByRef p5h As String)
-Dim paths() As String
-Dim s As String
+	Dim paths() As String
+	Dim s As String
 
    Input #nFileNumber, s
    paths = Split(s, ",")
@@ -876,8 +876,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function ValidFileName(ByVal strText As String) As Boolean
-Dim arrChar() As String
-Dim i As Integer
+	Dim arrChar() As String
+	Dim i As Integer
 
    arrChar = Split(gStringTable(knInvalidChars))
    For i = 0 To UBound(arrChar)
@@ -894,9 +894,9 @@ End Function
 '
 '------------------------------------------------------------
 Public Function LegalObjectName(ByVal strText As String) As Boolean
-Dim arrChar() As String
-Dim str1 As String
-Dim i As Integer
+	Dim arrChar() As String
+	Dim str1 As String
+	Dim i As Integer
 
    arrChar = Split(gStringTable(1409), "a")
    For i = 0 To UBound(arrChar)
@@ -926,9 +926,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub MenuEditor()
-Dim fMenuEditor As New frmMenuEditor
-Dim proj As CProject
-Dim mnu As CMenu
+	Dim fMenuEditor As New frmMenuEditor
+	Dim proj As CProject
+	Dim mnu As CMenu
 
    Set proj = ActiveProject
    If proj Is Nothing Then Exit Sub
@@ -946,7 +946,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ThemeEditor()
-Dim fThemeEditor As New frmThemeEditor
+	Dim fThemeEditor As New frmThemeEditor
 
    fThemeEditor.Show vbModal, frmMain
  End Sub
@@ -960,7 +960,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GetTextWidth(ByVal strText As String, Optional nFontIndex As Integer = 0, Optional nMagFactor As Integer = 1) As Integer
-Dim factor As Double
+	Dim factor As Double
 
    frmMain.picBox.fontname = gstrPalmFonts(nFontIndex)
    frmMain.picBox.fontSize = gnPalmFontSize(nFontIndex)
@@ -977,7 +977,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GetTextHeight(ByVal strText As String, Optional nFontIndex As Integer = 0, Optional nMagFactor As Integer = 1) As Integer
-Dim factor As Double
+	Dim factor As Double
 
    On Error GoTo err_GetTextHeight
 
@@ -995,7 +995,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GetScript(ByVal strMixed As String, Optional ByVal strScript As String) As String
-Dim obj As Object
+	Dim obj As Object
 
    If strScript = "" Then strScript = Mid(strMixed, InStrRev(strMixed, "|") + 1)
    Set obj = LocateObject(strMixed)
@@ -1010,7 +1010,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub PutScript(ByVal strCode As String, ByVal strGID As String)
-Dim obj As Object
+	Dim obj As Object
 
    Set obj = LocateObject(strGID)
    If obj Is Nothing Then Exit Sub
@@ -1027,7 +1027,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function CreateObjectEx(ByRef astrType As String) As Object
-Dim locobj As Object
+	Dim locobj As Object
 
    Select Case astrType
    Case "bmp": Set CreateObjectEx = New CUIBitmap
@@ -1072,7 +1072,7 @@ String
 ' ****************************************************************
 On Error GoTo END_ELAPSEDTIME
 
-Dim dtr, dtl, jml As Long
+	Dim dtr, dtl, jml As Long
 
 dtl = (Hour(tStart) * 3600) + (Minute(tStart) * 60) + (Second(tStart))
 dtr = (Hour(tStop) * 3600) + (Minute(tStop) * 60) + (Second(tStop))
@@ -1166,11 +1166,11 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ResIn(IdNo As Integer, p1 As String, p2 As String, p4 As String, p8 As String, p16 As String, p1h As String, p2h As String, p4h As String, p8h As String, p16h As String) As Double
-Dim resource As String
-Dim command As String
-Dim files As String
-Dim q As String
-Dim res As Double
+	Dim resource As String
+	Dim command As String
+	Dim files As String
+	Dim q As String
+	Dim res As Double
    
    q = Chr(34)
    files = ""

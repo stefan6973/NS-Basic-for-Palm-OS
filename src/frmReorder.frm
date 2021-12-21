@@ -80,9 +80,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub cmdDown_Click()
-Dim strTemp As String
-Dim ob As Object
-Dim li As Integer
+	Dim strTemp As String
+	Dim ob As Object
+	Dim li As Integer
 
    li = lstObjects.ListIndex
    strTemp = lstObjects.List(li)
@@ -99,9 +99,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub cmdUp_Click()
-Dim strTemp As String
-Dim ob As Object
-Dim li As Integer
+	Dim strTemp As String
+	Dim ob As Object
+	Dim li As Integer
 
    li = lstObjects.ListIndex
    strTemp = lstObjects.List(li)
@@ -118,8 +118,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Load()
-Dim obj As Object
-Dim i As Integer
+	Dim obj As Object
+	Dim i As Integer
 
    If Not gForm Is Nothing Then
       If gForm.ObjectCollection.count = 0 Then Exit Sub
@@ -168,8 +168,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub OKButton_Click()
-Dim coll As New Collection
-Dim i As Integer
+	Dim coll As New Collection
+	Dim i As Integer
 
    If Not gForm Is Nothing Then
       For i = 0 To UBound(gObjs)

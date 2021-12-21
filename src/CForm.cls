@@ -161,14 +161,14 @@ Public Sub PrcOut()
    Next
 
    For Each obj In ObjectCollection
-'dbug "going to an obj.prcout"
+      'dbug "going to an obj.prcout"
       wordBound 9
       obj.PrcOut
-'dbug "back from obj.prcout"
+      'dbug "back from obj.prcout"
    Next
-   Close 6
-   Close 9
-   Close 8
+   Close #6
+   Close #9
+   Close #8
 
    frm.dispWidth.w = 0
    frm.dispHeight.w = 0
@@ -220,9 +220,9 @@ Public Sub PrcOut()
    frm.menuRscId.w = cvtWord(0)
    frm.numObjects.w = cvtWord(fileLen(DownloadPath + "__temp8.__8") / 6)
    frm.objPtr.c = 0
-'dbug "writing frm to #7"
+   'dbug "writing frm to #7"
    Put #7, , frm
-   Close 7
+   Close #7
 End Sub
 
 '------------------------------------------------------------
@@ -231,9 +231,9 @@ End Sub
 Public Sub Restore(ByVal nFileNumber as integer)
    Dim theNoItems As Integer
    Dim i As Integer
-   Dim version As Integer
    Dim strname As String
 
+   Dim version As Integer
    Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3237) & version '"Error: Invalid Form Version
@@ -251,6 +251,7 @@ Public Sub Restore(ByVal nFileNumber as integer)
    
    Input #nFileNumber, pgm_script
    ProcessScript pgm_script, FromDisk
+   
    Input #nFileNumber, m_nTipsIdNo 'yes, it's read in twice no. No harm done...
 
    Input #nFileNumber, pgm_script_after
@@ -334,9 +335,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim temp As String
-Dim formObj As Object
-Dim strTemp As String
+	Dim temp As String
+	Dim formObj As Object
+	Dim strTemp As String
 
    Copy = Quote("vew") + vbCrLf
    temp = Join(Array(kVersion, IdNo, BoolStr(Modal), BoolStr(Frame), _
@@ -370,10 +371,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
-Dim nScriptStart, nScriptEnd As Integer
-Dim oldIdNo As Integer
+	Dim tokens() As String
+	Dim i As Integer
+	Dim nScriptStart, nScriptEnd As Integer
+	Dim oldIdNo As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "vew" Then
@@ -443,8 +444,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PasteObject(ByRef strLines() As String, bPasteForm As Boolean)
-Dim obj As Object
-Dim fPalmScreen As frmPalmScreen
+	Dim obj As Object
+	Dim fPalmScreen As frmPalmScreen
 
    Select Case LCase(UnQuote(strLines(1)))
    Case "bmp": Set obj = New CUIBitmap
@@ -480,8 +481,8 @@ End Sub
 '------------------------------------------------------------
 Public Function RestoreScript(ByRef strLines() As String, ByVal nScriptStart As Integer, _
                               ByRef nScriptEnd As Integer) As String
-Dim i As Integer
-Dim tokens() As String
+	Dim i As Integer
+	Dim tokens() As String
 
    'Find end of script
    For i = nScriptStart To UBound(strLines)
@@ -506,7 +507,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function JoinFormCode() As String
-Dim formObj As Object
+	Dim formObj As Object
 
    JoinFormCode = ""
    If Len(pgm_script) > 0 Then
@@ -532,10 +533,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub SplitFormCode(strCode As String)
-Dim n1, n2, nModuleStart, nModuleEnd, nModule, nNewModule As Integer
-Dim strLine, strModule, strSubName, strObjectName As String
-Dim bNewObject As Boolean
-Dim objTemp, objFormObj, objNewObj As Object
+	Dim n1, n2, nModuleStart, nModuleEnd, nModule, nNewModule As Integer
+	Dim strLine, strModule, strSubName, strObjectName As String
+	Dim bNewObject As Boolean
+	Dim objTemp, objFormObj, objNewObj As Object
 
    'nModule:
    '0 = none
@@ -872,8 +873,8 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Let Name(ByVal vData As String)
-Dim strOldName As String
-Dim strProcName As String
+	Dim strOldName As String
+	Dim strProcName As String
 
    'Verify name
    If Len(vData) = 0 Then Exit Property
@@ -926,7 +927,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get Object(nID As Integer) As Object
-Dim obj As Object
+	Dim obj As Object
 
    For Each obj In ObjectCollection
       If obj.obj.IdNo = nID Then
@@ -940,7 +941,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = 15 Then
       gPropInfo.Name = ""
@@ -1028,10 +1029,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim strWork As String
-Dim frm As CForm
-Dim n As Integer
-Dim l As Long
+	Dim strWork As String
+	Dim frm As CForm
+	Dim n As Integer
+	Dim l As Long
 
    ValidateProperty = True
    Select Case strProp
@@ -1183,7 +1184,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub RemoveObject(ByVal obj As Object)
-Dim i As Integer
+	Dim i As Integer
 
    For i = 1 To ObjectCollection.count
       If ObjectCollection(i).obj.GlobalID = obj.obj.GlobalID Then
@@ -1197,9 +1198,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function BuildMap() As String()
-Dim strMap As String
-Dim obj As Object
-Const kSep As String = ">"
+	Dim strMap As String
+	Dim obj As Object
+	Const kSep As String = ">"
 
    strMap = Join(Array(GlobalID & "|before", GlobalID & "|event", GlobalID & "|after"), kSep)
    For Each obj In ObjectCollection
@@ -1226,7 +1227,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GetObjectType(astrName As String) As String
-Dim obj As Object
+	Dim obj As Object
 
    If StrComp(Name, astrName, vbTextCompare) = 0 Then
       GetObjectType = "frm"

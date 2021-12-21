@@ -218,7 +218,7 @@ Option Explicit
 '------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
-Dim lRet As Long
+	Dim lRet As Long
 
    'Hide first
    Me.Visible = False
@@ -272,7 +272,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ToolboxSelect(nTool As Integer)
-Dim nIndex As Integer
+	Dim nIndex As Integer
 
    If nTool = gnToolboxTool And nTool <> 1 Then
       nIndex = 1

@@ -346,7 +346,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = 3 Then
       gPropInfo.Name = ""

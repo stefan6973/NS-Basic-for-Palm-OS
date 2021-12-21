@@ -38,9 +38,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim lab As labelOut
-Dim c As Byte
-Dim templen As Integer
+	Dim lab As labelOut
+	Dim c As Byte
+	Dim templen As Integer
 
    lab.id.w = cvtWord(obj.IdNo)
    If obj.Usable Then
@@ -72,7 +72,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
-Dim version As Integer
+	Dim version As Integer
 
    Input #nFileNumber, version
    If version <> kVersion Then
@@ -105,8 +105,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "lbl" Then
@@ -160,7 +160,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""

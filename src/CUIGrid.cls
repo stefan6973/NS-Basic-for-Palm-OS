@@ -246,8 +246,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim x As Integer, y As Integer
-Dim w As Integer, h As Integer
+	Dim x As Integer, y As Integer
+	Dim w As Integer, h As Integer
    
    If obj.Control Is Nothing Then Exit Sub
 
@@ -277,7 +277,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""
@@ -329,7 +329,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim n As Double
+	Dim n As Double
 
    ValidateProperty = True
    Select Case strProp
@@ -360,7 +360,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim temp As String
+	Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -373,8 +373,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "grd" Then

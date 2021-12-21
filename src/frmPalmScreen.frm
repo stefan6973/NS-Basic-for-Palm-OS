@@ -70,12 +70,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Const kScreenLeft = 5
-Const kScreenTop = 5
+	Const kScreenLeft = 5
+	Const kScreenTop = 5
 'Const kScreenWidth = 160  'Now a global, based on gbDana
-Const kScreenHeight = 160
-Const kTitleHeight = 13
-Const kTitleLineHeight = 2
+	Const kScreenHeight = 160
+	Const kTitleHeight = 13
+	Const kTitleLineHeight = 2
 
 Public Selection As New Collection
 Private m_nMagFactor As Integer
@@ -93,7 +93,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Click()
-Dim ob As Object
+	Dim ob As Object
 
    If Not gbWinNT2000 Then Exit Sub
    #If NSBSymbian = 0 Then
@@ -170,7 +170,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Let Object(theForm As CForm)
-Dim obj As Object
+	Dim obj As Object
    
    Set m_Form = theForm
    SetCaption
@@ -215,7 +215,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
-Dim obj As Object
+	Dim obj As Object
    If m_Form Is Nothing Then Exit Sub
    
    ClearSelection
@@ -261,7 +261,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub pbPalmScreen_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-Dim ob As Object
+	Dim ob As Object
 
    'Do nothing if shift key down, no tool selected, or outside screen bounds
    If Shift <> 0 Then Exit Sub
@@ -314,9 +314,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub pbPalmScreen_Paint()
-Dim row As Integer
-Dim col As Integer
-Dim ob As Object
+	Dim row As Integer
+	Dim col As Integer
+	Dim ob As Object
 
    If m_Form Is Nothing Then Exit Sub
    gsCurrentFormGlobalID = m_Form.GlobalID
@@ -381,7 +381,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub pbTitle_DblClick()
-Dim strTitle As String
+	Dim strTitle As String
 
    strTitle = InputBox(gStringTable(3262), , m_Form.Title) '"Enter new form title"
    If Len(strTitle) = 0 Then
@@ -439,7 +439,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub RemoveUIObject(ByVal obj As Object)
-Dim i As Integer
+	Dim i As Integer
 
    For i = 0 To Me.Controls.count - 1
       If Me.Controls(i) Is obj.obj.Control Then
@@ -470,8 +470,8 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub ClearSelection(Optional bDisplaySelection As Boolean = True)
-Dim fileName As String
-Dim dirName As String
+	Dim fileName As String
+	Dim dirName As String
 
    While Selection.count > 0
       Selection(1).obj.Selected = False
@@ -552,8 +552,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub MouseMoveSelection(ByRef x As Integer, ByRef y As Integer, nLeft As Integer, nTop As Integer, Optional ByVal obj As Object = Nothing, Optional nForceGrid As Integer = 0)
-Dim baseX As Integer, baseY As Integer
-Dim bGridPref As Boolean
+	Dim baseX As Integer, baseY As Integer
+	Dim bGridPref As Boolean
 
    'bGridPref allows temporary suspension/enforcement of grid
    bGridPref = gbWantGrid
@@ -585,7 +585,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ResizeSelectionToGrid(Optional ByVal obj As Object = Nothing, Optional nForceGrid As Integer = 0)
-Dim bGridPref As Boolean
+	Dim bGridPref As Boolean
 
    'bGridPref allows temporary suspension/enforcement of grid
    bGridPref = gbWantGrid
@@ -613,9 +613,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Format(nType As Integer, nStyle As Integer)
-Dim obj As Object
-Dim i As Integer
-Dim nMax As Integer, nMin As Integer, nSpc As Integer, nOff As Integer
+	Dim obj As Object
+	Dim i As Integer
+	Dim nMax As Integer, nMin As Integer, nSpc As Integer, nOff As Integer
 
    Select Case nType
    Case 0 'Align
@@ -824,7 +824,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Cut()
-Dim obj As Object
+	Dim obj As Object
 
    If Selection.count = 0 Then Exit Sub
    Copy
@@ -835,8 +835,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Copy()
-Dim strClip As String
-Dim obj As Object
+	Dim strClip As String
+	Dim obj As Object
 
    If Selection.count = 0 Then
       strClip = m_Form.Copy
@@ -859,7 +859,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste()
-Dim strLines() As String
+	Dim strLines() As String
 
    If ValidClipboard <> kClipboardObject Then Exit Sub
    strLines = Split(Clipboard.GetText, vbCrLf)
@@ -870,7 +870,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Delete()
-Dim obj As Object
+	Dim obj As Object
 
    If Selection.count = 0 Then Exit Sub
    For Each obj In Selection
@@ -882,7 +882,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub SelectAll()
-Dim obj As Object
+	Dim obj As Object
 
    ClearSelection
    For Each obj In m_Form.ObjectCollection

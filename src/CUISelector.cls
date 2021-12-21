@@ -42,9 +42,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim c As Byte
-Dim sel As ctlOut
-Dim templen As Integer
+	Dim c As Byte
+	Dim sel As ctlOut
+	Dim templen As Integer
 
    BuildControlPrc sel, obj
    sel.style.s = &H4
@@ -104,8 +104,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "sel" Then
@@ -178,7 +178,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""

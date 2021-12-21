@@ -292,7 +292,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub btnSaveAs_Click()
-Dim filename As String
+	Dim filename As String
 
    frmMain.dlgCommonDialog.DialogTitle = gStringTable(2207)
    frmMain.dlgCommonDialog.InitDir = fileDirectory + "\themes"

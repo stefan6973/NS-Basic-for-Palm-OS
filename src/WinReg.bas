@@ -139,7 +139,7 @@ Function CreateRegKey(NewSubKey As String) As Boolean
 
 On Error GoTo ERROR_HANDLER
 
-Dim phkResult As Long, lResult As Long, SA As SECURITY_ATTRIBUTES
+	Dim phkResult As Long, lResult As Long, SA As SECURITY_ATTRIBUTES
     
   'Create key if it does not exist
   CreateRegKey = (RegCreateKeyEx(hKey, SubKey & NewSubKey, 0, "", REG_OPTION_NON_VOLATILE, _
@@ -164,8 +164,8 @@ Function GetRegValue(hKey As Long, lpszSubKey As String, szKey As String, _
 
 On Error GoTo ERROR_HANDLER
 
-Dim phkResult As Long, lResult As Long, szBuffer As String, lBuffSize As Long
-Dim p As Integer
+	Dim phkResult As Long, lResult As Long, szBuffer As String, lBuffSize As Long
+	Dim p As Integer
 
   'Create Buffer
   szBuffer = Space(255)

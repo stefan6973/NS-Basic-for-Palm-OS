@@ -145,19 +145,19 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim saveCod As CCodeModule
-Dim saveModel As CProject
-Dim saveMnu As CMenuElem
-Dim saveView As CForm
-Dim saveObj As Object
-Dim origType As String
-Dim searchStart As Long
-Dim searchLength As Long
-Dim searchCnt As Long
-Dim searchType As String
-Dim searchPos As Long
-Dim origComplete As Boolean
-Dim m_Form As Form
+	Dim saveCod As CCodeModule
+	Dim saveModel As CProject
+	Dim saveMnu As CMenuElem
+	Dim saveView As CForm
+	Dim saveObj As Object
+	Dim origType As String
+	Dim searchStart As Long
+	Dim searchLength As Long
+	Dim searchCnt As Long
+	Dim searchType As String
+	Dim searchPos As Long
+	Dim origComplete As Boolean
+	Dim m_Form As Form
 Private m_strFind As String
 Private m_strReplace As String
 Private m_idSearchStart As String            'Replacing firstSearchModule
@@ -219,11 +219,11 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function butCommon_Click(bReplace As Boolean) As Boolean
-Dim proj As CProject
-Dim nFlags As Integer
-Dim i As Integer
-Dim strSearchStart As String
-Dim arrStr() As String
+	Dim proj As CProject
+	Dim nFlags As Integer
+	Dim i As Integer
+	Dim strSearchStart As String
+	Dim arrStr() As String
 
    'Get find and replace strings, set globals and determine if this is a new search
    gstrFind = txtFind.Text
@@ -334,7 +334,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butReplace_Click()
-Dim frm As frmCode
+	Dim frm As frmCode
 
    If Not butCommon_Click(True) Then
       Beep
@@ -366,10 +366,10 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butReplaceAll_Click()
-Dim frm As frmCode
-Dim i As Integer
-Dim bRepl As Boolean
-Dim nIndex As Long
+	Dim frm As frmCode
+	Dim i As Integer
+	Dim bRepl As Boolean
+	Dim nIndex As Long
    
    'Screw elegance!
 
@@ -429,7 +429,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Let Form(frm As Form)
-Dim rng As CodeMax4Ctl.range
+	Dim rng As CodeMax4Ctl.range
 
    Set m_Form = frm
    If typename(frm) = "frmCode" Then

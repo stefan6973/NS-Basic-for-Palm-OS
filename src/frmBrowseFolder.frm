@@ -67,7 +67,7 @@ Public path As String
 '
 '------------------------------------------------------------
 Private Sub cmbdrive_Change()
-Dim strDrive As String
+	Dim strDrive As String
 
    strDrive = Left(lstDir.path, 2)
    On Error GoTo BadDrive

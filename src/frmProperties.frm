@@ -143,8 +143,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim m_PropGrid As New CPropertiesGrid
-Dim m_obj As Object
+	Dim m_PropGrid As New CPropertiesGrid
+	Dim m_obj As Object
 
 '------------------------------------------------------------
 '
@@ -167,7 +167,7 @@ End Sub
 '------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
-Dim lRet As Long
+	Dim lRet As Long
 
    Me.Visible = False
 

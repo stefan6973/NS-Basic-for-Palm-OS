@@ -158,7 +158,7 @@ End Property
 '
 '------------------------------------------------------------
 Private Sub butEdit_click()
-Dim fMenuDef As New frmMenuDef
+	Dim fMenuDef As New frmMenuDef
 
    If outlMenu.ListIndex < 0 Then
       MsgBox "must select a menu bar first"
@@ -174,7 +174,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butApply_Click()
-Dim strCaption As String
+	Dim strCaption As String
 
    If outlMenu.ListIndex = -1 Then
       strCaption = fldCaption.Text
@@ -195,7 +195,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butDelete_Click()
-Dim i As Integer
+	Dim i As Integer
 
    If outlMenu.ListIndex < 0 Then
       MsgBox "Nothing is selected"
@@ -247,7 +247,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub InsertMenubar()
-Dim mBar As New CMenuBar
+	Dim mBar As New CMenuBar
 
    'Create MenuBar, add to project and menu
    mBar.IdNo = m_Project.GetNextSeqNo
@@ -268,7 +268,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butAdd_Click()
-Dim mBar As New CMenuBar
+	Dim mBar As New CMenuBar
 
    m_Project.Dirty = True
    mBar.IdNo = m_Project.GetNextSeqNo
@@ -302,10 +302,10 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Paint()
-Dim m As Integer
-Dim i As Integer
-Dim work As String
-Dim mBar As CMenuBar
+	Dim m As Integer
+	Dim i As Integer
+	Dim work As String
+	Dim mBar As CMenuBar
   
    outlMenu.fontName = gLabelFontName
    fldCaption.fontName = gLabelFontName

@@ -137,9 +137,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Load()
-Dim checksum As String
-Dim x, y As Double
-Dim trace As Boolean
+	Dim checksum As String
+	Dim x, y As Double
+	Dim trace As Boolean
    trace = True
    If trace Then MsgBox "demoSpash " & 1
    LoadResStrings Me

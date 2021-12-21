@@ -551,7 +551,7 @@ End Enum
 '
 '------------------------------------------------------------
 Private Sub butBrowseGlobalPath_Click()
-Dim fBrowseFolder As New frmBrowseFolder
+	Dim fBrowseFolder As New frmBrowseFolder
 
    On Error GoTo err_butBrowsefiledirectory_Click
    fBrowseFolder.path = txtFilesDirectory.Text
@@ -817,10 +817,10 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub getLanguages()
-Dim s, Name
-Dim hFile As Long
-Dim WFD As WIN32_FIND_DATA
-Dim i As Integer
+	Dim s, Name
+	Dim hFile As Long
+	Dim WFD As WIN32_FIND_DATA
+	Dim i As Integer
 
    i = 0
    hFile = FindFirstFile(ProgramsDirectory & "\Lang\StrTable_*.txt", WFD)
@@ -840,7 +840,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub OKButton_Click()
-Dim oldPath As String
+	Dim oldPath As String
 
    'Tab 1
    If Len(txtFilesDirectory) > 0 Then

@@ -98,7 +98,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub editor_SelChange()
-Dim rng As CodeMax4Ctl.range
+	Dim rng As CodeMax4Ctl.range
 
    If Editor.LineCount = 0 Then Exit Sub
    
@@ -220,7 +220,7 @@ End Sub
 '------------------------------------------------------------
 Sub SetCaption()
 'Dim strTitle As String
-Dim proj As CProject
+	Dim proj As CProject
 
    If IsUIObject Then
       Set proj = LocateProject(m_object.obj.GlobalID)
@@ -288,9 +288,9 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub EditorSel(SelStart As Long, SelLength As Long)
-Dim line As Integer
-Dim p As Long
-Dim SelRange As CodeMax4Ctl.range
+	Dim line As Integer
+	Dim p As Long
+	Dim SelRange As CodeMax4Ctl.range
 
    'convert character position in buffer to line, col
    Set SelRange = Editor.GetSel(True)
@@ -312,9 +312,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function SelStart()
-Dim SelRange As CodeMax4Ctl.range
-Dim p As Integer
-Dim i As Integer
+	Dim SelRange As CodeMax4Ctl.range
+	Dim p As Integer
+	Dim i As Integer
 
    Set SelRange = Editor.GetSel(True)
    p = SelRange.StartColNo
@@ -591,9 +591,9 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub editor_QueryMemberList(ByVal Cmd As CodeMax4Ctl.cmCommand, List As CodeMax4Ctl.IMemberList)
-Dim p As CodeMax4Ctl.ILineParser
-Dim sel As CodeMax4Ctl.range
-Dim strType As String
+	Dim p As CodeMax4Ctl.ILineParser
+	Dim sel As CodeMax4Ctl.range
+	Dim strType As String
     
    Set p = Editor.CreateParser()
    Set sel = Editor.GetSel(True)
@@ -634,9 +634,9 @@ End Sub
 '
 '------------------------------------------------------------
 Sub SetAllDividers()
-Dim i As Long
-Dim nLastDivider As Long
-Dim strLine As String
+	Dim i As Long
+	Dim nLastDivider As Long
+	Dim strLine As String
 
    ClearAllDividers
    For i = 0 To Editor.LineCount - 1
@@ -653,7 +653,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ClearAllDividers()
-Dim i As Long
+	Dim i As Long
 
    For i = 0 To Editor.LineCount - 1
       Editor.SetDivider i, False
@@ -664,9 +664,9 @@ End Sub
 '
 '------------------------------------------------------------
 Sub SetNewDividers(nStartLine As Long)
-Dim i As Long
-Dim nLastDivider As Long
-Dim strLine As String
+	Dim i As Long
+	Dim nLastDivider As Long
+	Dim strLine As String
 
    For i = nStartLine To 0 Step -1
       strLine = LCase(Trim(Editor.GetLine(i)))
@@ -691,7 +691,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ClearLastDivider(nLastDivider As Long)
-Dim i As Long
+	Dim i As Long
 
    i = nLastDivider + 1
    While i < Editor.LineCount
@@ -707,12 +707,12 @@ End Sub
 '
 '------------------------------------------------------------
 Sub CloseBlock(nStartLine As Long)
-Dim i As Long
-Dim strLine As String
-Dim bFound As Boolean
-Dim procType As String
-Dim pos As New CodeMax4Ctl.position
-Static bClosing As Boolean
+	Dim i As Long
+	Dim strLine As String
+	Dim bFound As Boolean
+	Dim procType As String
+	Dim pos As New CodeMax4Ctl.position
+	Static bClosing As Boolean
 
    If bClosing Then Exit Sub
    bClosing = True

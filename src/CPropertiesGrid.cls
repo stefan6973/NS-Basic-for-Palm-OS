@@ -197,7 +197,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub SetList()
-Dim strItems() As String, strItem As Variant
+	Dim strItems() As String, strItem As Variant
 
    HideEditors
    SetEdit
@@ -335,7 +335,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mEdit_LostFocus()
-Dim prevValue As String
+	Dim prevValue As String
     
    mButton.Visible = False
    If Not mEdit.Enabled Then Exit Sub
@@ -350,14 +350,14 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mEllipsis_Click()
-Dim strData() As String
-Dim filename As String
-Dim fontname As String
-Dim oleNewColor As OLE_COLOR
-Dim obj As Object
-Dim fTextEditDlg As New frmTextEditDlg
-Dim sFile() As String
-Dim trace As Boolean
+	Dim strData() As String
+	Dim filename As String
+	Dim fontname As String
+	Dim oleNewColor As OLE_COLOR
+	Dim obj As Object
+	Dim fTextEditDlg As New frmTextEditDlg
+	Dim sFile() As String
+	Dim trace As Boolean
 sFile = Split(gStringTable(2200), ">") 'get "File"
 trace = True
 
@@ -447,8 +447,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mGrid_Click()
-Dim lStyle As Long
-Dim ScrollWidth As Long
+	Dim lStyle As Long
+	Dim ScrollWidth As Long
 
    If mGrid.row = curRow Then
       If mGrid.ColSel <> mGrid.col Then mGrid.ColSel = mGrid.col
@@ -529,7 +529,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function ScrollBarWidth() As Long
-Dim lStyle As Long
+	Dim lStyle As Long
 
    'Check if scrollbar is showing
    lStyle = GetWindowLong(mGrid.hWnd, (-16))
@@ -577,7 +577,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddItem(nType As Integer, ByVal strProp As String, ByVal strVal As String, Optional ByVal strData As String)
-Static nCol1 As Integer
+	Static nCol1 As Integer
 
    If m_nRows = 0 Then nCol1 = 0
    mForm.font = mGrid.font
@@ -657,7 +657,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mEllipsisBitmapAction()
 'Dim filedirectory As String 'temp
-Dim filename As String
+	Dim filename As String
 
 '   filedirectory = "c:\nsbasic" 'temp
    On Error GoTo gotCancel
@@ -687,7 +687,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mEllipsisResourceAction()
 'Dim filedirectory As String 'temp
-Dim filename As String
+	Dim filename As String
 
 '   filedirectory = "c:\nsbasic" 'temp
    On Error GoTo gotCancel
@@ -726,8 +726,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub UpdateValue(nRow As Integer, strVal As String)
-Dim strOrig As String
-Dim frm As Form
+	Dim strOrig As String
+	Dim frm As Form
 
    strOrig = GetVal(nRow)
    If strOrig = strVal Then Exit Sub
@@ -756,7 +756,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub UpdateAllValues()
-Dim i As Integer
+	Dim i As Integer
 
    For i = 1 To m_nRows
       LetVal mForm.Object.GetPropertyVal(GetProp(i)), i

@@ -282,11 +282,11 @@ End Property
 '
 '------------------------------------------------------------
 Private Sub butAction_Click(index As Integer)
-Dim mBarNew As New CMenuBar
-Dim mElemNew As New CMenuElem
-Dim mBar As CMenuBar
-Dim mElem As CMenuElem
-Dim nIndex As Integer
+	Dim mBarNew As New CMenuBar
+	Dim mElemNew As New CMenuElem
+	Dim mBar As CMenuBar
+	Dim mElem As CMenuElem
+	Dim nIndex As Integer
 
    m_Project.Dirty = True
    Select Case index
@@ -397,8 +397,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butMove_Click(index As Integer)
-Dim nIndex As Integer
-Dim nItemData As Long
+	Dim nIndex As Integer
+	Dim nItemData As Long
 
    Select Case index
    Case 0 'Move Up
@@ -470,7 +470,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub InitMenuCombobox()
-Dim i As Integer
+	Dim i As Integer
 
    'Initialize Menu Combobox
    cmbMenu.Clear
@@ -518,8 +518,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub cmbMenu_Click()
-Dim nIndex As Integer
-Dim strname As String
+	Dim nIndex As Integer
+	Dim strname As String
 
    If cmbMenu.Tag < 0 Then
       cmbMenu.Tag = cmbMenu.ListIndex
@@ -580,8 +580,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Load()
-Dim i As Integer
-Dim strname As String
+	Dim i As Integer
+	Dim strname As String
    LoadResStrings Me
 
    If m_Menu Is Nothing Then Set m_Menu = m_Project.MenuCollection(1)
@@ -611,8 +611,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub SetMenu()
-Dim mBar As CMenuBar
-Dim mElem As CMenuElem
+	Dim mBar As CMenuBar
+	Dim mElem As CMenuElem
 
    lstMenu.Clear
    If Not m_Menu Is Nothing Then
@@ -686,8 +686,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function LocateMenuBar(nIdNo As Integer) As CMenuBar
-Dim mBar As CMenuBar
-Dim mElem As CMenuElem
+	Dim mBar As CMenuBar
+	Dim mElem As CMenuElem
 
    For Each mBar In m_Menu.MenuBars
       If mBar.IdNo = nIdNo Then
@@ -707,8 +707,8 @@ End Function
 '
 '------------------------------------------------------------
 Private Function LocateMenuElem(nIdNo As Integer) As CMenuElem
-Dim mBar As CMenuBar
-Dim mElem As CMenuElem
+	Dim mBar As CMenuBar
+	Dim mElem As CMenuElem
 
    If m_bMenuBar Then Exit Function
    For Each mBar In m_Menu.MenuBars
@@ -725,7 +725,7 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-Dim i As Integer
+	Dim i As Integer
 
    For i = 0 To lstMenu.ListCount - 1
       If lstMenu.ItemData(i) < kMenuElem Then
@@ -805,7 +805,7 @@ End Function
 '
 '------------------------------------------------------------
 Private Function MenuElemIndex(nBarIdNo As Integer, nElemIdNo As Integer) As Integer
-Dim i As Integer
+	Dim i As Integer
 
    For i = 1 To m_Menu.MenuBars.count
       If m_Menu.MenuBars(i).IdNo = nBarIdNo Then
@@ -838,7 +838,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub txtCaption_Change()
-Dim strTemp As String
+	Dim strTemp As String
 
    If m_bProgramSet Then Exit Sub
    If m_Target Is Nothing Then
@@ -863,7 +863,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function AddNewMenu() As Boolean
-Dim mnu As New CMenu
+	Dim mnu As New CMenu
 
    If gLanguage <> "Nippon" Then
       mnu.Name = InputBox(gStringTable(1623), gStringTable(1624))

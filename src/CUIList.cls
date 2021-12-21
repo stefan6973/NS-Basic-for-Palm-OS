@@ -48,13 +48,13 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim cnt As Integer
-Dim c As Byte
-Dim i As Integer
-Dim lst As listOut
-Dim strTemp As String
-Dim templen As Integer
-Dim arrList() As String
+	Dim cnt As Integer
+	Dim c As Byte
+	Dim i As Integer
+	Dim lst As listOut
+	Dim strTemp As String
+	Dim templen As Integer
+	Dim arrList() As String
 
    'Examine the list and make sure it contains enough items to satisy VisibleItems, padding with
    'a " " item where necessary
@@ -135,8 +135,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
-Dim version As Integer
-Dim s As String
+	Dim version As Integer
+	Dim s As String
 
    Input #nFileNumber, version
    If version > kVersion Then
@@ -157,7 +157,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
-Dim s As String
+	Dim s As String
    
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
@@ -183,8 +183,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "lst" Then
@@ -212,7 +212,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim y As Integer
+	Dim y As Integer
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -272,7 +272,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""
@@ -310,8 +310,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
-Dim i As Integer
-Dim strTemp As String
+	Dim i As Integer
+	Dim strTemp As String
 
    Select Case strProp
    Case "Visible Rows": GetPropertyVal = VisibleItems
@@ -329,11 +329,11 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim n As Integer
-Dim arrList() As String
-Dim i As Integer
-Dim j As Integer
-Dim arrItems() As String
+	Dim n As Integer
+	Dim arrList() As String
+	Dim i As Integer
+	Dim j As Integer
+	Dim arrItems() As String
 
    ValidateProperty = True
    Select Case strProp

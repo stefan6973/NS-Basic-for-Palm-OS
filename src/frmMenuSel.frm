@@ -108,7 +108,7 @@ End Sub 'butDelete_Click
 '
 '------------------------------------------------------------
 Private Sub ViewMenu(Menu As CMenu)
-Dim fMenuBars As New frmMenuBars
+	Dim fMenuBars As New frmMenuBars
 
    fMenuBars.Project = m_Project
    fMenuBars.Menu = Menu
@@ -130,7 +130,7 @@ End Sub 'butEdit_Click
 '
 '------------------------------------------------------------
 Private Sub butNew_Click()
-Dim mnu As New CMenu
+	Dim mnu As New CMenu
 
    m_Project.AddMenu mnu
    ViewMenu mnu
@@ -140,7 +140,7 @@ End Sub 'butNew_Click
 '
 '------------------------------------------------------------
 Private Sub Form_Paint()
-Dim menu2 As CMenu
+	Dim menu2 As CMenu
 
    listMenus.Clear
 

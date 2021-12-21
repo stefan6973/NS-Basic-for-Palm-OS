@@ -184,8 +184,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "sli" Then
@@ -222,11 +222,11 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-Dim i As Integer
-Dim h As Integer
-Dim w As Integer
-Dim wk As String
-Dim rad As Integer
+	Dim i As Integer
+	Dim h As Integer
+	Dim w As Integer
+	Dim wk As String
+	Dim rad As Integer
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -332,7 +332,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""
@@ -390,10 +390,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim n As Integer
-Dim bmp As CBitmapFile
-Dim frm As CForm
-Dim o As Object
+	Dim n As Integer
+	Dim bmp As CBitmapFile
+	Dim frm As CForm
+	Dim o As Object
 
    ValidateProperty = True
    Select Case strProp

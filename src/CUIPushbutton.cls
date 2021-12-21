@@ -47,9 +47,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-Dim c As Byte
-Dim pus As ctlOut
-Dim templen As Integer
+	Dim c As Byte
+	Dim pus As ctlOut
+	Dim templen As Integer
 
    BuildControlPrc pus, obj
    pus.style.s = &H1
@@ -102,7 +102,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-Dim temp As String
+	Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -115,8 +115,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i As Integer
+	Dim tokens() As String
+	Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "cho" Then
@@ -213,7 +213,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+	Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.name = ""
@@ -263,7 +263,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim o As Object
+	Dim o As Object
 
    ValidateProperty = True
    Select Case strProp
