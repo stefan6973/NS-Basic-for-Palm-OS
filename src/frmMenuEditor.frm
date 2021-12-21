@@ -264,14 +264,23 @@ Private Const kEditMenuName As Integer = -1
 Private Const kDeleteMenu As Integer = -2
 Private Const kAddNewMenu As Integer = -3
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Project(ByVal proj As CProject)
    Set m_Project = proj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Menu(ByVal mnu As CMenu)
    Set m_Menu = mnu
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butAction_Click(index As Integer)
 Dim mBarNew As New CMenuBar
 Dim mElemNew As New CMenuElem
@@ -384,6 +393,9 @@ Dim nIndex As Integer
    lstMenu.ListIndex = nIndex
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butMove_Click(index As Integer)
 Dim nIndex As Integer
 Dim nItemData As Long
@@ -447,10 +459,16 @@ Dim nItemData As Long
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butOK_Click()
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub InitMenuCombobox()
 Dim i As Integer
 
@@ -479,6 +497,9 @@ Dim i As Integer
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmbCommand_Click()
    If m_Target Is Nothing Then Exit Sub
    If Not typename(m_Target) = "CMenuElem" Then Exit Sub
@@ -493,6 +514,9 @@ Private Sub cmbCommand_Click()
    txtCaption_Change
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmbMenu_Click()
 Dim nIndex As Integer
 Dim strname As String
@@ -552,6 +576,9 @@ ResetIndex:
    cmbMenu.ListIndex = nIndex
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
 Dim i As Integer
 Dim strname As String
@@ -580,6 +607,9 @@ Dim strname As String
    SetMenu
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SetMenu()
 Dim mBar As CMenuBar
 Dim mElem As CMenuElem
@@ -603,6 +633,9 @@ Dim mElem As CMenuElem
    UpdateDialog
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub UpdateDialog()
    If lstMenu.ListIndex < 0 Then
       SetTxtCaption ""
@@ -649,6 +682,9 @@ Private Sub UpdateDialog()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function LocateMenuBar(nIdNo As Integer) As CMenuBar
 Dim mBar As CMenuBar
 Dim mElem As CMenuElem
@@ -667,6 +703,9 @@ Dim mElem As CMenuElem
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function LocateMenuElem(nIdNo As Integer) As CMenuElem
 Dim mBar As CMenuBar
 Dim mElem As CMenuElem
@@ -682,6 +721,9 @@ Dim mElem As CMenuElem
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 Dim i As Integer
 
@@ -702,18 +744,30 @@ Dim i As Integer
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lstMenu_Click()
    UpdateDialog
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lstMenu_KeyUp(KeyCode As Integer, Shift As Integer)
    If KeyCode = 93 Then PopupMenu mnuRight
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lstMenu_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
    If Button = vbRightButton Then PopupMenu mnuRight
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRightAdd_Click(index As Integer)
    Select Case index
    Case 0, 1: butAction_Click index
@@ -722,22 +776,34 @@ Private Sub mnuRightAdd_Click(index As Integer)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRightMove_Click(index As Integer)
    butMove_Click index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function MenuIndex(nIdNo As Integer) As Integer
    For MenuIndex = 1 To m_Project.MenuCollection.count
       If m_Project.MenuCollection(MenuIndex).IdNo = nIdNo Then Exit Function
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function MenuBarIndex(nIdNo As Integer) As Integer
    For MenuBarIndex = 1 To m_Menu.MenuBars.count
       If m_Menu.MenuBars(MenuBarIndex).IdNo = nIdNo Then Exit Function
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function MenuElemIndex(nBarIdNo As Integer, nElemIdNo As Integer) As Integer
 Dim i As Integer
 
@@ -750,18 +816,27 @@ Dim i As Integer
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetListIndex(nIdNo As Integer) As Integer
    For GetListIndex = 0 To lstMenu.ListCount - 1
       If lstMenu.ItemData(GetListIndex) Mod kMenuBar = nIdNo Then Exit Function
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SetTxtCaption(ByVal strCaption As String)
    m_bProgramSet = True
    txtCaption.Text = strCaption
    m_bProgramSet = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub txtCaption_Change()
 Dim strTemp As String
 
@@ -784,6 +859,9 @@ Dim strTemp As String
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function AddNewMenu() As Boolean
 Dim mnu As New CMenu
 

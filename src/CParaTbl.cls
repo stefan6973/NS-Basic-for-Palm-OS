@@ -26,6 +26,9 @@ Public ptype As String  's=sub l=label
 Public argCount As Integer
 Public defBy As String
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    tbl_no = 0
    name_ptr = ""

@@ -66,6 +66,10 @@ Attribute VB_Exposed = False
 'entire form is new 04012005
 
 Dim startIndex As Integer
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
 'MMD: Yeah, this is broken again... ha ha ha
    If Me.WindowState = vbMinimized Then Exit Sub  '02/11/2001 MMD
@@ -79,6 +83,10 @@ Private Sub Form_Resize()
       End With
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub addIt()
     'this routine has just a few changes 06112005 and they are marked individually
     Dim s1 As Integer
@@ -170,6 +178,9 @@ Private Sub addIt()
         
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
  
     'this routine changed drastically 06112005
@@ -293,6 +304,10 @@ Function formatWatchNames(source As String, varname As String)
    s = s + varname
    formatWatchNames = s
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lstVars_Click()
     addIt
 End Sub
@@ -301,6 +316,10 @@ End Sub
 '06112005End Sub
  
 'this routine added 06112005
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Tree_Click()
     addIt
 End Sub

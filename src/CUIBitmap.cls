@@ -77,6 +77,13 @@ trace = True
    If trace Then MsgBox "CUIBitmap:class_initialize 6"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 Dim c As Byte
 Dim i As Integer
@@ -121,6 +128,13 @@ Dim bBitmapOk As Boolean
    Put #9, , bmp
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
    Dim version As Integer
    Dim properties As String
@@ -148,6 +162,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
@@ -156,6 +173,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -164,6 +184,9 @@ Public Function Copy() As String
    Copy = Copy + obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim proplist() As String
 Dim i As Integer
@@ -196,6 +219,9 @@ Dim i As Integer
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim filename As String
 Dim w As Integer
@@ -317,6 +343,9 @@ pictureNotFound:
      * (obj.Control.Height / obj.Control.Parent.MagFactor) * 8
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ResourceId(ByVal vData As Integer)
    m_nResourceID = vData
    If m_nResourceID = 0 Then
@@ -325,123 +354,242 @@ Public Property Let ResourceId(ByVal vData As Integer)
       obj.Label = m_nResourceID
    End If
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ResourceId() As Integer
    If m_nResourceID = 0 Then m_nResourceID = obj.IdNo
    ResourceId = m_nResourceID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let FontBold(ByVal vData As Boolean)
    m_bFontBold = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get FontBold() As Boolean
    FontBold = m_bFontBold
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let FontItalic(ByVal vData As Boolean)
    m_bFontItalic = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get FontItalic() As Boolean
    FontItalic = m_bFontItalic
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let FontStrikethru(ByVal vData As Boolean)
    m_bFontStrikethru = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get FontStrikethru() As Boolean
    FontStrikethru = m_bFontStrikethru
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let FontUnderline(ByVal vData As Boolean)
    m_bFontUnderline = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get FontUnderline() As Boolean
    FontUnderline = m_bFontUnderline
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Stretch(ByVal vData As Boolean)
    m_bStretch = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Stretch() As Boolean
    Stretch = m_bStretch
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let GradientColor1(ByVal vData As Long)
    m_nGradientColor1 = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GradientColor1() As Long
    GradientColor1 = m_nGradientColor1
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let GradientColor2(ByVal vData As Long)
    m_nGradientColor2 = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GradientColor2() As Long
    GradientColor2 = m_nGradientColor2
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Alignment(ByVal vData As Integer)
    m_nAlignment = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Alignment() As Integer
    Alignment = m_nAlignment
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Appearance(ByVal vData As Integer)
    m_nAppearance = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Appearance() As Integer
    Appearance = m_nAppearance
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let BorderStyle(ByVal vData As Integer)
    m_nBorderStyle = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get BorderStyle() As Integer
    BorderStyle = m_nBorderStyle
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let fontSize(ByVal vData As Single)
    m_nFontSize = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get fontSize() As Single
    fontSize = m_nFontSize
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ForeColor(ByVal vData As Long)
    m_nForeColor = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ForeColor() As Long
    ForeColor = m_nForeColor
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let GradientStyle(ByVal vData As Integer)
    m_nGradientStyle = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GradientStyle() As Integer
    GradientStyle = m_nGradientStyle
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let caption(ByVal vData As String)
    m_sCaption = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get caption() As String
    caption = m_sCaption
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let fontname(ByVal vData As String)
    m_sFontName = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get fontname() As String
    fontname = m_sFontName
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Picture(ByVal vData As String)
    m_sPicture = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Picture() As String
    Picture = m_sPicture
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -546,6 +694,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Bitmap ID": GetPropertyVal = ResourceId
@@ -569,6 +720,10 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    Case Else: GetPropertyVal = obj.GetPropertyVal(strProp)
    End Select
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function setPropertyVal(ByVal strProp As String) As String
    Dim data() As String
    data = Split(strProp, "=")
@@ -595,6 +750,9 @@ Public Function setPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim nResID As Integer
 Dim bmp As CBitmapFile
@@ -689,14 +847,23 @@ Dim i As Long
    If ValidateProperty Then gTarget.Dirty = ValidateProperty
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function getAllProperties() As String
    Static nProp As Integer
    Dim i As Integer

@@ -19,6 +19,10 @@ Public obj As UIObject
 Private mvarRows As Integer
 Private mvarColumns As Integer
 Private mvarColumnWidth(26) As Integer
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    'create the mUILabel object when the UIShiftIndic class is created
    Dim i As Integer
@@ -31,6 +35,10 @@ Private Sub class_initialize()
       mvarColumnWidth(i) = 10
    Next
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
    Dim tbl As tableOut
    Dim c As Byte
@@ -46,6 +54,9 @@ Public Sub PrcOut()
    Put #9, , tbl
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
 
    Dim version As Integer
@@ -63,6 +74,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
 
    Dim version As Integer
@@ -79,6 +93,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
    Dim version As Integer
    Dim i As Integer
@@ -92,6 +109,10 @@ Public Function Copy() As String
    Next
    Copy = Copy + obj.Copy()
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
    Dim tokens() As String
    Dim i As Integer
@@ -122,6 +143,9 @@ Public Sub Paste(ByRef strLines() As String)
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw(theForm As Form)
    Dim xul, xll, xur, xlr As Integer
    Dim yul, yll, yur, ylr As Integer
@@ -139,22 +163,45 @@ Public Sub ScreenDraw(theForm As Form)
    theForm.Line (xul, yul)-(xlr, ylr), vbBlack, B
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Columns(ByVal vData As Integer)
 'Syntax: X.Columns = 5
    mvarColumns = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Columns() As Integer
    Columns = mvarColumns
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Rows(ByVal vData As Integer)
    mvarRows = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Rows() As Integer
    Rows = mvarRows
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetColumnWidth(iData As Integer, ByVal vData As Integer)
    mvarColumnWidth(iData) = vData
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetColumnWidth(iData As Integer) As Integer
    GetColumnWidth = mvarColumnWidth(iData)
 End Function

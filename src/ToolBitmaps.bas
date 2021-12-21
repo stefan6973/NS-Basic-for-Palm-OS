@@ -15,6 +15,9 @@ Public Const LR_LOADFROMFILE = &H10
 Public Const LR_LOADTRANSPARENT = &H20
 Public Const IMAGE_BITMAP = 0
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub MakeFileTrans(ImgPic As Object, ByVal FileName As String)
 'You'll need to add an NT 4.0 procedure
 Dim BitMapLong As Long

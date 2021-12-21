@@ -45,12 +45,18 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butClose_Click()
    Me.Hide
    Unload Me
    frmMain.Show
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    frmBitmapProp.caption = "Bitmap Properties - ID# " + Trim(str(bmp.IdNo))
    TxtPath = bmp.pathName

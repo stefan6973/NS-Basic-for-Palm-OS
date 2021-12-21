@@ -102,6 +102,9 @@ Private m_nBitmapIndex As Long
 Private m_nModuleIndex As Long
 Private m_strSelection As String
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
 Dim lRet As Long
@@ -124,6 +127,9 @@ Dim lRet As Long
    frmMain.mnuViewProjectExplorer.Checked = gbProjectExplorer
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DisplayExplorer()
 Dim i As Integer
 Dim wk, wk2 As String
@@ -233,6 +239,9 @@ repeat:
    expl.Refresh
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillProjectNode(nProject As Integer, ByVal proj As CProject)
 Dim wk As String
 
@@ -253,6 +262,9 @@ Dim wk As String
    expl.Nodes(nProject).Tag = proj.GlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillFormNode(nForm As Integer, ByVal frm As CForm, ByVal proj As CProject)
 Dim wk As String
 
@@ -270,6 +282,9 @@ Dim wk As String
    expl.Nodes(nForm).Tag = frm.GlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillObjectNode(nOb As Integer, ByVal ob As Object, ByVal frm As CForm, ByVal proj As CProject)
    Dim wk As String
 
@@ -279,16 +294,25 @@ Private Sub FillObjectNode(nOb As Integer, ByVal ob As Object, ByVal frm As CFor
    expl.Nodes(nOb).Tag = ob.obj.GlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillMenuNode(nMenu As Integer, ByVal mnu As CMenu)
    expl.Nodes(nMenu).Text = mnu.Name
    expl.Nodes(nMenu).Tag = mnu.GlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillMenuBarNode(nMenuBar As Integer, ByVal mBar As CMenuBar)
    expl.Nodes(nMenuBar).Text = mBar.caption
    expl.Nodes(nMenuBar).Tag = mBar.GlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillMenuElemNode(nMenuElem As Integer, ByVal mElem As CMenuElem)
 Dim wk As String
 
@@ -299,6 +323,9 @@ Dim wk As String
    expl.Nodes(nMenuElem).Tag = mElem.GlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillBitmapNode(nBmp As Integer, ByVal bmp As CBitmapFile, ByVal proj As CProject)
    Dim filename As String
    filename = bmp.PathName1
@@ -315,16 +342,26 @@ Private Sub FillBitmapNode(nBmp As Integer, ByVal bmp As CBitmapFile, ByVal proj
    expl.Nodes(nBmp).Text = bmp.IdNo & "/" & bmp.Name & " " & Mid(filename, InStrRev(filename, "\") + 1)
    expl.Nodes(nBmp).Tag = bmp.GlobalID
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillResourceNode(nRes As Integer, ByVal res As CResourceFile, ByVal proj As CProject)
    expl.Nodes(nRes).Text = res.IdNo & "/" & res.Name & " " & Mid(res.ResourcePath, InStrRev(res.ResourcePath, "\") + 1)
    expl.Nodes(nRes).Tag = res.GlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FillModuleNode(nModule As Integer, ByVal cMod As CCodeModule) ', byval proj As CProject)
    expl.Nodes(nModule).Text = cMod.filename
    expl.Nodes(nModule).Tag = cMod.GlobalID 'Join(Array("module", cmod.IdNo, proj.Name), "|")
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Expl_DblClick()
 Dim index As Integer
 Dim arrNode() As String
@@ -368,10 +405,16 @@ Dim fMenuEditor As New frmMenuEditor
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub expl_KeyUp(KeyCode As Integer, Shift As Integer)
    If KeyCode = 93 Then expl_MouseUp 2, 0, -expl.Left, -expl.Top
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub expl_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim o2 As Object
 Dim v2 As Object
@@ -416,6 +459,9 @@ Dim arrTag() As String
    frmMain.RightClickMenu 0, expl.SelectedItem.Tag
 End Sub  'expl_MouseUp
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    LoadResStrings Me
    Me.Left = -(Me.Width + 1)
@@ -437,6 +483,9 @@ Private Sub Form_Load()
 '   DockWindow
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
    If Me.WindowState = vbMinimized Then Exit Sub
    Me.ScaleMode = 3
@@ -448,12 +497,18 @@ Private Sub Form_Resize()
    'MsgBox "Screen.TwipsPerPixelX: " & Screen.TwipsPerPixelX
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
    gbProjectExplorer = False
    frmMain.picPanel_Resize
    frmMain.mnuViewProjectExplorer.Checked = gbProjectExplorer
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetNode(ByVal strTag As String) As MSComctlLib.Node
 Dim i As Integer
 
@@ -465,6 +520,9 @@ Dim i As Integer
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveNode(ByVal strID As String)
 Dim nod As MSComctlLib.Node
 
@@ -474,6 +532,9 @@ Dim nod As MSComctlLib.Node
    If nod.Children < 1 Then nod.Expanded = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewForm(ByRef frm As CForm, ByRef proj As CProject)
 Dim nod As MSComctlLib.Node
 
@@ -485,6 +546,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewControl(ByVal obj As Object, ByVal frm As CForm)
 Dim nod As MSComctlLib.Node
 
@@ -497,6 +561,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewMenu(ByRef mnu As CMenu, ByRef proj As CProject)
 Dim nod As MSComctlLib.Node
 
@@ -509,6 +576,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewMenuBar(ByRef mBar As CMenuBar, ByRef mnu As CMenu)
 Dim nod As MSComctlLib.Node
 
@@ -521,6 +591,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewMenuElem(ByRef mElem As CMenuElem, ByRef mBar As CMenuBar)
 Dim nod As MSComctlLib.Node
 
@@ -533,6 +606,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewBitmap(ByRef bmp As CBitmapFile, ByRef proj As CProject)
 Dim nod As MSComctlLib.Node
 
@@ -545,6 +621,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewResource(ByRef bmp As CResourceFile, ByRef proj As CProject)
 Dim nod As MSComctlLib.Node
 
@@ -557,6 +636,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewModule(ByRef cMod As CCodeModule, ByRef proj As CProject)
 Dim nod As MSComctlLib.Node
 
@@ -569,6 +651,9 @@ Dim nod As MSComctlLib.Node
    nod.EnsureVisible
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub UpdateTarget()
 Dim i As Integer
 
@@ -578,6 +663,9 @@ Dim i As Integer
    SetCaption
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetCaption()
    Me.caption = gStringTable(1301)
    If gTarget Is Nothing Then Exit Sub
@@ -585,6 +673,9 @@ Public Sub SetCaption()
    Me.caption = Me.caption & " - " & gTarget.Name
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ShowActive(Optional obj As Object)
 
    If obj Is Nothing Then
@@ -601,6 +692,9 @@ ShowActiveErr1:
    If gbProperties Then gfProperties.Object = LocateObject(obj.obj.GlobalID)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub UpdateObjectNode(ByVal obj As Object, ByVal strGlobalID As String)
 Dim nod As MSComctlLib.Node
 
@@ -619,6 +713,9 @@ Dim nod As MSComctlLib.Node
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub UpdateProjectMenus(ByVal proj As CProject)
 Dim nod As MSComctlLib.Node
 Dim i As Integer
@@ -633,6 +730,9 @@ Dim i As Integer
    DisplayProjectMenus proj, GetNode("Menus|" & proj.GlobalID).index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DisplayProjectMenus(ByVal proj As CProject, nMenusFolder As Integer)
 Dim nod As MSComctlLib.Node
 Dim nMenu As Integer

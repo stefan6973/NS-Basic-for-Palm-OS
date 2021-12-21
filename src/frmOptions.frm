@@ -347,7 +347,7 @@ Begin VB.Form frmOptions
             Width           =   3495
          End
          Begin VB.OptionButton optDownload 
-            Caption         =   "Send to Palm OS® &Emulator (POSE)"
+            Caption         =   "Send to Palm OSï¿½ &Emulator (POSE)"
             Height          =   255
             Index           =   1
             Left            =   120
@@ -536,6 +536,9 @@ Option Explicit
 Private m_nTab As Integer
 Private m_bFontChanged As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Enum enTabs
    tbsNone = -1
    tbsGeneral = 0
@@ -544,6 +547,9 @@ Private Enum enTabs
    tbsCompile = 3
 End Enum
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butBrowseGlobalPath_Click()
 Dim fBrowseFolder As New frmBrowseFolder
 
@@ -564,6 +570,9 @@ Dim fBrowseFolder As New frmBrowseFolder
 err_butBrowsefiledirectory_Click:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butBrowsePOSE_Click()
    On Error GoTo err_butBrowsePOSE_Click
    comdlg.DialogTitle = "Path to POSE"
@@ -577,6 +586,10 @@ Private Sub butBrowsePOSE_Click()
    txtPOSEpath.Refresh
 err_butBrowsePOSE_Click:
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butBrowseSimulator_Click()
    On Error GoTo err_butBrowseSimulator_Click
    comdlg.DialogTitle = "Path to Simulator"
@@ -591,6 +604,9 @@ Private Sub butBrowseSimulator_Click()
 err_butBrowseSimulator_Click:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butEditorPrefs_Click()
    MNSBCodeMax_SetLanguage cmaxPref
    MNSBCodeMax_SetScriptPrefs cmaxPref
@@ -600,6 +616,9 @@ Private Sub butEditorPrefs_Click()
    MWinReg.SetRegValue MWinReg.hKey, MWinReg.SubKey, "codeFontSize", cmaxPref.font.Size
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butFont_Click()
    'Prepare common dialog
    comdlg.flags = cdlCFBoth
@@ -620,14 +639,23 @@ fontDlgCancel:
    On Error GoTo 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub CancelButton_Click()
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub chkPlainText_Click()
    butFont.Enabled = chkPlainText
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    Dim i As Integer
    LoadResStrings Me ', False
@@ -785,6 +813,9 @@ Private Sub Form_Load()
 #End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub getLanguages()
 Dim s, Name
 Dim hFile As Long
@@ -805,8 +836,9 @@ Dim i As Integer
    Next
 End Sub
 
-
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub OKButton_Click()
 Dim oldPath As String
 
@@ -924,15 +956,24 @@ Dim oldPath As String
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub optDownload_Click(index As Integer)
    chkPOSErun.Enabled = (index = 1)
    chkSimulatorRun.Enabled = (index = 0)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tabPrefs_Click()
    ShowTab tabPrefs.SelectedItem.index - 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub ShowTab(nTab As Integer)
    If m_nTab <> tbsNone Then pbTab(m_nTab).Visible = False
    m_nTab = nTab

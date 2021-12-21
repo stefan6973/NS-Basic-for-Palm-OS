@@ -79,23 +79,38 @@ Option Explicit
 
 Private m_strTemplate As String
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ProjectTemplate() As String
    ProjectTemplate = m_strTemplate
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub CancelButton_Click()
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    lstTemplates.ListItems.Add , , "Project File", "NSBasic"
    LoadResStrings Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lstTemplates_DblClick()
    OKButton_Click
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub OKButton_Click()
    m_strTemplate = "Project File"
    Unload Me

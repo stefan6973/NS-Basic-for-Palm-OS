@@ -37,6 +37,9 @@ Private Const kTotalProps As Integer = 21
 Private Const kProperties As String = "Text-MaxChars-Left-Top-Width-Height"
 Private Const kMethods As String = "Hide-Show-Redraw-SetFocus"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    obj.Parent = Me
    obj.Name = "Field"
@@ -54,6 +57,9 @@ Private Sub class_initialize()
    m_nScrollbarID = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 Dim c As Byte
 Dim fld As FieldOut
@@ -127,6 +133,9 @@ Dim templen As Integer
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
    Dim version As Integer
    
@@ -141,6 +150,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
@@ -149,6 +161,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim temp As String
 
@@ -161,6 +176,9 @@ Dim temp As String
    Copy = Copy + obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -195,6 +213,9 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim i As Integer
 Dim nolines As Integer
@@ -242,78 +263,135 @@ Dim line As String
    obj.DrawSelected
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let HasScrollbar(ByVal vData As Boolean)
    m_bHasScrollbar = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get HasScrollbar() As Boolean
    HasScrollbar = m_bHasScrollbar
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let AutoShift(ByVal vData As Boolean)
    m_bAutoShift = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get AutoShift() As Boolean
    AutoShift = m_bAutoShift
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let MaxCharacters(ByVal vData As Integer)
    m_nMaxCharacters = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get MaxCharacters() As Integer
    MaxCharacters = m_nMaxCharacters
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let LeftJustified(ByVal vData As Boolean)
    m_bLeftJustified = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get LeftJustified() As Boolean
    LeftJustified = m_bLeftJustified
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let DynamicSize(ByVal vData As Boolean)
    m_bDynamicSize = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get DynamicSize() As Boolean
    DynamicSize = m_bDynamicSize
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let SingleLine(ByVal vData As Boolean)
    m_bSingleLine = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get SingleLine() As Boolean
    SingleLine = m_bSingleLine
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Underline(ByVal vData As Boolean)
    m_bUnderline = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Underline() As Boolean
    Underline = m_bUnderline
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Editable(ByVal vData As Boolean)
    m_bEditable = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Editable() As Boolean
    Editable = m_bEditable
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Numeric(ByVal vData As Boolean)
    m_bNumeric = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Numeric() As Boolean
    Numeric = m_bNumeric
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -355,6 +433,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Auto Shift": GetPropertyVal = AutoShift
@@ -370,6 +451,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim n As Double
 
@@ -455,10 +539,16 @@ Dim n As Double
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

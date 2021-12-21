@@ -18,7 +18,11 @@ Public nProc As Integer
 Public nMethodType As Integer
 Public nParams As Integer
 Public strHelp As String
-Public strArgTypes As String    ' EMP added
+Public strArgTypes As String ' EMP added
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub class_initialize()
    strname = ""
    nProc = -1

@@ -52,9 +52,9 @@ Public Property Get Status() As enConnectionState
     Status = m_connectionState
 End Property
 
-'--------------------------------------------------
+'------------------------------------------------------------
 ' initialization method
-'--------------------------------------------------
+'------------------------------------------------------------
 Public Function Initialize() As cIdeDebugger
    If Me Is Nothing Then
       Set Initialize = New cIdeDebugger
@@ -63,9 +63,9 @@ Public Function Initialize() As cIdeDebugger
    
 End Function
 
-'--------------------------------------------------
+'------------------------------------------------------------
 ' constructor
-'--------------------------------------------------
+'------------------------------------------------------------
 Private Sub Class_Initialize()
    'Set m_tcp = New Winsock
 End Sub

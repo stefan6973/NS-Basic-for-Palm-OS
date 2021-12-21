@@ -1,2 +1,4 @@
-
-NSBS1/.DS_Store
+any
+bin
+.vscode
+./**/.DS_Store

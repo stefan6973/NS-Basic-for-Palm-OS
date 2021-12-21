@@ -28,6 +28,9 @@ Private Const kTotalProps As Integer = 16
 Private Const kProperties As String = "Status-Left-Top-Width-Height"
 Private Const kMethods As String = "Hide-Show-Redraw"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    obj.Parent = Me
    obj.name = "Checkbox"
@@ -39,6 +42,9 @@ Private Sub class_initialize()
    m_bAnchorLeft = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 Dim c As Byte
 Dim chk As ctlOut
@@ -65,6 +71,9 @@ Dim templen As Integer
    Put #9, , c
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
    Dim version As Integer
 
@@ -78,6 +87,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
@@ -85,6 +97,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim temp As String
 
@@ -95,6 +110,9 @@ Dim temp As String
    Copy = Copy + obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -123,6 +141,9 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim boxWidth As Integer, w As Integer, h As Integer
 
@@ -156,30 +177,51 @@ Dim boxWidth As Integer, w As Integer, h As Integer
    obj.DrawSelected
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let GroupId(ByVal vData As Integer)
    m_nGroupID = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GroupId() As Integer
    GroupId = m_nGroupID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Selected(ByVal vData As Boolean)
    m_bSelected = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Selected() As Boolean
    Selected = m_bSelected
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let AnchorLeft(ByVal vData As Boolean)
    m_bAnchorLeft = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get AnchorLeft() As Boolean
    AnchorLeft = m_bAnchorLeft
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -215,6 +257,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Anchor Left": GetPropertyVal = AnchorLeft
@@ -224,6 +269,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim o As Object
 
@@ -283,10 +331,16 @@ Dim o As Object
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

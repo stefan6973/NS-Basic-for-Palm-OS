@@ -76,10 +76,16 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 'this entire form is new 04012005
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    LoadResStrings Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
 'MMD: Yeah, this is broken again... ha ha ha
    If Me.WindowState = vbMinimized Then Exit Sub  '02/11/2001 MMD

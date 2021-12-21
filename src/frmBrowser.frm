@@ -83,6 +83,9 @@ Attribute VB_Exposed = False
 Public StartingAddress As String
 Dim mbDontNavigateNow As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    On Error Resume Next
    LoadResStrings Me
@@ -105,11 +108,17 @@ Private Sub Form_Load()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub brwWebBrowser_DownloadComplete()
    On Error Resume Next
    Me.caption = brwWebBrowser.LocationName
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub brwWebBrowser_NavigateComplete2(ByVal pDisp As Object, URL As Variant)
    On Error Resume Next
    Dim i As Integer
@@ -130,6 +139,9 @@ Private Sub brwWebBrowser_NavigateComplete2(ByVal pDisp As Object, URL As Varian
    mbDontNavigateNow = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
    On Error Resume Next
 '   cboAddress.Width = Me.ScaleWidth - 100
@@ -137,6 +149,9 @@ Private Sub Form_Resize()
    brwWebBrowser.Height = Me.ScaleHeight - 100
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub timTimer_Timer()
    If brwWebBrowser.Busy = False Then
       timTimer.Enabled = False

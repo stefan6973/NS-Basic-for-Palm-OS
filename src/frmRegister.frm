@@ -77,6 +77,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butDone_Click()
    glSerialNumber = fldSerialNumber.Text
    CheckSerialNumber
@@ -84,11 +87,16 @@ Private Sub butDone_Click()
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butCancel_Click()
   Unload Me
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    LoadResStrings Me
    If Not allowRegistration Then

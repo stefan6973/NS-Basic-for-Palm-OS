@@ -1532,6 +1532,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    Saved = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
    Dim i As Integer
    Dim strTemp As String
@@ -1604,6 +1607,9 @@ SaveError:
    MsgBox gStringTable(3256) & vbCrLf & err.Description '"Unable to save project"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
    Dim frm As CForm
    Dim mnu As New CMenu
@@ -1627,6 +1633,9 @@ Public Sub Paste(ByRef strLines() As String)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function AddNewForm() As CForm
 Dim frm As New CForm
 Dim tempForm As CForm
@@ -1655,6 +1664,9 @@ Dim strTitle As String
    Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveForm(ByVal strGlobalID As String)
 Dim i As Integer
 
@@ -1669,6 +1681,9 @@ Dim i As Integer
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function AddNewBitmap(ByRef strFilename As String) As CBitmapFile
 Dim bmp As New CBitmapFile
 
@@ -1680,6 +1695,9 @@ Dim bmp As New CBitmapFile
    Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveBitmap(ByVal strGlobalID As String)
 Dim i As Integer
 
@@ -1691,6 +1709,10 @@ Dim i As Integer
    Next
    Dirty = True
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function AddNewResource(ByRef strFilename As String) As CResourceFile
 Dim bmp As New CResourceFile
 
@@ -1702,6 +1724,9 @@ Dim bmp As New CResourceFile
    Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveResource(ByVal strGlobalID As String)
 Dim i As Integer
 
@@ -1714,6 +1739,9 @@ Dim i As Integer
    Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function AddModule(Optional ByRef strFilename As String = "") As CCodeModule
 Dim cMod As New CCodeModule
 Dim cmod2 As CCodeModule
@@ -1750,6 +1778,9 @@ AddModule_FoundNext:
    Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveModule(ByVal strGlobalID As String)
 Dim i As Integer
 
@@ -1762,22 +1793,35 @@ Dim i As Integer
    Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddBitmap(ByVal bm As CBitmapFile, Optional nID As Integer = 0)
    BitmapCollection.Add bm
    If nID = 0 Then bm.IdNo = GetNextSeqNo
    Dirty = True
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddResource(ByVal resource As CResourceFile, Optional nID As Integer = 0)
    ResourceCollection.Add resource
    If nID = 0 Then resource.IdNo = GetNextSeqNo
    Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddDataElement(ByVal de As CDataElement)
    DataCollection.Add de
    de.tbl_no = DataCollection.count
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function AddMenu(Optional ByVal mnu As CMenu = Nothing) As Boolean
    If mnu Is Nothing Then
       Set mnu = New CMenu
@@ -1797,6 +1841,9 @@ Public Function AddMenu(Optional ByVal mnu As CMenu = Nothing) As Boolean
    Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub GenMenuTBAR(mn As CMenu, eno As Integer)
 Dim mBar As PPmenuBar
 Dim pull As menuPulldown
@@ -1976,12 +2023,18 @@ nextMenu:
    Seek #3, temp
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetNextSeqNo() As Integer
    If HighestSeqNo > 9990 Then MsgBox gStringTable(3443) 'Maximum number of resources in a project is 9999
    HighestSeqNo = HighestSeqNo + 1
    GetNextSeqNo = HighestSeqNo
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function OpenProject(ByVal strPath As String) As Boolean
    Dim o As Object
    Dim bmp As CBitmapFile
@@ -2113,28 +2166,46 @@ gotCancel:
    End
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub RestoreUIObject(ByVal nFileNumber as integer, ByVal frm As CForm, ByVal obj As Object)
    obj.Restore #nFileNumber
    frm.ObjectCollection.Add obj
    obj.obj.Form = frm
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ApplType(ByVal strname As String)
    m_strApplType = Left(strname, 4)
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ApplType() As String
    ApplType = m_strApplType
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let CreatorID(ByVal strCode As String)
    m_strCreatorID = Left(strCode, 4)
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get CreatorID() As String
    CreatorID = m_strCreatorID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -2213,6 +2284,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "(Name)": GetPropertyVal = Name
@@ -2235,6 +2309,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim strWork As String
 Dim proj As CProject
@@ -2393,6 +2470,9 @@ Dim frm As Form
    Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Form(nID As Integer) As CForm
 Dim frm As CForm
 
@@ -2404,6 +2484,9 @@ Dim frm As CForm
    Next
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Bitmap(nID As Integer) As CBitmapFile
 Dim bmp As CBitmapFile
 
@@ -2414,6 +2497,10 @@ Dim bmp As CBitmapFile
       End If
    Next
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get resource(nID As Integer) As CResourceFile
 Dim bmp As CResourceFile
 
@@ -2425,6 +2512,9 @@ Dim bmp As CResourceFile
    Next
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Module(nID As Integer) As CCodeModule
 Dim cm As CCodeModule
 
@@ -2436,15 +2526,24 @@ Dim cm As CCodeModule
    Next
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
 Attribute GlobalID.VB_UserMemId = 0
    GlobalID = m_strGlobalID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let GlobalID(strID As String)
    m_strGlobalID = "project|" & strID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetScript(strScript As String, Optional bForceCreate As Boolean = True) As String
    Select Case strScript
    Case "startup"
@@ -2462,6 +2561,9 @@ Public Function GetScript(strScript As String, Optional bForceCreate As Boolean 
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
    Select Case strScript
    Case "startup": pgm_script = strText
@@ -2470,6 +2572,9 @@ Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
    Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub WriteOutBitmaps()
 Dim bmp As CBitmapFile
 Dim frm As Object
@@ -2507,12 +2612,20 @@ Dim res As Double
    Next
 
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub WriteOutResources()
 Dim resource As CResourceFile
    For Each resource In ResourceCollection
          'ResIn resource.IdNo
    Next
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CheckBitmap(pathname As String) '07/18/01 GH
 'see if bitmap exists
    CheckBitmap = True
@@ -2529,6 +2642,9 @@ notFound:
    compileOkSw = False
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function BuildMap() As String()
 Dim strMap As String
 Dim frm As CForm
@@ -2557,6 +2673,9 @@ Const kSep As String = ">"
 '   Clipboard.SetText Join(BuildMap, vbCrLf)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetObjectType(astrName As String) As String
 Dim frm As CForm
 
@@ -2565,6 +2684,10 @@ Dim frm As CForm
       If GetObjectType <> "" Then Exit Function
    Next
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function BuildNavArray(view As CForm) As Integer() 'added 10.13.06 GH
     Dim navArray() As Integer
     ReDim navArray(10 + view.ObjectCollection.count * 4)

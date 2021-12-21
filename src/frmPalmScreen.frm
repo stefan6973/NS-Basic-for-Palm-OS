@@ -82,10 +82,16 @@ Private m_nMagFactor As Integer
 Private m_bNewObject As Boolean
 Private m_Form As CForm
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Activate()
    frmMain.ActiveFormChange 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Click()
 Dim ob As Object
 
@@ -111,6 +117,9 @@ Dim ob As Object
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    'Move offscreen
    Me.Left = -(Me.Width + 1)
@@ -157,6 +166,9 @@ Private Sub Form_Load()
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Object(theForm As CForm)
 Dim obj As Object
    
@@ -168,6 +180,9 @@ Dim obj As Object
    Next
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Object() As CForm
    Set Object = m_Form
 End Property
@@ -180,16 +195,25 @@ Function OrigY() As Integer
    OrigY = kScreenTop
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
    If frmMain.ActiveForm Is Me And Selection.count <> 1 Then ShowCoordinates -44, -44
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
    If WindowState = vbNormal Then
       If Me.Width <> (2 * kScreenLeft + picSS.Width + 8) * Screen.TwipsPerPixelX Then SetPicSS
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
 Dim obj As Object
    If m_Form Is Nothing Then Exit Sub
@@ -203,10 +227,16 @@ Dim obj As Object
    frmMain.ActiveFormChange 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GlobalID() As String
    GlobalID = m_Form.GlobalID
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub pbPalmScreen_Click()
    If m_bNewObject Then
       m_bNewObject = False
@@ -215,6 +245,9 @@ Private Sub pbPalmScreen_Click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub pbPalmScreen_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
    If gnToolboxTool <> 1 Then
       pbPalmScreen.MousePointer = vbCrosshair
@@ -224,6 +257,9 @@ Private Sub pbPalmScreen_MouseMove(Button As Integer, Shift As Integer, x As Sin
    If frmMain.ActiveForm Is Me And Selection.count = 0 Then ShowCoordinates x \ m_nMagFactor, y \ m_nMagFactor
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub pbPalmScreen_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim ob As Object
 
@@ -274,6 +310,9 @@ Dim ob As Object
    m_bNewObject = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub pbPalmScreen_Paint()
 Dim row As Integer
 Dim col As Integer
@@ -330,11 +369,17 @@ Dim ob As Object
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub pbTitle_Click()
    If gnToolboxTool = 1 Then ClearSelection
    DisplaySelection
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub pbTitle_DblClick()
 Dim strTitle As String
 
@@ -357,6 +402,9 @@ Dim strTitle As String
    DisplaySelection
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub pbTitle_Paint()
    If m_Form Is Nothing Then Exit Sub
    pbTitle.Cls
@@ -370,6 +418,9 @@ Private Sub pbTitle_Paint()
    pbTitle.Print m_Form.Title
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddUIObject(ByVal obj As Object)
    obj.obj.Control = Me.Controls.Add("VB.PictureBox", obj.obj.Name)
    If obj.obj.Kind = "bmp" Then
@@ -384,6 +435,9 @@ Public Sub AddUIObject(ByVal obj As Object)
    Set obj.obj.Control.Container = pbPalmScreen
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveUIObject(ByVal obj As Object)
 Dim i As Integer
 
@@ -397,15 +451,24 @@ Dim i As Integer
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get MagFactor() As Integer
    MagFactor = m_nMagFactor
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let MagFactor(nMagFactor As Integer)
    m_nMagFactor = nMagFactor
    pbPalmScreen.Refresh
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ClearSelection(Optional bDisplaySelection As Boolean = True)
 Dim fileName As String
 Dim dirName As String
@@ -434,6 +497,9 @@ Dim dirName As String
       
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddSelectionItem(ByVal obj As Object)
    obj.obj.Selected = True
    obj.ScreenDraw
@@ -441,11 +507,17 @@ Public Sub AddSelectionItem(ByVal obj As Object)
    DisplaySelection
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetSelection(ByVal obj As Object)
    ClearSelection False
    AddSelectionItem obj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveSelectionItem(ByVal obj As Object)
    obj.obj.Selected = False
    obj.ScreenDraw
@@ -453,6 +525,9 @@ Public Sub RemoveSelectionItem(ByVal obj As Object)
    DisplaySelection
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DisplaySelection()
    Select Case Selection.count
    Case 0
@@ -473,6 +548,9 @@ Public Sub DisplaySelection()
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub MouseMoveSelection(ByRef x As Integer, ByRef y As Integer, nLeft As Integer, nTop As Integer, Optional ByVal obj As Object = Nothing, Optional nForceGrid As Integer = 0)
 Dim baseX As Integer, baseY As Integer
 Dim bGridPref As Boolean
@@ -503,6 +581,9 @@ Dim bGridPref As Boolean
    gbWantGrid = bGridPref
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ResizeSelectionToGrid(Optional ByVal obj As Object = Nothing, Optional nForceGrid As Integer = 0)
 Dim bGridPref As Boolean
 
@@ -528,6 +609,9 @@ Dim bGridPref As Boolean
    gbWantGrid = bGridPref
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Format(nType As Integer, nStyle As Integer)
 Dim obj As Object
 Dim i As Integer
@@ -671,26 +755,41 @@ Dim nMax As Integer, nMin As Integer, nSpc As Integer, nOff As Integer
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picss_Paint()
    '1 pixel border on all sides accounts for factor of 2 below
    picSS.PaintPicture picSS.Picture, 0, 0, picSS.Width - 2, picSS.Height - 2
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picSS_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
    If Button = vbLeftButton And Shift = 0 Then
       If x > (2 * m_nMagFactor) And x < (24 * m_nMagFactor) And y > (35 * m_nMagFactor) And y < (58 * m_nMagFactor) Then MenuEditor
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetCaption()
    Me.caption = m_Form.Project.Name & " - Form (" & m_Form.Name & ")"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub UpdateScreen()
    pbPalmScreen.Refresh
    SetCaption
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function SnapToGrid(nVal As Integer) As Integer
    If gbWantGrid Then
       SnapToGrid = ((nVal + gnGridIncr \ 2) \ gnGridIncr) * gnGridIncr
@@ -699,6 +798,9 @@ Public Function SnapToGrid(nVal As Integer) As Integer
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
 
    'Save any open code windows that belong to this form
@@ -718,6 +820,9 @@ Public Sub Save(ByVal nFileNumber as interger)
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Cut()
 Dim obj As Object
 
@@ -726,6 +831,9 @@ Dim obj As Object
    Delete
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Copy()
 Dim strClip As String
 Dim obj As Object
@@ -740,10 +848,16 @@ Dim obj As Object
    Clipboard.SetText kClipboardHeader & vbCrLf & strClip
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidPaste() As Boolean
    ValidPaste = (ValidClipboard = kClipboardObject)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste()
 Dim strLines() As String
 
@@ -752,6 +866,9 @@ Dim strLines() As String
    m_Form.PasteObject strLines, False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Delete()
 Dim obj As Object
 
@@ -761,6 +878,9 @@ Dim obj As Object
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SelectAll()
 Dim obj As Object
 
@@ -770,10 +890,16 @@ Dim obj As Object
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Dirty() As Boolean
    Dirty = False
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SetPicSS()
 #If NSBSymbian Then
    picSS.Height = 0
@@ -792,6 +918,9 @@ Private Sub SetPicSS()
 #End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub addImageToBitmap(obj)
    Dim fileName As String
    Dim HiRes As Boolean

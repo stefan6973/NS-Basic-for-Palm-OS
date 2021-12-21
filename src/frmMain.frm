@@ -1357,10 +1357,16 @@ Private m_nGlobalIDSerial As Integer
 Private fCodeDebug As frmCode
 Public bCMaxFindFlag As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmaxFind_Change()
    gbFindOne = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmaxFind_FindWrapped(ByVal lCmd As CodeMax4Ctl.cmCommand, ByVal bForward As Boolean)
    If (UBound(garrSearchMap) <> gnSearchLoc) Or (gnFindFlags And kFindSelected) Then
       cmaxFind.CancelEvent
@@ -1393,10 +1399,16 @@ Private Sub cmaxFind_FindWrapped(ByVal lCmd As CodeMax4Ctl.cmCommand, ByVal bFor
 '   End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmaxFind_ModifiedChange()
    gbReplaceChange = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmaxFind_SelChange()
 'Private Sub cmaxFind_SelChange(ByVal Control As CodeMax4Ctl.CodeMax)
 Dim sel As range
@@ -1427,6 +1439,9 @@ Dim sel As range
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub MDIForm_Load()
 Dim strProj As String
 Dim bShowSplash As Boolean
@@ -1540,6 +1555,9 @@ If trace Then MsgBox 13
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub LoadNewProject()
 Dim proj As New CProject
 Dim openProj As CProject
@@ -1570,6 +1588,9 @@ Dim strname As String
    If gbProjectExplorer Then gfProjectExplorer.ShowActive proj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub OpenProject(ByVal strProj As String)
 Dim strPath As String
 Dim proj As New CProject
@@ -1603,6 +1624,9 @@ Dim openProj As CProject
    If gbProjectExplorer Then gfProjectExplorer.ShowActive proj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub AddProject(proj As CProject)
 Dim frm As CForm, frmX As CForm
 Dim fPalmScreen As New frmPalmScreen
@@ -1636,6 +1660,9 @@ Dim fPalmScreen As New frmPalmScreen
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function RemoveProject(ByVal proj As CProject) As Boolean
 Dim frm As Form
 Dim obj As Object
@@ -1696,8 +1723,9 @@ Dim bDirty As Boolean
    UpdateProjectList
 End Function
 
-
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub MDIForm_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 Dim proj As CProject
 
@@ -1714,12 +1742,18 @@ Dim proj As CProject
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub MDIForm_Resize()
    'MsgBox "resize " & Me.Height & " " & Me.Width
    If Me.Width < 320 Then Me.Width = 320
    If Me.Height < 320 Then Me.Height = 320
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub MDIForm_Unload(Cancel As Integer)
 Dim fontDir As String
 Dim lParam As Long
@@ -1746,12 +1780,18 @@ Dim i As Integer
    SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, lParam
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpTechNotes_Click()
    Dim techNotes As String
    techNotes = ProgramsDirectory & "\technotes\index.htm"
    openWebPage techNotes
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEdit_Click()
 Dim fCode As frmCode
 
@@ -1792,6 +1832,9 @@ Dim fCode As frmCode
    mnuEditReplace.Enabled = (Not gTarget Is Nothing)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditDelete_Click()
    If ActiveForm Is Nothing Then Exit Sub
    Select Case typename(ActiveForm)
@@ -1799,6 +1842,9 @@ Private Sub mnuEditDelete_Click()
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditFind_Click()
    PutTheCodeBack
    frmFind.Form = ActiveForm
@@ -1806,22 +1852,34 @@ Private Sub mnuEditFind_Click()
    frmFind.Show vbModal
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditGoTo_Click()
    If ActiveForm Is Nothing Then Exit Sub
    If typename(ActiveForm) <> "frmCode" Then Exit Sub
    ActiveForm.GoToLine
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditPreferences_Click()
 'Dim fPreferences As New frmPreferences
 
 '   fPreferences.Show vbModal
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditRedo_Click()
    ActiveForm.Redo
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditReplace_Click()
    PutTheCodeBack
    frmFind.Form = ActiveForm
@@ -1829,6 +1887,9 @@ Private Sub mnuEditReplace_Click()
    frmFind.Show vbModal
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditSelectAll_Click()
    If ActiveForm Is Nothing Then Exit Sub
    Select Case typename(ActiveForm)
@@ -1836,10 +1897,16 @@ Private Sub mnuEditSelectAll_Click()
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFile_Click()
    Me.mnuFileMRU(1) = Me.mnuFormat
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileMRU_Click(index As Integer)
 Dim proj As CProject
 
@@ -1854,6 +1921,9 @@ Dim proj As CProject
    If RemoveProject(gTarget) Then OpenProject mnuFileMRU(index).Tag
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSaveProject_Click()
    Dim proj As CProject
 
@@ -1866,6 +1936,9 @@ Private Sub mnuFileSaveProject_Click()
    SaveProject proj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SaveProject(ByVal proj As CProject)
    Dim i As Integer
    Dim k As Integer
@@ -1918,6 +1991,9 @@ gotCancel:
    On Error GoTo 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSaveProjectAs_Click()
 Dim proj As CProject
 
@@ -1943,6 +2019,9 @@ gotCancel:
    Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormat_Click()
 Dim bEnabled As Boolean
 Dim i As Integer
@@ -1968,53 +2047,86 @@ Dim i As Integer
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormatAlignItem_Click(index As Integer)
    'Lefts, Centers, Rights, -, Tops, Middles, Bottoms, -, Grid
    ActiveForm.Format 0, index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormatCenterItem_Click(index As Integer)
    'Horizontally, Vertically
    ActiveForm.Format 5, index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormatHorizontalSpacingItem_Click(index As Integer)
    'Equal, Increase, Decrease, Remove
    ActiveForm.Format 3, index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormatMakeSameSizeItem_Click(index As Integer)
    'Width, Height, Both
    ActiveForm.Format 1, index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormatOrderItem_Click(index As Integer)
    'Front, Forward, Backward, Back
    ActiveForm.Format 6, index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormatSizeToGrid_Click()
    'Size To Grid
    ActiveForm.Format 2, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFormatVerticalSpacingItem_Click(index As Integer)
    'Equal, Increase, Decrease, Remove
    ActiveForm.Format 4, index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpPalmCreatorID_Click()
    openWebPage "http://www.accessdevnet.com/index.php/ACCESS-Tools/View-category.html"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpPOSE_Click()
    openWebPage "http://www.accessdevnet.com/index.php/ACCESS-Tools/View-category.html"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpRegister_Click()
    frmRegister.Show vbModal, Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpTopics_Click()
    Dim helpFile As String
    
@@ -2048,28 +2160,46 @@ getHelp:
       dlgCommonDialog.ShowHelp
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpBook_Click()
    Dim filename As String
    filename = ProgramsDirectory & "\nsb4palmosfree.pdf"
    err = ShellExecute(0, "Open", filename, vbNullString, vbNullString, 5)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpHandbook_Click()
    Dim filename As String
    filename = ProgramsDirectory & "\lang\Handbook.pdf"
    err = ShellExecute(0, "Open", filename, vbNullString, vbNullString, 5)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpTutorials_Click()
    Dim tutorials As String
    tutorials = ProgramsDirectory & "\technotes\TT.index.htm"
    openWebPage tutorials
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpReadme_Click()
    Dim tutorials As String
    tutorials = ProgramsDirectory & "\Readme.htm"
    openWebPage tutorials
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProject_Click()
    mnuProjectAddForm.Enabled = (Not gTarget Is Nothing)
    mnuProjectAddMenu.Enabled = (Not gTarget Is Nothing)
@@ -2083,44 +2213,76 @@ Private Sub mnuProject_Click()
    'If gTarget Is Nothing Then Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectAddBitmap_click()
    ProjectAddBitmap
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectAddResource_click()
    ProjectAddResource
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectAddExistingModule_Click()
    ProjectAddModuleExisting
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectAddForm_click()
    ProjectAddForm
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectAddMenu_Click()
    ProjectAddMenu
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectAddNewModule_Click()
    ProjectAddModuleNew
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectSetTargetList_Click(index As Integer)
    'This allows the user to manually change the target project
    Set gTarget = LocateObject(mnuProjectSetTargetList(index).Tag)
    UpdateProjectList
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectStartupCode_Click()
    ViewCode gTarget.GlobalID, "startup"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuProjectTerminationCode_Click()
    ViewCode gTarget.GlobalID, "termination"
 End Sub
 
 'Translate to mnuRightItem equivalent
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRightAddItem_Click(index As Integer)
    Select Case index
    Case 0, 1: mnuRightItem_Click index + 17
@@ -2128,6 +2290,9 @@ Private Sub mnuRightAddItem_Click(index As Integer)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRightEdit_Click(index As Integer)
    Select Case index
    Case 0: ActiveForm.Undo
@@ -2149,6 +2314,9 @@ Private Sub mnuRightEdit_Click(index As Integer)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRightEditAdvanced_Click(index As Integer)
    Select Case index
    Case 0: mnuRightEditAdvanced(0).Checked = ActiveForm.ShowWhitespace
@@ -2159,6 +2327,9 @@ Private Sub mnuRightEditAdvanced_Click(index As Integer)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRightEditCode_Click()
    mnuRightEdit(0).Enabled = ActiveForm.CanUndo
    mnuRightEdit(1).Enabled = ActiveForm.CanRedo
@@ -2217,6 +2388,10 @@ End Sub
 '32 Reorder...       3390
 '33 -
 '34 P&roperties...         1038
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRightItem_Click(index As Integer)
 Dim nClickSource As Integer
 Dim strGlobalID As String
@@ -2338,6 +2513,9 @@ Dim nod As MSComctlLib.Node
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRun_Click()
 If gTarget Is Nothing Then
       mnuRunCompile.caption = mnuRunCompile.Tag
@@ -2408,6 +2586,10 @@ If gTarget Is Nothing Then
    End If
 
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunHotsyncLibs_Click()
    dlgCommonDialog.DialogTitle = "Shared Libraries"
    dlgCommonDialog.InitDir = fileDirectory + "\Lib"
@@ -2422,16 +2604,26 @@ Private Sub mnuRunHotsyncLibs_Click()
 Cancel:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunHotsyncProject_Click()
    If Not DownloadFile(DownloadPath + gTarget.Name + ".prc", "Hotsync") Then MsgBox gStringTable(3332) '"Download failed."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunHotsyncRuntime_Click()
    Dim runtime As String
    runtime = "NSBRuntime.prc"
    If gbIncludeArmNative = True Then runtime = "NSBRuntimeARM68K.prc"
    DownloadFile ProgramsDirectory & "\BuildTools\" & runtime, "Hotsync"
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunPOSELibs_Click()
    dlgCommonDialog.DialogTitle = "Shared Libraries"
    dlgCommonDialog.InitDir = fileDirectory + "\Lib"
@@ -2446,10 +2638,16 @@ Private Sub mnuRunPOSELibs_Click()
 Cancel:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunPOSEProject_Click()
    If Not DownloadFile(DownloadPath + gTarget.Name + ".prc", DownloadOption) Then MsgBox gStringTable(3332) '"Download failed."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunPoseRuntime_Click()
    Dim runtime As String
    runtime = "NSBRuntime.prc"
@@ -2471,6 +2669,9 @@ Private Sub mnuTools_Click()
    mnuToolsThemeEditor.Enabled = (gProjects.count > 0)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuToolsList_Click(index As Integer)
 Dim pathname As String
 Dim err As Integer
@@ -2479,19 +2680,32 @@ Dim err As Integer
    err = ShellExecute(0, "Open", pathname, vbNullString, vbNullString, 5)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuToolsMenuEditor_Click()
    MenuEditor
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuToolsThemeEditor_Click()
    ThemeEditor
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuToolsOptions_Click()
 Dim fOptions As New frmOptions
 
    fOptions.Show vbModal, Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindow_Click()
 '   If Picture1.Visible Then
 '      mnuWindowProjectExplorer.Enabled = True
@@ -2500,10 +2714,16 @@ Private Sub mnuWindow_Click()
 '   End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowList_Click(index As Integer)
    GetMDIChild(mnuWindowList(index).Tag).ZOrder
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewProjectExplorer_Click()
    If gbProjectExplorer Then
       Unload gfProjectExplorer
@@ -2513,6 +2733,9 @@ Private Sub mnuViewProjectExplorer_Click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewProperties_Click()
    If gbProperties Then
       Unload gfProperties
@@ -2521,6 +2744,9 @@ Private Sub mnuViewProperties_Click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewToolbox_Click()
    If gbToolbox Then
       Unload gfToolbox
@@ -2529,12 +2755,18 @@ Private Sub mnuViewToolbox_Click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picSplit_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
    m_bSizing = True
    SetParent picSplit.hWnd, frmMain.hWnd
    UpdateWindow picSplit.hWnd
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picSplit_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim pt As POINTAPI
 
@@ -2549,6 +2781,9 @@ Dim pt As POINTAPI
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picSplit_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim pt As POINTAPI
 
@@ -2564,6 +2799,9 @@ Dim pt As POINTAPI
    UpdateWindow picSplit.hWnd
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub picToolbox_Resize()
 ''   picToolbox.Width = tbToolbox.Width
 Dim l As Long
@@ -2575,6 +2813,9 @@ Dim l As Long
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub picPanel_Resize()
 'On Error Resume Next
 Dim nSplit As Integer
@@ -2609,6 +2850,9 @@ Dim nSplit As Integer
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub picProjectExplorer_Resize()
 Dim l As Long
 
@@ -2619,6 +2863,9 @@ Dim l As Long
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub picProperties_Resize()
 Dim l As Long
 
@@ -2629,12 +2876,18 @@ Dim l As Long
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picWidth_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
    m_bSizing = True
    SetParent picWidth.hWnd, frmMain.hWnd
    UpdateWindow picWidth.hWnd
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picWidth_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim pt As POINTAPI
 
@@ -2647,6 +2900,9 @@ Dim pt As POINTAPI
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub picWidth_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim pt As POINTAPI
 Dim NewWidth As Integer
@@ -2666,6 +2922,9 @@ Dim NewWidth As Integer
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub UpdateToolbar()
    On Error Resume Next
    tbToolBar.Buttons(7).Enabled = ActiveForm.CanUndo
@@ -2676,6 +2935,9 @@ Public Sub UpdateToolbar()
    On Error GoTo 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tbToolBar_ButtonClick(ByVal Button As MSComctlLib.Button)
    On Error Resume Next
    Select Case Button.key
@@ -2701,10 +2963,16 @@ Private Sub tbToolBar_ButtonClick(ByVal Button As MSComctlLib.Button)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpAbout_Click()
    frmAbout.Show vbModal, Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpSearchForHelpOn_Click()
    Dim nRet As Integer
 
@@ -2722,6 +2990,9 @@ Private Sub mnuHelpSearchForHelpOn_Click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpContents_Click()
    Dim nRet As Integer
 
@@ -2739,26 +3010,44 @@ Private Sub mnuHelpContents_Click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowArrangeIcons_Click()
    Me.Arrange vbArrangeIcons
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowTileVertical_Click()
    Me.Arrange vbTileVertical
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowTileHorizontal_Click()
    Me.Arrange vbTileHorizontal
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowCascade_Click()
    Me.Arrange vbCascade
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowNewWindow_Click()
    LoadNewProject
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpWWW_Click()
    #If NSBSymbian Then
    openWebPage "http://www.nsbasic.com/symbian/info/ide.html"
@@ -2767,10 +3056,16 @@ Private Sub mnuHelpWWW_Click()
    #End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewOptions_Click()
    frmOptions.Show vbModal, Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewRefresh_Click()
 Dim frm As Form
 
@@ -2780,16 +3075,25 @@ Dim frm As Form
    frm.Visible = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewStatusBar_Click()
    mnuViewStatusBar.Checked = Not mnuViewStatusBar.Checked
    sbStatusBar.Visible = mnuViewStatusBar.Checked
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewToolbar_Click()
    mnuViewToolbar.Checked = Not mnuViewToolbar.Checked
    tbToolBar.Visible = mnuViewToolbar.Checked
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditPaste_Click()
    If ActiveForm Is Nothing Then Exit Sub
    Select Case typename(ActiveForm)
@@ -2799,6 +3103,9 @@ Private Sub mnuEditPaste_Click()
 '   ActiveForm.rtfText.SelRTF = Clipboard.GetText
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditCopy_Click()
    If ActiveForm Is Nothing Then Exit Sub
    Select Case typename(ActiveForm)
@@ -2809,6 +3116,9 @@ Private Sub mnuEditCopy_Click()
 '
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditCut_Click()
    If ActiveForm Is Nothing Then Exit Sub
    Select Case typename(ActiveForm)
@@ -2820,19 +3130,31 @@ Private Sub mnuEditCut_Click()
 '
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditUndo_Click()
    ActiveForm.Undo
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileExit_click()
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSend_Click()
    'ToDo: Add 'mnuFileSend_Click' code.
    MsgBox "Add 'mnuFileSend_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFilePrint_Click()
 Dim strGID As String
 Dim currentModule As Boolean
@@ -2868,11 +3190,17 @@ Dim currentModule As Boolean
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFilePrintPreview_Click()
    'ToDo: Add 'mnuFilePrintPreview_Click' code.
    MsgBox "Add 'mnuFilePrintPreview_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFilePageSetup_Click()
    On Error Resume Next
    With dlgCommonDialog
@@ -2884,11 +3212,17 @@ Private Sub mnuFilePageSetup_Click()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileProperties_Click()
    'ToDo: Add 'mnuFileProperties_Click' code.
    MsgBox "Add 'mnuFileProperties_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSaveAll_Click()
    Dim proj As CProject
 
@@ -2897,6 +3231,9 @@ Private Sub mnuFileSaveAll_Click()
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSaveAs_click()
 Dim sFile As String
 
@@ -2917,11 +3254,17 @@ Dim sFile As String
    ActiveForm.rtfText.SaveFile sFile
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileClose_click()
    'ToDo: Add 'mnuFileClose_Click' code.
    MsgBox "Add 'mnuFileClose_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileOpenProject_click()
 Dim strProj As String
 'Dim fSelProj As New frmSelProj
@@ -2936,6 +3279,9 @@ Dim strProj As String
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileNewProject_click()
 Dim fNewProject As New frmNewProject
 Dim strNew As String
@@ -2955,6 +3301,9 @@ Dim strNew As String
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub UpdateProjectList()
 Dim i As Integer
 Dim proj As CProject
@@ -2988,6 +3337,9 @@ Dim proj As CProject
    mnuRun_Click
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ActiveFormChange(nActivate As Integer)
 Dim i As Integer
 Dim fCode As frmCode
@@ -3023,6 +3375,9 @@ Dim fCode As frmCode
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Project(ByVal strname As String) As CProject
 Dim proj As CProject
 
@@ -3035,11 +3390,17 @@ Dim proj As CProject
    Next
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddMDIChild(frm As Form)
    Children.Add frm
    SetWindowList
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function RemoveMDIChild(strGlobalID As String) As Form
 Dim i As Integer
 
@@ -3057,6 +3418,9 @@ ErrorRemovingMDIChild:
    On Error GoTo 0
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub CloseMDIChild(strGlobalID As String)
 Dim frm As Form
 
@@ -3064,6 +3428,9 @@ Dim frm As Form
    If Not frm Is Nothing Then Unload frm
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SetWindowList()
 Dim i As Integer
 Dim frm As Form
@@ -3091,6 +3458,9 @@ Dim frm As Form
    If i > 0 Then mnuWindowBar1.Visible = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetMDIChild(strGlobalID As String) As Form
    For Each GetMDIChild In Children
       If GetMDIChild.GlobalID = strGlobalID Then Exit Function
@@ -3098,6 +3468,9 @@ Public Function GetMDIChild(strGlobalID As String) As Form
    Set GetMDIChild = Nothing
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ViewObject(strGlobalID As String) As frmPalmScreen
 'Dim frm As Form
 Dim obj As Object
@@ -3127,6 +3500,9 @@ Dim obj As Object
    ShowStatus ViewObject.Tag, True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ViewCode(ByVal strGlobalID As String, Optional ByVal strScript As String = "", Optional ByVal bDebug As Boolean = False) As frmCode
 Dim obj As Object
 Dim strCode As String
@@ -3173,11 +3549,17 @@ Dim strCode As String
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tmrStatus_Timer()
    tmrStatus.Enabled = False
    sbStatusBar.Panels(1).Text = ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function DownloadFile(filename As String, mode As String) As Boolean
 Dim t As Double
 Dim result As Boolean
@@ -3222,6 +3604,9 @@ Sub pause(secs)
    Loop
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunCompile_Click()
 Dim wk As String
 Dim nFileSize As Long
@@ -3344,6 +3729,10 @@ SimulatorError:
         MsgBox gStringTable(3382) '"Simulator pathname not valid"
         Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub setupPalmSimIni()
    Dim iniPath As String
    Dim m As String
@@ -3389,6 +3778,10 @@ Private Sub setupPalmSimIni()
 exitSetupPalmSimIni:
    ShowStatus ""
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub setupEmulatorIni()
    Dim iniPath As String
    Dim systemDirectory As String
@@ -3427,6 +3820,9 @@ Private Sub setupEmulatorIni()
    ShowStatus ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunPOSEstartApp_Click()
    Dim result As Boolean
    If DownloadOption = "POSE" Or DownloadOption = "Simulator" Then
@@ -3441,6 +3837,9 @@ Private Sub mnuRunPOSEstartApp_Click()
    ShowStatus ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunPOSEstop_Click()
    Dim result As Boolean
    If DownloadOption = "POSE" Or DownloadOption = "Simulator" Then
@@ -3451,6 +3850,10 @@ Private Sub mnuRunPOSEstop_Click()
     End If
     ShowStatus ""
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function isPOSERunning() As Boolean
    If EmuLink1.CheckPresence Then
       isPOSERunning = True
@@ -3508,6 +3911,9 @@ err_PrintCode:
    Printer.EndDoc
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrintForm(strGlobalID As String)
 Dim frm As CForm
 Dim ob As Object
@@ -3545,6 +3951,9 @@ err_PrintForm:
    Printer.EndDoc
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrintProject()
 Dim cMod As CCodeModule
 Dim mnu As CMenu
@@ -3583,6 +3992,9 @@ getOut:
    On Error GoTo 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub PrintCommon(t1 As String, t2 As String, script As String)
    Dim i As Long
    Dim j As Long
@@ -3674,6 +4086,10 @@ End Sub
 
 'nClickSource = 0: Project Explorer Window
 'nClickSource = 1: Palm Screen
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RightClickMenu(nClickSource As Integer, strGlobalID As String)
 Dim i As Integer
 
@@ -3782,6 +4198,9 @@ Dim i As Integer
    PopupMenu mnuRight
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub UpdateMRU()
 Dim i As Integer
 Dim strPath As String
@@ -3800,6 +4219,10 @@ Dim strPath As String
    Close #1
    mnuFileBar3.Visible = mnuFileMRU(1).Visible
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub UpdateTools()
 Dim i As Integer
 Dim j As Integer
@@ -3831,12 +4254,18 @@ skipitem1:
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function FindNext(ByVal strText As String) As Boolean
    cmaxFind.Text = strText
    FindNext = CMaxFindNext(cmaxFind)
    cmaxFind.Text = ""
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ReplaceAll(ByVal strGID As String)
 Dim fCode As frmCode
 Dim strScript As String
@@ -3869,6 +4298,9 @@ Dim obj As Object
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub CheckForPalmFonts()
 Dim tempFontName As String
 Dim fontDir As String
@@ -3917,6 +4349,10 @@ MissingFont2:
    MsgBox gStringTable(1411), vbCritical + vbOKOnly
    gbPlainText = True
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function ParseCommandLine()
    Dim commandLine As String
    Dim p As Integer
@@ -3940,6 +4376,10 @@ Private Function ParseCommandLine()
    End If
    'MsgBox "CommandLine:" & commandLine & "." & vbCr & "Project:" & gCommandLineProject & "." & vbCr & "Options:" & gCommandLineOptions & "."
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function CompileImmediately()
    gbLaunchPOSE = False
    gbAutoSave = False
@@ -3947,6 +4387,10 @@ Private Function CompileImmediately()
    
    mnuRunCompile_Click
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function ShowNewOpen(bShowNew As Boolean) As String
 Dim strRecent As String
 Dim strRecentFile As String
@@ -4031,6 +4475,9 @@ End Function
 '   Close #iFIle
 'End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetCaptions()
 Dim frm As Form
 
@@ -4042,6 +4489,9 @@ Dim frm As Form
    gfProperties.SetCaption
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PutTheCodeBack()
 Dim frm As Form
 
@@ -4050,16 +4500,25 @@ Dim frm As Form
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuDebugContinue_click()
    sendDataToDeviceDebugger ("cont")
    gbAtBreakPoint = False
    ShowStatus ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub sendDataToDeviceDebugger(m As String)
       tcpServer.SendData m
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tcpServer_ConnectionRequest(ByVal requestID As Long)
   ' Check if the control's State is closed. If not,
     ' close the connection before accepting the new
@@ -4071,6 +4530,9 @@ Private Sub tcpServer_ConnectionRequest(ByVal requestID As Long)
     tcpServer.Accept requestID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tcpServer_DataArrival(ByVal bytesTotal As Long)
 Dim strData As String
 Dim pos As Integer
@@ -4742,11 +5204,17 @@ Function extractSubFuncName(sInput As String)
        
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuDebugIgnoreBreakpoints_Click()
     ignoreBreakpoints = True
     mnuDebugContinue_click
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuCodeDebugBreakpointsClearAll_Click()
 Dim strData As String
 Dim pos As Integer
@@ -4779,6 +5247,9 @@ Dim view2 As CForm
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuCodeDebugBreakpointsClearThisModule_Click()
 Dim fCode As frmCode
 
@@ -4798,6 +5269,9 @@ Function RemoveBreakpoints(astrText As String) As String
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuCodeDebugCallStack_Click()
     Dim s As String
     Dim i As Integer
@@ -4811,11 +5285,17 @@ Private Sub mnuCodeDebugCallStack_Click()
     frmMain.sendDataToDeviceDebugger (s)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuCodeDebugSingleStep_Click()
     frmMain.sendDataToDeviceDebugger ("one")
     'closeDownThisForm
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuCodeDebugStop_Click()
  
     sendDataToDeviceDebugger ("quit")
@@ -5019,10 +5499,16 @@ End If
 'end changes 061120005
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub mnuCodeDebugWatch_Click()
    sendFirstWatchRequest
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub sendFirstWatchRequest()
     Dim i As Integer
     Dim s As String
@@ -5053,6 +5539,10 @@ End Sub
 
 
 'start additions 07262005
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub timeDelay(secs As Integer)
     Dim startTime As Date
     Dim endTime As Date

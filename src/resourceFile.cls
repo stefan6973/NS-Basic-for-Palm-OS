@@ -28,6 +28,9 @@ Private Const kVersion As Integer = 1
 Private Const kTotalProps As Integer = 4
 Private Const kResStrings As Integer = 2201
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub class_initialize()
 Dim i As Integer
 
@@ -38,6 +41,9 @@ Dim i As Integer
    m_nIdNo = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
    Write #nFileNumber, "resfile"
    Write #nFileNumber, kVersion
@@ -47,6 +53,9 @@ Public Sub Save(ByVal nFileNumber as interger)
    Write #nFileNumber, GetRelativePath(gTarget.pathname, ResourcePath)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
 Dim version As Integer
 Dim nID As Integer
@@ -64,6 +73,9 @@ Dim nID As Integer
    SetFileName ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetFileName(newPath As String)
    If Len(ResourcePath) = 0 And Len(newPath) <> 0 Then
       ResourcePath = newPath
@@ -71,40 +83,66 @@ Public Sub SetFileName(newPath As String)
    filename = Mid(ResourcePath, InStrRev(ResourcePath, "\") + 1)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let IdNo(ByVal nIdNo As Integer)
    m_nIdNo = nIdNo
    If m_nIdNo Then Name = "Resource" & m_nIdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IdNo() As Integer
    IdNo = m_nIdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Project() As CProject
    Set Project = m_Project
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Project(prj As CProject)
    Set m_Project = prj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ResourceType() As String
    ResourceType = m_ResourceType
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ResourceType(p As String)
    m_ResourceType = p
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ResourcePath() As String
    ResourcePath = m_ResourcePath
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ResourcePath(p As String)
    m_ResourcePath = p
 End Property
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 Dim nIndex As Integer
@@ -134,6 +172,9 @@ Dim nIndex As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "(Name)": GetPropertyVal = Name
@@ -143,6 +184,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim bmp As CResourceFile
 Dim x As Integer
@@ -177,9 +221,16 @@ Dim x As Integer
    If ValidateProperty Then LocateProject(GlobalID).Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
    GlobalID = Join(Array("resource", IdNo, m_Project.GlobalID), "|")
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GuessName()
 Dim nameSoFar As String
 Dim k As Integer
@@ -209,6 +260,10 @@ giveUp:
     
 fileNotFound:
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut(pathname)
 Dim bite As Byte
 Dim k As Integer

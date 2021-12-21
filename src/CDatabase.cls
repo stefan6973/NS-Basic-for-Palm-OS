@@ -26,6 +26,10 @@ Public LocalOrGlobal           As String  '**added 04042004
 Public LocalSource             As String  '**added 04042004
 
 Public keyFieldTblNo As Integer     'added 02042004
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub class_initialize()
    keyFieldTblNo = 0                'added 02042004
    

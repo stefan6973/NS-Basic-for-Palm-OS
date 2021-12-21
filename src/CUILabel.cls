@@ -24,6 +24,9 @@ Private Const kTotalProps As Integer = 8
 Private Const kProperties As String = "Text"
 Private Const kMethods As String = "Hide-Show-Redraw-Left-Top-Width-Height"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    obj.Parent = Me
    obj.name = "Label"
@@ -31,6 +34,9 @@ Private Sub class_initialize()
    obj.Label = obj.name
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 Dim lab As labelOut
 Dim c As Byte
@@ -62,6 +68,9 @@ Dim templen As Integer
    Put #9, , c
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
 Dim version As Integer
 
@@ -74,18 +83,27 @@ Dim version As Integer
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
    Copy = Copy + obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -110,6 +128,9 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
    If obj.Control Is Nothing Then Exit Sub
 
@@ -135,6 +156,9 @@ Public Sub ScreenDraw()
    obj.DrawSelected
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -159,18 +183,30 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    GetPropertyVal = obj.GetPropertyVal(strProp)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
    ValidateProperty = obj.ValidateProperty(strProp, strVal)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

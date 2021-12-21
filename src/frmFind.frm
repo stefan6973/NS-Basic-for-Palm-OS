@@ -164,11 +164,17 @@ Private m_idSearchStart As String            'Replacing firstSearchModule
 Private m_bSearchFound As Boolean            'Replacing searchNotFoundSw
 Private m_rSearchStart As CodeMax4Ctl.range   'Replacing searchStart
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butCancel_Click()
    Unload Me
 '   frmCode.Refresh
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
 '   gbNewFind = True
    LoadResStrings Me
@@ -209,6 +215,9 @@ Private Sub Form_Load()
    m_strReplace = txtReplace.Text
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function butCommon_Click(bReplace As Boolean) As Boolean
 Dim proj As CProject
 Dim nFlags As Integer
@@ -293,6 +302,9 @@ Dim arrStr() As String
    butCommon_Click = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butFindNext_click()
    If Not butCommon_Click(False) Then
       Beep
@@ -318,6 +330,9 @@ Private Sub butFindNext_click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butReplace_Click()
 Dim frm As frmCode
 
@@ -347,6 +362,9 @@ Dim frm As frmCode
       End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butReplaceAll_Click()
 Dim frm As frmCode
 Dim i As Integer
@@ -407,6 +425,9 @@ Dim nIndex As Long
    gbReplaceAll = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Form(frm As Form)
 Dim rng As CodeMax4Ctl.range
 
@@ -427,6 +448,9 @@ Dim rng As CodeMax4Ctl.range
    End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let FindReplace(bFindReplace As Boolean)
    lblReplace.Visible = bFindReplace
    txtReplace.Visible = bFindReplace
@@ -441,6 +465,9 @@ Public Property Let FindReplace(bFindReplace As Boolean)
    End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub optModule_Click()
    'Find next always enabled on Find Dialog
    If Not butReplace.Visible Then Exit Sub
@@ -448,6 +475,9 @@ Private Sub optModule_Click()
    butReplace.Enabled = Not optSelected.Value
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub optProject_Click()
    'Find next always enabled on Find Dialog
    If Not butReplace.Visible Then Exit Sub
@@ -455,6 +485,9 @@ Private Sub optProject_Click()
    butReplace.Enabled = Not optSelected.Value
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub optSelected_Click()
    'Find next always enabled on Find Dialog
    If Not butReplace.Visible Then Exit Sub
@@ -462,11 +495,17 @@ Private Sub optSelected_Click()
    butReplace.Enabled = Not optSelected.Value
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub txtFind_GotFocus()
    txtFind.SelStart = 0
    txtFind.SelLength = Len(txtFind.Text)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub txtReplace_GotFocus()
    txtReplace.SelStart = 0
    txtReplace.SelLength = Len(txtReplace.Text)

@@ -78,17 +78,25 @@ Private rngCurrent As CodeMax4Ctl.range
 
 Public IsUIObject As Boolean
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Editor_ContextMenu(ByVal x As Long, ByVal y As Long)
    Editor.CancelEvent
    PopupMenu frmMain.mnuRightEditCode
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Editor_PropsChange()
    Editor.CancelEvent
    MNSBCodeMax_SavePrefs Editor
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub editor_SelChange()
 Dim rng As CodeMax4Ctl.range
 
@@ -109,13 +117,18 @@ Dim rng As CodeMax4Ctl.range
 'Debug.Print "SelChange"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Activate()
    frmMain.ActiveFormChange 1
    SetAllDividers
 '   LoadBreakpoints
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
    'Removed check for dirty, because it allows new modules to close without saving
 '   If Dirty And typename(m_object) = "CCodeModule" Then
@@ -129,6 +142,9 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
    If m_object Is Nothing Then Exit Sub
    If compileInProcess = False Then
@@ -141,6 +157,9 @@ Private Sub Form_Unload(Cancel As Integer)
    frmMain.ActiveFormChange 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function check_code() As Boolean 'check that there is no code before or after
    'Let's clean up a number of things here...
    ' 1. Clear leading white space
@@ -157,6 +176,9 @@ Function check_code() As Boolean 'check that there is no code before or after
    check_code = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub PutTheCodeBack()
 '   StoreBreakpoints
    If Not bDirty Then Exit Sub
@@ -174,6 +196,9 @@ Sub PutTheCodeBack()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
 'MsgBox "frmCode: Load"
 'Dim winState As Integer
@@ -190,6 +215,9 @@ Private Sub Form_Load()
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub SetCaption()
 'Dim strTitle As String
 Dim proj As CProject
@@ -223,6 +251,9 @@ Dim proj As CProject
 '   Me.caption = "NS Basic/Palm - " & strTitle
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
 'MMD: Yeah, this is broken again... ha ha ha
    If Me.WindowState = vbMinimized Then Exit Sub  '02/11/2001 MMD
@@ -232,18 +263,30 @@ Private Sub Form_Resize()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetSel(sel As CodeMax4Ctl.range)
    Editor.SetSel sel, True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetSel() As CodeMax4Ctl.range
    Set GetSel = Editor.GetSel(True)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function SelText() As String
    SelText = Editor.SelText
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub EditorSel(SelStart As Long, SelLength As Long)
 Dim line As Integer
 Dim p As Long
@@ -265,6 +308,9 @@ Dim SelRange As CodeMax4Ctl.range
    Editor.SetSel SelRange, True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function SelStart()
 Dim SelRange As CodeMax4Ctl.range
 Dim p As Integer
@@ -278,36 +324,60 @@ Dim i As Integer
    SelStart = p
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub editor_Change()
    frmMain.UpdateToolbar
    bDirty = True
    m_proj.Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub editor_CmdFailure(ByVal Cmd As CodeMax4Ctl.cmCommand, ByVal lErrCode As CodeMax4Ctl.cmCommandErr)
    If lErrCode = cmErrNotFound Then Editor.CancelEvent
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub editor_RegisteredCmd(ByVal lCmd As CodeMax4Ctl.cmCommand)
    If lCmd = CM_NSB_EDITSELECTALL Then Editor.ExecuteCmd cmCmdSelectAll
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Text(ByRef vData As String)
    Editor.Text = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Text() As String
    Text = Editor.Text
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Dirty(ByVal vData As Boolean)
    bDirty = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Dirty() As Boolean
    Dirty = bDirty
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Object(ByVal obj As Object)
    Set m_object = obj
    If IsUIObject Then
@@ -318,10 +388,16 @@ Public Property Let Object(ByVal obj As Object)
    SetCaption
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Object() As Object
    Set Object = m_object
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
    If m_object Is Nothing Then
       GlobalID = ""
@@ -334,74 +410,120 @@ Public Property Get GlobalID() As String
    End If
 End Property
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DisplaySelection()
    If gbProjectExplorer Then gfProjectExplorer.ShowActive m_object
    If gbProperties Then gfProperties.Object = m_object
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GoToLine()
    Editor.ExecuteCmd cmCmdGotoLine, -1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Undo()
    Editor.ExecuteCmd cmCmdUndo, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Redo()
    Editor.ExecuteCmd cmCmdRedo, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Cut()
    Editor.ExecuteCmd cmCmdCut, 0
    SetAllDividers
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Copy()
    Editor.ExecuteCmd cmCmdCopy, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste()
    Editor.ExecuteCmd cmCmdPaste, 0
    SetAllDividers
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidPaste() As Boolean
 '   If ValidClipboard <> 0 Then Exit Function
    ValidPaste = Clipboard.GetFormat(vbCFText)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Delete()
    Editor.ExecuteCmd cmCmdDelete, 0
    SetAllDividers
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SelectAll()
    Editor.ExecuteCmd cmCmdSelectAll, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ShowWhitespace() As Boolean
    ShowWhitespace = Not Editor.DisplayWhitespace
    Editor.ExecuteCmd IIf(ShowWhitespace, cmCmdWhitespaceDisplayOn, cmCmdWhitespaceDisplayOff), 0
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetRepeatCount()
    Editor.ExecuteCmd cmCmdSetRepeatCount, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub CommentSelection(bComment As Boolean)
    Editor.ExecuteCmd IIf(bComment, cmCmdCommentSelection, cmCmdUncommentSelection), 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ExecuteCommand()
    Editor.ExecuteCmd cmCmdChooseCmd, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
    PutTheCodeBack
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetFindText() As String
    'If nothing is selected, use the last find string
    'If something is selected, use the selection or first line of what is selected, whichever is shortest
@@ -416,26 +538,44 @@ Public Function GetFindText() As String
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function FindNext() As Boolean
    FindNext = CMaxFindNext(Editor)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CanUndo() As Boolean
    CanUndo = Editor.CanUndo
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CanRedo() As Boolean
    CanRedo = Editor.CanRedo
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CanCut() As Boolean
    CanCut = Editor.CanCut
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CanCopy() As Boolean
    CanCopy = Editor.CanCopy
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CanPaste() As Boolean
    CanPaste = Editor.CanPaste
 End Function
@@ -446,6 +586,10 @@ End Function
 ' the list from appearing.  If 'List' is not set and CancelEvent() is not called, CodeMax will fall back
 ' to the value stored in CodeMax.MemberList, then fall back to the current scopes (innermost to outermost)
 ' memberlist (ITokenSet.MemberList), then fall back to ILanguage.MemberList.
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub editor_QueryMemberList(ByVal Cmd As CodeMax4Ctl.cmCommand, List As CodeMax4Ctl.IMemberList)
 Dim p As CodeMax4Ctl.ILineParser
 Dim sel As CodeMax4Ctl.range
@@ -486,6 +630,9 @@ Dim strType As String
    Set List = cmGlobals.MemberLists("Global Methods")
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub SetAllDividers()
 Dim i As Long
 Dim nLastDivider As Long
@@ -502,6 +649,9 @@ Dim strLine As String
    ClearLastDivider nLastDivider
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ClearAllDividers()
 Dim i As Long
 
@@ -510,6 +660,9 @@ Dim i As Long
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub SetNewDividers(nStartLine As Long)
 Dim i As Long
 Dim nLastDivider As Long
@@ -534,6 +687,9 @@ Dim strLine As String
    ClearLastDivider nLastDivider
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ClearLastDivider(nLastDivider As Long)
 Dim i As Long
 
@@ -547,6 +703,9 @@ Dim i As Long
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub CloseBlock(nStartLine As Long)
 Dim i As Long
 Dim strLine As String
@@ -578,6 +737,10 @@ Static bClosing As Boolean
    End If
    bClosing = False
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub showEditorProperties()
    Editor.ExecuteCmd cmCmdProperties, 0
 End Sub

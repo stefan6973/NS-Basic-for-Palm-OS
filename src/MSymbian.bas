@@ -30,12 +30,15 @@ Global executableName As String
 Global platform As String
 Global trace As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub compileSymbian()
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim fileLen As Integer
    Dim res
    trace = True
-   FileNumber = FreeFile
+   nFileNumber = FreeFile
    deleteWorkFiles
    
    If gbCreateS60 Then
@@ -82,9 +85,9 @@ Sub compileSymbian()
    
    If Not trace Then deleteWorkFiles 'comment out this statement to leave the workfiles around
    If errLogFile <> "" Then
-      Open errLogFile For Binary Access Read As #FileNumber
-      fileLen = LOF(FileNumber)
-      Close #FileNumber
+      Open errLogFile For Binary Access Read As #nFileNumber
+      fileLen = LOF(nFileNumber)
+      Close #nFileNumber
       
       If fileLen = 795 Or fileLen = 1065 Then
          Kill errLogFile
@@ -97,6 +100,10 @@ Sub compileSymbian()
       runImmediately
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub initFileNames(pform As String)
    platform = pform
    executableName = "StyleTapLauncher" & platform
@@ -126,6 +133,10 @@ Sub initFileNames(pform As String)
    exeBatFile = outputDir & "exe.bat"
    uidcrcTmpFile = outputDir & "uidcrc.tmp"
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub deleteWorkFiles()
 
    On Error Resume Next
@@ -180,13 +191,17 @@ Sub deleteWorkFiles()
    On Error GoTo 0
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub modifyPKGfile(platform As String)
 'The pkg file contains general information about the project and which files are to be installed.
 'It is used by the makesis utility to create the installer.
 'This code takes a template.pkg file from the BuildTools folder and modifies it for this project.
 'Placeholders, marked by *** before and after, in the template are replaced.
 
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim data As String
    Dim s As String
    Dim p As Integer
@@ -201,11 +216,11 @@ Sub modifyPKGfile(platform As String)
    
    ShowStatus "Modifying PKG File", True
    infile = toolsDir & "template.pkg"
-   FileNumber = FreeFile
-   Open infile For Binary Access Read As #FileNumber
-   data = String$(LOF(FileNumber), 32) 'fill buffer before reading
-   Get #FileNumber, , data
-   Close #FileNumber
+   nFileNumber = FreeFile
+   Open infile For Binary Access Read As #nFileNumber
+   data = String$(LOF(nFileNumber), 32) 'fill buffer before reading
+   Get #nFileNumber, , data
+   Close #nFileNumber
    
    'get the UID3
    targetPath = "- " & Quote & "!:\private\" & gTarget.UID3 & "\install\db\"
@@ -273,12 +288,15 @@ Sub modifyPKGfile(platform As String)
    data = Replace(data, "***Resources***", s)
    
    'write out the new file
-   Open pkgFile For Binary As #FileNumber
-   Put #FileNumber, , data
-   Close #FileNumber
+   Open pkgFile For Binary As #nFileNumber
+   Put #nFileNumber, , data
+   Close #nFileNumber
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub compileResourceFile(rppname As String)
 'The resource files (*.rsc) contain general information about the executable.
 'The parameters are stored in the related .rpp file.
@@ -291,7 +309,7 @@ Sub compileResourceFile(rppname As String)
 'The modified rsc file will be installed on the device.
 'Warning: the output file from rcomp (*.rss) has to go to a pathname without spaces.
 
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim data As String
    Dim launcherName As String
    Dim installFolder As String
@@ -300,11 +318,11 @@ Sub compileResourceFile(rppname As String)
       
    ShowStatus "Compiling Resource " & rppname, True
    infile = toolsDir & "template" & platform & rppname & ".rpp"
-   FileNumber = FreeFile
-   Open infile For Binary Access Read As #FileNumber
-   data = String$(LOF(FileNumber), 32) 'fill buffer before reading
-   Get #FileNumber, , data
-   Close #FileNumber
+   nFileNumber = FreeFile
+   Open infile For Binary Access Read As #nFileNumber
+   data = String$(LOF(nFileNumber), 32) 'fill buffer before reading
+   Get #nFileNumber, , data
+   Close #nFileNumber
    
    'Apply the fixups
    If gTarget.installFolder = "" Then
@@ -324,9 +342,9 @@ Sub compileResourceFile(rppname As String)
    data = Replace(data, "***mbmFile***", shortMbmFile)
             
    'write out the new file
-   Open outputDir & executableName & rppname & ".rpp" For Binary As #FileNumber
-   Put #FileNumber, , data
-   Close #FileNumber
+   Open outputDir & executableName & rppname & ".rpp" For Binary As #nFileNumber
+   Put #nFileNumber, , data
+   Close #nFileNumber
    
    'now compile it
       
@@ -336,15 +354,18 @@ Sub compileResourceFile(rppname As String)
    data = data & " -o" & q(GetTemporaryPath() & executableName & rppname & ".rsc")
    data = data & " -s" & q(outputDir & executableName & rppname & ".rpp") & vbCrLf
       
-   Open outputDir & "rcomp" & platform & rppname & ".bat" For Binary As #FileNumber
-   Put #FileNumber, , data
-   Close #FileNumber
+   Open outputDir & "rcomp" & platform & rppname & ".bat" For Binary As #nFileNumber
+   Put #nFileNumber, , data
+   Close #nFileNumber
 
    data = q(outputDir & "rcomp" & platform & rppname & ".bat") & " 1>> " & q(logFile) & " 2>> " & q(errLogFile)
    res = ExecCmd(data)
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub modifyEXEfile(filename As String, UID3 As String)
 'The exe file is the one that is actually launched by the Symbian Launcher.
 'It is just a pretty face. It displays a name and an icon (both defined in the rsc files),
@@ -366,7 +387,7 @@ Sub modifyEXEfile(filename As String, UID3 As String)
 'fontconv is originally named crc32; found on the net. It calculates the crc32 and fixes the exe file.
 
    ShowStatus "Modifying EXE File:" & filename, True
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim tmpFile As String
    Dim data As String
    Dim i As Integer
@@ -377,13 +398,13 @@ Sub modifyEXEfile(filename As String, UID3 As String)
    Dim uid1 As String
    Dim uid2 As String
    Dim resBytes() As Byte
-   FileNumber = FreeFile
+   nFileNumber = FreeFile
    
    'create fontconv.exe
    resBytes = LoadResData(101, "custom")
-   Open "fontconv.exe" For Binary As #FileNumber
-   Put #FileNumber, , resBytes
-   Close #FileNumber
+   Open "fontconv.exe" For Binary As #nFileNumber
+   Put #nFileNumber, , resBytes
+   Close #nFileNumber
 
    If LCase(Right(filename, 4)) = ".exe" Then
       uid1 = "0x1000007A" 'KExecutableImageUid
@@ -409,21 +430,21 @@ Sub modifyEXEfile(filename As String, UID3 As String)
    Kill fontconvBatFile
    On Error GoTo 0
    
-   Open fontconvBatFile For Binary As #FileNumber
-   Put #FileNumber, , data
-   Close #FileNumber
+   Open fontconvBatFile For Binary As #nFileNumber
+   Put #nFileNumber, , data
+   Close #nFileNumber
    data = q(fontconvBatFile) & " 1>> " & q(logFile) & " 2>> " & q(errLogFile)
    res = ExecCmd(data)
    
    'Zap the declared capabilities so they are just the basic ones
-   Open filename For Binary Access Write As #FileNumber
-   Put #FileNumber, &H89, CByte(0)
-   Put #FileNumber, &H8A, CByte(&HE0)
-   Put #FileNumber, &H8B, CByte(1)
-   Put #FileNumber, &H8C, CByte(0)
-   Put #FileNumber, &H8D, CByte(0)
-   Put #FileNumber, &H8E, CByte(0)
-   Close #FileNumber
+   Open filename For Binary Access Write As #nFileNumber
+   Put #nFileNumber, &H89, CByte(0)
+   Put #nFileNumber, &H8A, CByte(&HE0)
+   Put #nFileNumber, &H8B, CByte(1)
+   Put #nFileNumber, &H8C, CByte(0)
+   Put #nFileNumber, &H8D, CByte(0)
+   Put #nFileNumber, &H8E, CByte(0)
+   Close #nFileNumber
    
    data = "fontconv" & " -u 0x" & UID3
    data = data & " -c 0x" & Right(Hex(uidBytes(15) + &H100), 2)
@@ -439,9 +460,9 @@ Sub modifyEXEfile(filename As String, UID3 As String)
    Kill fontconvBatFile
    On Error GoTo 0
    
-   Open fontconvBatFile For Binary As #FileNumber
-   Put #FileNumber, , data
-   Close #FileNumber
+   Open fontconvBatFile For Binary As #nFileNumber
+   Put #nFileNumber, , data
+   Close #nFileNumber
    
    If trace Then
     data = q(fontconvBatFile) & " 1>> " & q(logFile) & " 2>> " & q(errLogFile)
@@ -452,22 +473,29 @@ Sub modifyEXEfile(filename As String, UID3 As String)
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub makeCMDfile()
 'This file contains the name of the NS Basic app that StyleTap will launch
 
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim data As String
    
    ShowStatus "Modifying CMD File", True
-   FileNumber = FreeFile
+   nFileNumber = FreeFile
    
    data = "StyleTapSymbian_" & uid3plus(1) & ".dll StyleTap_" & uid3plus(2) & ".dll /launch " & q(gTarget.Name)
       
-   Open cmdFile For Binary As #FileNumber
-   Put #FileNumber, , data
-   Close #FileNumber
+   Open cmdFile For Binary As #nFileNumber
+   Put #nFileNumber, , data
+   Close #nFileNumber
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub convertIconS60()
 'This creates the icon file in MIF form (Multi Image Format).
 'It takes an svgt file (Scalar Vector Graphics - Tiny) file and feeds it to the mifconv utility
@@ -479,7 +507,7 @@ Sub convertIconS60()
    Dim data As String
    Dim res As Integer
    Dim icon As String
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim cmdFile As String
    
    icon = GetAbsolutePath(gTarget.LauncherIconS60, "")
@@ -492,22 +520,26 @@ Sub convertIconS60()
    data = data & " /B" & q(Left(toolsDir, Len(toolsDir) - 1))
    data = data & " /X /c32 " & q(icon)
    
-   FileNumber = FreeFile
-   Open convertIconBatFile For Output As #FileNumber
-   Print #FileNumber, data
-   Close #FileNumber
+   nFileNumber = FreeFile
+   Open convertIconBatFile For Output As #nFileNumber
+   Print #nFileNumber, data
+   Close #nFileNumber
 
    data = q(convertIconBatFile) & " 1>> " & q(logFile) & " 2>> " & q(errLogFile)
    res = ExecCmd(data)
  
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub convertIconUIQ()
 
    ShowStatus "Converting UIQ Icon", True
    Dim data As String
    Dim res As Integer
    Dim icon As String
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim cmdFile As String
    Dim s As String
    
@@ -519,15 +551,19 @@ Sub convertIconUIQ()
    data = data & " /c8" & q(s & "40.bmp") & " /c8" & q(toolsDir & "40.bmp")
    data = data & " /c8" & q(s & "18.bmp") & " /c8" & q(toolsDir & "18.bmp")
    
-   FileNumber = FreeFile
-   Open convertIconBatFile For Output As #FileNumber
-   Print #FileNumber, data
-   Close #FileNumber
+   nFileNumber = FreeFile
+   Open convertIconBatFile For Output As #nFileNumber
+   Print #nFileNumber, data
+   Close #nFileNumber
 
    data = q(convertIconBatFile) & " 1>> " & q(logFile) & " 2>> " & q(errLogFile)
    res = ExecCmd(data)
  
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub createInstaller(platform As String)
 'This creates a batch file to call the makesis utility.
 'Makesis uses the information in the .pkg file (see ModifyPkgFile) to do its stuff.
@@ -535,7 +571,7 @@ Sub createInstaller(platform As String)
 'It's the only file that matters after the installer is created.
 
    Dim cmdFile As String
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim data As String
    Dim res As Integer
    Dim expDays As String
@@ -569,16 +605,19 @@ Sub createInstaller(platform As String)
       data = data & "move " & q(sisxFile & platform) & " " & q(sisFileUIQss) & vbCrLf               'signed
    End If
 
-   FileNumber = FreeFile
-   Open createInstallerBatFile For Output As #FileNumber
-   Print #FileNumber, data
-   Close #FileNumber
+   nFileNumber = FreeFile
+   Open createInstallerBatFile For Output As #nFileNumber
+   Print #nFileNumber, data
+   Close #nFileNumber
 
    data = q(createInstallerBatFile) & " 1>> " & q(logFile) & " 2>> " & q(errLogFile)
    res = ExecCmd(data)
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub runImmediately()
    Dim command As String
    Dim res As Integer
@@ -594,95 +633,118 @@ Sub runImmediately()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function readInputFile(inputfile As String, s() As Byte) As Long
    Dim i As Long
-   Dim FileNumber As Integer
-   FileNumber = FreeFile
+   Dim nFileNumber As Integer
+   nFileNumber = FreeFile
    i = -1
-   Open inputfile For Binary As #FileNumber
-   While EOF(FileNumber) = False
+   Open inputfile For Binary As #nFileNumber
+   While EOF(nFileNumber) = False
       i = i + 1
-      Get #FileNumber, , s(i)
+      Get #nFileNumber, , s(i)
    Wend
-   Close #FileNumber
+   Close #nFileNumber
    readInputFile = i - 1
 End Function
-Sub copyBytes(s() As Byte, fromByte As Long, toByte As Long, FileNumber As Integer)
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Sub copyBytes(s() As Byte, fromByte As Long, toByte As Long, nFileNumber As Integer)
    Dim i As Long
    For i = fromByte To toByte
-      Put #FileNumber, , CByte(s(i))
+      Put #nFileNumber, , CByte(s(i))
    Next
 End Sub
-Sub writeString(outString As String, leadBytes As Integer, FileNumber As Integer)
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Sub writeString(outString As String, leadBytes As Integer, nFileNumber As Integer)
    Dim i As Integer
-   If leadBytes >= 1 Then Put #FileNumber, , CByte(Len(outString))
-   If leadBytes = 2 Then Put #FileNumber, , CByte(Len(outString))
+   If leadBytes >= 1 Then Put #nFileNumber, , CByte(Len(outString))
+   If leadBytes = 2 Then Put #nFileNumber, , CByte(Len(outString))
    For i = 1 To Len(outString)
-      Put #FileNumber, , CByte(Asc(Mid(outString, i, 1)))
+      Put #nFileNumber, , CByte(Asc(Mid(outString, i, 1)))
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function CRC32(buffer() As Byte, bufLen)
-'not used. Symbian uses some other algorithm.
-Dim crc32Table() As Long
-Dim crc32Result As Long
-Dim iLookup As Integer
-Dim b As Byte
+   'not used. Symbian uses some other algorithm.
+   Dim crc32Table() As Long
+   Dim crc32Result As Long
+   Dim iLookup As Integer
+   Dim b As Byte
 
-Dim dwPolynomial As Long
-dwPolynomial = &HEDB88320 'found this magic number on the web. Seems to be commonly used.
-dwPolynomial = 0
-Dim i As Integer, j As Integer
+   Dim dwPolynomial As Long
+   dwPolynomial = &HEDB88320 'found this magic number on the web. Seems to be commonly used.
+   dwPolynomial = 0
+   Dim i As Integer, j As Integer
 
-ReDim crc32Table(256)
-Dim dwCrc As Long
+   ReDim crc32Table(256)
+   Dim dwCrc As Long
 
-For i = 0 To 255
-    dwCrc = i
-    For j = 8 To 1 Step -1
-        If (dwCrc And 1) Then
-            dwCrc = ((dwCrc And &HFFFFFFFE) \ 2&) And &H7FFFFFFF
-            dwCrc = dwCrc Xor dwPolynomial
-        Else
-            dwCrc = ((dwCrc And &HFFFFFFFE) \ 2&) And &H7FFFFFFF
-        End If
-    Next j
-    crc32Table(i) = dwCrc
-Next i
+   For i = 0 To 255
+      dwCrc = i
+      For j = 8 To 1 Step -1
+         If (dwCrc And 1) Then
+               dwCrc = ((dwCrc And &HFFFFFFFE) \ 2&) And &H7FFFFFFF
+               dwCrc = dwCrc Xor dwPolynomial
+         Else
+               dwCrc = ((dwCrc And &HFFFFFFFE) \ 2&) And &H7FFFFFFF
+         End If
+      Next j
+      crc32Table(i) = dwCrc
+   Next i
 
-crc32Result = &HFFFFFFFF
-      
-For i = 0 To bufLen - 1
-   iLookup = (crc32Result And &HFF) Xor buffer(i)
-   crc32Result = ((crc32Result And &HFFFFFF00) \ &H100) And 16777215 ' nasty shr 8 with vb :/
-   crc32Result = crc32Result Xor crc32Table(iLookup)
-Next
+   crc32Result = &HFFFFFFFF
+         
+   For i = 0 To bufLen - 1
+      iLookup = (crc32Result And &HFF) Xor buffer(i)
+      crc32Result = ((crc32Result And &HFFFFFF00) \ &H100) And 16777215 ' nasty shr 8 with vb :/
+      crc32Result = crc32Result Xor crc32Table(iLookup)
+   Next
 
-CRC32 = Not (crc32Result)
+   CRC32 = Not (crc32Result)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function q(s As String) As String
    'this function returns s as "s"
    q = Chr(34) & s & Chr(34)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function checkLaunchVersion() As String
-Dim s1() As String
-Dim i As Long
+   Dim s1() As String
+   Dim i As Long
 
-'LaunchVersion must be in the format x,y,z
-s1 = Split(gTarget.LaunchVersion, ",")
-If UBound(s1) = 2 Then
-   For i = 0 To 2
-      If Not IsNumeric(s1(i)) Then s1(i) = "0"
-   Next
-   gTarget.LaunchVersion = Join(s1, ",")
-Else
-   gTarget.LaunchVersion = "1,0,0"
-End If
-checkLaunchVersion = gTarget.LaunchVersion
+   'LaunchVersion must be in the format x,y,z
+   s1 = Split(gTarget.LaunchVersion, ",")
+   If UBound(s1) = 2 Then
+      For i = 0 To 2
+         If Not IsNumeric(s1(i)) Then s1(i) = "0"
+      Next
+      gTarget.LaunchVersion = Join(s1, ",")
+   Else
+      gTarget.LaunchVersion = "1,0,0"
+   End If
+   checkLaunchVersion = gTarget.LaunchVersion
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function uid3plus(plus) As String
    uid3plus = Hex(plus + Val("&h" & gTarget.UID3))
 End Function

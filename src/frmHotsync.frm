@@ -77,12 +77,18 @@ Option Explicit
 Private mvarInstall As String
 #If NSBSymbian=0 Then
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butCancel_Click()
    Me.Hide
    Unload Me
    'frmMain.Show
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub butInstall_Click()
    If userlist.ListIndex = -1 Or userlist.ListIndex > userlist.ListCount - 1 Then
       MsgBox gStringTable(3322) '"Please select a username."
@@ -102,6 +108,9 @@ Public Sub butInstall_Click()
    'frmMain.Show
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    Dim count As Long
    Dim index As Integer
@@ -150,6 +159,9 @@ Private Sub Form_Load()
    End With
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DoInstall(strInstall As String)
    mvarInstall = strInstall
    If installType = "many" Then
@@ -162,10 +174,16 @@ Public Sub DoInstall(strInstall As String)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let install(strInstall As String)
    mvarInstall = strInstall
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get install() As String
    install = mvarInstall
 End Property

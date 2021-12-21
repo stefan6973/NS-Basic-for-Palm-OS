@@ -30,6 +30,9 @@ Public Sub class_initialize()
 '   idno = gtarget.HighestSeqNo
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Dim mElem As CMenuElem
 
@@ -42,6 +45,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim mElem As CMenuElem
 
@@ -54,6 +60,9 @@ Dim mElem As CMenuElem
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String, ByVal proj As CProject)
 Dim tokens() As String
 Dim i As Integer, nCount As Integer
@@ -95,6 +104,9 @@ PasteMenuElem:
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub restore()
 Dim ignore As String
 Dim version As Integer
@@ -122,11 +134,17 @@ Dim mElem As CMenuElem
 '   End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
 Attribute GlobalID.VB_UserMemId = 0
    GlobalID = m_strGlobalID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetGlobalID(ByVal strMenuGlobalID As String)
    If IdNo = 0 Then
       m_strGlobalID = "|" & strMenuGlobalID
@@ -139,6 +157,9 @@ Public Sub SetGlobalID(ByVal strMenuGlobalID As String)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -161,6 +182,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Caption": GetPropertyVal = caption
@@ -168,6 +192,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
    ValidateProperty = True
    Select Case strProp
@@ -181,6 +208,9 @@ Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String
    If ValidateProperty Then LocateProject(GlobalID).Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Name() As String
    Name = "Menu Bar"
 End Property

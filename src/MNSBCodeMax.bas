@@ -25,11 +25,14 @@ Const kKeywords = " Let If Then Else ElseIf EndIf Do Loop Exit For Next GoTo" & 
 Const kOperators = "^  -  *  /  \  +  =  <>  <  >  <=  >=  Mod  Is  Like  And  Eqv  Imp  Not  Or  Xor"
 Const kIntrinsics = "bmp but chk fld gad shf grd lbl lst pop cho rpt scr sel sli"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub CreateLanguage()
 Dim trace As Boolean
 trace = True
    If trace Then MsgBox "CreateLanguage " & 1
-   '--------------------------------------
+   '------------------------------------------------------------
    ' create A new language
    'Dim l As New CodeMax4Ctl.Language
    #If NSBSymbian Then
@@ -41,7 +44,7 @@ trace = True
    cmLanguage.WhitespaceAsParamBlock = True
    cmLanguage.WordChars = "[\w]"
 
-   '--------------------------------------
+   '------------------------------------------------------------
    ' create a 'Whitespace' scope tokenset.
    ' this is necessary so we can support
    ' parameter blocks that start with whitespace
@@ -57,7 +60,7 @@ trace = True
    Call cmLanguage.TokenSets.Add(Whitespace)
    If trace Then MsgBox "CreateLanguage " & 2
     
-    '--------------------------------------
+    '------------------------------------------------------------
     ' create a 'Scope Keywords' scope tokenset
     Dim ScopeKeywords As New CodeMax4Ctl.TokenSet
     ScopeKeywords.id = cmTsIdScopeKeywords
@@ -94,7 +97,7 @@ trace = True
     Call Whitespace.ValidScopes.Add(ScopeKeywords)
     If trace Then MsgBox "CreateLanguage " & 3
 
-    '--------------------------------------
+    '------------------------------------------------------------
     ' create an empty 'Text' tokenset as a catch-all
     ' for text in all scopes
     ' Note: this is added later to the language
@@ -108,11 +111,11 @@ trace = True
     Call Text.ValidScopes.Add(Nothing)
    If trace Then MsgBox "CreateLanguage " & 4
 
-    '--------------------------------------------
+    '------------------------------------------------------------
     ' create a 'Parameter Block' scope tokenset.
     ' This is necessary for CodeMax to automatically
     ' support Parameter Info toolTips.
-    '--------------------------------------------
+    '------------------------------------------------------------
     Dim ParamBlock As New CodeMax4Ctl.TokenSet
     ParamBlock.Name = "Parameter Block"
     ParamBlock.id = cmTsIdParameterBlocks
@@ -135,7 +138,7 @@ trace = True
     ' add this scope to the language
     Call cmLanguage.TokenSets.Add(ParamBlock)
 
-    '--------------------------------------
+    '------------------------------------------------------------
     ' create a 'Comments' scope tokenset
     Dim Comments As New CodeMax4Ctl.TokenSet
     Comments.Name = "Comments"
@@ -154,7 +157,7 @@ trace = True
     Call cmLanguage.TokenSets.Add(Comments)
    If trace Then MsgBox "CreateLanguage " & 6
 
-   '----------------------------------------------------------------------
+   '------------------------------------------------------------
     ' create a 'Escape Sequences' tokenset for embedded quotes in strings
     Dim EscSequence As New CodeMax4Ctl.TokenSet
     EscSequence.Name = "Escape Sequences"
@@ -164,7 +167,7 @@ trace = True
     ' add 'EscSequence' to the language
     Call cmLanguage.TokenSets.Add(EscSequence)
 
-    '--------------------------------------
+    '------------------------------------------------------------
     ' create a 'Strings' scope tokenset
     Dim Strings As New CodeMax4Ctl.TokenSet
     Strings.Name = "Strings"
@@ -187,7 +190,7 @@ trace = True
     ' EscSequence can be nested within strings
     Call EscSequence.ValidScopes.Add(Strings)
 
-    '--------------------------------------
+    '------------------------------------------------------------
     ' create a 'Keywords' list tokenset
     Dim Keywords As New CodeMax4Ctl.TokenSet
     Dim keywordList() As String, d As String, i As Integer
@@ -208,7 +211,7 @@ trace = True
     ' add 'Keywords' to the language
     Call cmLanguage.TokenSets.Add(Keywords)
     
-    '--------------------------------------
+    '------------------------------------------------------------
     ' create a 'Variables' list tokenset
     Dim Variables As New CodeMax4Ctl.TokenSet
     Dim VariablesList() As String
@@ -229,7 +232,7 @@ trace = True
     ' add 'Variables' to the language
     Call cmLanguage.TokenSets.Add(Variables)
     
-    '--------------------------------------
+    '------------------------------------------------------------
     ' create an 'Operators' list tokenset
     Dim Operators As New CodeMax4Ctl.TokenSet
     Dim operatorList() As String
@@ -254,12 +257,12 @@ trace = True
     Call cmLanguage.TokenSets.Add(Operators)
    If trace Then MsgBox "CreateLanguage " & 8
 
-    '--------------------------------------------
+    '------------------------------------------------------------
     ' create a 'Argument Separater' scope tokenset.
     ' This is necessary for CodeMax to support bolding
     ' of the current parameter in a Parameter Info
     ' tooltip.
-    '--------------------------------------------
+    '------------------------------------------------------------
     Dim ArgSep As New CodeMax4Ctl.TokenSet
     ArgSep.Name = "Argument Separators"
     ArgSep.id = cmTsIdArgSeparators
@@ -284,12 +287,12 @@ trace = True
     Call cmLanguage.TokenSets.Add(Text)
    If trace Then MsgBox "CreateLanguage " & 9
 
-    '--------------------------------------
+    '------------------------------------------------------------
     ' make the language available to the user
     Call cmLanguage.Register
    If trace Then MsgBox "CreateLanguage " & 10
 
-   '--------------------------------------
+   '------------------------------------------------------------
    ' create a memberlist for the Err global
    ' variable so we can hand it to CodeMax
    ' at a later time in OnQueryMemberList().
@@ -318,7 +321,7 @@ trace = True
    Call ErrMethods.Register
    If trace Then MsgBox "CreateLanguage " & 11
     
-   '--------------------------------------
+   '------------------------------------------------------------
    ' create a memberlist for global functions.
    Dim GblMethods As New CodeMax4Ctl.MemberList
    Dim s As String
@@ -346,7 +349,7 @@ trace = True
    Call GblMethods.Register
    If trace Then MsgBox "CreateLanguage " & 12
 
-   '------------------------------------------
+   '------------------------------------------------------------
    ' create member lists for intrinsic objects
    Dim intrinMems As CodeMax4Ctl.MemberList
    Dim strsIntrinsics() As String, strTrinsic As String
@@ -395,6 +398,10 @@ trace = True
 End Sub
 
 'Let's set CodeMax and Code Window stuffs here... once
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub MNSBCodeMax_Initialize()
 Dim hotKey As New CodeMax4Ctl.hotKey
 Dim trace As Boolean
@@ -440,6 +447,9 @@ trace = True
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub MNSBCodeMax_CreateNSBasicLanguage()
    Dim d As String
    Dim nsbLang As CodeMax4Ctl.Language
@@ -557,6 +567,9 @@ End Sub
 '   MWinReg.SubKey = oldSubKey
 'End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub MNSBCodeMax_SetLanguage(ByRef scriptObj As CodeMax4Ctl.CodeMax)
 '**** Apply the language to our control instance
 '   script.Language = ""
@@ -571,6 +584,9 @@ Sub MNSBCodeMax_SetLanguage(ByRef scriptObj As CodeMax4Ctl.CodeMax)
 '   script.SetColor cmClrText, vbWhite
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub MNSBCodeMax_SavePrefs(scriptObj As CodeMax4Ctl.CodeMax)
 Dim key As String
    #If NSBSymbian Then
@@ -583,6 +599,9 @@ Dim key As String
    'MsgBox "settings saved"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub MNSBCodeMax_SetScriptPrefs(ByRef scriptObj As CodeMax4Ctl.CodeMax)
 Dim key As String
 'Dim oldhKey As Long

@@ -77,10 +77,16 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 'entire form is new 04012005
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    LoadResStrings Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
 'MMD: Yeah, this is broken again... ha ha ha
    If Me.WindowState = vbMinimized Then Exit Sub  '02/11/2001 MMD
@@ -95,6 +101,9 @@ Private Sub Form_Resize()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWatchAdd_Click()
     frmAddWatchVariable.Show 1
     
@@ -102,6 +111,9 @@ Private Sub mnuWatchAdd_Click()
     'Me.Hide
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWatchDelete_Click()
     Dim index As Integer
     Dim Tag As Long
@@ -129,6 +141,9 @@ Private Sub mnuWatchDelete_Click()
     Loop
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWatchDeleteAll_Click()
    Do While frmWatchVariables.Tree.Nodes.count > 0
         frmWatchVariables.Tree.Nodes.Remove (0)

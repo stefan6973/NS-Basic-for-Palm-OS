@@ -628,6 +628,9 @@ Attribute VB_Exposed = False
 Private Declare Function SendMessage Lib "User32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Any) As Long
 Const EM_UNDO = &HC7
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub MDIForm_Load()
    LoadResStrings Me
    Me.Left = GetSetting(App.Title, "Settings", "MainLeft", 1000)
@@ -637,7 +640,9 @@ Private Sub MDIForm_Load()
    LoadNewDoc
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub LoadNewDoc()
    Static lDocumentCount As Long
    Dim frmD As frmDocument
@@ -647,7 +652,9 @@ Private Sub LoadNewDoc()
    frmD.Show
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub MDIForm_Unload(Cancel As Integer)
    If Me.WindowState <> vbMinimized Then
       SaveSetting App.Title, "Settings", "MainLeft", Me.Left
@@ -657,6 +664,9 @@ Private Sub MDIForm_Unload(Cancel As Integer)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tbToolBar_ButtonClick(ByVal Button As MSComCtlLib.Button)
    On Error Resume Next
    Select Case Button.Key
@@ -707,335 +717,536 @@ Private Sub tbToolBar_ButtonClick(ByVal Button As MSComCtlLib.Button)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpmnuHelpAbout_Click()
    'ToDo: Add 'mnuHelpmnuHelpAbout_Click' code.
    MsgBox "Add 'mnuHelpmnuHelpAbout_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpmnuHelpWWW_Click()
    'ToDo: Add 'mnuHelpmnuHelpWWW_Click' code.
    MsgBox "Add 'mnuHelpmnuHelpWWW_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpmnuHelpHelp_Click()
    'ToDo: Add 'mnuHelpmnuHelpHelp_Click' code.
    MsgBox "Add 'mnuHelpmnuHelpHelp_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuHelpmnuHelpRegister_Click()
    'ToDo: Add 'mnuHelpmnuHelpRegister_Click' code.
    MsgBox "Add 'mnuHelpmnuHelpRegister_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowmnuWindowWindows_Click()
    'ToDo: Add 'mnuWindowmnuWindowWindows_Click' code.
    MsgBox "Add 'mnuWindowmnuWindowWindows_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowTileVertical_Click()
    Me.Arrange vbTileVertical
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowTileHorizontal_Click()
    Me.Arrange vbTileHorizontal
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowCascade_Click()
    Me.Arrange vbCascade
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowmnuWindowProperties_Click()
    'ToDo: Add 'mnuWindowmnuWindowProperties_Click' code.
    MsgBox "Add 'mnuWindowmnuWindowProperties_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuWindowmnuWindowToolPalette_Click()
    'ToDo: Add 'mnuWindowmnuWindowToolPalette_Click' code.
    MsgBox "Add 'mnuWindowmnuWindowToolPalette_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuToolsOptions_Click()
    'ToDo: Add 'mnuToolsOptions_Click' code.
    MsgBox "Add 'mnuToolsOptions_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuToolsmnuToolsMenuEditor_Click()
    'ToDo: Add 'mnuToolsmnuToolsMenuEditor_Click' code.
    MsgBox "Add 'mnuToolsmnuToolsMenuEditor_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatOrderBack_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatOrderBack_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatOrderBack_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatOrderBackward_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatOrderBackward_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatOrderBackward_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatOrderForward_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatOrderForward_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatOrderForward_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatOrderFront_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatOrderFront_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatOrderFront_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatOrder_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatOrder_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatOrder_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatCenterVertically_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatCenterVertically_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatCenterVertically_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatCenterHorizontally_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatCenterHorizontally_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatCenterHorizontally_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatCenter_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatCenter_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatCenter_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatVerticalSpacingRemove_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatVerticalSpacingRemove_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatVerticalSpacingRemove_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatVerticalSpacingDecrease_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatVerticalSpacingDecrease_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatVerticalSpacingDecrease_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatVerticalSpacingIncrease_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatVerticalSpacingIncrease_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatVerticalSpacingIncrease_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatVerticalSpacingEqual_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatVerticalSpacingEqual_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatVerticalSpacingEqual_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatVerticalSpacing_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatVerticalSpacing_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatVerticalSpacing_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatHorizontalSpacingRemove_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatHorizontalSpacingRemove_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatHorizontalSpacingRemove_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatHorizontalSpacingDecrease_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatHorizontalSpacingDecrease_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatHorizontalSpacingDecrease_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatHorizontalSpacingIncrease_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatHorizontalSpacingIncrease_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatHorizontalSpacingIncrease_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatHorizontalSpacingEqual_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatHorizontalSpacingEqual_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatHorizontalSpacingEqual_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatHorizontalSpacing_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatHorizontalSpacing_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatHorizontalSpacing_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatSizeToGrid_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatSizeToGrid_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatSizeToGrid_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatMakeSameSizeBoth_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatMakeSameSizeBoth_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatMakeSameSizeBoth_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatMakeSameSizeHeight_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatMakeSameSizeHeight_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatMakeSameSizeHeight_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatMakeSameSizeWidth_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatMakeSameSizeWidth_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatMakeSameSizeWidth_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatMakeSameSize_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatMakeSameSize_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatMakeSameSize_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlignToGrid_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlignToGrid_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlignToGrid_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlignBottoms_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlignBottoms_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlignBottoms_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlignMiddles_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlignMiddles_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlignMiddles_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlignTops_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlignTops_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlignTops_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlignRights_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlignRights_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlignRights_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlignCenters_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlignCenters_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlignCenters_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlignLefts_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlignLefts_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlignLefts_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuFormatmnuFormatAlign_Click()
    'ToDo: Add 'mnumnuFormatmnuFormatAlign_Click' code.
    MsgBox "Add 'mnumnuFormatmnuFormatAlign_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectSetDefault_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectSetDefault_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectSetDefault_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectProperties_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectProperties_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectProperties_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectDownloadMathlib_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectDownloadMathlib_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectDownloadMathlib_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectDownloadRuntime_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectDownloadRuntime_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectDownloadRuntime_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectDownloadProject_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectDownloadProject_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectDownloadProject_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectMake_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectMake_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectMake_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectHelpCode_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectHelpCode_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectHelpCode_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectTerminationCode_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectTerminationCode_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectTerminationCode_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectStartupCode_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectStartupCode_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectStartupCode_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectAddModule_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectAddModule_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectAddModule_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuEditAddBitmap_Click()
    'ToDo: Add 'mnumnuProjectmnuEditAddBitmap_Click' code.
    MsgBox "Add 'mnumnuProjectmnuEditAddBitmap_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnumnuProjectmnuProjectAddForm_Click()
    'ToDo: Add 'mnumnuProjectmnuProjectAddForm_Click' code.
    MsgBox "Add 'mnumnuProjectmnuProjectAddForm_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewRefresh_Click()
    'ToDo: Add 'mnuViewRefresh_Click' code.
    MsgBox "Add 'mnuViewRefresh_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewStatusBar_Click()
    mnuViewStatusBar.Checked = Not mnuViewStatusBar.Checked
    sbStatusBar.Visible = mnuViewStatusBar.Checked
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuViewToolbar_Click()
    mnuViewToolbar.Checked = Not mnuViewToolbar.Checked
    tbToolBar.Visible = mnuViewToolbar.Checked
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditmnuEditGoTo_Click()
    'ToDo: Add 'mnuEditmnuEditGoTo_Click' code.
    MsgBox "Add 'mnuEditmnuEditGoTo_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditmnuEditReplace_Click()
    'ToDo: Add 'mnuEditmnuEditReplace_Click' code.
    MsgBox "Add 'mnuEditmnuEditReplace_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditmnuEditFindNext_Click()
    'ToDo: Add 'mnuEditmnuEditFindNext_Click' code.
    MsgBox "Add 'mnuEditmnuEditFindNext_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditmnuEditFind_Click()
    'ToDo: Add 'mnuEditmnuEditFind_Click' code.
    MsgBox "Add 'mnuEditmnuEditFind_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditmnuEditSelectAll_Click()
    'ToDo: Add 'mnuEditmnuEditSelectAll_Click' code.
    MsgBox "Add 'mnuEditmnuEditSelectAll_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditmnuEditDelete_Click()
    'ToDo: Add 'mnuEditmnuEditDelete_Click' code.
    MsgBox "Add 'mnuEditmnuEditDelete_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditPaste_Click()
    On Error Resume Next
    ActiveForm.rtfText.SelRTF = Clipboard.GetText
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditCopy_Click()
    On Error Resume Next
    Clipboard.SetText ActiveForm.rtfText.SelRTF
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditCut_Click()
    On Error Resume Next
    Clipboard.SetText ActiveForm.rtfText.SelRTF
@@ -1043,23 +1254,34 @@ Private Sub mnuEditCut_Click()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditmnuEditRedo_Click()
    'ToDo: Add 'mnuEditmnuEditRedo_Click' code.
    MsgBox "Add 'mnuEditmnuEditRedo_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuEditUndo_Click()
    'ToDo: Add 'mnuEditUndo_Click' code.
    MsgBox "Add 'mnuEditUndo_Click' code."
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileExit_Click()
    'unload the form
    Unload Me
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFilePrint_Click()
    On Error Resume Next
    If ActiveForm Is Nothing Then Exit Sub
@@ -1082,6 +1304,9 @@ Private Sub mnuFilePrint_Click()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFilePageSetup_Click()
    On Error Resume Next
    With dlgCommonDialog
@@ -1092,11 +1317,17 @@ Private Sub mnuFilePageSetup_Click()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSaveAll_Click()
    'ToDo: Add 'mnuFileSaveAll_Click' code.
    MsgBox "Add 'mnuFileSaveAll_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSaveAs_Click()
    Dim sFile As String
    
@@ -1120,6 +1351,9 @@ Private Sub mnuFileSaveAs_Click()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileSave_Click()
    Dim sFile As String
    If Left$(ActiveForm.Caption, 8) = "Document" Then
@@ -1142,16 +1376,25 @@ Private Sub mnuFileSave_Click()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFilemnuFileSaveProjectAs_Click()
    'ToDo: Add 'mnuFilemnuFileSaveProjectAs_Click' code.
    MsgBox "Add 'mnuFilemnuFileSaveProjectAs_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFilemnuFileSaveProject_Click()
    'ToDo: Add 'mnuFilemnuFileSaveProject_Click' code.
    MsgBox "Add 'mnuFilemnuFileSaveProject_Click' code."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileOpen_Click()
    Dim sFile As String
 
@@ -1175,6 +1418,9 @@ Private Sub mnuFileOpen_Click()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuFileNew_Click()
    LoadNewDoc
 End Sub

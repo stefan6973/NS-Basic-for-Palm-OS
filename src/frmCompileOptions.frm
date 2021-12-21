@@ -158,12 +158,18 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butCancel_Click()
    Me.Hide
    Unload Me
    frmMain.Show
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butDone_Click()
 Dim oldPath As String
 Dim res As Boolean
@@ -233,6 +239,9 @@ Dim strHiRes As String
    frmMain.Show
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Command1_Click()
    comdlg.DialogTitle = "Path to POSE"
    comdlg.InitDir = GlobalPath + "\tools"
@@ -246,6 +255,9 @@ Private Sub Command1_Click()
    txtPOSEpath.Refresh
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Command2_Click()
    comdlg.DialogTitle = "Global Path"
    comdlg.InitDir = GlobalPath
@@ -258,6 +270,9 @@ Private Sub Command2_Click()
    txtGlobalPath.Refresh
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    txtGlobalPath = GlobalPath
    txtPOSEpath = gstrPOSEPath
@@ -300,6 +315,9 @@ Private Sub Form_Load()
    End With
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub optDownload_Click(index As Integer)
    If index = 1 Then
       chkPOSErun.Enabled = True

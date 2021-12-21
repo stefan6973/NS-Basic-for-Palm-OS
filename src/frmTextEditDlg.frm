@@ -50,19 +50,31 @@ Option Explicit
 Private m_strText As String
 Public Cancelled As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Text() As String
    Text = m_strText
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Text(ByVal strText As String)
    m_strText = strText
    txtEdit.Text = m_strText
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_GotFocus()
    txtEdit.SetFocus
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    LoadResStrings Me ', False
 
@@ -73,16 +85,25 @@ Private Sub Form_Load()
    Cancelled = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub OKButton_Click()
    m_strText = txtEdit.Text
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub CancelButton_Click()
    Cancelled = True
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub txtEdit_KeyUp(KeyCode As Integer, Shift As Integer)
    If (Shift And vbCtrlMask) And KeyCode = Asc("A") Then
       txtEdit.SelStart = 0

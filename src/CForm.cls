@@ -55,9 +55,12 @@ Private Const kErrStrings As Integer = 2150
 Private Const kProperties As String = ""
 Private Const kMethods As String = ""
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
-Dim i As Integer
-Dim temp As String
+   Dim i As Integer
+   Dim temp As String
 
    obj_code = ""
    Set ObjectCollection = New Collection
@@ -98,13 +101,16 @@ Dim temp As String
    #End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
-Dim titl As titleOut
-Dim frm As formOut
-Dim wkstr As String
-Dim c As Byte
-Dim templen As Integer
-Dim obj As Object, o2 As Object
+   Dim titl As titleOut
+   Dim frm As formOut
+   Dim wkstr As String
+   Dim c As Byte
+   Dim templen As Integer
+   Dim obj As Object, o2 As Object
 
    On Error GoTo 0
    wkstr = Dir(DownloadPath + "__temp*.*")
@@ -272,6 +278,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
    Dim strTemp As String
    Dim obj As Object
@@ -321,6 +330,9 @@ Public Sub Save(ByVal nFileNumber as interger)
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim temp As String
 Dim formObj As Object
@@ -354,6 +366,9 @@ Dim strTemp As String
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -424,6 +439,9 @@ Dim oldIdNo As Integer
    If UBound(strLines) > 1 Then PasteObject strLines, True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PasteObject(ByRef strLines() As String, bPasteForm As Boolean)
 Dim obj As Object
 Dim fPalmScreen As frmPalmScreen
@@ -457,6 +475,9 @@ Dim fPalmScreen As frmPalmScreen
    If UBound(strLines) > 1 Then PasteObject strLines, bPasteForm
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function RestoreScript(ByRef strLines() As String, ByVal nScriptStart As Integer, _
                               ByRef nScriptEnd As Integer) As String
 Dim i As Integer
@@ -481,6 +502,9 @@ Dim tokens() As String
    ProcessScript RestoreScript, FromDisk
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function JoinFormCode() As String
 Dim formObj As Object
 
@@ -504,6 +528,9 @@ Dim formObj As Object
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SplitFormCode(strCode As String)
 Dim n1, n2, nModuleStart, nModuleEnd, nModule, nNewModule As Integer
 Dim strLine, strModule, strSubName, strObjectName As String
@@ -582,6 +609,9 @@ MsgBox strModule
    If Len(strModule) > 0 Then CheckModuleIn nModule, strModule, objFormObj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub CheckModuleIn(ByVal nModule As Integer, ByVal strModule As String, ByVal objFormObj As Object)
    Select Case nModule
    Case 1 'before
@@ -596,144 +626,251 @@ Private Sub CheckModuleIn(ByVal nModule As Integer, ByVal strModule As String, B
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Modal() As Boolean
    Modal = m_bModal
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Modal(ByVal vData As Boolean)
    m_bModal = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Frame() As Boolean
    Frame = m_bFrame
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Frame(ByVal vData As Boolean)
    m_bFrame = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get SaveBehind() As Boolean
    SaveBehind = m_bSaveBehind
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let SaveBehind(ByVal vData As Boolean)
    m_bSaveBehind = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IdNo() As Integer
    IdNo = m_nIdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let IdNo(ByVal vData As Integer)
    m_nIdNo = vData
    If m_nIdNo Then Name = "Form" & IdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get OriginLeft() As Integer
    OriginLeft = m_nOriginLeft
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let OriginLeft(ByVal vData As Integer)
    m_nOriginLeft = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get OriginTop() As Integer
    OriginTop = m_nOriginTop
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let OriginTop(ByVal vData As Integer)
    m_nOriginTop = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Width() As Integer
    Width = m_nWidth
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Width(ByVal vData As Integer)
    m_nWidth = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Height() As Integer
    Height = m_nHeight
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Height(ByVal vData As Integer)
    m_nHeight = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IsDefaultForm() As Boolean
    IsDefaultForm = m_bIsDefaultForm
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let IsDefaultForm(ByVal vData As Boolean)
    m_bIsDefaultForm = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get OptTitle() As Boolean
    OptTitle = m_bOptTitle
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let OptTitle(ByVal vData As Boolean)
    m_bOptTitle = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get DefaultButtonID() As Integer
    DefaultButtonID = m_nDefaultButtonId
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let DefaultButtonID(ByVal vData As Integer)
    m_nDefaultButtonId = vData
 End Property
 
 '10.16.06 GH Start additions
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get TipsIdNo() As Integer
    TipsIdNo = m_nTipsIdNo
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let TipsIdNo(ByVal vData As Integer)
    m_nTipsIdNo = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Tips() As String
    Tips = m_sTips
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Tips(ByVal vData As String)
    m_sTips = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NavFlags(ByVal vData As Long)
    m_nNavFlags = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get NavFlags() As Long
    NavFlags = m_nNavFlags
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NavFirstID(ByVal vData As Integer)
    m_nNavFirstID = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get NavFirstID() As Integer
    NavFirstID = m_nNavFirstID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NavJumpToID(ByVal vData As Integer)
    m_nNavJumpToID = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get NavJumpToID() As Integer
    NavJumpToID = m_nNavJumpToID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NavBottomLeftID(ByVal vData As Integer)
    m_nNavBottomLeftID = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get NavBottomLeftID() As Integer
    NavBottomLeftID = m_nNavBottomLeftID
 End Property
 '10.16.06 GH End addtions
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Name(ByVal vData As String)
 Dim strOldName As String
 Dim strProcName As String
@@ -764,18 +901,30 @@ Dim strProcName As String
    End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Name() As String
    Name = m_strName
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Project() As CProject
    Set Project = m_Project
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Project(prj As CProject)
    Set m_Project = prj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Object(nID As Integer) As Object
 Dim obj As Object
 
@@ -787,6 +936,9 @@ Dim obj As Object
    Next
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -843,6 +995,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "(Name)": GetPropertyVal = Name
@@ -869,6 +1024,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim strWork As String
 Dim frm As CForm
@@ -954,11 +1112,17 @@ Dim l As Long
    If ValidateProperty Then Project.Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
 Attribute GlobalID.VB_UserMemId = 0
    GlobalID = Join(Array("form", IdNo, m_Project.GlobalID), "|")
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetScript(strScript As String, Optional bForceCreate As Boolean = True) As String
    Select Case strScript
    Case "before"
@@ -983,6 +1147,9 @@ Public Function GetScript(strScript As String, Optional bForceCreate As Boolean 
    PutScript GetScript, strScript
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
    Select Case strScript
    Case "before": pgm_script = strText
@@ -992,6 +1159,9 @@ Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
    m_Project.Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewObject(ByVal obj As Object)
    obj.obj.IdNo = Project.GetNextSeqNo
    Select Case obj.obj.Kind
@@ -1009,6 +1179,9 @@ Public Sub AddNewObject(ByVal obj As Object)
    Project.Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveObject(ByVal obj As Object)
 Dim i As Integer
 
@@ -1020,6 +1193,9 @@ Dim i As Integer
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function BuildMap() As String()
 Dim strMap As String
 Dim obj As Object
@@ -1032,14 +1208,23 @@ Const kSep As String = ">"
    BuildMap = Split(strMap, kSep)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetObjectType(astrName As String) As String
 Dim obj As Object
 
@@ -1052,6 +1237,10 @@ Dim obj As Object
       Next
    End If
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetStringList() As String
    GetStringList = "Modal Tips>" & m_sTips
 End Function

@@ -24,6 +24,9 @@ Private Const kTotalProps As Integer = 5
 Private Const kProperties As String = "Index-Left-Top-Width-Height"
 Private Const kMethods As String = "Hide-Show"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    obj.Parent = Me
    obj.name = "GSI"
@@ -32,6 +35,9 @@ Private Sub class_initialize()
    obj.Height = 8
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub PrcOut()
 Dim c As Byte
 Dim si As shiftIndicOut
@@ -48,6 +54,9 @@ Dim si As shiftIndicOut
    Put #9, , si
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
    Dim version As Integer
 
@@ -60,17 +69,27 @@ Public Sub Restore(ByVal nFileNumber as integer)
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
    Copy = Copy + obj.Copy()
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -95,6 +114,9 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim i As Integer, h As Integer, w As Integer
 
@@ -117,6 +139,9 @@ Dim i As Integer, h As Integer, w As Integer
    obj.DrawSelected
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -138,18 +163,30 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    GetPropertyVal = obj.GetPropertyVal(strProp)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
    ValidateProperty = obj.ValidateProperty(strProp, strVal)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

@@ -36,6 +36,9 @@ Public typedefFlag As Boolean
 Public typedefName As String
 Public isConstant As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    Name = ""
    Length = 0
@@ -61,66 +64,114 @@ Private Sub class_initialize()
    LocalOrGlobal = "g"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Cur_No_Values(ByVal vData As Integer)
    mvarCur_No_Values = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Cur_No_Values() As Integer
    Cur_No_Values = mvarCur_No_Values
 End Property
 
-Public Property Let Kind(ByVal vData As String)
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public  Property Let Kind(ByVal vData As String)
    mvarKind = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Kind() As String
    Kind = mvarKind
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Dgt_Aft(ByVal vData As Integer)
    mvarDgt_Aft = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Dgt_Aft() As Integer
    Dgt_Aft = mvarDgt_Aft
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Dgt_Bef(ByVal vData As Integer)
    mvarDgt_Bef = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Dgt_Bef() As Integer
    Dgt_Bef = mvarDgt_Bef
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Length(ByVal vData As Integer)
    mvarLength = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Length() As Integer
    Length = mvarLength
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Name(ByVal vData As String)
    mvarName = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Name() As String
    Name = mvarName
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ByteFlag(ByVal vData As Byte)
    mvarByteFlag = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ByteFlag() As Byte
    ByteFlag = mvarByteFlag
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ByteFlag2(ByVal vData As Byte)
    mvarByteFlag2 = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ByteFlag2() As Byte
    ByteFlag2 = mvarByteFlag2
 End Property

@@ -70,18 +70,30 @@ Attribute VB_Exposed = False
 Option Explicit
 Private m_Project As CProject
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Project(ByVal proj As CProject)
    Set m_Project = proj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Project() As CProject
    Set Project = m_Project
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butClose_Click()
    Unload Me
 End Sub 'butClose_Click
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butDelete_Click()
    If listMenus.ListIndex < 0 Or listMenus.ListIndex > m_Project.MenuCollection.count - 1 Then
 '      MsgBox "Must select a menu to delete"
@@ -92,6 +104,9 @@ Private Sub butDelete_Click()
    listMenus.RemoveItem listMenus.ListIndex
 End Sub 'butDelete_Click
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub ViewMenu(Menu As CMenu)
 Dim fMenuBars As New frmMenuBars
 
@@ -100,6 +115,9 @@ Dim fMenuBars As New frmMenuBars
    fMenuBars.Show vbModal
 End Sub 'ViewMenu
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butEdit_click()
    If listMenus.ListIndex < 0 Or listMenus.ListIndex > m_Project.MenuCollection.count - 1 Then
 '      MsgBox "Must select a menu to edit"
@@ -108,6 +126,9 @@ Private Sub butEdit_click()
    ViewMenu m_Project.MenuCollection(listMenus.ListIndex + 1)
 End Sub 'butEdit_Click
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butNew_Click()
 Dim mnu As New CMenu
 
@@ -115,6 +136,9 @@ Dim mnu As New CMenu
    ViewMenu mnu
 End Sub 'butNew_Click
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Paint()
 Dim menu2 As CMenu
 
@@ -137,6 +161,9 @@ Dim menu2 As CMenu
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub listMenus_DblClick()
    butEdit_click
 End Sub

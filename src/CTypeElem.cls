@@ -14,6 +14,9 @@ Attribute VB_Exposed = False
 Public Name As String
 Public de As CDataElement
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub class_initialize()
    Name = ""
    Set de = Nothing

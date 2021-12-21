@@ -2,6 +2,9 @@ Attribute VB_Name = "MNSBSerial"
 Option Explicit
 
 #If NSBSymbian Then
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function isPro() As Boolean
    If CheckSerial(glSerialNumber, 4) \ 2 = CheckSerial(glSerialNumber, 4) / 2 Then
       isPro = True
@@ -11,6 +14,9 @@ Public Function isPro() As Boolean
 End Function
 #End If
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CheckSerial(ByVal astrSerial As String, ByRef anProduct As Integer) As Long
 Dim nProduct As Integer
 Dim nMod As Integer
@@ -64,6 +70,10 @@ End Function
    'Customer # = Dig0Dig1Dig2Dig3Dig4
    '(Pad1 + Dig2Dig1) mod 7 = ModVal
    '(Pad2 + Dig4Dig3) mod 7 = ModVal
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GenSerial(ByVal anProduct As Integer, ByVal anCustNum As Long) As String
 Dim nProduct As Integer
 Dim nMod As Integer

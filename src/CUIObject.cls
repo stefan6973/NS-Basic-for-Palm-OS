@@ -55,6 +55,9 @@ Private Const kErrStrings As Integer = 2450
 Private Const kDragHandleSize As Integer = 3
 Private Const kSelectBorderSize As Integer = 2
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
 '   Set NextObj = Nil
 '   Set PrevObj = Nil
@@ -78,6 +81,9 @@ Private Sub class_initialize()
    obj_code_len = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
    Dim i As Integer
    Dim temp As String
@@ -111,6 +117,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Dim strTemp As String
 
@@ -123,6 +132,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, strTemp
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
    Dim strTemp As String
 
@@ -136,6 +148,9 @@ Public Function Copy() As String
    Copy = Copy & Quote(strTemp) & vbCrLf
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
    Dim tokens() As String
    Dim i, nScriptEnd As Integer
@@ -202,15 +217,24 @@ Public Sub Paste(ByRef strLines() As String)
    ReDim Preserve strLines(UBound(strLines) - nScriptEnd)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PasteShift()
    OrigLeft = OrigLeft + (gnGridIncr \ 2)
    OrigTop = OrigTop + (gnGridIncr \ 2)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Label(ByVal vData As String)
    m_strLabel = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Label() As String
 '   If Len(m_strLabel) > 0 Then
       Label = m_strLabel
@@ -219,52 +243,88 @@ Public Property Get Label() As String
 '   End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let FontID(ByVal vData As Integer)
    m_nFontId = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get FontID() As Integer
    FontID = m_nFontId
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let script(ByVal vData As String)
    m_strScript = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get script() As String
    script = m_strScript
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ScriptLen() As Long
    ScriptLen = Len(m_strScript)
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Usable(ByVal vData As Boolean)
    m_bUsable = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Usable() As Boolean
    Usable = m_bUsable
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Width(ByVal vData As Integer)
    m_nWidth = vData
    If m_nWidth < 0 Then m_nWidth = 0
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Width() As Integer
    Width = m_nWidth
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Height(ByVal vData As Integer)
    m_nHeight = vData
    If m_nHeight < 0 Then m_nHeight = 0
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Height() As Integer
    Height = m_nHeight
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let OrigTop(ByVal vData As Integer)
 '   If vData < 0 Then vData = 0
    'Subtract one to account for 160 pixel screen having pixels from 0 to 159
@@ -274,10 +334,16 @@ Public Property Let OrigTop(ByVal vData As Integer)
    m_nOrigTop = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get OrigTop() As Integer
    OrigTop = m_nOrigTop
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let OrigLeft(ByVal vData As Integer)
 '   If vData < 0 Then vData = 0
    'Subtract one to account for 160 pixel screen having pixels from 0 to 159
@@ -287,10 +353,16 @@ Public Property Let OrigLeft(ByVal vData As Integer)
    m_nOrigLeft = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get OrigLeft() As Integer
    OrigLeft = m_nOrigLeft
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let IdNo(ByVal vData As Integer)
    m_nIdNo = vData
    If m_nIdNo Then
@@ -298,37 +370,61 @@ Public Property Let IdNo(ByVal vData As Integer)
    End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IdNo() As Integer
    IdNo = m_nIdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NavFlags(ByVal vData As Integer)
    m_nNavFlags = vData
    If m_nNavFlags < 0 Then m_nNavFlags = 0
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get NavFlags() As Integer
    NavFlags = m_nNavFlags
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NavAboveID(ByVal vData As Integer)
    m_nNavAboveID = vData
    If m_nNavAboveID < 0 Then m_nNavAboveID = 0
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get NavAboveID() As Integer
    NavAboveID = m_nNavAboveID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NavBelowID(ByVal vData As Integer)
    m_nNavBelowID = vData
    If m_nNavBelowID < 0 Then m_nWidth = 0
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get NavBelowID() As Integer
    NavBelowID = m_nNavBelowID
 End Property
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Name(ByVal vData As String)
 Dim strSubName As String
 
@@ -356,30 +452,51 @@ Dim strSubName As String
 '   End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Name() As String
    Name = m_strName
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get SubName() As String
    SubName = m_strSubName
 End Property
    
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Kind() As String
    Kind = m_strKind
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Kind(ByVal vData As String)
    m_strKind = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Form() As CForm
    Set Form = m_Form
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Form(frm As CForm)
    Set m_Form = frm
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty(strProp As String)
    gPropInfo.Name = strProp
    'Use pgString as default, it is most common
@@ -405,6 +522,9 @@ Public Sub GetProperty(strProp As String)
    gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "(Name)": GetPropertyVal = Name
@@ -439,6 +559,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim n As Double
 Dim i As Integer
@@ -522,11 +645,17 @@ Dim obj As Object
    If ValidateProperty Then Form.Project.Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
 Attribute GlobalID.VB_UserMemId = 0
    GlobalID = Join(Array("object", IdNo, m_Form.GlobalID), "|")
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetScript(strScript As String, Optional bForceCreate As Boolean = True) As String
    If Len(m_strScript) > 0 Or Not bForceCreate Then
       GetScript = m_strScript
@@ -535,28 +664,46 @@ Public Function GetScript(strScript As String, Optional bForceCreate As Boolean 
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
    m_strScript = strText
    m_Form.Project.Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Control() As VB.PictureBox
    Set Control = m_Control
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Control(ByVal pb As VB.PictureBox)
    Set m_Control = pb
    If Not m_Control Is Nothing Then m_Control.Visible = True
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Parent() As Object
    Set Parent = m_Parent
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Parent(ByVal obj As Object)
    Set m_Parent = obj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub m_Control_DblClick()
 Dim fCode As New frmCode
 
@@ -566,6 +713,9 @@ Dim fCode As New frmCode
    frmMain.ViewCode GlobalID, "code"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function GetHandle(ByVal x As Integer, ByVal y As Integer)
 Dim nMid As Integer
       
@@ -603,6 +753,9 @@ Dim nMid As Integer
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SetMousePointer(Optional ByVal nHandle As Integer = 0)
    Select Case nHandle
    Case 0: m_Control.MousePointer = vbDefault
@@ -613,11 +766,17 @@ Private Sub SetMousePointer(Optional ByVal nHandle As Integer = 0)
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub m_Control_KeyUp(KeyCode As Integer, Shift As Integer)
    If Not Selected Then Exit Sub
    If Shift = 0 And KeyCode = 46 Then FormRemoveObject m_Control.Parent.Object, Me.Parent
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub m_Control_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
    If Not m_Control.Parent Is frmMain.ActiveForm Then m_Control.Parent.ZOrder
    If Button <> vbLeftButton Then Exit Sub
@@ -644,6 +803,9 @@ Private Sub m_Control_MouseDown(Button As Integer, Shift As Integer, x As Single
    SetMousePointer m_nMouseHandle
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub m_Control_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim nX As Integer, nY As Integer, n As Integer
 
@@ -713,6 +875,9 @@ Dim nX As Integer, nY As Integer, n As Integer
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub m_Control_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
    If Button = vbRightButton Then
       If x < 0 Or y < 0 Or x > m_Control.Width Or y > m_Control.Height Then Exit Sub
@@ -746,11 +911,17 @@ Private Sub m_Control_MouseUp(Button As Integer, Shift As Integer, x As Single, 
    ShowStatus
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub m_Control_Paint()
    'Each different parent type knows how it wants to be ScreenDraw'n
    Parent.ScreenDraw
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw(bDrawBorder As Boolean)
 Dim fontname As String
 Dim fontSize As Integer
@@ -786,6 +957,9 @@ Dim nMag As Integer
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DrawSelected()
 Dim nMid As Integer
 
@@ -805,6 +979,10 @@ Dim nMid As Integer
    Control.Line (nMid, 0)-(nMid + kDragHandleSize, kDragHandleSize), Control.ForeColor, BF
    Control.Line (nMid, Control.Height - (kDragHandleSize + 1))-(nMid + kDragHandleSize, Control.Height - 1), Control.ForeColor, BF
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Object(nID As Integer) As Object
 Dim obj As Object
 Dim frm As CForm

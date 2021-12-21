@@ -105,6 +105,9 @@ Private openName As String
 
 Private Const Classic = "01010101,01FFFFFF,01010101,01330199,01FFFFFF,01010101,01FFFFFF,01010101,01330199,01FFFFFF,01FFFFFF,01010101,01999999,01010101,01FFFF01,01010101,01010101,01FFFFFF,01010101,0101FFFF,01330199,01330199,01FFFFFF,01330199,01FFFFFF,01330199,01FFFFFF,0101CC01,01FFCC01,01FF0101,01330199,Classic"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub btnOpen_Click()
    
    frmMain.dlgCommonDialog.DialogTitle = gStringTable(2207)
@@ -122,6 +125,9 @@ Private Sub btnOpen_Click()
 gotCancel:
 End Sub
   
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub loadTheme(filename)
    Dim i As Integer
    
@@ -140,6 +146,9 @@ Sub loadTheme(filename)
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub btnSave_Click()
    Dim i As Integer
    Dim filename As String
@@ -149,14 +158,14 @@ Private Sub btnSave_Click()
    Dim b2 As Integer
    Dim b3 As Integer
    Dim frm As Form
-   Dim FileNumber As Integer
-   FileNumber = FreeFile
+   Dim nFileNumber As Integer
+   nFileNumber = FreeFile
   
    'does file exist already?
    On Error GoTo fileNotFound
-   Open filename For Random As #FileNumber
+   Open filename For Random As #nFileNumber
    On Error GoTo 0
-   Close #FileNumber
+   Close #nFileNumber
    
    If LCase(openName) <> LCase(filename) Then
       i = MsgBox(gStringTable(3455) & txtName.Text & "?", vbOKCancel)
@@ -199,13 +208,15 @@ fileNotFound:
    End If
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SaveThemeFile(Name As String, themeResource() As Byte)
    Dim filename As String
    Dim data(212) As Byte
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim i As Integer
-   FileNumber = FreeFile
+   nFileNumber = FreeFile
    Dim s As String
    
    For i = 0 To 212
@@ -236,19 +247,29 @@ Private Sub SaveThemeFile(Name As String, themeResource() As Byte)
    Next
    
    filename = fileDirectory & "\themes\" & Name & ".pdb"
-   Open filename For Binary Access Write As #FileNumber
-   Put #FileNumber, , data
-   Close #FileNumber
+   Open filename For Binary Access Write As #nFileNumber
+   Put #nFileNumber, , data
+   Close #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function hexString2string(s As String) As String
    hexString2string = hexChar2char(Mid(s, 1, 2)) & hexChar2char(Mid(s, 3, 2)) & hexChar2char(Mid(s, 5, 2)) & hexChar2char(Mid(s, 7, 2))
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function hexChar2char(s)
    hexChar2char = Chr(Val("&h" & s))
    If hexChar2char = Chr(0) Then hexChar2char = Chr(1) 'zero not allowed in Palm OS string
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub btnNew_Click()
    Dim i As Integer
    Dim s() As String
@@ -267,6 +288,9 @@ Private Sub btnNew_Click()
    openName = txtName.Text
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub btnSaveAs_Click()
 Dim filename As String
 
@@ -289,6 +313,9 @@ Dim filename As String
 gotCancel:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    Dim data() As String
    Dim i As Integer
@@ -321,6 +348,9 @@ Private Sub Form_Load()
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
    With gridThemes
       .Top = 500
@@ -343,6 +373,9 @@ Private Sub Form_Resize()
    'Me.Height = btnSave.Top + btnSave.Height + 150
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gridThemes_click() 'bring up the color picker when grid clicked on
    If gridThemes.col <> 3 Then Exit Sub
    Dim oleNewColor As OLE_COLOR
@@ -356,6 +389,9 @@ End Sub
 
 
 #If 1 = 0 Then 'dead code.
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub btnImportColors_Click()
 'Import data from Memopad. The colors app put the themes there.
 'just used once, to create the initial entries in \Themes

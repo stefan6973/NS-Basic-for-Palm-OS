@@ -1,6 +1,9 @@
 Attribute VB_Name = "mKeyboardHook"
 Option Explicit
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type RECT
    Left As Long
    Top As Long
@@ -8,11 +11,17 @@ Type RECT
    Bottom As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type POINTAPI
    X As Long
    Y As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Declare Function GetParent Lib "user32" (ByVal hwnd As Long) As Long
 Public Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
 Public Declare Function GetWindowRect Lib "user32" (ByVal hwnd As Long, lpRect As RECT) As Long
@@ -103,12 +112,18 @@ Public Const MAX_PATH = 260
 
 Private m_hKeyHook  As Long
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub InstallHook()
    If m_hKeyHook = 0 Then
       m_hKeyHook = SetWindowsHookEx(WH_KEYBOARD, AddressOf TabKeyProc, 0&, App.ThreadID)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveHook()
    If m_hKeyHook <> 0 Then
       UnhookWindowsHookEx m_hKeyHook
@@ -116,6 +131,9 @@ Public Sub RemoveHook()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GetCDlgFileName(ByVal hDlg As Long) As String
 Dim sBuf As String
 Dim iPos As Long
@@ -130,6 +148,9 @@ Dim hwnd As Long
    End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function TabKeyProc(ByVal nCode As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
    If nCode >= 0 And Not (frmNew Is Nothing) Then
       If wParam = 9 Then

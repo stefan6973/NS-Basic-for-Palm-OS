@@ -34,6 +34,9 @@ Public gbWinNT2000 As Boolean
 Public gstrPalmFonts(7) As String
 Public gnPalmFontSize(7) As Integer
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 'Public Function TraverseProject(Optional strGID As String = "") As String
 'Dim arrGID() As String
 'Static s_strGIDStart As String
@@ -92,6 +95,9 @@ Public gnPalmFontSize(7) As Integer
 '   TraverseProject = s_strGIDCurrent
 'End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub CMaxPrepFindReplace(ByVal cMax As CodeMax4Ctl.CodeMax)
    cMax.ExecuteCmd cmCmdSetFindText, gstrFind
    cMax.ExecuteCmd cmCmdSetReplaceText, gstrReplace
@@ -110,6 +116,9 @@ Public Sub CMaxPrepFindReplace(ByVal cMax As CodeMax4Ctl.CodeMax)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CMaxFindNext(ByVal cMax As CodeMax4Ctl.CodeMax) As Boolean
 Dim range1 As CodeMax4Ctl.range
 Dim range2 As CodeMax4Ctl.range
@@ -152,6 +161,9 @@ Dim range2 As CodeMax4Ctl.range
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function FindNext() As Boolean
 Dim frm As frmCode
 Dim sel As range
@@ -205,16 +217,25 @@ lblFindNextFailed:
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ShowStatus(Optional ByVal strStatus As String = "", Optional bAutoClear As Boolean = False)
    frmMain.sbStatusBar.Panels(1).Text = strStatus
    frmMain.tmrStatus.Enabled = False
    If bAutoClear Then frmMain.tmrStatus.Enabled = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ShowCursor(l As Integer, c As Integer)
    frmMain.sbStatusBar.Panels(2).Text = "Line: " & l & "   Col: " & c
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ShowCoordinates(x As Integer, y As Integer) ', Optional bAutoClear As Boolean = False)
    If x = -44 And y = -44 Then
       frmMain.sbStatusBar.Panels(2).Text = ""
@@ -225,6 +246,9 @@ Sub ShowCoordinates(x As Integer, y As Integer) ', Optional bAutoClear As Boolea
 '   If bAutoClear Then frmMain.tmrStatus.Enabled = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ShowDimensions(w As Integer, h As Integer) ', Optional bAutoClear As Boolean = False)
    If w = -44 And h = -44 Then
       frmMain.sbStatusBar.Panels(3).Text = ""
@@ -235,6 +259,9 @@ Sub ShowDimensions(w As Integer, h As Integer) ', Optional bAutoClear As Boolean
 '   If bAutoClear Then frmMain.tmrStatus.Enabled = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function LocateProject(ByVal strGID As String) As CProject
 Dim arrGID() As String
 Dim proj As CProject
@@ -261,6 +288,9 @@ Dim cMod As CCodeModule
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function LocateObject(ByVal strGID As String) As Object
 Dim arrGID() As String
 Dim proj As CProject
@@ -333,6 +363,9 @@ Dim obj As Object, o2 As Object, o3 As Object
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddForm(Optional ByVal proj As CProject = Nothing)
 Dim frm As CForm
 Dim fPalmScreen As New frmPalmScreen
@@ -346,6 +379,9 @@ Dim fPalmScreen As New frmPalmScreen
 '   frmMain.AddMDIChild fPalmScreen
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectRemoveForm(ByVal frm As CForm, Optional ByVal proj As CProject)
 Dim f As Form
 Dim ob As Object
@@ -370,6 +406,9 @@ If MsgBox(gStringTable(3442) & frm.Title & "?", vbYesNo) = vbYes Then
 End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddMenu(Optional ByVal proj As CProject = Nothing)
 Dim fMenuEditor As New frmMenuEditor
 
@@ -381,6 +420,9 @@ Dim fMenuEditor As New frmMenuEditor
    gfProjectExplorer.UpdateProjectMenus proj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectRemoveMenu(ByVal mnu As CMenu, Optional ByVal proj As CProject = Nothing)
    If proj Is Nothing Then Set proj = gTarget
    proj.MenuCollection.Remove str(mnu.IdNo)
@@ -388,6 +430,9 @@ Sub ProjectRemoveMenu(ByVal mnu As CMenu, Optional ByVal proj As CProject = Noth
    If gbProperties Then gfProperties.Object = Nothing
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddMenuBar(ByVal mnu As CMenu, Optional ByVal proj As CProject = Nothing)
 Dim mBar As New CMenuBar
 
@@ -405,6 +450,9 @@ Dim mBar As New CMenuBar
    gfProjectExplorer.AddNewMenuBar mBar, mnu
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectRemoveMenuBar(ByVal mBar As CMenuBar, Optional ByVal proj As CProject = Nothing)
 Dim mnu As CMenu
 Dim mBar2 As CMenuBar
@@ -422,6 +470,9 @@ Dim mBar2 As CMenuBar
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddMenuElem(ByVal mBar As CMenuBar, Optional ByVal proj As CProject = Nothing)
 Dim mElem As New CMenuElem
 
@@ -439,6 +490,9 @@ Dim mElem As New CMenuElem
    gfProjectExplorer.AddNewMenuElem mElem, mBar
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectRemoveMenuElem(ByVal mElem As CMenuElem, Optional ByVal proj As CProject = Nothing)
 Dim mnu As CMenu
 Dim mBar As CMenuBar
@@ -459,6 +513,9 @@ Dim mElem2 As CMenuElem
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddBitmap(Optional ByVal proj As CProject = Nothing)
 Dim bmp As CBitmapFile
 Dim filename As String
@@ -492,6 +549,9 @@ Dim j As Integer
 gotCancel:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddResource(Optional ByVal proj As CProject = Nothing)
 Dim res As CResourceFile
 Dim filename As String
@@ -532,6 +592,9 @@ Dim j As Integer
 gotCancel:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddModuleNew(Optional ByVal proj As CProject = Nothing)
 Dim cMod As CCodeModule
 
@@ -541,6 +604,9 @@ Dim cMod As CCodeModule
    gfProjectExplorer.AddNewModule cMod, proj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectAddModuleExisting(Optional ByVal proj As CProject = Nothing)
 Dim cMod As CCodeModule
 
@@ -569,6 +635,9 @@ Dim cMod As CCodeModule
 gotCancel:
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProjectRemoveModule(ByVal cMod As CCodeModule, Optional ByVal proj As CProject)
 Dim f As Form
 
@@ -583,6 +652,9 @@ Dim f As Form
    If gbProperties Then gfProperties.Object = Nothing
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub FormRemoveObject(ByVal frm As CForm, ByVal obj As Object)
 Dim f As Form
 
@@ -597,6 +669,9 @@ Dim f As Form
    If gbProperties Then gfProperties.Object = Nothing
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ProcessScript(ByRef strScript As String, lDirection As Long)
    Dim i As Long
 
@@ -641,6 +716,9 @@ Function UnBoolStr(strVal As String) As Boolean
    If strVal = "#TRUE#" Then UnBoolStr = True Else UnBoolStr = False
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidClipboard() As Integer
 Dim strClip As String
 
@@ -713,6 +791,9 @@ End Function
 '   End If
 'End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ImgNum(iml As ImageList, strKey As String) As Long
    ImgNum = iml.ListImages(strKey).index - 1
 End Function
@@ -741,6 +822,9 @@ Function trimWhiteSpace(ByVal s As String, Optional direction As Integer = 2) As
    trimWhiteSpace = s
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SaveImages(p1 As String, p2 As String, p3 As String, p4 As String, p5 As String, p1h As String, p2h As String, p3h As String, p4h As String, p5h As String)
 Dim paths(9) As String
    
@@ -761,6 +845,9 @@ Dim paths(9) As String
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RestoreImages(ByRef p1 As String, ByRef p2 As String, ByRef p3 As String, ByRef p4 As String, ByRef p5 As String, ByRef p1h As String, ByRef p2h As String, ByRef p3h As String, ByRef p4h As String, ByRef p5h As String)
 Dim paths() As String
 Dim s As String
@@ -785,6 +872,9 @@ Dim s As String
    If UBound(paths) > 8 Then p5h = paths(9) Else p5h = ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidFileName(ByVal strText As String) As Boolean
 Dim arrChar() As String
 Dim i As Integer
@@ -800,6 +890,9 @@ Dim i As Integer
    ValidFileName = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function LegalObjectName(ByVal strText As String) As Boolean
 Dim arrChar() As String
 Dim str1 As String
@@ -822,10 +915,16 @@ Dim i As Integer
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub InvalidProperty()
    MsgBox gStringTable(1407), vbOKOnly + vbCritical
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub MenuEditor()
 Dim fMenuEditor As New frmMenuEditor
 Dim proj As CProject
@@ -842,6 +941,10 @@ Dim mnu As CMenu
    fMenuEditor.Show vbModal, frmMain
    gfProjectExplorer.UpdateProjectMenus proj
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ThemeEditor()
 Dim fThemeEditor As New frmThemeEditor
 
@@ -853,6 +956,9 @@ Public Function ActiveProject() As CProject
    If ActiveProject Is Nothing Then Set ActiveProject = gTarget
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetTextWidth(ByVal strText As String, Optional nFontIndex As Integer = 0, Optional nMagFactor As Integer = 1) As Integer
 Dim factor As Double
 
@@ -867,6 +973,9 @@ Dim factor As Double
 '         & "Text Width: " & GetTextWidth
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetTextHeight(ByVal strText As String, Optional nFontIndex As Integer = 0, Optional nMagFactor As Integer = 1) As Integer
 Dim factor As Double
 
@@ -882,6 +991,9 @@ err_GetTextHeight:
    GetTextHeight = 11
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetScript(ByVal strMixed As String, Optional ByVal strScript As String) As String
 Dim obj As Object
 
@@ -894,6 +1006,9 @@ Dim obj As Object
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PutScript(ByVal strCode As String, ByVal strGID As String)
 Dim obj As Object
 
@@ -907,6 +1022,10 @@ Dim obj As Object
 End Sub
 
 'Const kIntrinsics = "Bitmap Button CheckBox Field Gadget GraffitiShiftIndicator Grid Label List Popup PushButton Repeater Scrollbar Selector"
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CreateObjectEx(ByRef astrType As String) As Object
 Dim locobj As Object
 
@@ -930,6 +1049,9 @@ Dim locobj As Object
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetObjectType(astrName As String) As String
    GetObjectType = gTarget.GetObjectType(astrName)
 End Function
@@ -967,12 +1089,20 @@ ElapsedTime = Format(str(Int((Int((jml / 3600)) Mod 24))), "00") + ":" + Format(
 END_ELAPSEDTIME:
      
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function swapRGB(color As Long) As Long
    'Palm is BGR, Windows is RGB. Need to swap B and R. (Big Endian vs. Little Endian)
    Dim s As String
    s = Hex(&H1000000 + color)
    swapRGB = CLng("&h" & Mid(s, 6, 2) & Mid(s, 4, 2) & Mid(s, 2, 2))
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function getUIColorTable(x) As Long
    Dim themeColors() As Long
 
@@ -980,6 +1110,10 @@ Public Function getUIColorTable(x) As Long
    getUIColorTable = swapRGB(themeColors(x))
    
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function getThemeColors(filename) As Long()
    Dim themeColors(31) As Long
    Dim i As Integer
@@ -988,24 +1122,24 @@ Public Function getThemeColors(filename) As Long()
    Dim b3 As String
    Dim err As Integer
    Dim themeResource(213) As Byte
-   Dim FileNumber As Integer
+   Dim nFileNumber As Integer
    Dim trace As Boolean
    trace = True
    
    If trace Then MsgBox "getThemeColors 1" & filename
-   FileNumber = FreeFile
+   nFileNumber = FreeFile
    If filename = "" Then GoTo themeNotFound
    
    If trace Then MsgBox "getThemeColors 2" & GetAbsolutePath(filename, "")
    If trace Then MsgBox "getThemeColors filedirectory=" & fileDirectory
    On Error GoTo themeNotFound
-   Open GetAbsolutePath(filename, "") For Input As #FileNumber
+   Open GetAbsolutePath(filename, "") For Input As #nFileNumber
    On Error GoTo 0
-   Close #FileNumber
+   Close #nFileNumber
    
-   Open GetAbsolutePath(filename, "") For Binary Access Read As #FileNumber
-   Get #FileNumber, 89, themeResource
-   Close #FileNumber
+   Open GetAbsolutePath(filename, "") For Binary Access Read As #nFileNumber
+   Get #nFileNumber, 89, themeResource
+   Close #nFileNumber
    
    If trace Then MsgBox "getThemeColors 3" & filename
    For i = 1 To 30
@@ -1027,6 +1161,10 @@ themeNotFound:
       getThemeColors = getThemeColors(fileDirectory & "\themes\Classic.pdb")
    #End If
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ResIn(IdNo As Integer, p1 As String, p2 As String, p4 As String, p8 As String, p16 As String, p1h As String, p2h As String, p4h As String, p8h As String, p16h As String) As Double
 Dim resource As String
 Dim command As String

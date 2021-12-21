@@ -63,6 +63,9 @@ Option Explicit
 
 Public path As String
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmbdrive_Change()
 Dim strDrive As String
 
@@ -75,15 +78,24 @@ BadDrive:
    cmbDrive.Drive = strDrive
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmdCancel_Click()
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmdOK_Click()
    path = lstDir.path
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    If Mid(path, 2, 1) = ":" Then
       cmbDrive = Left(path, 2)
@@ -95,6 +107,9 @@ Private Sub Form_Load()
    lblPath.caption = path
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lstDir_Change()
    lblPath.caption = lstDir.path
 End Sub

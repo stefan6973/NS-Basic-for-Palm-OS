@@ -32,6 +32,9 @@ Private Const kTotalProps As Integer = 16
 Private Const kProperties As String = "Selected-Text-Text(number)-Index-NoItems-ItemText-Left-Top-Width-Height"
 Private Const kMethods As String = "Hide-Show-Redraw-Clear-Add-Delete"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    obj.Parent = Me
    obj.name = "Popup"
@@ -46,6 +49,9 @@ Private Sub class_initialize()
    'reserve id for list
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 Dim c As Byte
 Dim pop As ctlOut
@@ -88,6 +94,9 @@ Dim templen As Integer
    Put #9, , popup
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub PutOutListElem()
 Dim cnt As Integer
 Dim c As Byte
@@ -193,6 +202,9 @@ Dim arrList() As String
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
 
    Dim version As Integer
@@ -212,6 +224,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
@@ -225,6 +240,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
    Copy = Quote(obj.Kind) & vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -233,6 +251,9 @@ Public Function Copy() As String
    Copy = Copy & obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -262,6 +283,9 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim i As Integer
 Const kDropArrowWidth = 8
@@ -284,38 +308,65 @@ Const kDropArrowSpace = 2
    obj.DrawSelected
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ResourceId(ByVal vData As Integer)
    m_nResourceID = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ResourceId() As Integer
    ResourceId = m_nResourceID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let AnchorLeft(ByVal vData As Boolean)
    m_bAnchorLeft = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get AnchorLeft() As Boolean
    AnchorLeft = m_bAnchorLeft
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ListId(ByVal vData As Integer)
    m_nListID = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ListId() As Integer
    ListId = m_nListID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let VisibleItems(ByVal vData As Integer)
    m_nVisibleItems = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get VisibleItems() As Integer
    VisibleItems = m_nVisibleItems
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -361,6 +412,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Anchor Left": GetPropertyVal = AnchorLeft
@@ -376,6 +430,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim nResID As Integer
 Dim bmp As CBitmapFile
@@ -423,14 +480,23 @@ Dim arrItems() As String
    If ValidateProperty Then obj.Form.Project.Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetStringList() As String
    GetStringList = "List Items>" & Join(Split(m_strList, vbTab), vbCrLf)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

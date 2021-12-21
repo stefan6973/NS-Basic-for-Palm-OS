@@ -1,6 +1,9 @@
 Attribute VB_Name = "PalmFont"
 Private FontMask(8) As Byte
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type PalmFontInfoType
    BytesWide As Integer
    ColsWide(258) As Integer
@@ -15,6 +18,9 @@ End Type
 Global PalmFontInfo(8) As PalmFontInfoType
 Private FontsInitialized As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub PalmFont_Initialize()
    If FontsInitialized Then Exit Sub
    FontsInitialized = True
@@ -39,6 +45,9 @@ Sub PalmFont_Initialize()
    FontRetrieve 7, &H27AC
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function GetInt() As Integer
    Dim l As Byte
    Dim r As Byte
@@ -49,6 +58,10 @@ Private Function GetInt() As Integer
    GetInt = l * 256 + r
    'MsgBox str(Loc(13)) + " getint=" + str(getint) + " " + str(l) + " " + str(r)
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub FontRetrieve(theFont As Integer, p As Long)
    Dim i, j As Integer
 
@@ -110,14 +123,23 @@ Private Sub FontRetrieve(theFont As Integer, p As Long)
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function FontLeading(theFont As Integer) As Integer
    FontLeading = PalmFontInfo(theFont).LeadingPixels
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function FontCharIndex(theFont As Integer, char As String) As Integer
    FontCharIndex = Asc(char) - PalmFontInfo(theFont).StartChar
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function FontRows(theFont As Integer, char As String) As Integer
    If FontCharIndex(theFont, char) >= 0 Then
       FontRows = PalmFontInfo(theFont).RowsHigh
@@ -126,6 +148,9 @@ Private Function FontRows(theFont As Integer, char As String) As Integer
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function FontCols(theFont As Integer, char As String) As Integer
    If FontCharIndex(theFont, char) >= 0 Then
       FontCols = PalmFontInfo(theFont).ColsWide(Asc(char))
@@ -134,6 +159,9 @@ Private Function FontCols(theFont As Integer, char As String) As Integer
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function FontPixel(theFont As Integer, char As String, row As Integer, col As Integer) As Boolean
 '   Dim z As String
    Dim pint As Integer
@@ -174,6 +202,10 @@ End Function
 
 'George: This function is only used in CForm.PrcOut
 'George: Now that we use the Palm fonts, can we do without it?
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function FontTextHeight(theForm As Form, theString As String, theFont As Integer) As Integer
    If Not bPlainText Then
 'MMD: Deleted Mag nific
@@ -186,6 +218,10 @@ End Function
 
 'George: This function is only used in CForm.PrcOut
 'George: Now that we use the Palm fonts, can we do without it?
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function FontTextWidth(theForm As Form, theString As String, theFont As Integer) As Integer
    Dim i As Integer
 
@@ -205,6 +241,9 @@ Function FontTextWidth(theForm As Form, theString As String, theFont As Integer)
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function FontCheckAvail(theFont As Integer) As Boolean
    If Not FontsInitialized Then PalmFont_Initialize
 

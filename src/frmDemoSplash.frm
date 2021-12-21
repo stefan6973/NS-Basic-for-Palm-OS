@@ -112,6 +112,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Private daysRemaining As Long
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub btnBuy_Click()
    #If NSBSymbian Then
       openWebPage "www.nsbasic.com/order.shtml"
@@ -120,12 +124,18 @@ Private Sub btnBuy_Click()
    #End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Command1_Click()
   Me.Hide
   Unload Me
   If daysRemaining < 0 Then End
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
 Dim checksum As String
 Dim x, y As Double
@@ -175,6 +185,9 @@ Dim trace As Boolean
    If trace Then MsgBox "demoSpash " & 4
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
   Me.Hide
   Unload Me

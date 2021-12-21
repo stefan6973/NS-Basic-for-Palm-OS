@@ -257,11 +257,17 @@ Global se As CSynElem
 Global first_se As CSynElem
 Global formCount As Integer '11.20.06 GH counter of number of forms with nav
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Enum ProcessScriptEnum
    ToDisk
    FromDisk
 End Enum
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type PropertyInfo
    Name As String
    Val As String
@@ -270,6 +276,9 @@ Public Type PropertyInfo
 End Type
 Global gPropInfo As PropertyInfo
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type controlProportions
    widthProportions As Single
    heightProportions As Single
@@ -277,24 +286,39 @@ Type controlProportions
    leftProportions As Single
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type Word
    w As Integer
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type Dword
    d As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type PointType
    x As Integer
    y As Integer
 End Type
    
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type RectangleType
    topleft As PointType
    extent As PointType
 End Type
    
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type AbsRectType
    Left As Integer
    Top As Integer
@@ -302,18 +326,30 @@ Type AbsRectType
    Bottom As Integer
 End Type
    
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type CharPtr
    c As Long
 End Type
    
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type Handle
    h As Long
 End Type
     
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type ControlStyleType
    s As Byte
 End Type
     
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type ctlOut
    id As Word
    bounds As RectangleType
@@ -332,15 +368,24 @@ Type ctlOut
    unused3 As Byte
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type LineInfoType
    start As Word
    Length As Word
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type LineInfoPtr
    l As Long
 End Type
   
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type FieldOut
    id As Word
    RECT As RectangleType
@@ -374,11 +419,17 @@ Type FieldOut
    unused As Byte
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type titleOut
    RECT As RectangleType
    Text As CharPtr
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type labelOut
    id As Word
    pos As PointType
@@ -389,6 +440,10 @@ Type labelOut
 End Type
  
 'added 04012005   !!!new slider control!!!!!
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type SliderOut
    id As Word
    bounds As RectangleType
@@ -406,6 +461,9 @@ Type SliderOut
 End Type
 'end additions 04012005
  
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type gadgetOut
    id As Word
    Usable As Word
@@ -413,6 +471,9 @@ Type gadgetOut
    data As CharPtr
 End Type
  
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type bitmapOut
    Usable As Byte
       ':1 set if part of UI
@@ -421,11 +482,17 @@ Type bitmapOut
    rscId As Word
 End Type
  
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type popupOut
    ctlId As Word
    ListId As Word
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type listOut
    id As Word
    bounds As RectangleType
@@ -448,6 +515,9 @@ Type listOut
    callback As CharPtr
 End Type
   
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type scrollbarOut
    bounds As RectangleType
    id As Word
@@ -466,11 +536,17 @@ Type scrollbarOut
    savePos As Integer
 End Type
   
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type shiftIndicOut
    pos As PointType
 End Type
   
-  Type tableOut
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Type tableOut
      id As Word
      bounds As RectangleType
      attr As Byte
@@ -492,35 +568,43 @@ End Type
      currentField As CharPtr
    End Type
    
-   Type tableRowAttr
-     id As Word
-     Height As Word
-     data As Dword
-     flag1 As Byte
-       'reserved 7 bits
-       'usable   &h01
-     flag2 As Byte
-     'reserved 5 bits
-       'invalid  &h04
-       'staticHeight '&h02
-       'selectable   '&h01
-     Reserved As Word
-   End Type
-   
-   Type tableColAttr
-     Width As Word
-     flag1 As Byte
-       'unused - 6 bits
-       'editIndicator &h02
-       'usable        &h01
-     flag2 As Byte
-     spacing As Word
-     drawCallback As CharPtr
-     loadData     As CharPtr
-     saveData As CharPtr
-   End Type
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Type tableRowAttr
+   id As Word
+   Height As Word
+   data As Dword
+   flag1 As Byte
+      'reserved 7 bits
+      'usable   &h01
+   flag2 As Byte
+   'reserved 5 bits
+      'invalid  &h04
+      'staticHeight '&h02
+      'selectable   '&h01
+   Reserved As Word
+End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Type tableColAttr
+   Width As Word
+   flag1 As Byte
+      'unused - 6 bits
+      'editIndicator &h02
+      'usable        &h01
+   flag2 As Byte
+   spacing As Word
+   drawCallback As CharPtr
+   loadData     As CharPtr
+   saveData As CharPtr
+End Type
    
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type formOut
    dispWidth As Word
    dispHeight As Word
@@ -545,7 +629,7 @@ Type formOut
       '&h03 frame width:2
    statePtr As CharPtr
    nextWindow As CharPtr
-   '-----------------end of window type structure----------
+   '------------------------------------------------------------end of window type structure----------
    id As Word
    attr As Byte
       '&h80 usable:1
@@ -568,6 +652,9 @@ Type formOut
    objPtr As CharPtr
 End Type
   
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type prcHeader
    NameFld(31) As Byte
    flags As Word
@@ -591,6 +678,9 @@ Type prcHeader
    numRecords As Word
 End Type
   
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type menuItem
    id As Word
    command As Byte
@@ -598,6 +688,9 @@ Type menuItem
    itemStr As Long
 End Type
   
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type menuPulldown
    menuWin As Handle
    bounds As RectangleType
@@ -608,6 +701,9 @@ Type menuPulldown
    menuItemTypeOffset As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type PPmenuBar
    barWin As Handle
    bitsBehind As Handle
@@ -626,6 +722,10 @@ Type PPmenuBar
 End Type
     
 'separate bitmap entry in prc file
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type bmpType
    Width As Word
    Height As Word
@@ -637,6 +737,9 @@ Type bmpType
    resv4 As Word
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Global stage As String
 Global newProjSw As Boolean
 Global LitePro As String
@@ -764,7 +867,9 @@ Global resizeType As Integer
 Global g_strTrue As String
 Global g_strFalse As String
 
- 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk_proc_verbs() As Integer
     If term_is("_end-line") Then
 'dbug    "chk_proc_verbs got _end-line"
@@ -1044,6 +1149,9 @@ foundVerb:
 
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk_func_name() As Integer
 
      If (term_is("abs")) Then
@@ -1356,6 +1464,10 @@ Function chk_func_name() As Integer
        chk_func_name = 0
      End If
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk_verb() As Integer              '/*-------check if term is a cobol verb---*/
     If (Mid$(term, 1, 1) = " ") Then GoTo isVerb
     'If (term_is("alter")) Then GoTo isVerb
@@ -1486,6 +1598,9 @@ isVerb:
     Exit Function
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk_reserved() As Integer
     Dim i As Integer
     Dim ad1 As String
@@ -1505,6 +1620,10 @@ End Function
 
 'MMD: This is less efficient version of standard StrComp(a,b,vbTextCompare)
 '10.22.06 GH: No longer used
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function stricmp(a As String, b As String) As Integer
    Dim aa As String
    Dim bb As String
@@ -1521,6 +1640,9 @@ Function stricmp(a As String, b As String) As Integer
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk_num_con() As Integer
     Dim i As Integer
     got_period = 0
@@ -1559,6 +1681,10 @@ continue:
     End If
     chk_num_con = 1
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_term()
     Dim tempSe As CSynElem
 
@@ -1604,6 +1730,10 @@ exit_get_term:
       dbug "returning term=" + term + " termin=" + termin + " type=" + str$(termType)
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_stmt_elem()
     Dim c As String * 1
     Dim i As Integer
@@ -1758,6 +1888,10 @@ type_done:
 'dbug "stmtelem=" + term
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub removeBrackets()
   Dim i As Integer
   Dim j As Integer
@@ -1779,11 +1913,18 @@ retry:
     If c = "]" Then SYNTAX 7
   Next
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_seteventhandled()
    out_one_char (&H7)
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk_dbname()
   Dim i As Integer
   
@@ -1813,6 +1954,9 @@ Function chk_dbname()
 'sgBox "not dbname= " + term + "  #dbs=" + str$(model1.DatabaseCollection.count)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function term_is(chk_term As String) As Boolean
     'check if "term" = parameter------*/
     'If LCase$(term) = LCase$(chk_term) Then term_is = True _
@@ -1824,7 +1968,12 @@ End Function
 'MMD: Unused function
 'Sub strcpy(too As String, from As String)
 '   too = from
-'End Sub
+'End 
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Sub
 
 Function initialize_valu()
     Dim Dummy As Boolean
@@ -1845,6 +1994,9 @@ Function initialize_valu()
     
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function new_term_not(chk_term As String) As Boolean    'get new term & chk against param--*/
     get_term
 'sgBox "at new-term-not--looking for=" + chk_term + " got=" + term
@@ -1855,6 +2007,9 @@ Function new_term_not(chk_term As String) As Boolean    'get new term & chk agai
     End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function term_not(chk_term As String) As Boolean
    ' check if "term" not = parameter
 
@@ -1865,6 +2020,9 @@ Function term_not(chk_term As String) As Boolean
     End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function locate_data_tbl() As Integer  'locate data elem by name
 Dim lvl As Integer
 Dim save_term As String
@@ -2031,6 +2189,9 @@ loc_name_no_match:
    locate_data_tbl = 0
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function locateDataByName(Name As String) As CDataElement
   Dim d As CDataElement
 
@@ -2065,6 +2226,9 @@ loc_name_no_match:
    Set locateDataByName = Nothing
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function find_de_by_no(de_no As Integer) As CDataElement                '/*uses d.e. # to locate d.e. tbl entry*/
    If de_no = 0 Then
      Set find_de_by_no = Nothing
@@ -2073,6 +2237,9 @@ Function find_de_by_no(de_no As Integer) As CDataElement                '/*uses 
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub print_err(ByVal Msg As String)
    compile_no_good = 9999
    MsgBox gStringTable(3103) + Msg '+ "'."   'Error...
@@ -2082,12 +2249,20 @@ err.Raise 1000
   
 End Sub
 'added routine 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_term_left_paren()
    get_term
    If se.maj = "p" And se.sub1 = 0 Then Exit Sub
    SYNTAX 11
 End Sub
 'added routine 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_term_right_paren()
    get_term
    If se.maj = "p" And se.sub1 = 1 Then Exit Sub
@@ -2099,6 +2274,9 @@ End Sub
 '    get_data_name
 'End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_dataname_num()  '/*find dataname--must be dataname & numeric type*/
    get_dataname
    If (err_code = 0) Then
@@ -2110,6 +2288,9 @@ Sub get_dataname_num()  '/*find dataname--must be dataname & numeric type*/
    print_err gStringTable(3106) '"Expecting a numeric variable or numeric constant."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_dataname_string()  '/*find dataname--must be dataname & string type*/
    get_dataname
 'sgBox "error kind =" + DATA.kind + "errcode=" + str$(err_code) + " termType=" + str$(termType)
@@ -2122,6 +2303,9 @@ Sub get_dataname_string()  '/*find dataname--must be dataname & string type*/
    print_err gStringTable(3107) + term + " " + str$(termType) '"Expecting a variable of type STRING or a string literal surrounded by quote marks. Term and type: "
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_dataname()  '/*--- find next data name--------------*/
 Dim save_data As New CDataElement
     
@@ -2146,6 +2330,9 @@ End Sub
 '    get_dataname_nosubs
 'End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_dataname_nosubs()  '/*get data name w/o subscripts--------*/
    err_code = 0
    get_term
@@ -2174,6 +2361,9 @@ exitIt:
    s3_tbl_no = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub process_a_char() ' /*-----process one single char from input-*/
     Dim Val As Long
     Dim save_cur As String
@@ -2305,6 +2495,10 @@ UseIt:
            Exit Sub
      End Select
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_next_char()         '/*----get char from in buffer_*/
     Dim i As Integer
     If (look_i = 0) Then
@@ -2322,11 +2516,19 @@ Sub get_next_char()         '/*----get char from in buffer_*/
     End If
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub term_err_stop(str As String)
    MsgBox (str)
    MsgBox gStringTable(3227) '"Compile will continue, but is not successful."
    'End
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_next_char_absol()
    '10.22.06 GH code optimized
    If (end_input) Then
@@ -2349,6 +2551,9 @@ Sub get_next_char_absol()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub build_look_ahead_buf()        '/*--build up look ahead bufr---*/
     get_next_char_absol
     If (end_input) Then
@@ -2360,6 +2565,10 @@ Sub build_look_ahead_buf()        '/*--build up look ahead bufr---*/
     look_i = look_i + 1
     Mid$(look_ahead_buf, look_i + 1, 1) = ""
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub look_ahead_a_char()        '/*---peek ahead one char to see what it is*/
     If (Not look_i = 0) Then
       look_ahead_char = Mid$(look_ahead_buf, 1, 1)
@@ -2371,6 +2580,10 @@ Sub look_ahead_a_char()        '/*---peek ahead one char to see what it is*/
     End If
     look_ahead_char = Mid$(in_buf, in_ptr + 2, 1)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub remove_lead_blanks()   '/*----skip by all leading blank chars---*/
     If (end_input) Then Exit Sub
     Do
@@ -2378,6 +2591,10 @@ Sub remove_lead_blanks()   '/*----skip by all leading blank chars---*/
        
     Loop While ((cur_char = " ") Or (cur_char = "@"))  'modified 04012005
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub insert_char()
     '/*---add cur char to term string building*/
     If (term_len = (term_len_max - 1)) Then
@@ -2388,6 +2605,9 @@ Sub insert_char()
     term_len = term_len + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk_data_para() As Integer '/*------chk if term is data or parag name--*/
     Dim i As Integer
     Dim periodSw As Boolean
@@ -2436,6 +2656,9 @@ continue:
     chk_data_para = 1
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub graph_change_cursor(too As String)
     If too = "n" Then
        Screen.MousePointer = vbDefault
@@ -2449,6 +2672,9 @@ End Sub
 '
 'End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub chk_for_subscripts()
 ''no longer used
     Dim test As String
@@ -2559,10 +2785,18 @@ subs_not_defined:
     print_err gStringTable(3111) '"Name used as a subscript is not defined elsewhere.")
     GoTo chk_subs_return
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub skip_over_input_space()   '/*--skip space in input stmt---*/
     get_next_char
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub add_to_para_tbl()    '/*----add to para tbl----------*/
    
     Set p = New CParaTbl
@@ -2573,6 +2807,10 @@ Sub add_to_para_tbl()    '/*----add to para tbl----------*/
     gTarget.ParagCollection.Add p               'added 4/07/2001  ***
 'sprintf(debug,"created para=%p first=%p last=%p",p,first_para_tbl_ptr,last_para_tbl_ptr)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub add_to_link_tbl()    '/*----add to para tbl----------*/
     
     Set p = New CParaTbl
@@ -2583,6 +2821,9 @@ Sub add_to_link_tbl()    '/*----add to para tbl----------*/
 'sprintf(debug,"created para=%p first=%p last=%p",p,first_para_tbl_ptr,last_para_tbl_ptr)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub chk_outstand_ifs()   '/*----chk outstanding ifs-------*/
     '??not used
     Dim i As Integer
@@ -2602,6 +2843,10 @@ Sub chk_outstand_ifs()   '/*----chk outstanding ifs-------*/
       if_level = 0
     End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_para_name()  '/*------get para name---------*/
     Dim result As Integer
     get_term
@@ -2617,6 +2862,10 @@ Sub get_para_name()  '/*------get para name---------*/
     term_tbl_no = p.tbl_no
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_link_name()  '/*------get para name---------*/
     Dim result As Integer
     get_term
@@ -2632,9 +2881,17 @@ Sub get_link_name()  '/*------get para name---------*/
     term_tbl_no = p.tbl_no
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_file_ptr(file_ptr As CFileEntry)
     out_the_string (file_ptr.Name)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_one_char(the_byte As Byte)    'out one char as two bytes to avoid unicode problems
     If (proc_offset = code_buff_max) Then
        abort_too_big
@@ -2642,6 +2899,10 @@ Sub out_one_char(the_byte As Byte)    'out one char as two bytes to avoid unicod
     code_buffer = code_buffer & Chr$(Int(the_byte / 64) + 1) & Chr$((the_byte Mod 64) + 1)
     proc_offset = proc_offset + 1
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_one_char_of_string(the_char As String)
   If the_char = "" Then
     out_one_char (0)
@@ -2649,6 +2910,10 @@ Sub out_one_char_of_string(the_char As String)
     out_one_char (Asc(the_char))
   End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub OLD_out_one_char_of_string(the_char As String)
    If (proc_offset = code_buff_max) Then
      abort_too_big
@@ -2663,6 +2928,9 @@ Sub OLD_out_one_char_of_string(the_char As String)
     proc_offset = proc_offset + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub OLD_out_one_char(the_char As Byte)    '/*------out one character-----------*/
     If (proc_offset = code_buff_max) Then
        abort_too_big
@@ -2679,6 +2947,10 @@ Sub OLD_out_one_char(the_char As Byte)    '/*------out one character-----------*
     End If
     proc_offset = proc_offset + 1
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_one_integ(i As Integer)  '/*------output one integer----------*/
     Dim l As Byte
     Dim m As Byte
@@ -2698,6 +2970,10 @@ Sub out_one_integ(i As Integer)  '/*------output one integer----------*/
     out_one_char l
     out_one_char m
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_one_unsignedInteg(i As Long)  '5/7/1
    Dim m1 As Byte
    Dim m2 As Byte
@@ -2713,7 +2989,9 @@ Sub out_one_unsignedInteg(i As Long)  '5/7/1
    out_one_char m2
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_the_string(str As String)
     Dim i As Integer
     If ((proc_offset + Len(str)) >= code_buff_max) Then abort_too_big
@@ -2725,44 +3003,84 @@ Sub out_the_string(str As String)
     
     out_one_char (&H0)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_tok_1arg(the_token As Byte)       '  /*---output token + 1 argument---*/
     out_one_char (the_token)
     out_1arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_tok_2arg(the_token As Byte)       '  /*---output token + 2 argument---*/
     out_one_char (the_token)
     out_2arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_tok_3arg(the_token As Byte)       '  /*---output token + 3 argument---*/
     out_one_char (the_token)
     out_3arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_tok_4arg(the_token As Byte)       '  /*---output token + 3 argument---*/
     out_one_char (the_token)
     out_4arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_tok_5arg(the_token As Byte)       '  /*---output token + 3 argument---*/
     out_one_char (the_token)
     out_5arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_1arg()     '/*------output 1 argument---------*/
     out_the_1st_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_2arg()          '/*------output 2 arguments--------*/
     out_the_1st_arg
     out_the_2cnd_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_3arg()         '/*------output 3 arguments--------*/
     out_the_1st_arg
     out_the_2cnd_arg
     out_the_3rd_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_4arg()         '/*------output 3 arguments--------*/
     out_the_1st_arg
     out_the_2cnd_arg
     out_the_3rd_arg
     out_the_4th_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_5arg()         '/*------output 3 arguments--------*/
     out_the_1st_arg
     out_the_2cnd_arg
@@ -2770,6 +3088,10 @@ Sub out_5arg()         '/*------output 3 arguments--------*/
     out_the_4th_arg
     out_the_5th_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_an_arg(arg As Integer, Sub_1 As Integer, Sub_2 As Integer, Sub_3 As Integer)
     Dim d As CDataElement
     
@@ -2791,21 +3113,45 @@ Sub out_an_arg(arg As Integer, Sub_1 As Integer, Sub_2 As Integer, Sub_3 As Inte
          End If
      End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_the_1st_arg()             '/*----put out arg 1------------------*/
     out_an_arg arg_1, arg1_occ1, arg1_occ2, arg1_occ3
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_the_2cnd_arg()            ' /*----put out arg 2------------------*/
     out_an_arg arg_2, arg2_occ1, arg2_occ2, arg2_occ3
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_the_3rd_arg()            ' /*----put out arg 3------------------*/
     out_an_arg arg_3, arg3_occ1, arg3_occ2, arg3_occ3
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_the_4th_arg()            ' /*----put out arg 3------------------*/
     out_an_arg arg_4, arg4_occ1, arg4_occ2, arg4_occ3
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_the_5th_arg()             '/*----put out arg 3------------------*/
     out_an_arg arg_5, arg5_occ1, arg5_occ2, arg5_occ3
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function locate_para_tbl() As Integer '   /*--locate paragraph tbl-----*/
   Dim i As Integer                     'added 4/07/2001 ***
   i = 0                                'added 4/07/2001 ***
@@ -2824,6 +3170,9 @@ Function locate_para_tbl() As Integer '   /*--locate paragraph tbl-----*/
   Set p = para_null_ptr
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function locate_link_tbl() As Integer '   /*--locate paragraph tbl-----*/
 'If compiler_debug Then
 'dbug "in locate-link"
@@ -2845,6 +3194,9 @@ Function locate_link_tbl() As Integer '   /*--locate paragraph tbl-----*/
    Set p = para_null_ptr
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function loc_para_ptr(parag_no As Integer) As CParaTbl '/*-locate paragraph ptr---*/
    For Each p In gTarget.ParagCollection
      If p.tbl_no = parag_no Then
@@ -2855,6 +3207,10 @@ Function loc_para_ptr(parag_no As Integer) As CParaTbl '/*-locate paragraph ptr-
    Set loc_para_ptr = para_null_ptr
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function loc_link_ptr(parag_no As Integer) As CParaTbl '/*-locate paragraph ptr---*/
    For Each p In gTarget.LinkCollection
      If p.tbl_no = parag_no Then
@@ -2866,6 +3222,9 @@ Function loc_link_ptr(parag_no As Integer) As CParaTbl '/*-locate paragraph ptr-
    Exit Function
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub reset_args()                   '/*---reset args to nulls------------*/
    arg_1 = 0
    arg_2 = 0
@@ -2885,6 +3244,9 @@ Sub reset_args()                   '/*---reset args to nulls------------*/
    Set d3 = dataelem_null_ptr
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub set_arg_1()                  ' /*--------set argument 1------------*/
     Set d1 = data
     arg_1 = term_tbl_no
@@ -2892,6 +3254,10 @@ Sub set_arg_1()                  ' /*--------set argument 1------------*/
     arg1_occ2 = s2_tbl_no
     arg1_occ3 = s3_tbl_no
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub set_arg_2()                 '  /*--------set argument 2------------*/
     Set d2 = data
     arg_2 = term_tbl_no
@@ -2899,6 +3265,10 @@ Sub set_arg_2()                 '  /*--------set argument 2------------*/
     arg2_occ2 = s2_tbl_no
     arg2_occ3 = s3_tbl_no
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub set_arg_3()                  ' /*--------set argument 3------------*/
     Set d3 = data
     arg_3 = term_tbl_no
@@ -2906,6 +3276,10 @@ Sub set_arg_3()                  ' /*--------set argument 3------------*/
     arg3_occ2 = s2_tbl_no
     arg3_occ3 = s3_tbl_no
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub set_arg_4()                  ' /*--------set argument 4------------*/
     Set d4 = data
     arg_4 = term_tbl_no
@@ -2914,6 +3288,10 @@ Sub set_arg_4()                  ' /*--------set argument 4------------*/
     arg4_occ3 = s3_tbl_no
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub set_arg_5()                  ' /*--------set argument 5------------*/
     Set d5 = data
     arg_5 = term_tbl_no
@@ -2921,13 +3299,24 @@ Sub set_arg_5()                  ' /*--------set argument 5------------*/
     arg5_occ2 = s2_tbl_no
     arg5_occ3 = s3_tbl_no
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub abort_too_big()
    term_err_stop gStringTable(3116) '"Compiled code exceeds internal code buffer size.")
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function load_alloc_data() As CDataElement
    Set load_alloc_data = New CDataElement
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function add_data_name_to_tbl(LocOrGlob As String)
    'put data name into data elem tbl
    Set data = load_alloc_data
@@ -2943,6 +3332,9 @@ Function add_data_name_to_tbl(LocOrGlob As String)
    gTarget.AddDataElement data
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function new_is(chk_term As String) As Boolean
     If new_not(chk_term) Then
        new_is = False
@@ -2951,6 +3343,9 @@ Function new_is(chk_term As String) As Boolean
     End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_string()             '/*-----get parsed string of char---------*/
 
  'dbug "at get_string"
@@ -2981,6 +3376,10 @@ Sub get_string()             '/*-----get parsed string of char---------*/
     term_area = 2
 'dbug "***got string =" + term
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function new_not(chk_term As String) As Boolean
     get_term
     If term = chk_term Then
@@ -2989,6 +3388,10 @@ Function new_not(chk_term As String) As Boolean
         new_not = True
     End If
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function new_term_is(chk_term As String) As Boolean   '/*------get new term & chk against param--*/
     get_term
     If term = chk_term Then
@@ -2999,6 +3402,10 @@ Function new_term_is(chk_term As String) As Boolean   '/*------get new term & ch
 End Function
 
 '/*--------------------------------------------*/
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function compile_all() As Integer
 Dim saveHighestSeqNo As Long
    saveHighestSeqNo = gTarget.HighestSeqNo
@@ -3088,7 +3495,7 @@ Dim projectDir
    link_tbl_no = 0
    'graph_blink_cursor '041601 MMD
 
-'---------------
+'------------------------------------------------------------
    gTarget.obj_code = ""
    gTarget.obj_code_len = 0
    
@@ -3114,7 +3521,7 @@ Dim projectDir
    End If
    gCorrection = 0
 
-'----------------
+'------------------------------------------------------------
    gTarget.termin_obj_code = ""
    gTarget.termin_obj_code_len = 0
 'sgBox "model-script=" + model1.pgm_script
@@ -3133,7 +3540,7 @@ Dim projectDir
       End If
    End If
 
-'----------------
+'------------------------------------------------------------
    For Each cod In gTarget.CodeCollection
       cod.obj_code = ""
       cod.obj_code_len = 0
@@ -3153,7 +3560,7 @@ Dim projectDir
       End If
    Next
 
-'----------------
+'------------------------------------------------------------
    For Each Menu In gTarget.MenuCollection
       For Each mnuBar In Menu.MenuBars
          For Each mnu In mnuBar.MenuElems
@@ -3177,7 +3584,7 @@ Dim projectDir
       Next
    Next
 
-'----------------
+'------------------------------------------------------------
    For Each view2 In gTarget.FormCollection
       Set old_aView = view2
       'graph_blink_cursor '041601 MMD
@@ -3282,6 +3689,9 @@ compileFailed:
    GoTo compile_over
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub AddNSBNames()
    'adds all of nsb's predefined constants to the project
    'constants must start with nsb or you'll need to fix code in PrcOut
@@ -3324,6 +3734,9 @@ Sub AddNSBNames()
    AddNSB "nsbSIR", 32769 'SIR
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub AddNSB(Name As String, Value As Variant)
    Dim av As New CDataElement
 
@@ -3348,6 +3761,9 @@ Sub AddNSB(Name As String, Value As Variant)
    gTotalNSBvars = gTotalNSBvars + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function compile_one_script(script As String) As Long    '***revised 3/13/2001**************
 Dim ii As Integer
 Dim work As String
@@ -3394,6 +3810,9 @@ FoundErr:                                                               'added 8
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_a_dummy_goto()
     out_one_char &H1E
     out_one_integ para_endif_ptr(if_level)
@@ -3402,12 +3821,20 @@ End Sub
 'Sub strcpy(tostr As String, from As String)
 '   tostr = from
 'End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub dbug(Msg As String)
   MsgBox Msg
 End Sub
 
 'Copyright 2002 by NS BASIC Corporation.  All rights reserved.
 'MMD: This will get moved to MNSBasic when relative paths are introduced
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub MakeGlobalDirectories()
     '??
     If Dir(fileDirectory, vbDirectory) = "" Then
@@ -3432,6 +3859,9 @@ Sub MakeGlobalDirectories()
     DownloadPath = fileDirectory + "\Download\"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub Main()
 Dim index As Integer
 Dim userID As Long
@@ -3524,6 +3954,9 @@ trace = True
    If compileOkSw And InStr(gCommandLineOptions, "-compile") Then End
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub wordBound(n As Integer)
    Dim j As Long
    Dim c As Byte
@@ -3534,6 +3967,10 @@ Sub wordBound(n As Integer)
       Put n, , c
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub inputWordBound(n As Integer)
   Dim j As Long
   Dim c As Byte
@@ -3548,6 +3985,10 @@ Sub inputWordBound(n As Integer)
 
      End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeTOCRecord3(f As Integer, typ As String, id As Integer, position As Long)
    Dim i As Integer
    Dim c As Byte
@@ -3562,6 +4003,10 @@ Sub writeTOCRecord3(f As Integer, typ As String, id As Integer, position As Long
      writeOutInteger f, id
      writeOutLong f, position
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeTOCRecord4(f As Integer, typ As String, id As Integer, position As Long)
    Dim i As Integer
    Dim c As Byte
@@ -3576,6 +4021,10 @@ Sub writeTOCRecord4(f As Integer, typ As String, id As Integer, position As Long
      writeOutInteger f, id
      writeOutLong f, position
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function cvtWord(j As Integer) As Integer
     Dim i As Long
     Dim l As Long
@@ -3601,6 +4050,10 @@ Function cvtWord(j As Integer) As Integer
 
     End If
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeOutInteger(f As Integer, q As Integer)
     'r=file@, q=value
     Dim i As Integer
@@ -3626,9 +4079,17 @@ Sub writeOutInteger(f As Integer, q As Integer)
     writeOutByte f, m
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub outLong(f As Integer, l As Long)
    writeOutLong f, l
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeOutLong(f As Integer, q As Long)
     Dim i As Long
     Dim j As Byte
@@ -3678,6 +4139,10 @@ Sub writeOutLong(f As Integer, q As Long)
     writeOutByte f, l
     writeOutByte f, m
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub openOutput()
 Dim wk As String
 
@@ -3705,9 +4170,17 @@ Dim wk As String
     End If
   End If                    '10.22.00 GH
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeOutByte(f As Integer, b As Byte)
    Put f, , b
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeOutString(f As Integer, str1 As String)
   Dim i As Integer
   'Dim b As Byte
@@ -3742,6 +4215,10 @@ Sub writeOutString(f As Integer, str1 As String)
   k1 = &H0
   Put f, , k1
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function getWriteOutStringLen(str1 As String) As Integer '04/25/1 GH
   Dim i As Integer
   Dim k1 As Byte
@@ -3766,6 +4243,9 @@ Function getWriteOutStringLen(str1 As String) As Integer '04/25/1 GH
   Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeOutCode(f As Integer, code As String, codeLen As Long)
    Dim i As Long
    Dim c As Byte
@@ -3775,6 +4255,9 @@ Sub writeOutCode(f As Integer, code As String, codeLen As Long)
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub OLD_writeOutCode(f As Integer, code As String, codeLen As Long)
    Dim i As Long
    Dim c As Byte
@@ -3798,6 +4281,10 @@ Sub OLD_writeOutCode(f As Integer, code As String, codeLen As Long)
 End Sub
 
 'MMD: This belongs inside CUIObject
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub BuildControlPrc(but As ctlOut, obj As CUIObject)
    but.id.w = cvtWord(obj.IdNo)
    but.bounds.topleft.x = cvtWord(obj.OrigLeft)
@@ -3814,6 +4301,10 @@ Sub BuildControlPrc(but As ctlOut, obj As CUIObject)
    but.font = obj.FontID
    but.group = 0
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub PalmDatesTwo(diffSecs As Integer, b1 As Byte, b2 As Byte, b3 As Byte, b4 As Byte, _
                                    c1 As Byte, c2 As Byte, c3 As Byte, c4 As Byte)
     Dim x As Date
@@ -3822,6 +4313,10 @@ Sub PalmDatesTwo(diffSecs As Integer, b1 As Byte, b2 As Byte, b3 As Byte, b4 As 
     PalmDate x, diffSecs, c1, c2, c3, c4
   
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub PalmDate(startDate As Date, diffSecs As Integer, b1 As Byte, b2 As Byte, b3 As Byte, b4 As Byte)
   Dim a As Date
   Dim b As Date
@@ -3871,6 +4366,10 @@ Sub PalmDate(startDate As Date, diffSecs As Integer, b1 As Byte, b2 As Byte, b3 
   
   'sgBox "x=" + str$(xold) + "  xb=" + str$(b1) + " b2=" + str$(b2) + " b3=" + str$(b3) + " b4=" + str$(b4)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function chk(x As Double, y As Double) As Integer
   If x >= y Then
     x = x - y
@@ -3879,8 +4378,16 @@ Function chk(x As Double, y As Double) As Integer
     chk = 0
   End If
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub displayHelp(x As Form)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub arith_exp_gen()
 If compiler_debug Then
 MsgBox "arith exp gen"
@@ -3889,6 +4396,10 @@ End If
    arith_scan_all
    Set se = first_se
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub dbugDump()
   Dim tempSe As CSynElem
   Set tempSe = se
@@ -3901,6 +4412,10 @@ Sub dbugDump()
  End If
  Set se = tempSe
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub arith_scan_all() '/*scan entire syn elem list */
   If first_se Is se_null_ptr Then
     Exit Sub
@@ -3938,6 +4453,10 @@ MsgBox "after arith_scan_all"
 dbugDump
 End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub arith_scan_for_exp()  '/* scans from se to begin expression */
     Dim wkde As CDataElement   '*** added 10.10.2000
     Dim argcnt As Integer
@@ -4519,6 +5038,10 @@ End If
     Set se = se.Nxt
 End Sub
 'inserted entire routine 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_getGeneralPropertyString()     'entire routine added 08222002
   Dim byt As Byte
 'compiler_debug = True
@@ -4671,6 +5194,10 @@ Sub func_getGeneralPropertyString()     'entire routine added 08222002
 End Sub
 
 'inserted entire routine 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_getGeneralPropertyNumeric()     'entire routine added 08222002
   Dim byt As Byte
 'compiler_debug = True
@@ -4843,6 +5370,10 @@ Sub func_getGeneralPropertyNumeric()     'entire routine added 08222002
 End Sub
 
 '06102002  added entire routine
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_controlsCount()
 
    Dim a As CSynElem
@@ -4916,6 +5447,10 @@ Sub func_controlsCount()
    End If         '06102002
 End Sub
 '06102002 end of additions
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_tableCommon()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -4979,6 +5514,9 @@ Sub func_tableCommon()
    
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_findctlname(a As CSynElem)
    Dim view2 As CForm
    Dim d As CDataElement
@@ -4995,6 +5533,10 @@ Sub func_findctlname(a As CSynElem)
    Next
    print_err gStringTable(3128) + d.single_value '"Can't locate a control that matches name="
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_scrollbargetcurrent()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5049,6 +5591,10 @@ Sub func_scrollbargetcurrent()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_controlgetstatus()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5103,6 +5649,10 @@ Sub func_controlgetstatus()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_controlgetid()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5157,6 +5707,10 @@ Sub func_controlgetid()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_controlgettext()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5211,6 +5765,10 @@ Sub func_controlgettext()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_fieldgettext()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5267,14 +5825,26 @@ Sub func_fieldgettext()
   
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_listgetnoitems()
   listOrPopup = "l"
   GetNoItemsCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_popupgetnoitems()
   listOrPopup = "p"
   GetNoItemsCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub GetNoItemsCommon()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5331,14 +5901,26 @@ Sub GetNoItemsCommon()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_listgetselecteditemno()
   listOrPopup = "l"
   getSelectedItemNoCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_popupgetselecteditemno()
   listOrPopup = "p"
   getSelectedItemNoCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub getSelectedItemNoCommon()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5397,14 +5979,26 @@ Sub getSelectedItemNoCommon()
     'z.relno = 0
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_listgetitemtext()
    listOrPopup = "l"
    getItemTextCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_popupgetitemtext()
    listOrPopup = "p"
    getItemTextCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub getItemTextCommon()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5469,6 +6063,10 @@ Sub getItemTextCommon()
    z.sub3 = 0
    Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_popupgettext()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5526,6 +6124,10 @@ Sub func_popupgettext()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_tablegetitemtext()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -5598,6 +6200,10 @@ Sub func_tablegetitemtext()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_tablegetselectedrow()
 Dim a As CSynElem
    Dim b As CSynElem
@@ -5650,6 +6256,10 @@ Dim a As CSynElem
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_getselectedcol()
 Dim a As CSynElem
    Dim b As CSynElem
@@ -5703,6 +6313,10 @@ Dim a As CSynElem
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_getnorows()
 Dim a As CSynElem
    Dim b As CSynElem
@@ -5885,6 +6499,10 @@ Sub func_dbread()
    find_dbvars
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbupdate()
    out_one_char (&H25)
    db_set_result
@@ -5893,6 +6511,10 @@ Sub func_dbupdate()
    find_dbvars
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbdelete()
    out_one_char (&H26)
    db_set_result
@@ -5901,6 +6523,10 @@ Sub func_dbdelete()
    dbelim_paren
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbinsert()
    out_one_char (&H27)
    db_set_result
@@ -5909,6 +6535,10 @@ Sub func_dbinsert()
    find_dbvars
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbreadnext()
    out_one_char (&H28)
    db_set_result
@@ -5917,6 +6547,10 @@ Sub func_dbreadnext()
    find_dbvars
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbreadprev()
    out_one_char (&H49)
    db_set_result
@@ -5925,12 +6559,20 @@ Sub func_dbreadprev()
    find_dbvars
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dberase()
    out_one_char (&H29)
    db_set_result
    find_dbname
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbcreate()
    out_one_char (&H2A)
 
@@ -5945,6 +6587,10 @@ Sub func_dbcreate()
    
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbopen()
 'sgBox "at dbopen"
    Dim d As CDataElement
@@ -5962,6 +6608,9 @@ Sub func_dbopen()
    dbelim_paren
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function projNameOnly(projname As String) As String
    Dim i As Integer
    For i = Len(projname) To 1 Step -1
@@ -5971,6 +6620,10 @@ Function projNameOnly(projname As String) As String
      End If
    Next
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbreset()
    
     
@@ -5980,12 +6633,20 @@ Sub func_dbreset()
    
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbclose()
    out_one_char (&H2C)
    db_set_result
    find_dbname
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbget()
    '1/9/2001 out_one_char (&H2D)
    out_one_char (&H87)  '1/9/2001 to use new put in runtime
@@ -5996,6 +6657,9 @@ Sub func_dbget()
    dbelim_paren
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbgetnorecs()
    out_one_char (&H1F)
    db_set_result
@@ -6012,6 +6676,9 @@ Sub func_dbput()
    dbelim_paren
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_dbposition()
    out_one_char (&H2F)
    db_set_result
@@ -6020,6 +6687,10 @@ Sub func_dbposition()
    find_dboffset
    dbelim_paren
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub dbelim_paren()
   Dim temp As CSynElem
   If Not se.maj = "p" Then
@@ -6030,6 +6701,9 @@ Sub dbelim_paren()
   delete_syn_elem temp
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbname()
   Dim temp As CSynElem
 
@@ -6047,6 +6721,9 @@ Sub find_dbname()
   delete_syn_elem temp
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbvars()
   Dim temp As CSynElem
   Dim wk As String
@@ -6119,6 +6796,10 @@ elimSe:
    out_one_integ (0)
    allowArrayNames = False        '***added 4/30/2001 **********************
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbkey()
   Dim valu1 As CDataElement
   Dim temp As CSynElem
@@ -6139,6 +6820,10 @@ Sub find_dbkey()
      Set se = se.Nxt
      delete_syn_elem temp
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbliteral()
   Dim temp As CSynElem
    If Not se.maj = "d" Then
@@ -6154,6 +6839,10 @@ Sub find_dbliteral()
      Set se = se.Nxt
      delete_syn_elem temp
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbcardno()
   Dim temp As CSynElem
 If Not se.maj = "d" Then
@@ -6170,6 +6859,10 @@ If Not se.maj = "d" Then
      Set se = se.Nxt
      delete_syn_elem temp
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbcreator()
   Dim temp As CSynElem
   If Not se.maj = "d" Then
@@ -6185,6 +6878,10 @@ Sub find_dbcreator()
      Set se = se.Nxt
      delete_syn_elem temp
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbsinglevar()
   Dim temp As CSynElem
   If Not se.maj = "d" Then
@@ -6200,6 +6897,10 @@ Sub find_dbsinglevar()
      Set se = se.Nxt
      delete_syn_elem temp
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dboptlength()
   Dim temp As CSynElem
   If Not se.maj = "d" Then
@@ -6219,6 +6920,10 @@ Sub find_dboptlength()
      delete_syn_elem temp
   End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dbwhere()
   Dim temp As CSynElem
     arg_1 = se.de_no
@@ -6231,6 +6936,10 @@ Sub find_dbwhere()
      Set se = se.Nxt
      delete_syn_elem temp
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub find_dboffset()
   Dim temp As CSynElem
      arg_1 = se.de_no
@@ -6245,6 +6954,10 @@ Sub find_dboffset()
      delete_syn_elem temp
 
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub db_set_result()
   Dim temp As CSynElem
    gen_alloc_arith_work
@@ -6262,6 +6975,10 @@ Sub db_set_result()
    se.sub2 = 0
    se.sub3 = 0
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_externalFunc()
    ' EMP overhauled
    Dim i As Integer, numSE As Integer
@@ -6418,6 +7135,10 @@ Sub func_externalFunc()
    se.termType = 4
    
 End Sub  'func_externalFunc
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub old_func_externalFunc()
    Dim aSynElem(60) As CSynElem
    Dim i As Integer, numSE As Integer
@@ -6505,6 +7226,10 @@ Sub old_func_externalFunc()
    se.term = ""
    se.termType = 4
 End Sub  'func_externalFunc
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_sysTrapFunc()
    Dim aSynElem(10) As CSynElem
    Dim i As Integer, numSE As Integer
@@ -6583,6 +7308,10 @@ Sub func_sysTrapFunc()
    se.term = ""
    se.termType = 4
 End Sub  'func_sysTrapFunc
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub set_result_string()
 
   Dim temp As CSynElem
@@ -6604,6 +7333,9 @@ Sub set_result_string()
     
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_0arg(the_type As String)
     Dim a As CSynElem
     Dim b As CSynElem
@@ -6652,6 +7384,10 @@ Sub func_0arg(the_type As String)
 'sgBox "at end of func_0arg    se.maj=" + se.maj
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_1arg(the_type As String, type1 As String)
 
     Dim valu1 As CDataElement
@@ -6727,6 +7463,10 @@ Sub func_1arg(the_type As String, type1 As String)
     Set se = d
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_2arg(the_type As String, type1 As String, type2 As String)
     Dim valu1 As CDataElement
     Set valu1 = dataelem_null_ptr
@@ -6820,6 +7560,10 @@ Sub func_2arg(the_type As String, type1 As String, type2 As String)
     Set se = e
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_3arg(the_type As String, type1 As String, type2 As String, type3 As String)
     Dim valu1 As CDataElement
     Set valu1 = dataelem_null_ptr
@@ -6939,6 +7683,10 @@ Sub func_3arg(the_type As String, type1 As String, type2 As String, type3 As Str
     Set se = f
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_4arg(the_type As String, type1 As String, type2 As String, _
                                   type3 As String, type4 As String)
     Dim valu1 As CDataElement
@@ -7077,11 +7825,19 @@ Sub func_4arg(the_type As String, type1 As String, type2 As String, _
     Set se = G
   
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub arith_syntax_err()         '/* syntax err */
     SYNTAX 68
     Set se = se_null_ptr
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_unary_minus()           '/* unary - */
     Dim temp As CSynElem
     Set temp = se_null_ptr
@@ -7108,10 +7864,17 @@ Sub gen_unary_minus()           '/* unary - */
     
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub MissingArg()
    print_err gStringTable(3148) '"Incorrect number of function arguments"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_three_term_arith()
     Dim a As CSynElem
     Dim b As CSynElem
@@ -7287,6 +8050,10 @@ dbugDump
 End If
      Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_alloc_arith_work()       '/* assign arith work variable */
 
     If (arith_work_de_no < first_arith_work) Then
@@ -7300,6 +8067,10 @@ Sub gen_alloc_arith_work()       '/* assign arith work variable */
     term_err_stop gStringTable(3224) '"Not enough arith work variables.")   '/* all used up */
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_alloc_string_work()       '/* assign string work variable */
 
     If (string_work_de_no < first_string_work) Then
@@ -7314,6 +8085,9 @@ Sub gen_alloc_string_work()       '/* assign string work variable */
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub build_syn_elem()
    If Not OnOneLine = 2 Then term_used = 1
    arith_work_de_no = 0
@@ -7337,6 +8111,9 @@ Public Sub build_syn_elem()
 '    Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub eliminateNegConstants()
 Dim Prev As CSynElem
 Dim temp As CSynElem
@@ -7389,6 +8166,9 @@ notPossible:
    Loop
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub convertUndefFuncs()
    '??code not now in use
    Set se = first_se
@@ -7413,6 +8193,10 @@ ContinueLoop:
       Set se = se.Nxt
    Loop
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substituteForObjNotation()
 'this changes syn-elems to substitute for
 '       obj.property = .....
@@ -8680,6 +9464,10 @@ notSupported:   'added 08222002
    
 End Sub
 'entire routine added 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substGetGeneralProperty(controlId As Integer, propId As Integer, retType As String)
   Dim x As CSynElem
   
@@ -8792,6 +9580,10 @@ addRightParen:                                              'added 09092002
   
 End Sub
 'entire routine added 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substSetGeneralProperty(controlId As Integer, propId As Integer, retType As String)
   Dim x As CSynElem
   
@@ -8865,6 +9657,10 @@ Sub substSetGeneralProperty(controlId As Integer, propId As Integer, retType As 
   termType = saveTermType1013       'added 10132002
 End Sub
 'entire routine added 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substGeneralVerb(controlId, verbId As Integer)
    Dim x As CSynElem
    Dim saveSe As CSynElem          'added 09092002
@@ -8941,6 +9737,10 @@ Sub substGeneralVerb(controlId, verbId As Integer)
 ''dbugDump             'temporary
 End Sub
 '08222002 added entire routine
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub addSynElemAfterSE(x As CSynElem)
   Set x.Prev = se
   Set x.Nxt = se.Nxt
@@ -9031,6 +9831,10 @@ parenAlready:
 End Sub
 
 '06102002 end of inserted statements
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substituteInsert(verb As String)
    Dim temp As New CSynElem
    
@@ -9054,6 +9858,10 @@ Sub substituteInsert(verb As String)
    
 
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substitute2for2(verb As String, obj As String)
   
    'entry was of the form obj.prop = value
@@ -9074,6 +9882,10 @@ Sub substitute2for2(verb As String, obj As String)
    se.Nxt.sub3 = 0
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substitute2for1(verb As String, obj As String)
    Dim temp As New CSynElem
    
@@ -9099,6 +9911,10 @@ Sub substitute2for1(verb As String, obj As String)
    Set temp.Prev = se
    Set se.Nxt = temp
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substituteExternal(libID As Integer, procid As Integer, numArgs As Integer, retType As String)
 ' EMP overhauled
 ' DIKEO eliminate array if possible
@@ -9255,6 +10071,10 @@ Sub substituteExternal(libID As Integer, procid As Integer, numArgs As Integer, 
     Next curSE
 
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub substituteFunc(verb As String, obj As String, funcNo As Integer)
 
   Dim temp2 As New CSynElem
@@ -9329,6 +10149,10 @@ parenAlready:
    Set temp3.Prev = se
    Set se.Nxt = temp3
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub build_next_se()        '/*------bld a single syn elem entry-----*/
     Dim pno As Integer
     Dim temp As CSynElem
@@ -9412,57 +10236,100 @@ End If
       repeat_sw = 0
     End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_reserved()
   se.maj = "@"
   se.de_no = 0
   se.sub1 = 0
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_dbname()
 'sgBox "at bld_dbname"
   se.maj = "&"
   se.de_no = dbNumber
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_function()
     se.maj = funcName
     se.sub1 = func_type
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_left_paren()
     se.maj = "p"
     se.sub1 = 0
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_right_paren()
     se.maj = "p"
     se.sub1 = 1
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_plus()
     se.maj = "a"
     se.sub1 = 1
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_minus()
     se.maj = "a"
     se.sub1 = 2
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_mult()
     se.maj = "a"
     se.sub1 = 3
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_div()
     se.maj = "a"
     se.sub1 = 4
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_expon()
     se.maj = "a"
     se.sub1 = 5
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_less()
     Dim temp As CSynElem
     If Not se.Prev Is se_null_ptr Then
@@ -9482,11 +10349,19 @@ Sub bld_less()
     se.sub1 = 1
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_less_equal()
     se.maj = "r"
     se.sub1 = 5   '/*same as NOT >  */
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_greater()
     Dim temp As CSynElem
     If Not se.Prev Is se_null_ptr Then
@@ -9506,17 +10381,29 @@ Sub bld_greater()
     se.sub1 = 2
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_greater_equal()
     
     se.maj = "r"
     se.sub1 = 4 '/*same as NOT < */
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_exceeds()
     se.maj = "r"
     se.sub1 = 2
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_equal()
     Dim temp As CSynElem
     If Not se.Prev Is se_null_ptr Then
@@ -9536,6 +10423,10 @@ Sub bld_equal()
     se.sub1 = 3
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_unequal() 'I don't think this is used. GH
     se.maj = "r"
     se.sub1 = 6
@@ -9547,6 +10438,10 @@ Sub bld_unequal() 'I don't think this is used. GH
     'End If
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_less_than()
     get_term
     '/*"than"*/
@@ -9554,6 +10449,10 @@ Sub bld_less_than()
     bld_less
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_greater_than()
     get_term
     '/*"than"*/
@@ -9561,6 +10460,10 @@ Sub bld_greater_than()
     bld_greater
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_is()
     get_term
     If ((term_is("less")) Or _
@@ -9584,26 +10487,45 @@ Sub bld_is()
     repeat_sw = 0
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_comma()
     release_syn_elem
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_or()
     se.maj = "l"
     se.sub1 = 1
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_and()
     se.maj = "l"
     se.sub1 = 2
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_not()
     se.maj = "l"
     se.sub1 = 3
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_zero()
     Dim temp As CSynElem
 
@@ -9622,6 +10544,10 @@ Sub bld_zero()
     bld_const    '/* now put zero in as a constant */
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_equal_to()
     get_term
     '/*"to"*/
@@ -9629,6 +10555,10 @@ Sub bld_equal_to()
     bld_equal
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_dname()
     Dim pno As Integer
    
@@ -9698,6 +10628,10 @@ itsDataelem:
        End If
      End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_const()
     
     locate_data_tbl
@@ -9709,6 +10643,9 @@ Sub bld_const()
     
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub bld_verb()
     se.maj = "z"
     se.sub1 = 0
@@ -9720,6 +10657,10 @@ Sub bld_verb()
     repeat_sw = 0
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub release_syn_elem()
     Dim temp As CSynElem
     Dim Nxt As CSynElem
@@ -9741,6 +10682,10 @@ Sub release_syn_elem()
     
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub delete_syn_elem(temp As CSynElem)       '/*----delete an elem in list------*/
     Dim bak As CSynElem
     Dim fwd As CSynElem
@@ -9764,7 +10709,9 @@ Sub delete_syn_elem(temp As CSynElem)       '/*----delete an elem in list------*
 
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub insert_syn_elem_before() '/*put new elem before current one*/
     Dim temp As CSynElem
     Set temp = New CSynElem
@@ -9780,6 +10727,10 @@ Sub insert_syn_elem_before() '/*put new elem before current one*/
     Set se = temp
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub insert_syn_elem_after() '/*put new elem after  current one*/
     Dim temp As CSynElem
     Set temp = New CSynElem
@@ -9794,6 +10745,9 @@ Sub insert_syn_elem_after() '/*put new elem after  current one*/
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub logic_exp_gen()
     Set se = first_se
     If se.Nxt Is se_null_ptr Then SYNTAX 100
@@ -9809,6 +10763,10 @@ Public Sub logic_exp_gen()
     Set se = first_se
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub logic_scan_all()        '/* scan entire syn elem list */
 restart_logic_scan:
     logic_stat = 1
@@ -9825,6 +10783,10 @@ logic_scan_again:
     End If
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub logic_scan_for_exp()  '/* scan from se to begin expres */
     Dim temp As CSynElem
     Set temp = se_null_ptr
@@ -9918,15 +10880,27 @@ Sub logic_scan_for_exp()  '/* scan from se to begin expres */
     
     Set se = se.Nxt
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub logic_insert_subj_oper()     '/*insert implied subj+oper */
     logic_insert_subject
     logic_insert_an_elem (oper_se)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub logic_insert_subject()        '/*insert implied relat subject */
     logic_insert_an_elem (subj_se)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub logic_insert_an_elem(copy_se As CSynElem)  '/*insert a copy of elem into list */
     Dim temp As CSynElem
     Set temp = New CSynElem
@@ -9946,6 +10920,10 @@ Sub logic_insert_an_elem(copy_se As CSynElem)  '/*insert a copy of elem into lis
     Set se.Prev = temp
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub logic_syntax_err()
     SYNTAX 103
     Set se = se_null_ptr
@@ -9955,6 +10933,10 @@ End Sub
 '/*                                 to become one operator.        */
 '/*                  2.fills in implied vars & opers               */
 '/**/
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub logic_compress_expand()
     Dim temp As CSynElem
     Set temp = se_null_ptr
@@ -10058,6 +11040,10 @@ repeat_again:
     Loop
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_not_logic()            '/* not condition */
     Dim temp As CSynElem
     Set temp = se.Nxt
@@ -10075,6 +11061,10 @@ Sub gen_not_logic()            '/* not condition */
     se.de_no = log_work_var_no
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_relational_logic()     '/*relational logic tests */
     Dim wk_s As String
     Dim b As CSynElem
@@ -10118,6 +11108,10 @@ Sub gen_relational_logic()     '/*relational logic tests */
     se.de_no = log_work_var_no
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_logic_class_tests()
     Dim the_byte As Byte
     Dim b As CSynElem
@@ -10167,6 +11161,10 @@ Sub gen_logic_class_tests()
     se.de_no = log_work_var_no
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_logic_and_or()
     Dim a As CSynElem
     Dim c As CSynElem
@@ -10187,6 +11185,10 @@ Sub gen_logic_and_or()
     se.de_no = log_work_var_no
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub gen_alloc_log_work()  '/*assign a logical work variable */
     If (log_work_var_no < log_work_var_max) Then
       log_work_var_no = log_work_var_no + 1
@@ -10210,6 +11212,9 @@ Function chk_if_work_var(de_no As Integer) As Integer    '/*exit subs 1 if de_no
     End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function parseTheScript() As Integer
 Dim save_proc_offset As Long
 Dim pp As CParaTbl
@@ -10296,6 +11301,9 @@ Dim tempBuffer As String
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_comment()
    'skip till end of line
    Do While (1)
@@ -10304,6 +11312,9 @@ Sub parse_comment()
    Loop
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_it()
 Dim work As String
 Dim tempSe As CSynElem
@@ -10518,10 +11529,16 @@ chk_more:
    GoTo proc_loop
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub SYNTAX(Optional err As Integer)
    print_err gStringTable(3115) & " " & err '"Syntax error.
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_let()
 'Dim save_rel_1 As String
 'Dim save_rel_tbl_1 As Integer
@@ -10832,6 +11849,10 @@ Dim kk As Integer
    term = saveTerm
    termType = saveTermtype
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_cursor()
 
     parse_opt_paren
@@ -10913,6 +11934,10 @@ End Sub
 '     out_the_4th_arg
 '     out_the_5th_arg
 'End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_display()
     parse_opt_paren
     out_one_char (&H9)
@@ -10958,6 +11983,10 @@ Sub parse_display()
      out_one_char (&H0)
      Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_edit()
     'not used
     parse_opt_paren
@@ -10977,6 +12006,9 @@ Sub parse_edit()
     End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_else()
     
 'sgBox "parsing else" + "  offset=" + str$(proc_offset)
@@ -10998,6 +12030,10 @@ Sub parse_else()
        End If
     End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_common_else()
     If ((if_level < 1) Or (para_false_ptr(if_level) = 0)) Then SYNTAX 115
 
@@ -11010,6 +12046,9 @@ Sub parse_common_else()
     If OnOneLine = 2 Then OnOneLine = 9  'modified 4/07/2001 ***
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_elseif()
     parse_common_else
     'if_level = if_level - 1
@@ -11018,6 +12057,9 @@ Sub parse_elseif()
     if_was_elseif(if_level - 1) = 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_endif()
 
     If (if_level = 0) Then
@@ -11040,6 +12082,10 @@ again:
     If if_was_elseif(if_level) = 1 Then GoTo again
     If Not OnOneLine = 0 Then OnOneLine = 4    '****changed 11/20/2000 *****
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_loop()
     If (while_level = 0) Then
        '/**/
@@ -11056,6 +12102,10 @@ Sub parse_loop()
     while_level = while_level - 1
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_exit()
 'dbug "at exit sub"
   get_term
@@ -11085,6 +12135,10 @@ Sub parse_exit()
     SYNTAX 116
   End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_end()
 'dbug "at end sub"
   get_term
@@ -11130,7 +12184,9 @@ Sub parse_end()
   End If
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_global()
   'start additions 02062004
   Dim t As CTypeElem
@@ -11200,6 +12256,10 @@ dimAgain:
    'end additions 02062004
                                                             
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function locate_typedef(who As String) As CTypeDef
 
    Dim t As CTypeDef
@@ -11213,6 +12273,10 @@ Function locate_typedef(who As String) As CTypeDef
    Set locate_typedef = Nothing
    
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_typeStmt()
 Dim typename As String
  
@@ -11243,6 +12307,9 @@ Dim typename As String
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_typeElement()
   Dim typelem As CTypeElem
   Dim saveTerm As String
@@ -11285,6 +12352,10 @@ Sub parse_typeElement()
    
  End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_loadLibrary()
    ' Load library is a language statement that can be called with 1 or 2 parameters
    ' The first parameter is a string that defines the name that the library will be
@@ -11410,6 +12481,10 @@ Sub parse_loadLibrary()
    End If
 'MsgBox "Parsed LoadLibrary"
 End Sub  'parse_loadLibrary
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_dim()
   Dim t As CTypeElem
   Dim typ  As CTypeDef
@@ -11453,6 +12528,9 @@ dimAgain:
    '04042004 End If                                                         'added 09242003
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_dim_single()
    Dim db As cDatabase    'inserted 02062004
    get_dataname_nosubs
@@ -11475,6 +12553,10 @@ Sub parse_dim_single()
    ParseDimOrGlobal "local"
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ParseDimOrGlobal(locGlob As String)
   
   
@@ -11506,6 +12588,10 @@ Sub ParseDimOrGlobal(locGlob As String)
      SYNTAX 122
   End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_the_as_clause(what As String)
    Dim t As CTypeDef
    Dim d As CDataElement
@@ -11806,6 +12892,10 @@ errorDatabase:                       'added 09242003
       End If
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_externalSub()
     ' EMP rewritten
    Dim aSynElem(60) As CSynElem
@@ -11899,6 +12989,10 @@ Sub parse_externalSub()
       delete_syn_elem aSynElem(i)
    Next
 End Sub  'parse_externalSub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub oldParse_externalSub()
    Dim aSynElem(10) As CSynElem
    Dim i As Integer, numSE As Integer
@@ -11971,6 +13065,10 @@ Sub oldParse_externalSub()
       delete_syn_elem aSynElem(i)
    Next
 End Sub  'old parse_externalSub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_sysTrapSub()
    Dim aSynElem(10) As CSynElem
    Dim i As Integer, numSE As Integer
@@ -12048,6 +13146,10 @@ Sub parse_sysTrapSub()
       delete_syn_elem aSynElem(i)
    Next
 End Sub  'parse_sysTrapSub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub ClearLocalVariables()
   Dim d As CDataElement
 
@@ -12057,6 +13159,10 @@ Sub ClearLocalVariables()
       End If
    Next
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_define()
    'skip define statements - they are obsolete
    
@@ -12088,6 +13194,10 @@ Sub parse_define()
    parse_the_as_clause "def"
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_function() 'func definition
   Dim typ As New CTypeDef
   Dim t As New CTypeElem
@@ -12220,6 +13330,10 @@ LoopOnArg:
    
 'sgBox "leaving parse_func"
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_sub()
    'puts out one element of typedef as a sub or func arg
    '...may put out several if the element is subscripted
@@ -12308,11 +13422,18 @@ LoopOnArg:
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_beep()
    out_one_char &H5
 End Sub
 
 '06102002 added entire subroutine
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_clearfields()
     Dim view2 As CForm
     Set view2 = aView_null_ptr
@@ -12346,6 +13467,10 @@ Sub parse_clearfields()
 End Sub
 
 '06102002 added entire subroutine ****
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_setheapvariablecount()
   get_dataname_num
   If Not err_code = 0 Then SYNTAX 137
@@ -12353,6 +13478,9 @@ Sub parse_setheapvariablecount()
   out_tok_1arg (&HC0)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_bitmap()
   'no longer used??
   parse_opt_paren
@@ -12365,6 +13493,10 @@ Sub parse_bitmap()
   out_one_integ (controlId)
   out_the_1st_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_call()
    Dim result As Integer
    Dim cnt As Integer
@@ -12434,6 +13566,10 @@ dataOrTypeDef:
    End If
    
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_createwindow()
   parse_opt_paren
   get_dataname_string
@@ -12453,18 +13589,30 @@ Sub parse_createwindow()
   set_arg_5  'height
   out_tok_5arg (&H40)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_destroywindow()
   parse_opt_paren
   get_dataname_string
   set_arg_1 'name of window
   out_tok_1arg (&H41)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_setcurwindow()
   parse_opt_paren
   get_dataname_string
   set_arg_1 'name of window
   out_tok_1arg (&H47)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_erasewindow()
   parse_opt_paren
   out_one_char (&H42)
@@ -12476,6 +13624,9 @@ Sub parse_erasewindow()
   End If                         '***added 11272000 ***********
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_drawchars()
   
   parse_opt_paren
@@ -12489,6 +13640,10 @@ Sub parse_drawchars()
   out_tok_3arg (&H43)
   parse_getpentype
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_drawbitmap()
   parse_opt_paren
   get_dataname_num
@@ -12501,6 +13656,10 @@ Sub parse_drawbitmap()
   out_tok_3arg (&H48)
 
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_drawline()
   
   parse_opt_paren
@@ -12515,6 +13674,10 @@ Sub parse_drawline()
   out_tok_4arg (&H44)
   parse_getpentype
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_drawrectangle()
   parse_opt_paren
   get_dataname_num
@@ -12532,6 +13695,10 @@ Sub parse_drawrectangle()
   
   parse_getpentype
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_fillrectangle()
   parse_opt_paren
   get_dataname_num
@@ -12547,6 +13714,10 @@ Sub parse_fillrectangle()
    out_tok_5arg (&H46)
   parse_getpentype
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_getpentype()
   get_term
   If term_is("normal") Or term_is("nsbnormal") Or term_is("_end-line") Then
@@ -12568,10 +13739,17 @@ Sub parse_getpentype()
   End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_menuerase()
   parse_opt_paren
   out_one_char (&H20)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_menudraw()
    parse_opt_paren
    get_term
@@ -12587,10 +13765,18 @@ found_it:
    out_one_char (&H21)
    out_one_integ Menu.IdNo
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_menureset()
    parse_opt_paren
    out_one_char (&H22)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_msgbox()
     parse_opt_paren
     get_dataname_string
@@ -12598,6 +13784,10 @@ Sub parse_msgbox()
     set_arg_1
     out_tok_1arg (&HD3)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_for()
   Dim save_term As String
   'Dim saveSE as csynelem
@@ -12693,6 +13883,10 @@ Sub parse_for()
 
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_next()
     If for_level = 0 Then
        print_err gStringTable(3199) '"Found 'NEXT' without a matching 'FOR' statement.")
@@ -12707,10 +13901,18 @@ Sub parse_next()
     p.defined = 1
     for_level = for_level - 1
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_go()
     If (new_term_not("to")) Then SYNTAX 148
     parse_goto
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_getpen()
     parse_opt_paren
     get_dataname_num
@@ -12721,6 +13923,10 @@ Sub parse_getpen()
    set_arg_3  'pen up=3 pen down=2
    out_tok_3arg (&H4C)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_gosub()
     arg_2 = 0
     get_para_name
@@ -12729,6 +13935,10 @@ Sub parse_gosub()
     out_one_char (&H10)
     out_one_integ (arg_1)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_goto()
     get_para_name
     If (err_code) Then SYNTAX 150
@@ -12738,10 +13948,16 @@ Sub parse_goto()
     out_one_integ (p.tbl_no) '***added 11/20/2000
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_return()
     out_one_char (&H1D)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_select()
 Dim cs As New CSelectObj
 
@@ -12764,6 +13980,9 @@ Dim cs As New CSelectObj
    gTarget.SelectCollection.Add cs
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_case()
 Dim save_term As String
 Dim cs As CSelectObj
@@ -12868,6 +14087,10 @@ Dim z As CSynElem
       cs.stat = 999 'have case else
     End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_end_select()
     Dim cs As CSelectObj
     If gTarget.SelectCollection.count = 0 Then print_err gStringTable(3204) '"END SELECT without SELECT CASE"
@@ -12882,6 +14105,10 @@ Sub parse_end_select()
     gTarget.SelectCollection.Remove gTarget.SelectCollection.count
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_if()
     Dim save_term As String
   
@@ -12940,6 +14167,10 @@ Sub parse_if()
     End If
     
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_do()
     get_term
     If term_is("while") Then
@@ -12952,12 +14183,24 @@ Sub parse_do()
       parse_while_or_until (&HA7)
     End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_while()
   parse_while_or_until (&HA9)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_until()
   parse_while_or_until (&HA8)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_while_or_until(tok As String)
     Dim save_term As String
 'sgBox "in do while"
@@ -13005,6 +14248,10 @@ Sub parse_while_or_until(tok As String)
         get_term 'skip the resulting logic var
     End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ALPHALIT() As Boolean
    If termType = 5 Then
      ALPHALIT = True
@@ -13013,6 +14260,10 @@ Public Function ALPHALIT() As Boolean
    End If
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function NUMLIT() As Boolean
    If termType = 6 Then
      NUMLIT = True
@@ -13021,6 +14272,10 @@ Public Function NUMLIT() As Boolean
    End If
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function DATATYPE() As Boolean
    If termType = 4 Then
      DATATYPE = True
@@ -13029,6 +14284,10 @@ Public Function DATATYPE() As Boolean
    End If
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function NOTDATA() As Boolean
    If Not termType = 4 Then
      NOTDATA = True
@@ -13037,6 +14296,10 @@ Public Function NOTDATA() As Boolean
    End If
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function OTHER() As Boolean
    If termType = 7 Then
      OTHER = True
@@ -13045,6 +14308,10 @@ Public Function OTHER() As Boolean
    End If
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Reserved() As Boolean
    If termType = 3 Then
      Reserved = True
@@ -13053,6 +14320,10 @@ Public Function Reserved() As Boolean
    End If
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function verb() As Boolean
    If termType = 2 Then
      verb = True
@@ -13061,6 +14332,10 @@ Public Function verb() As Boolean
    End If
    Exit Function
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_input()
     parse_opt_paren
     get_dataname
@@ -13070,6 +14345,10 @@ Sub parse_input()
     out_tok_1arg (&H1)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_label()
     Dim save_term As String
     Dim result As Integer
@@ -13091,6 +14370,10 @@ check_para_exists:
     last_para = p.tbl_no
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_newmodel()
     'not used
     get_dataname
@@ -13099,6 +14382,10 @@ Sub parse_newmodel()
     out_tok_1arg (&H98)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_nextscreen()
    Dim view2 As CForm
    Set view2 = aView_null_ptr
@@ -13154,6 +14441,10 @@ Sub parse_nextscreen()
    print_err gStringTable(3212) + work '"NEXTFORM references an unknown form name:" & work)
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_print()
 'code not used
     parse_opt_paren
@@ -13172,6 +14463,9 @@ Sub parse_print()
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_redraw()
 'sgBox "at redraw"
     parse_opt_paren
@@ -13228,6 +14522,9 @@ Sub parse_redraw()
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function testIfRealControl(obj As CUIObject) As Integer
    Select Case obj.Kind
    Case "but", "chk", "cho", "pop", "rpt", "sel", "pus": testIfRealControl = 1
@@ -13235,6 +14532,9 @@ Function testIfRealControl(obj As CUIObject) As Integer
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_sound()
   parse_opt_paren
   get_dataname_num
@@ -13286,6 +14586,9 @@ End Sub
 '    Exit Sub
 'End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_playsound()
   parse_opt_paren
   get_dataname_num
@@ -13299,11 +14602,18 @@ Sub parse_playsound()
 
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_stop()
     out_one_char (&H18)
     out_one_char (&H0)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_table()
     get_term
      '/**/
@@ -13321,6 +14631,10 @@ Sub parse_table()
     End If
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_table_export()
     'not used
     get_dataname_nosubs
@@ -13360,6 +14674,10 @@ Sub parse_table_export()
     out_one_char (&H0)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_table_shift()
     'not used
     get_term
@@ -13378,6 +14696,10 @@ Sub parse_table_shift()
     out_tok_2arg (&H32)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_table_delete()
     'not used
     get_dataname
@@ -13396,6 +14718,9 @@ Sub parse_table_delete()
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_table_transfer()
     'not used
     Dim argum1 As CDataElement
@@ -13417,6 +14742,10 @@ Sub parse_table_transfer()
     out_tok_2arg (&H30)
     Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_table_empty()
     'not used
     get_dataname
@@ -13426,6 +14755,9 @@ Sub parse_table_empty()
     Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_import()
    'not used
    Dim start_row, start_col As Integer
@@ -13555,6 +14887,10 @@ check_flatfile:
     out_one_char (&H0)
    Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_export()
    'not used
    Dim delim As String
@@ -13619,6 +14955,10 @@ End Sub
 '   out_tok_2arg (&HB1)
 '   Exit Sub
 'End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_launchprogram()
    parse_opt_paren
    get_dataname_num
@@ -13629,6 +14969,10 @@ Sub parse_launchprogram()
    out_tok_2arg (&HB2)
    Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_transfertoprogram()
    parse_opt_paren
    get_dataname_num
@@ -13653,6 +14997,10 @@ End Sub
 '    out_tok_1arg (&HB4)
 '   Exit Sub
 'End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_exec()
    get_term
     '/**/
@@ -13671,6 +15019,10 @@ End Sub
 '    out_tok_1arg (&H97)
 '    Exit Sub
 'End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_send()
    'not used
    parse_opt_paren
@@ -13688,6 +15040,10 @@ Sub parse_send()
    out_one_char (&H0)
    Exit Sub
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_receive()
    'not used
    parse_opt_paren
@@ -13706,6 +15062,9 @@ Sub parse_receive()
    Exit Sub
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_delay()
    parse_opt_paren
    get_dataname_num
@@ -13765,6 +15124,10 @@ End Sub
 '   End If
 '   Exit Sub
 'End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_ControlSetStatus()
   Dim res As Integer
   parse_opt_paren
@@ -13824,7 +15187,9 @@ End Sub
 '08222002
 '08222002End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_ControlSetLabel()
 '   If editorSource = "p" Or editorSource = "w" Or editorSource = "v" Then
    Select Case Mid$(editorSource, InStrRev(editorSource, "|") + 1)
@@ -13847,7 +15212,9 @@ Sub parse_ControlSetLabel()
    End If                            'new
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_PopupSetText()
   parse_opt_paren
   get_controlName "pop"
@@ -13859,6 +15226,9 @@ Sub parse_PopupSetText()
   out_one_char_of_string (" ")
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_ControlHide()
    parse_opt_paren
    get_controlName ""
@@ -13885,6 +15255,10 @@ Sub parse_ControlHide()
       End If                                                      '815 added **********
    End If                                                         '815 added **********
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_ControlShow()
   parse_opt_paren
   get_controlName ""
@@ -13905,6 +15279,9 @@ Sub parse_ControlShow()
   
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_fieldSetText()
 '   If editorSource = "p" Or editorSource = "w" Or editorSource = "v" Then
    Select Case Mid$(editorSource, InStrRev(editorSource, "|") + 1)
@@ -13928,6 +15305,10 @@ Sub parse_fieldSetText()
 'dbug "leaving parse_fieldsettext"
 'out_one_integ (res)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_fieldSetMaxChars()
   parse_opt_paren
   get_controlName "fld"
@@ -13938,11 +15319,19 @@ Sub parse_fieldSetMaxChars()
   out_the_1st_arg
   
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_listAddItem()
   parse_opt_paren
   get_controlName "lst"
   addItemCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_popupAddItem()
   parse_opt_paren
   get_controlName "pop"
@@ -13950,6 +15339,10 @@ Sub parse_popupAddItem()
   addItemCommon
 End Sub
 'entire routine added 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_setgeneralproperty()
   Dim parenSw As Boolean
   Dim b As Byte
@@ -14142,6 +15535,10 @@ Sub parse_setgeneralproperty()
 End Sub
 
 'entire routine added 08222002
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_generalVerb()
   Dim b As Byte
   Dim d2 As CDataElement    '***added 09302002***
@@ -14384,6 +15781,9 @@ allDone:
     
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_popupClear()
   parse_opt_paren
   get_controlName "pop"
@@ -14391,6 +15791,10 @@ Sub parse_popupClear()
   out_one_char (&H6)
   out_one_integ (controlId)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_listclear()
   'If editor Source = "p" Or editor Source = "w" Or editor Source = "v" Then  'removed 6.6.2000 GH
   '   print_err "The ListClear command cannot be used in" + chr$(10) + chr$(13) + "a form before script. Place this command in the after script."
@@ -14402,6 +15806,10 @@ Sub parse_listclear()
   out_one_char (&H4D)
   out_one_integ (controlId)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub addItemCommon()
   get_dataname_string  'the item text
   set_arg_1
@@ -14429,12 +15837,20 @@ Sub addItemCommon()
   End If
   
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_listDeleteItem()
   parse_opt_paren
   get_controlName "lst"
   controlId = controlId
   deleteItemCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_popupDeleteItem()
   parse_opt_paren
   get_controlName "pop"
@@ -14442,6 +15858,10 @@ Sub parse_popupDeleteItem()
   
   deleteItemCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub deleteItemCommon()
   get_dataname_num  'index where to delete
   set_arg_2
@@ -14449,17 +15869,29 @@ Sub deleteItemCommon()
   out_one_integ (controlId)
   out_the_2cnd_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_listSetSelected()
   parse_opt_paren
   get_controlName "lst"
   setSelectedCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_popupSetSelected()
   parse_opt_paren
   get_controlName "pop"
   controlId = controlId + 1
   setSelectedCommon
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub setSelectedCommon()
   get_dataname_num  'index to select
   set_arg_2
@@ -14467,6 +15899,10 @@ Sub setSelectedCommon()
   out_one_integ (controlId)
   out_the_2cnd_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_scrollbarsetcurrent()
   parse_opt_paren
   
@@ -14478,6 +15914,10 @@ Sub parse_scrollbarsetcurrent()
   out_one_integ (controlId)
   out_the_2cnd_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_scrollbarsetmin()
   parse_opt_paren
   get_controlName "scr"
@@ -14488,6 +15928,10 @@ Sub parse_scrollbarsetmin()
   out_one_integ (controlId)
   out_the_2cnd_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_scrollbarsetmax()
   parse_opt_paren
   get_controlName "scr"
@@ -14498,6 +15942,10 @@ Sub parse_scrollbarsetmax()
   out_one_integ (controlId)
   out_the_2cnd_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_scrollbarsetpagesize()
   parse_opt_paren
   get_controlName "scr"
@@ -14509,8 +15957,9 @@ Sub parse_scrollbarsetpagesize()
   out_the_2cnd_arg
 End Sub
 
-
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub get_controlName(t As String)
   
   
@@ -14518,6 +15967,10 @@ Sub get_controlName(t As String)
 'sgBox "at ctlname term=" + term + "  type=" + str$(termType)
   SearchControlName t
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub SearchControlName(t As String)
 Dim view2 As CForm
 
@@ -14539,6 +15992,9 @@ Dim view2 As CForm
    print_err gStringTable(3220) '"Can't locate a control that matches name"
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_opt_paren()
    get_term
    If term_is("(") Then
@@ -14549,6 +16005,9 @@ Sub parse_opt_paren()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ReplaceQuotes(txt As String) As String
    Dim i As Integer
    Dim wk As String
@@ -14573,11 +16032,17 @@ Function locate_type_def(who As String) As CTypeDef
    Set locate_type_def = Nothing
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub strip_and_locate_data_tbl()
    term = Right$(term, Len(term) - 1)
    locate_data_tbl
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub PutOutTypeDefArgs(t As CTypeElem, data As CDataElement, s1_tbl_no As Integer, s2_tbl_no As Integer, s3_tbl_no As Integer, cnt As Integer)
    'new 805  all of this sub
    Dim wk As String
@@ -14602,6 +16067,9 @@ Sub PutOutTypeDefArgs(t As CTypeElem, data As CDataElement, s1_tbl_no As Integer
             cnt = cnt + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub CheckSerialNumber()
 Dim serNo As Long
 #If NSBSymbian Then
@@ -14628,6 +16096,10 @@ End If
 End Sub
 
 '***added this subroutine 3/13/2001 **************************************
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub out_unsigned_integ(i As Long)
    'outputs up to 65k as two-byte unsigned int
    Dim m1 As Byte
@@ -14645,6 +16117,10 @@ Sub out_unsigned_integ(i As Long)
 End Sub                '***end of code additions 3/13/2001
 
 '***this entire routine new 3/13/2001***
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub writeOutUnsignedInteger(f As Integer, i As Long)
    Dim m1 As Byte
    Dim m2 As Byte
@@ -14659,18 +16135,30 @@ Sub writeOutUnsignedInteger(f As Integer, i As Long)
    writeOutByte f, m1
    writeOutByte f, m2
 End Sub                '***end of additions 3/13/2001
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_signaturestartcapture()   '*** routine added 4/30/2001 *************
   parse_opt_paren
   get_controlName "gad"
   out_one_char (&H76)
   out_one_integ (controlId)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_signatureerase()          '*** routine added 4/30/2001 *************
   parse_opt_paren
   get_controlName "gad"
   out_one_char (&H75)
   out_one_integ (controlId)
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub parse_signaturedisplay()        '*** routine added 4/30/2001 *************
   parse_opt_paren
   get_controlName "gad"
@@ -14681,6 +16169,10 @@ Sub parse_signaturedisplay()        '*** routine added 4/30/2001 *************
   set_arg_1
   out_the_1st_arg
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub func_gadEndCapture()
    Dim a As CSynElem
    Dim b As CSynElem
@@ -14735,6 +16227,10 @@ Sub func_gadEndCapture()
     
     Set se = z
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub CollectFuncs()
 'this collects all functions and returns DEFINE statements for them
 Dim cMod As CCodeModule
@@ -14769,6 +16265,10 @@ ShowStatus "Collecting Function Definitions"
    'Next
    'MsgBox gDefineStmts
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub CollectFuncsInCode(script As String, startupScript As Boolean)
    Dim i As Long
    Dim j As Long
@@ -14786,6 +16286,10 @@ Private Sub CollectFuncsInCode(script As String, startupScript As Boolean)
       End If
    Loop
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub CollectFuncsOnList(stmt As String, startupScript As Boolean)
 Dim p1 As Long
 Dim p2 As Long
@@ -14814,6 +16318,10 @@ Dim p2 As Long
    
    gDefineStmts = gDefineStmts & stmt
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function DefineFuncsInStartupCode(codeIn As String) As String
 Dim i As Long
 Dim themeCode As String
@@ -14841,6 +16349,10 @@ Dim theme As String
    End If
    DefineFuncsInStartupCode = codeIn
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function DefineSetThemeFunction() As String
 Dim s As String
  s = "Function SetTheme(filename as string) as Integer" & vbCrLf
@@ -14893,6 +16405,10 @@ Dim s As String
 DefineSetThemeFunction = s
 'MsgBox s
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function dbCreateDatases() As String
 Dim s As String
 Dim res As CResourceFile
@@ -14906,6 +16422,9 @@ Dim res As CResourceFile
    dbCreateDatases = s
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub addThemeToResources()
    Dim path As String
    Dim Name As String
@@ -14928,6 +16447,10 @@ Public Sub addThemeToResources()
       DoEvents
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function createNewResource(Name As String, filename As String, resType As String, path As String) As CResourceFile
    Dim resource As CResourceFile
    

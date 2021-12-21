@@ -2,6 +2,9 @@ Attribute VB_Name = "MCapture"
 Option Explicit
 Option Base 0
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Type PALETTEENTRY
     peRed   As Byte
     peGreen As Byte
@@ -9,12 +12,18 @@ Private Type PALETTEENTRY
     peFlags As Byte
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Type LOGPALETTE
     palVersion       As Integer
     palNumEntries    As Integer
     palPalEntry(255) As PALETTEENTRY  ' Enough for 256 colors
 End Type
          
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Type GUID
     Data1    As Long
     Data2    As Integer
@@ -22,6 +31,9 @@ Private Type GUID
     Data4(7) As Byte
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Type RECT
     Left   As Long
     Top    As Long
@@ -29,6 +41,9 @@ Private Type RECT
     Bottom As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Type PicBmp
     Size As Long
     Type As Long
@@ -37,6 +52,9 @@ Private Type PicBmp
     Reserved As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Const RASTERCAPS As Long = 38
 Private Const RC_PALETTE As Long = &H100
 Private Const SIZEPALETTE As Long = 104
@@ -149,6 +167,10 @@ Private Declare Function GetForegroundWindow Lib "USER32" () As Long
 Private Declare Function OleCreatePictureIndirect _
     Lib "olepro32.dll" (PicDesc As PicBmp, RefIID As GUID, _
     ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CreateBitmapPicture(ByVal hBmp As Long, _
         ByVal hPal As Long) As Picture
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -224,87 +246,90 @@ End Function
 '      portion of the window that was captured
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function CaptureWindow(ByVal hWndSrc As Long, _
     ByVal bClient As Boolean, ByVal LeftSrc As Long, _
     ByVal TopSrc As Long, ByVal WidthSrc As Long, _
     ByVal HeightSrc As Long) As Picture
 
-Dim hDCMemory       As Long
-Dim hBmp            As Long
-Dim hBmpPrev        As Long
-Dim r               As Long
-Dim hDCSrc          As Long
-Dim hPal            As Long
-Dim hPalPrev        As Long
-Dim RasterCapsScrn  As Long
-Dim HasPaletteScrn  As Long
-Dim PaletteSizeScrn As Long
-Dim LogPal          As LOGPALETTE
-'
-' Get the proper Device Context (DC) depending on the value of bClient.
-'
-If bClient Then
-    hDCSrc = GetDC(hWndSrc)       'Get DC for Client area.
-Else
-    hDCSrc = GetWindowDC(hWndSrc) 'Get DC for entire window.
-End If
-'
-' Create a memory DC for the copy process.
-'
-hDCMemory = CreateCompatibleDC(hDCSrc)
-'
-' Create a bitmap and place it in the memory DC.
-'
-hBmp = CreateCompatibleBitmap(hDCSrc, WidthSrc, HeightSrc)
-hBmpPrev = SelectObject(hDCMemory, hBmp)
-'
-' Get the screen properties.
-'
-RasterCapsScrn = GetDeviceCaps(hDCSrc, RASTERCAPS)   'Raster capabilities
-HasPaletteScrn = RasterCapsScrn And RC_PALETTE       'Palette support
-PaletteSizeScrn = GetDeviceCaps(hDCSrc, SIZEPALETTE) 'Palette size
-'
-' If the screen has a palette make a copy and realize it.
-'
-If HasPaletteScrn And (PaletteSizeScrn = 256) Then
+    Dim hDCMemory       As Long
+    Dim hBmp            As Long
+    Dim hBmpPrev        As Long
+    Dim r               As Long
+    Dim hDCSrc          As Long
+    Dim hPal            As Long
+    Dim hPalPrev        As Long
+    Dim RasterCapsScrn  As Long
+    Dim HasPaletteScrn  As Long
+    Dim PaletteSizeScrn As Long
+    Dim LogPal          As LOGPALETTE
     '
-    ' Create a copy of the system palette.
+    ' Get the proper Device Context (DC) depending on the value of bClient.
     '
-    LogPal.palVersion = &H300
-    LogPal.palNumEntries = 256
-    r = GetSystemPaletteEntries(hDCSrc, 0, 256, LogPal.palPalEntry(0))
-    hPal = CreatePalette(LogPal)
+    If bClient Then
+        hDCSrc = GetDC(hWndSrc)       'Get DC for Client area.
+    Else
+        hDCSrc = GetWindowDC(hWndSrc) 'Get DC for entire window.
+    End If
     '
-    ' Select the new palette into the memory DC and realize it.
+    ' Create a memory DC for the copy process.
     '
-    hPalPrev = SelectPalette(hDCMemory, hPal, 0)
-    r = RealizePalette(hDCMemory)
-End If
-'
-' Copy the on-screen image into the memory DC.
-'
-r = BitBlt(hDCMemory, 0, 0, WidthSrc, HeightSrc, hDCSrc, LeftSrc, TopSrc, vbSrcCopy)
-'
-' Remove the new copy of the on-screen image.
-'
-hBmp = SelectObject(hDCMemory, hBmpPrev)
-'
-' If the screen has a palette get back the
-' palette that was selected in previously.
-'
-If HasPaletteScrn And (PaletteSizeScrn = 256) Then
-    hPal = SelectPalette(hDCMemory, hPalPrev, 0)
-End If
-'
-' Release the DC resources back to the system.
-'
-r = DeleteDC(hDCMemory)
-r = ReleaseDC(hWndSrc, hDCSrc)
-'
-' Create a picture object from the bitmap
-' and palette handles.
-'
-Set CaptureWindow = CreateBitmapPicture(hBmp, hPal)
+    hDCMemory = CreateCompatibleDC(hDCSrc)
+    '
+    ' Create a bitmap and place it in the memory DC.
+    '
+    hBmp = CreateCompatibleBitmap(hDCSrc, WidthSrc, HeightSrc)
+    hBmpPrev = SelectObject(hDCMemory, hBmp)
+    '
+    ' Get the screen properties.
+    '
+    RasterCapsScrn = GetDeviceCaps(hDCSrc, RASTERCAPS)   'Raster capabilities
+    HasPaletteScrn = RasterCapsScrn And RC_PALETTE       'Palette support
+    PaletteSizeScrn = GetDeviceCaps(hDCSrc, SIZEPALETTE) 'Palette size
+    '
+    ' If the screen has a palette make a copy and realize it.
+    '
+    If HasPaletteScrn And (PaletteSizeScrn = 256) Then
+        '
+        ' Create a copy of the system palette.
+        '
+        LogPal.palVersion = &H300
+        LogPal.palNumEntries = 256
+        r = GetSystemPaletteEntries(hDCSrc, 0, 256, LogPal.palPalEntry(0))
+        hPal = CreatePalette(LogPal)
+        '
+        ' Select the new palette into the memory DC and realize it.
+        '
+        hPalPrev = SelectPalette(hDCMemory, hPal, 0)
+        r = RealizePalette(hDCMemory)
+    End If
+    '
+    ' Copy the on-screen image into the memory DC.
+    '
+    r = BitBlt(hDCMemory, 0, 0, WidthSrc, HeightSrc, hDCSrc, LeftSrc, TopSrc, vbSrcCopy)
+    '
+    ' Remove the new copy of the on-screen image.
+    '
+    hBmp = SelectObject(hDCMemory, hBmpPrev)
+    '
+    ' If the screen has a palette get back the
+    ' palette that was selected in previously.
+    '
+    If HasPaletteScrn And (PaletteSizeScrn = 256) Then
+        hPal = SelectPalette(hDCMemory, hPalPrev, 0)
+    End If
+    '
+    ' Release the DC resources back to the system.
+    '
+    r = DeleteDC(hDCMemory)
+    r = ReleaseDC(hWndSrc, hDCSrc)
+    '
+    ' Create a picture object from the bitmap
+    ' and palette handles.
+    '
+    Set CaptureWindow = CreateBitmapPicture(hBmp, hPal)
 End Function
 
 

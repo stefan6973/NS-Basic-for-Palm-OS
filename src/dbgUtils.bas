@@ -5,14 +5,23 @@ Private msg_active As Boolean
 Private trace_avtive  As Boolean
 Private trace_prefix As String
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get isTracingEnabled() As Boolean
     isTracingEnabled = trace_avtive
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get areTraceMsgEnabled() As Boolean
     areTraceMsgEnabled = msg_active
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Property Let Prefix(value As String)
     If value <> "???" Then
         trace_prefix = " - " & value & ": "
@@ -28,6 +37,9 @@ Public Sub enableTracing(onConsole As Boolean, onGUI As Boolean, Optional ByVal 
     Prefix = newPrefix
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub disableTracing()
     trace_avtive = False
     trace_prefix = "???"

@@ -25,6 +25,10 @@ Public Sub class_initialize()
    m_idno = -1
    Set m_arrGlobalMethods = New Collection
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function LoadNewLibrary(strInfPath As String, strLibObj As String) As Boolean
    ' Added by EMP to support new format
    Dim WhileState As Integer  '0=Open File, 1=Got PrcName, 2=GlobalMethods 3=PrivateMethods, 4=InfVers
@@ -105,6 +109,9 @@ ParseError:
    LoadNewLibrary = False
 End Function  'LoadNewLibrary
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function AddMethod(ByVal strLine As String) As Boolean
    Dim vTemp As Variant
    Dim strTemp As String
@@ -149,6 +156,10 @@ Private Function AddMethod(ByVal strLine As String) As Boolean
    m_arrGlobalMethods.Add meth, meth.strname
    AddMethod = True
 End Function  'AddMethod
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function GuessType(inout As String, typ As String)
    ' EMP
    GuessType = ""
@@ -174,6 +185,10 @@ Private Function GuessType(inout As String, typ As String)
    
    
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function ParseHelp(meth As CExternalLibraryMethod, isFunc As Boolean) As Boolean
    ' EMP
    Dim help As String
@@ -322,6 +337,10 @@ Private Function ParseHelp(meth As CExternalLibraryMethod, isFunc As Boolean) As
    
    ParseHelp = True
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function AddNewMethod(ByVal strLine As String) As Boolean
    Dim vTemp As Variant
    Dim vTemp2 As Variant
@@ -373,6 +392,10 @@ Private Function AddNewMethod(ByVal strLine As String) As Boolean
    m_arrGlobalMethods.Add meth, meth.strname
    AddNewMethod = True
 End Function  'AddNewMethod
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetProcNum(strname As String) As Integer
    Dim elm As CExternalLibraryMethod
    GetProcNum = -1
@@ -382,6 +405,10 @@ Public Function GetProcNum(strname As String) As Integer
    If (err <> 0) Then Exit Function
    GetProcNum = elm.nProc
 End Function  'GetProcNum
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetArgTypes(strname As String) As String
 ' EMP added
    Dim elm As CExternalLibraryMethod
@@ -392,6 +419,10 @@ Public Function GetArgTypes(strname As String) As String
    If (err <> 0) Then Exit Function
    GetArgTypes = elm.strArgTypes
 End Function  'GetProcNum
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetNumProcArgs(strname As String) As Integer
    Dim elm As CExternalLibraryMethod
    GetNumProcArgs = -1
@@ -401,12 +432,24 @@ Public Function GetNumProcArgs(strname As String) As Integer
    If (err <> 0) Then Exit Function
    GetNumProcArgs = elm.nParams
 End Function 'GetNumProcArgs
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let IdNo(new_idno As Integer)
    m_idno = new_idno
 End Property 'SET idno
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IdNo() As Integer
    IdNo = m_idno
 End Property  'GET idno
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get PrcName() As String
    PrcName = m_strPrcName
 End Property  'GET PrcName

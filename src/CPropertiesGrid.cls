@@ -34,6 +34,9 @@ Private Declare Function GetSystemMetrics Lib "USER32" (ByVal nIndex As Long) As
 Private Const SM_CXVSCROLL = 2
 Private Const WS_VSCROLL = &H200000
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Enum enCols
    enProp = 0
    enVal
@@ -41,6 +44,9 @@ Private Enum enCols
    enData
 End Enum
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Enum enPropType
    pgReadOnly = 0
    pgString
@@ -53,16 +59,22 @@ Public Enum enPropType
    pgFont
 End Enum
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private m_nRows As Integer
 Private curRow As Integer
 Private bLockCol As Boolean
 Private sTrue As String, sFalse As String
 Private m_bList As Boolean
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Init(objGrid As MSFlexGrid, objMask As VB.Label, objEdit As VB.TextBox, _
       objList As VB.TextBox, objButton As VB.CheckBox, objListProp As VB.ListBox, _
       objEllipsis As VB.CommandButton, objForm As Object)
-Dim bool As Boolean
+   Dim bool As Boolean
 
    sTrue = True
    sFalse = False
@@ -94,6 +106,9 @@ Dim bool As Boolean
    HideEditors
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Resize()
    With mGrid
       .Left = 0
@@ -113,6 +128,9 @@ Public Sub Resize()
 '   mGrid_Click
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub HideEditors()
 '   mGrid.SetFocus
    mMask.Visible = False
@@ -127,6 +145,9 @@ Public Sub HideEditors()
    mEdit.Tag = ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub LocateEdit()
    If mGrid.row = 0 Or mGrid.col = 0 Then Exit Sub
    With mMask
@@ -144,6 +165,9 @@ Private Sub LocateEdit()
    End With
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetEdit()
    bLockCol = True
    mGrid.col = 1
@@ -169,6 +193,9 @@ Public Sub SetEdit()
    bLockCol = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetList()
 Dim strItems() As String, strItem As Variant
 
@@ -196,6 +223,9 @@ Dim strItems() As String, strItem As Variant
    m_bList = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetEllipsis()
    HideEditors
    SetEdit
@@ -213,6 +243,9 @@ Public Sub SetEllipsis()
    End With
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mButton_Click()
 '   If mButton.Value = 1 Then mButton.Value = 0
    If mButton.Value = 0 Then
@@ -264,10 +297,16 @@ End Sub
 ''bSet = False
 'End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mEdit_Click()
    mButton.Visible = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mEdit_KeyPress(KeyAscii As Integer)
    'If enter is pressed, update.
    If KeyAscii = 13 Then
@@ -276,6 +315,9 @@ Private Sub mEdit_KeyPress(KeyAscii As Integer)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mEdit_KeyDown(KeyCode As Integer, Shift As Integer)
     Dim prevValue As String
     If KeyCode = vbKeyReturn Then
@@ -289,6 +331,9 @@ Private Sub mEdit_KeyDown(KeyCode As Integer, Shift As Integer)
     mButton.Visible = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mEdit_LostFocus()
 Dim prevValue As String
     
@@ -301,6 +346,9 @@ Dim prevValue As String
        
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mEllipsis_Click()
 Dim strData() As String
 Dim filename As String
@@ -395,6 +443,9 @@ gotCancel:
    mForm.Object = obj
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mGrid_Click()
 Dim lStyle As Long
 Dim ScrollWidth As Long
@@ -439,6 +490,9 @@ Dim ScrollWidth As Long
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mGrid_DblClick()
    If m_nRows < 1 Then Exit Sub
    If GetType = pgReadOnly Then Exit Sub
@@ -449,6 +503,9 @@ Private Sub mGrid_DblClick()
 '   End With
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mGrid_EnterCell()
    If curRow <> mGrid.row Then
       mGrid_Click
@@ -456,6 +513,9 @@ Private Sub mGrid_EnterCell()
    If Not bLockCol And mGrid.col <> 0 Then mGrid.col = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mGrid_KeyDown(KeyCode As Integer, Shift As Integer)
    If KeyCode = vbKeyReturn Then
       Call mGrid_DblClick
@@ -465,6 +525,9 @@ Private Sub mGrid_KeyDown(KeyCode As Integer, Shift As Integer)
 '   End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ScrollBarWidth() As Long
 Dim lStyle As Long
 
@@ -482,17 +545,18 @@ Dim lStyle As Long
 End Function
 
 'This would be the function to manage scrolling, but things are acting funny
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mGrid_Scroll2()
    If mEdit.Visible Then SetEdit
    If m_bList Then SetList
 End Sub
 
-
-
-
-
-
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mListProp_click()
    mListProp.Visible = False
    mButton.Value = 0
@@ -509,6 +573,9 @@ Private Sub mListProp_click()
    SetList
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddItem(nType As Integer, ByVal strProp As String, ByVal strVal As String, Optional ByVal strData As String)
 Static nCol1 As Integer
 
@@ -540,6 +607,9 @@ Static nCol1 As Integer
    HideEditors
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function GetProp(Optional nRow As Integer = -1) As String
    If nRow < 0 Then nRow = mGrid.row
    GetProp = mGrid.TextMatrix(nRow, enProp)
@@ -549,27 +619,42 @@ Private Function GetProp(Optional nRow As Integer = -1) As String
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function GetVal(Optional nRow As Integer = -1) As String
    If nRow < 0 Then nRow = mGrid.row
    GetVal = mGrid.TextMatrix(nRow, enVal)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function GetType(Optional nRow As Integer = -1) As Integer
    If m_nRows < 1 Then Exit Function
    If nRow < 0 Then nRow = mGrid.row
    GetType = Val(mGrid.TextMatrix(nRow, enType))
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function GetData(Optional nRow As Integer = -1) As String
    If nRow < 0 Then nRow = mGrid.row
    GetData = mGrid.TextMatrix(nRow, enData)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub LetVal(ByVal strVal As String, Optional nRow As Integer = -1)
    If nRow < 0 Then nRow = mGrid.row
    mGrid.TextMatrix(nRow, enVal) = strVal
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mEllipsisBitmapAction()
 'Dim filedirectory As String 'temp
 Dim filename As String
@@ -596,6 +681,10 @@ gotCancel:
       GoTo SetBitmapName
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mEllipsisResourceAction()
 'Dim filedirectory As String 'temp
 Dim filename As String
@@ -623,6 +712,9 @@ gotCancel:
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Clear()
    HideEditors
    mGrid.Rows = 1
@@ -630,6 +722,9 @@ Public Sub Clear()
    curRow = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub UpdateValue(nRow As Integer, strVal As String)
 Dim strOrig As String
 Dim frm As Form
@@ -657,6 +752,9 @@ Dim frm As Form
    UpdateAllValues
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub UpdateAllValues()
 Dim i As Integer
 

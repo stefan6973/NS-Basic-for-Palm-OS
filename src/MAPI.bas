@@ -1,6 +1,9 @@
 Attribute VB_Name = "MAPI"
 Option Explicit
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type RECT
     Left As Long
     Top As Long
@@ -8,11 +11,17 @@ Type RECT
     Bottom As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type POINTAPI
     x As Long
     y As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type Msg
    hWnd As Long
    message As Long
@@ -22,12 +31,18 @@ Type Msg
    pt As POINTAPI
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type NMHDR
    hwndFrom As Long
    idfrom As Long
    code As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type ToolTipText
    hdr As NMHDR
    lpszText As Long
@@ -36,6 +51,9 @@ Type ToolTipText
    uFlags As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type MINMAXINFO
    ptReserved As POINTAPI
    ptMaxSize As POINTAPI
@@ -44,6 +62,9 @@ Public Type MINMAXINFO
    ptMaxTrackSize As POINTAPI
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public gHWndToolTip As Long
 
 Public Type TOOLINFO
@@ -56,6 +77,9 @@ Public Type TOOLINFO
    lpszText As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Declare Function GetParent Lib "USER32" (ByVal hWnd As Long) As Long
 Public Declare Function SetParent Lib "USER32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
 Public Declare Function GetWindowRect Lib "USER32" (ByVal hWnd As Long, lpRect As RECT) As Long
@@ -259,6 +283,10 @@ Private Declare Function FindExecutable Lib "shell32.dll" Alias _
 Private Const CREATE_NO_WINDOW = &H800000
 Private Const STARTF_USESHOWWINDOW = &H1
 Private Const SW_HIDE = 0
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Type STARTUPINFO
       cb As Long
       lpReserved As String
@@ -280,7 +308,10 @@ Private Type STARTUPINFO
       hStdError As Long
    End Type
 
-   Private Type PROCESS_INFORMATION
+   '------------------------------------------------------------
+'
+'------------------------------------------------------------
+Private Type PROCESS_INFORMATION
       hProcess As Long
       hThread As Long
       dwProcessID As Long
@@ -317,6 +348,9 @@ Public Const GENERIC_READ As Long = &H80000000
 Public Const FILE_SHARE_READ As Long = &H1
 Public Const OPEN_EXISTING As Long = &H3
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type SHFILEINFO
    hIcon As Long
    iIcon As Long
@@ -325,6 +359,9 @@ Public Type SHFILEINFO
    szTypeName As String * 80
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type SYSTEMTIME
    wYear As Integer
    wMonth As Integer
@@ -336,11 +373,17 @@ Public Type SYSTEMTIME
    wMilliseconds As Integer
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type FILETIME
    dwLowDateTime As Long
    dwHighDateTime As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type WIN32_FIND_DATA
    dwFileAttributes As Long
    ftCreationTime As FILETIME
@@ -354,12 +397,18 @@ Public Type WIN32_FIND_DATA
    cAlternate As String * 14
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type FILE_PARAMS
    fAttributes As Long
    sFileRoot As String
    sFileNameExt As String
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Declare Function FindClose Lib "kernel32" _
   (ByVal hFindFile As Long) As Long
    
@@ -401,6 +450,9 @@ Declare Function FillRect Lib "USER32" (ByVal hDC As Long, lpRect As RECT, ByVal
    
 Public Const CSIDL_PROGRAM_FILES = &H26
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type ChooseColorStruct
     lStructSize As Long
     hwndOwner As Long
@@ -442,6 +494,9 @@ Dim lngResult As Long
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetProgramFilesName() As String
    'returns "Program Files" if OS is English, "Programme" if German, etc.
    Dim lngResult As Long
@@ -457,6 +512,9 @@ Public Function GetProgramFilesName() As String
 
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ExecCmd(cmdline$)         '07/19/01 gh
    Dim proc As PROCESS_INFORMATION
    Dim start As STARTUPINFO
@@ -481,11 +539,18 @@ Public Function ExecCmd(cmdline$)         '07/19/01 gh
       ExecCmd = ret&
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub InstallHook()
    If m_hKeyHook = 0 Then
       m_hKeyHook = SetWindowsHookEx(WH_KEYBOARD, AddressOf TabKeyProc, 0&, App.ThreadID)
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveHook()
    If m_hKeyHook <> 0 Then
       UnhookWindowsHookEx m_hKeyHook
@@ -493,6 +558,9 @@ Public Sub RemoveHook()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GetCDlgFileName(ByVal hDlg As Long) As String
 Dim sBuf As String
 Dim iPos As Long
@@ -506,6 +574,9 @@ Dim hWnd As Long
    End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function TabKeyProc(ByVal nCode As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
   
  If nCode >= 0 And Not (frmNewOpen Is Nothing) Then
@@ -549,12 +620,16 @@ Public Function TabKeyProc(ByVal nCode As Long, ByVal wParam As Long, ByVal lPar
  TabKeyProc = CallNextHookEx(m_hKeyHook, nCode, wParam, lParam)
          
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub openWebPage(pageName As String)
       
       Dim filename, Dummy As String
       Dim BrowserExec As String * 255
       Dim RetVal As Long
-      Dim FileNumber As Integer
+      Dim nFileNumber As Integer
       
       RetVal = ShellExecute(frmMain.hWnd, "open", pageName, Dummy, Dummy, SW_SHOWNORMAL)
       If RetVal <= 32 Then        ' Error
@@ -565,10 +640,10 @@ Sub openWebPage(pageName As String)
       ' First, create a known, temporary HTML file
       BrowserExec = Space(255)
       filename = "C:\temphtm.HTM"
-      FileNumber = FreeFile                    ' Get unused file number
-      Open filename For Output As #FileNumber  ' Create temp HTML file
-          Write #FileNumber, "<HTML> <\HTML>"  ' Output text
-      Close #FileNumber                        ' Close file
+      nFileNumber = FreeFile                    ' Get unused file number
+      Open filename For Output As #nFileNumber  ' Create temp HTML file
+          Write #nFileNumber, "<HTML> <\HTML>"  ' Output text
+      Close #nFileNumber                        ' Close file
       ' Then find the application associated with it
       RetVal = FindExecutable(filename, Dummy, BrowserExec)
       BrowserExec = Trim(BrowserExec)
@@ -583,7 +658,8 @@ Sub openWebPage(pageName As String)
       End If
       Kill filename                   ' delete temp HTML file
 End Sub
-'*******************************************************************************
+
+'------------------------------------------------------------
 ' GetRelativePath (FUNCTION)
 '
 ' PARAMETERS:
@@ -596,7 +672,7 @@ End Sub
 ' DESCRIPTION:
 ' GetRelativePath demonstrates when given a directory path and a file path how
 ' to return the relative path from the directory to the file.
-'*******************************************************************************
+'------------------------------------------------------------
 Public Function GetRelativePath(ByVal sFromDirectory As String, _
                                 ByVal sToFile As String) As String
                                 
@@ -626,6 +702,9 @@ Public Function GetRelativePath(ByVal sFromDirectory As String, _
 
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetAbsolutePath(ByVal BasePath As String, ByVal FN As String) As String
    Dim sReturn As String
    Dim p As Long
@@ -640,6 +719,10 @@ Public Function GetAbsolutePath(ByVal BasePath As String, ByVal FN As String) As
       GetAbsolutePath = Left$(sReturn, InStr(1, sReturn, Chr(0)) - 2)
    End If
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ReadFile(astrFile As String, ByRef astrText As String) As Boolean
 
 Dim hFile As Long
@@ -659,6 +742,10 @@ End If
 CloseHandle hFile
 
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Function ByteArrayToString(bytArray() As Byte) As String
     Dim sAns As String
     Dim iPos As String
@@ -671,6 +758,9 @@ Private Function ByteArrayToString(bytArray() As Byte) As String
  
  End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DrawGradient(lDestHDC As Long, lDestWidth As Long, lDestHeight As Long, lStartColor As Long, lEndColor As Long, iStyle As Integer)
 'lDestHDC - The hDC of the object you want to draw to
 'lDestWidth - The Width of the Gradient
@@ -770,6 +860,10 @@ Public Sub DrawGradient(lDestHDC As Long, lDestWidth As Long, lDestHeight As Lon
       End If
    Next
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function ShowColorDialog(Optional ByVal hParent As Long, _
     Optional ByVal bFullOpen As Boolean, Optional ByVal InitColor As OLE_COLOR) _
     As Long

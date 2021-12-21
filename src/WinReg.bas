@@ -65,13 +65,21 @@ Type SECURITY_ATTRIBUTES
   bInheritHandle As Boolean
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type FILETIME
   dwLowDateTime As Long
   dwHighDateTime As Long
 End Type
 
 
-'Registry Function Prototypes
+'Registry 
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Function Prototypes
 Declare Function RegOpenKeyEx Lib "advapi32" Alias "RegOpenKeyExA" _
   (ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, _
   ByVal samDesired As Long, phkResult As Long) As Long
@@ -123,6 +131,10 @@ Public Const SETREGVALUEDATA = 4
 
 'Operation Flag
 Public CurrentOperation As Integer
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function CreateRegKey(NewSubKey As String) As Boolean
 
 On Error GoTo ERROR_HANDLER
@@ -144,7 +156,9 @@ ERROR_HANDLER:
   
 End Function
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function GetRegValue(hKey As Long, lpszSubKey As String, szKey As String, _
                      szDefault As String) As Variant
 
@@ -185,6 +199,9 @@ ERROR_HANDLER:
 
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function SetRegValue(hKey As Long, lpszSubKey As String, ByVal sSetValue As String, _
                      ByVal sValue As String) As Boolean
    On Error GoTo ERROR_HANDLER

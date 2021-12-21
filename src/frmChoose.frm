@@ -35,11 +35,18 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butCancel_Click()
   'Me.Hide   '1114
   frmCode.Show 1  '1114
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Paint()
   Dim v As DataElement
   Dim s As view
@@ -56,6 +63,9 @@ Private Sub Form_Paint()
   
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lst_Click()
   'If lst.ListIndex < 0 Or lst.ListIndex > lst.ListCount - 1 Then Exit Sub
   'frmCode.Script.text = left(frmCode.Script.text, _

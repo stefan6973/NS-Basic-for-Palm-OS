@@ -138,6 +138,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    LoadResStrings Me, False
    
@@ -162,6 +165,9 @@ Private Sub Form_Load()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmdOK_Click()
    Unload Me
 End Sub

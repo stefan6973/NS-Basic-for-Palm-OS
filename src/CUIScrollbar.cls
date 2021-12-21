@@ -33,6 +33,9 @@ Private Const kTotalProps As Integer = 12
 Private Const kProperties As String = "Value-Min-Max-PageSize-Left-Top-Width-Height"
 Private Const kMethods As String = "Hide-Show-Redraw"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    obj.Parent = Me
    obj.name = "Scrollbar"
@@ -45,6 +48,9 @@ Private Sub class_initialize()
    m_nPageSize = 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 Dim c As Byte
 Dim scr As scrollbarOut
@@ -76,6 +82,9 @@ Dim scr As scrollbarOut
    Put #9, , scr
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
 
    Dim version As Integer
@@ -96,6 +105,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
@@ -103,6 +115,9 @@ Public Sub Save(ByVal nFileNumber as integer)
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim temp As String
 
@@ -113,6 +128,9 @@ Dim temp As String
    Copy = Copy + obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -142,6 +160,9 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim i As Integer, h As Integer, w As Integer
 
@@ -169,38 +190,65 @@ Dim i As Integer, h As Integer, w As Integer
    obj.DrawSelected
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let PageSize(ByVal vData As Integer)
    m_nPageSize = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get PageSize() As Integer
    PageSize = m_nPageSize
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let MaxValue(ByVal vData As Integer)
    m_nMaxValue = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get MaxValue() As Integer
    MaxValue = m_nMaxValue
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let MinValue(ByVal vData As Integer)
    m_nMinValue = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get MinValue() As Integer
    MinValue = m_nMinValue
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Value(ByVal vData As Integer)
    m_nValue = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Value() As Integer
    Value = m_nValue
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -236,6 +284,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Maximum": GetPropertyVal = MaxValue
@@ -246,6 +297,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim n As Integer
 Dim bmp As CBitmapFile
@@ -287,10 +341,16 @@ Dim o As Object
    If ValidateProperty Then obj.Form.Project.Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

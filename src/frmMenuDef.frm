@@ -157,18 +157,30 @@ Private m_Menu As CMenu
 Private m_MenuBar As CMenuBar
 Private m_nIndex As Integer
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Project(ByVal proj As CProject)
    Set m_Project = proj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Menu(ByVal mnu As CMenu)
    Set m_Menu = mnu
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let MenuBar(ByVal mBar As CMenuBar)
    Set m_MenuBar = mBar
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butEdit_click()
 Dim fCode As New frmCode
 
@@ -187,6 +199,9 @@ Dim fCode As New frmCode
    fCode.Show vbModal
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butApply_Click()
 Dim strCaption As String
    
@@ -205,6 +220,9 @@ Dim strCaption As String
    Refresh
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butDelete_Click()
 Dim i As Integer
 
@@ -231,14 +249,23 @@ Dim i As Integer
    Refresh
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butClose_Click()
    Unload Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butInsert_Click()
    insert_menuelem
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub insert_menuelem()
 Dim mnuElem As New CMenuElem
 
@@ -257,6 +284,9 @@ Dim mnuElem As New CMenuElem
    If outlMenu.ListCount = 1 Then outlMenu.ListIndex = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub butAdd_Click()
 Dim mnuElem As New CMenuElem
 
@@ -272,20 +302,32 @@ Dim mnuElem As New CMenuElem
    Refresh
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub fldMenuName_Change()
    m_Project.Dirty = True
    m_Menu.Name = fldMenuName.Text
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub menuOption_Change()
    m_Project.Dirty = True
    m_MenuBar.caption = menuOption.Text
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    m_nIndex = -1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Paint()
 'Dim m As Integer
 'Dim i As Integer
@@ -329,6 +371,9 @@ Dim mnuElem As CMenuElem
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub outlMenu_Click()
    m_nIndex = outlMenu.ListIndex
 '   If outlMenu.ListIndex = -1 Then
@@ -340,6 +385,9 @@ Private Sub outlMenu_Click()
 '   End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub outlMenu_DblClick()
    butEdit_click
 End Sub

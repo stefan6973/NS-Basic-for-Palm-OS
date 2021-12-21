@@ -1,6 +1,9 @@
 Attribute VB_Name = "modAPI"
 Option Explicit
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type RECT
     Left As Long
     Top As Long
@@ -8,11 +11,17 @@ Type RECT
     Bottom As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type POINTAPI
     x As Long
     y As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type Msg
    hwnd As Long
    message As Long
@@ -22,12 +31,18 @@ Type Msg
    pt As POINTAPI
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type NMHDR
    hwndFrom As Long
    idfrom As Long
    code As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Type ToolTipText
    hdr As NMHDR
    lpszText As Long
@@ -36,6 +51,9 @@ Type ToolTipText
    uFlags As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type MINMAXINFO
    ptReserved As POINTAPI
    ptMaxSize As POINTAPI
@@ -44,8 +62,14 @@ Public Type MINMAXINFO
    ptMaxTrackSize As POINTAPI
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public gHWndToolTip As Long
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Type TOOLINFO
    cbSize As Long
    uFlags As Long
@@ -56,6 +80,9 @@ Public Type TOOLINFO
    lpszText As Long
 End Type
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Declare Function GetParent Lib "user32" (ByVal hwnd As Long) As Long
 Public Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
 Public Declare Function GetWindowRect Lib "user32" (ByVal hwnd As Long, lpRect As RECT) As Long
@@ -247,11 +274,18 @@ Private Declare Function FindExecutable Lib "shell32.dll" Alias _
          String, ByVal lpResult As String) As Long
 
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub InstallHook()
    If m_hKeyHook = 0 Then
       m_hKeyHook = SetWindowsHookEx(WH_KEYBOARD, AddressOf TabKeyProc, 0&, App.ThreadID)
    End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub RemoveHook()
    If m_hKeyHook <> 0 Then
       UnhookWindowsHookEx m_hKeyHook
@@ -259,6 +293,9 @@ Public Sub RemoveHook()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GetCDlgFileName(ByVal hDlg As Long) As String
 Dim sBuf As String
 Dim iPos As Long
@@ -272,6 +309,9 @@ Dim hwnd As Long
    End If
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function TabKeyProc(ByVal nCode As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
   
  If nCode >= 0 And Not (frmSelProj Is Nothing) Then
@@ -315,20 +355,24 @@ Public Function TabKeyProc(ByVal nCode As Long, ByVal wParam As Long, ByVal lPar
  TabKeyProc = CallNextHookEx(m_hKeyHook, nCode, wParam, lParam)
          
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub openWebPage(pageName As String)
       
       Dim fileName, Dummy As String
       Dim BrowserExec As String * 255
       Dim RetVal As Long
-      Dim FileNumber As Integer
+      Dim nFileNumber As Integer
 
       ' First, create a known, temporary HTML file
       BrowserExec = Space(255)
       fileName = "C:\temphtm.HTM"
-      FileNumber = FreeFile                    ' Get unused file number
-      Open fileName For Output As #FileNumber  ' Create temp HTML file
-          Write #FileNumber, "<HTML> <\HTML>"  ' Output text
-      Close #FileNumber                        ' Close file
+      nFileNumber = FreeFile                    ' Get unused file number
+      Open fileName For Output As #nFileNumber  ' Create temp HTML file
+          Write #nFileNumber, "<HTML> <\HTML>"  ' Output text
+      Close #nFileNumber                        ' Close file
       ' Then find the application associated with it
       RetVal = FindExecutable(fileName, Dummy, BrowserExec)
       BrowserExec = Trim(BrowserExec)

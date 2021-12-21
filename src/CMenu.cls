@@ -26,6 +26,9 @@ Private Sub class_initialize()
    IdNo = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
 Dim version As Integer
 Dim i As Integer
@@ -52,6 +55,9 @@ Dim mBar As CMenuBar
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
    Dim mBar As CMenuBar
 
@@ -64,6 +70,9 @@ Public Sub Save(ByVal nFileNumber as interger)
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim mBar As CMenuBar
 
@@ -76,6 +85,9 @@ Dim mBar As CMenuBar
    Next
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String, ByVal proj As CProject)
 Dim tokens() As String
 Dim i As Integer, nCount As Integer
@@ -117,11 +129,17 @@ PasteMenuBar:
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
 Attribute GlobalID.VB_UserMemId = 0
    GlobalID = m_strGlobalID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetGlobalID(ByRef strProjGlobalID As String)
    If IdNo = 0 Then
       m_strGlobalID = "|" & strProjGlobalID
@@ -134,6 +152,9 @@ Public Sub SetGlobalID(ByRef strProjGlobalID As String)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -156,6 +177,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Name": GetPropertyVal = Name
@@ -163,6 +187,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
    ValidateProperty = True
    Select Case strProp
@@ -179,6 +206,9 @@ Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String
    If ValidateProperty Then LocateProject(GlobalID).Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub MoveElement(ByVal Elem As CMenuElem, moveDir As Long)
 Dim mBar As CMenuBar
 Dim mElem As CMenuElem
@@ -214,6 +244,9 @@ lbl_MoveElement:
    LocateProject(GlobalID).Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub MoveBar(ByVal bar As CMenuBar, moveDir As Long)
 Dim mBar As CMenuBar
 Dim i As Integer

@@ -42,6 +42,9 @@ Public Sub class_initialize()
    obj_code_len = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as interger)
 Dim strTemp As String
 
@@ -53,6 +56,9 @@ Dim strTemp As String
    Write #nFileNumber, strTemp
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim strTemp As String
 
@@ -64,6 +70,9 @@ Dim strTemp As String
    Copy = Copy & Quote(strTemp) & vbCrLf
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -137,19 +146,31 @@ Public Sub Restore(ByVal nFileNumber as integer)
    ProcessScript menu_script, FromDisk
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ProcName() As String
    ProcName = "Menu" & IdNo & "_click"
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
 Attribute GlobalID.VB_UserMemId = 0
    GlobalID = m_strGlobalID
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetGlobalID(ByVal strMenuBarGlobalID As String)
    m_strGlobalID = "menuelem|" & IdNo & "|" & strMenuBarGlobalID
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetScript(ByVal strScript As String, Optional ByVal bForceCreate As Boolean = True) As String
    If Len(menu_script) > 0 Or Not bForceCreate Then
       GetScript = menu_script
@@ -158,6 +179,9 @@ Public Function GetScript(ByVal strScript As String, Optional ByVal bForceCreate
    End If
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
 Dim proj As CProject
    menu_script = strText
@@ -165,6 +189,9 @@ Dim proj As CProject
    proj.Dirty = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 Dim i As Integer
@@ -201,6 +228,9 @@ Dim i As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Caption": GetPropertyVal = caption
@@ -210,6 +240,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim strCommand As String
 
@@ -236,14 +269,23 @@ Dim strCommand As String
    If ValidateProperty Then LocateProject(GlobalID).Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Name() As String
    Name = "Dropdown"
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get caption() As String
    caption = m_strCaption
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let caption(ByVal strCaption As String)
 Dim strFont As String
 Dim nFontSize As Integer
@@ -258,6 +300,9 @@ Dim nFontSize As Integer
    frmMain.picBox.fontSize = nFontSize
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get MenuWidth() As Integer
    MenuWidth = m_nMenuWidth
 End Property

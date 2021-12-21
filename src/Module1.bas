@@ -1,6 +1,9 @@
 Attribute VB_Name = "MStringTables"
 Option Explicit
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub LoadStringTable()
 Dim message As String
 Dim i As Integer
@@ -40,6 +43,10 @@ skipIt:
 exitSub:
 
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub LoadResStrings(frm As Form, Optional bLoadFont As Boolean = True)
 Dim ctl As Control
 Dim obj As Object

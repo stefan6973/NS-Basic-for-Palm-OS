@@ -146,16 +146,25 @@ Attribute VB_Exposed = False
 Dim m_PropGrid As New CPropertiesGrid
 Dim m_obj As Object
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    gbProperties = True
    m_PropGrid.Init grdProperties, lblMask, txtEdit, txtList, Button, lstProps, btnEllipsis, Me
    Me.Left = -(Me.Width + 1)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Resize()
    m_PropGrid.Resize
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
 Dim lRet As Long
@@ -180,12 +189,18 @@ Dim lRet As Long
    ShowObject
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
    gbProperties = False
    frmMain.picPanel_Resize
    frmMain.mnuViewProperties.Checked = gbProperties
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Object(ByRef obj As Object)
    If obj Is m_obj Then Exit Property
    m_PropGrid.HideEditors
@@ -193,6 +208,9 @@ Public Property Let Object(ByRef obj As Object)
    ShowObject
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub ShowObject()
    m_PropGrid.Clear
    If Not m_obj Is Nothing Then
@@ -205,10 +223,16 @@ Private Sub ShowObject()
    SetCaption
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Object() As Object
    Set Object = m_obj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetCaption()
    Me.caption = gStringTable(1302)
    If m_obj Is Nothing Then Exit Sub

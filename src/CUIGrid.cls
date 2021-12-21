@@ -26,6 +26,9 @@ Private Const kProperties As String = "Left-Top-Width-Height-Col-Cols-ColWidth-R
 Private Const kMethods As String = "Add-Clear-Hide-Redraw-Remove-Show-" _
    & "ColType-TextMatrix-ValueMatrix-FontMatrix-ShowGridLines-HideGridLines-BindToDatabase"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
     Dim i As Integer
      obj.Parent = Me
@@ -41,6 +44,10 @@ Private Sub class_initialize()
      m_nCols = 2
      obj.Width = m_nCols * 25
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 'several mods to this code 09242003
    Dim tbl As tableOut
@@ -151,25 +158,52 @@ Public Sub PrcOut()
       Put #9, , scr
     End If
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let HasScrollbar(ByVal vData As Boolean)
     m_bHasScrollbar = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get HasScrollbar() As Boolean
     HasScrollbar = m_bHasScrollbar
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Cols(ByVal vData As Integer)
    m_nCols = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Cols() As Integer
    Cols = m_nCols
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let VisibleRows(ByVal vData As Integer)
    m_nVisibleRows = vData
 End Property
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get VisibleRows() As Integer
    VisibleRows = m_nVisibleRows
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
   
   Dim version As Integer
@@ -190,6 +224,9 @@ Public Sub Restore(ByVal nFileNumber as integer)
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
   Dim version As Integer
   version = 2
@@ -205,7 +242,9 @@ Public Sub Save(ByVal nFileNumber as integer)
   obj.Save #nFileNumber
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim x As Integer, y As Integer
 Dim w As Integer, h As Integer
@@ -233,6 +272,10 @@ Dim w As Integer, h As Integer
 
    obj.DrawSelected
 End Sub
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -270,6 +313,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Cols": GetPropertyVal = Cols
@@ -279,6 +325,9 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim n As Double
 
@@ -306,6 +355,10 @@ Dim n As Double
    Case Else: ValidateProperty = obj.ValidateProperty(strProp, strVal)
    End Select
 End Function
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
 Dim temp As String
 
@@ -316,6 +369,9 @@ Dim temp As String
    Copy = Copy + obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -344,10 +400,16 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
  
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

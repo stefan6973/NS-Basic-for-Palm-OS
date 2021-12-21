@@ -68,11 +68,17 @@ Public gForm As CForm
 Public gProj As CProject
 Private gObjs() As Object
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub CancelButton_Click()
    Set gProj = Nothing
    Me.Hide
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmdDown_Click()
 Dim strTemp As String
 Dim ob As Object
@@ -89,6 +95,9 @@ Dim li As Integer
    lstObjects.ListIndex = li
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmdUp_Click()
 Dim strTemp As String
 Dim ob As Object
@@ -105,6 +114,9 @@ Dim li As Integer
    lstObjects.ListIndex = li
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
 Dim obj As Object
 Dim i As Integer
@@ -137,6 +149,9 @@ Dim i As Integer
    If lstObjects.ListCount <> 0 Then lstObjects.ListIndex = 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lstObjects_Click()
    If lstObjects.ListIndex < 0 Then
       cmdUp.Enabled = False
@@ -149,6 +164,9 @@ Private Sub lstObjects_Click()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub OKButton_Click()
 Dim coll As New Collection
 Dim i As Integer

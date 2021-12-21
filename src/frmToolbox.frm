@@ -213,6 +213,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
 Dim lRet As Long
@@ -239,6 +242,9 @@ Dim lRet As Long
    frmMain.mnuViewToolbox.Checked = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
    gbToolbox = True
    gnToolboxTool = 1
@@ -246,16 +252,25 @@ Private Sub Form_Load()
    LoadResStrings Me
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
    gbToolbox = False
    frmMain.picToolbox.Visible = False
    frmMain.mnuViewToolbox.Checked = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tbToolbox_ButtonClick(ByVal Button As MSComctlLib.Button)
    ToolboxSelect Button.index
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ToolboxSelect(nTool As Integer)
 Dim nIndex As Integer
 

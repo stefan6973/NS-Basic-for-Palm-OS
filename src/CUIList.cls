@@ -31,6 +31,9 @@ Private Const kTotalProps As Integer = 13
 Private Const kProperties As String = "ItemText-NoItems-Selected-Left-Top-Width"
 Private Const kMethods As String = "Hide-Show-Redraw-Clear-Add-Remove"
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    obj.Parent = Me
    obj.name = "List"
@@ -41,6 +44,9 @@ Private Sub class_initialize()
    m_strList = ""
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
 Dim cnt As Integer
 Dim c As Byte
@@ -125,6 +131,9 @@ Dim arrList() As String
    Next
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Restore(ByVal nFileNumber as integer)
 Dim version As Integer
 Dim s As String
@@ -144,6 +153,9 @@ Dim s As String
    obj.Restore #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Save(ByVal nFileNumber as integer)
 Dim s As String
    
@@ -156,6 +168,9 @@ Dim s As String
    obj.Save #nFileNumber
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function Copy() As String
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -164,6 +179,9 @@ Public Function Copy() As String
    Copy = Copy + obj.Copy()
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
 Dim tokens() As String
 Dim i As Integer
@@ -190,6 +208,9 @@ Dim i As Integer
    obj.Paste strLines
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub ScreenDraw()
 Dim y As Integer
 
@@ -217,24 +238,39 @@ Dim y As Integer
    obj.DrawSelected
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Set Items(ByVal vData As Object)
    Set m_Items = vData
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Items() As Collection
    Set Items = m_Items
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let VisibleItems(ByVal vData As Integer)
 'George: VisibleItems dictates object height, via Palm Font stuff
    m_nVisibleItems = vData
    obj.Height = GetTextHeight("?", obj.FontID) * m_nVisibleItems
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get VisibleItems() As Integer
    VisibleItems = m_nVisibleItems
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -270,6 +306,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
 Dim i As Integer
 Dim strTemp As String
@@ -286,6 +325,9 @@ Dim strTemp As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
 Dim n As Integer
 Dim arrList() As String
@@ -325,14 +367,23 @@ Dim arrItems() As String
    If ValidateProperty Then obj.Form.Project.Dirty = True
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetStringList() As String
    GetStringList = "List Items>" & Join(Split(m_strList, vbTab), vbCrLf)
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PropertyList() As String()
    PropertyList = Split(kProperties, "-")
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function MethodList() As String()
    MethodList = Split(kMethods, "-")
 End Function

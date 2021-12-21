@@ -31,14 +31,23 @@ Public Property Set Prev(ByVal c As CSynElem)
     Set mvarPrev = c
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Prev()
    Set Prev = mvarPrev
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Set Nxt(ByVal c As CSynElem)
     Set mvarNxt = c
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Nxt()
    Set Nxt = mvarNxt
 End Property

@@ -232,6 +232,9 @@ Private m_dExistDate() As Date
 Private m_vExistIcon() As Variant
 Private m_iExistCOunt As Long
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function SetBackwardFocus() As Long
 Dim CurHnd As Long
 Dim NewHnd As Long
@@ -282,6 +285,9 @@ Dim NewHnd As Long
 
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub SetControlPos(ByVal hd As Long, ByVal SFlags As Long, Optional ByVal lID As Long = -1)
 Dim tdr As RECT
 Dim wLp As POINTAPI
@@ -313,6 +319,9 @@ Dim lShiftY As Long
     
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function SetForwardFocus() As Long
 Dim CurHnd As Long
 Dim NewHnd As Long
@@ -378,7 +387,9 @@ Dim NewHnd As Long
 
 End Function
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cD_DialogOK(bCancel As Boolean)
    bCancel = True
    m_bCancel = False
@@ -386,6 +397,9 @@ Private Sub cD_DialogOK(bCancel As Boolean)
    tmrUnload.Enabled = True
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cD_FolderChange(ByVal hDlg As Long)
 Static DoOnce As Boolean
 Dim hd As Long
@@ -407,7 +421,9 @@ Dim hd As Long
    End If
 End Sub
 
-
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cD_InitDialog(ByVal hDlg As Long)
 Dim hd As Long
 Dim tR As RECT, tTR As RECT
@@ -540,15 +556,24 @@ Dim lW As Long, lH As Long
    InstallHook
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub chkDont_Click()
    m_bShowNew = Not m_bShowNew
    MWinReg.SetRegValue MWinReg.hKey, MWinReg.SubKey, "ShowSplash", m_bShowNew
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub CmdNewCancel_Click()
    Form_QueryUnload 0, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub cmdNewOpen_Click()
    If lvwNew.SelectedItem Is Nothing Then Exit Sub
 
@@ -557,6 +582,9 @@ Private Sub cmdNewOpen_Click()
    Form_QueryUnload 0, 0
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_Load()
 Dim itmX As ListItem
 Dim i As Long
@@ -619,6 +647,9 @@ Dim i As Long
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
    If (m_hwnd <> 0) And (m_hDlg <> 0) Then
       'Cancel Common Dialog box if loaded:
@@ -636,22 +667,34 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
    RemoveHook
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lvwNew_DblClick()
    If Not (lvwNew.SelectedItem Is Nothing) And Not (lvwNew.DropHighlight Is Nothing) Then
       cmdNewOpen.Value = True
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lvwNew_ItemClick(ByVal Item As MSComctlLib.ListItem)
    m_sFileName = Item.Text
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lvwNew_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
    If Button = vbLeftButton Then
       lvwNew.DropHighlight = lvwNew.HitTest(x, y)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lvwRecent_DblClick()
    If Not (lvwRecent.SelectedItem Is Nothing) And Not (lvwRecent.DropHighlight Is Nothing) Then
       m_sFileName = lvwRecent.SelectedItem.Text
@@ -659,6 +702,9 @@ Private Sub lvwRecent_DblClick()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lvwRecent_ItemClick(ByVal Item As MSComctlLib.ListItem)
    'Recent item:
    m_sFileName = Item.SubItems(1)
@@ -667,12 +713,18 @@ Private Sub lvwRecent_ItemClick(ByVal Item As MSComctlLib.ListItem)
    SetDlgItemText m_hwnd, fdlgEdtFileName, m_sFileName
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub lvwRecent_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
    If Button = vbLeftButton Then
       lvwRecent.DropHighlight = lvwRecent.HitTest(x, y)
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub m_Controls_GotFocus()
    If GetFocusAPI <> tabMain.hwnd Then
       If tabMain.SelectedItem.caption = "New" Then
@@ -683,10 +735,16 @@ Private Sub m_Controls_GotFocus()
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tabMain_BeforeClick(Cancel As Integer)
    LastTabFocus = tabMain.SelectedItem.caption
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tabMain_Click()
 Dim iTab As String
 Dim hd  As Long
@@ -825,14 +883,23 @@ Dim hd  As Long
    End Select
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get ShowNew() As Boolean
    ShowNew = m_bShowNew
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IsNew() As Boolean
    IsNew = m_bIsNew
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddNewType(ByVal sName As String, Optional ByVal vIcon As Variant)
    m_iNewCount = m_iNewCount + 1
    ReDim Preserve m_sNewName(1 To m_iNewCount) As String
@@ -842,6 +909,10 @@ Public Sub AddNewType(ByVal sName As String, Optional ByVal vIcon As Variant)
 End Sub
 
 'Public Sub AddExistItem(ByVal sName As String, ByVal sFOlder As String, ByVal dDate As Date, Optional ByVal vIcon As Variant)
+
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub AddExistItem(ByVal sName As String, ByVal sFOlder As String, Optional ByVal vIcon As Variant)
    m_iExistCOunt = m_iExistCOunt + 1
    ReDim Preserve m_sExistName(1 To m_iExistCOunt) As String
@@ -854,28 +925,46 @@ Public Sub AddExistItem(ByVal sName As String, ByVal sFOlder As String, Optional
    m_vExistIcon(m_iExistCOunt) = vIcon
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let NewImageList(ByRef ilsThis As ImageList)
    Set m_ilsNew = ilsThis
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ExistingImageList(ByRef ilsThis As ImageList)
    Set m_ilsExist = ilsThis
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let ShowNew(ByVal bShow As Boolean)
    m_bShowNew = bShow
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Cancelled() As Boolean
    Cancelled = m_bCancel
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get fileName() As String
    'Property to allow the caller to retrieve the
    'selected file name:
    fileName = m_sFileName
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub tmrUnload_Timer()
    Unload Me
 End Sub

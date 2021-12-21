@@ -11,10 +11,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 Public Name As String
 Public de As CDataElement
 Public Elements As New Collection
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Sub class_initialize()
    Name = ""
 '   Set Elements = Collection
