@@ -101,7 +101,7 @@ Public Function LoadNewLibrary(strInfPath As String, strLibObj As String) As Boo
 ParseError:
    print_err gStringTable(3223) + strInfPath + " " + strLine + " " + strLine
    '"Invalid method declaration in Library Declaration File: "
-   Close #1
+   Close #nFileNumber
    LoadNewLibrary = False
 End Function  'LoadNewLibrary
 

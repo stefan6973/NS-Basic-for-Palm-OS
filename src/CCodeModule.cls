@@ -19,17 +19,22 @@ Public Name As String
 Public pgm_script As String
 Public obj_code As String
 Public obj_code_len As Long
-Public m_bSaved As Boolean
-
 Public offset As Integer
+
+Public m_bSaved As Boolean
 Private m_nIdNo As Integer
 
+'------------------------------------------------------------
 '2300 marks beginning of CCodeModule string table entries
+'------------------------------------------------------------
 Private Const kResStrings As Integer = 2300
 Private Const kTotalProps As Integer = 3
 Private Const kErrStrings As Integer = 2350
 Private Const kVersion As Integer = 2
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
    IdNo = 0
    Name = "Module.cod"
@@ -40,37 +45,49 @@ Private Sub class_initialize()
    m_bSaved = False
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
    'none
 End Sub
 
-Public Sub Save()
-   Write #1, "mod"
-   Write #1, str(kVersion)
-   Write #1, IdNo
-   Write #1, GetRelativePath(gTarget.pathname, path)
-   Write #1, Name
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Save(ByVal nFileNumber as integer)
+   Write #nFileNumber, "mod"
+   Write #nFileNumber, str(kVersion)
+   Write #nFileNumber, IdNo
+   Write #nFileNumber, GetRelativePath(gTarget.pathname, path)
+   Write #nFileNumber, Name
 End Sub
 
-Public Sub Restore()
-Dim strTemp As String
-Dim PathOrVersion
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim strTemp As String
+   Dim PathOrVersion
 
-   Input #1, PathOrVersion 'code that can open old version without Version# field
+   Input #nFileNumber, PathOrVersion 'code that can open old version without Version# field
    If Val(PathOrVersion) > 0 Then
-      Input #1, m_nIdNo
-      Input #1, path
+      Input #nFileNumber, m_nIdNo
+      Input #nFileNumber, path
    Else
       path = PathOrVersion
    End If
    
    SetFileName
-   Input #1, strTemp
+   Input #nFileNumber, strTemp
    OpenModule
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub OpenModule()
-Dim res As Boolean
+   Dim res As Boolean
 
    'On Error GoTo fileNotFound
    'Open path For Input As #2
@@ -89,6 +106,9 @@ Dim res As Boolean
    End If
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetFileName(Optional newPath As String = "")
    If Len(path) = 0 And Len(newPath) <> 0 Then
       path = newPath
@@ -97,17 +117,26 @@ Public Sub SetFileName(Optional newPath As String = "")
    Name = fileName
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let IdNo(nIdNo As Integer)
    m_nIdNo = nIdNo
    If m_nIdNo Then Name = "Module" & IdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IdNo() As Integer
    IdNo = m_nIdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
-Static nProp As Integer
+   Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -128,6 +157,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
    Case "Name": GetPropertyVal = Name
@@ -136,8 +168,11 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-Dim cMod As CCodeModule
+   Dim cMod As CCodeModule
 
    ValidateProperty = True
 '   Select Case strProp
@@ -147,18 +182,27 @@ Dim cMod As CCodeModule
 '   End Select
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get GlobalID() As String
-Attribute GlobalID.VB_UserMemId = 0
+   Attribute GlobalID.VB_UserMemId = 0
    GlobalID = "module|" + Me.path
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function GetScript(strScript As String, Optional bForceCreate As Boolean = True) As String
    GetScript = pgm_script
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PutScript(ByVal strText As String, ByVal strScript As String) As Boolean
-Dim strGID As String
-Dim bDirty As Boolean
+   Dim strGID As String
+   Dim bDirty As Boolean
 
    bDirty = (pgm_script <> strText)
    If Not bDirty And Not m_bSaved And Len(strText) = 0 Then

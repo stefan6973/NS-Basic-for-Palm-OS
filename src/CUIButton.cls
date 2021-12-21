@@ -70,24 +70,24 @@ Dim templen As Integer
    Put #9, , c
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim version As Integer
 
-   Input #1, version
+   Input #nFileNumber, version
    If version <> kVersion Then
       MsgBox gStringTable(3270) + version '"Error: Invalid button version (" & version & ")"
       End
    End If
 
-   Input #1, m_bAnchorLeft, m_bFrame, m_bNonBoldFrame
-   obj.Restore
+   Input #nFileNumber, m_bAnchorLeft, m_bFrame, m_bNonBoldFrame
+   obj.Restore #nFileNumber
 End Sub
 
-Public Sub Save()
-   Write #1, obj.Kind
-   Write #1, kVersion
-   Write #1, m_bAnchorLeft, m_bFrame, m_bNonBoldFrame
-   obj.Save
+Public Sub Save(ByVal nFileNumber as integer)
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, m_bAnchorLeft, m_bFrame, m_bNonBoldFrame
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String

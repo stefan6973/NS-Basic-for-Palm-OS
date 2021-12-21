@@ -42,15 +42,15 @@ Public Sub class_initialize()
    obj_code_len = 0
 End Sub
 
-Public Sub Save()
+Public Sub Save(ByVal nFileNumber as interger)
 Dim strTemp As String
 
-   Write #1, "menu"
-   Write #1, kVersion
-   Write #1, caption, command, subrtnName, IdNo
+   Write #nFileNumber, "menu"
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, caption, command, subrtnName, IdNo
    strTemp = menu_script
    ProcessScript strTemp, ToDisk
-   Write #1, strTemp
+   Write #nFileNumber, strTemp
 End Sub
 
 Public Function Copy() As String
@@ -116,20 +116,23 @@ Dim nScriptEnd As Integer
    ReDim Preserve strLines(UBound(strLines) - nScriptEnd)
 End Sub
 
-Public Sub Restore()
-Dim ignore As String
-Dim version As Integer
-Dim strTemp As String
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim ignore As String
+   Dim version As Integer
+   Dim strTemp As String
 
-   Input #1, ignore 'menu"
-   Input #1, version
+   Input #nFileNumber, ignore 'menu"
+   Input #nFileNumber, version
    If version <> kVersion Then
       MsgBox gStringTable(3247) + version '"Error: Invalid Dropdown Version (" & version & ")"
       End
    End If
 
-   Input #1, strTemp, command, subrtnName, IdNo
-   Input #1, menu_script
+   Input #nFileNumber, strTemp, command, subrtnName, IdNo
+   Input #nFileNumber, menu_script
    caption = strTemp
    ProcessScript menu_script, FromDisk
 End Sub

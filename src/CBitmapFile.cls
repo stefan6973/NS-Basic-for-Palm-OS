@@ -23,6 +23,9 @@ Private Const kVersion As Integer = 1
 '2200 marks beginning of CBitmapFile string table entries
 Private Const kResStrings As Integer = 2200
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub Class_Initialize()
 '   model.HighestSeqNo = model.HighestSeqNo + 1
 '   IdNo = model.HighestSeqNo
@@ -32,46 +35,55 @@ Public Sub Class_Initialize()
    FileName = ""
 End Sub
 
-Public Sub Save()
-   Write #1, "bmpfile"
-   Write #1, kVersion
-   Write #1, Name
-   Write #1, IdNo
-   Write #1, Path
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Save(ByVal nFileNumber as interger)
+   Write #nFileNumber, "bmpfile"
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, Name
+   Write #nFileNumber, IdNo
+   Write #nFileNumber, Path
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim version As Integer
 
-   Input #1, version
+   Input #nFileNumber, version
    If version <> kVersion Then
       MsgBox "Error: Invalid Bitmap File Version (" & version & ")"
       End
    End If
-   Input #1, Name
-   Input #1, m_nIdNo
-   Input #1, Path
+   Input #nFileNumber, Name
+   Input #nFileNumber, m_nIdNo
+   Input #nFileNumber, Path
    SetFileName
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub PrcOut()
-Dim bmpOut As bmpType
-Dim offsetStop As Long
-Dim wid As Long
-Dim ht As Long
-Dim widshort As Integer
-Dim htshort As Integer
-Dim b As Byte
-Dim i, j, n, k As Integer
-Dim o As Byte
-Dim noBits As Integer
-Dim noInBits As Integer
-Dim noOutBits As Integer
-Dim offset As Long
-Dim filesize As Long
-Dim ignorelong As Long
-Dim headerSize As Long
-Dim ignoreInt As Integer
+   Dim bmpOut As bmpType
+   Dim offsetStop As Long
+   Dim wid As Long
+   Dim ht As Long
+   Dim widshort As Integer
+   Dim htshort As Integer
+   Dim b As Byte
+   Dim i, j, n, k As Integer
+   Dim o As Byte
+   Dim noBits As Integer
+   Dim noInBits As Integer
+   Dim noOutBits As Integer
+   Dim offset As Long
+   Dim filesize As Long
+   Dim ignorelong As Long
+   Dim headerSize As Long
+   Dim ignoreInt As Integer
 
    'make sure file exists
    On Error GoTo fileNotFound
@@ -101,13 +113,13 @@ Dim ignoreInt As Integer
       Exit Sub
    End If
 
-'MsgBox "filesize=" + str(filesize)
+   'MsgBox "filesize=" + str(filesize)
    ignorelong = bmpGetLong(10)
    headerSize = bmpGetLong(10)
    ignorelong = bmpGetLong(10)
    wid = bmpGetLong(10)
    ht = bmpGetLong(10)
-'MsgBox "wid=" + str(wid) + " ht=" + str(ht)
+   'MsgBox "wid=" + str(wid) + " ht=" + str(ht)
    ignoreInt = bmpGetShort(10)
    noBits = bmpGetShort(10)
    If noBits > 1 Then
@@ -127,7 +139,7 @@ Dim ignoreInt As Integer
    'write out header info for bitmap
    widshort = wid
    htshort = ht
-'MsgBox "wid=" + str(widshort) + " ht=" + str(htshort) + " rowbytes=" + str(noOutBits / 8)
+   'MsgBox "wid=" + str(widshort) + " ht=" + str(htshort) + " rowbytes=" + str(noOutBits / 8)
    bmpOut.Width.w = cvtWord(widshort)
    bmpOut.Height.w = cvtWord(htshort)
    bmpOut.rowBytes.w = cvtWord(noOutBits / 8)
@@ -139,13 +151,13 @@ Dim ignoreInt As Integer
    Put #3, , bmpOut
 
    offset = filesize + noInBits / 8
-'MsgBox "noInbits=" + str(noInBits) + " noOutbits=" + str(noOutBits)
+   'MsgBox "noInbits=" + str(noInBits) + " noOutbits=" + str(noOutBits)
  
 nextLine:
    offset = offset - 2 * noInBits / 8
    offsetStop = offset + noInBits / 8
    If offset < headerSize Then GoTo allDone
-'MsgBox "at next line --offset=" + str(offset)
+   'MsgBox "at next line --offset=" + str(offset)
    j = 8
    o = &H0
    k = 0
@@ -155,7 +167,7 @@ nextLine:
        
          Seek #10, offset
          b = bmpGetByte(10)
-'MsgBox "i=" + str(i) + "read = " + str(b)
+   'MsgBox "i=" + str(i) + "read = " + str(b)
          j = 0
       End If
 
@@ -252,12 +264,18 @@ fileNotFound: On Error GoTo 0
    MsgBox "Error: Bitmap " & Path & " not found. This bitmap will be skipped."
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function bmpGetByte(fil As Integer) As Integer  '10.26.00 GH function rewritten
   Dim b As Byte
   Get #fil, , b
   bmpGetByte = b
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function bmpGetShort(fil As Integer) As Integer  '10.26.00 GH function rewritten
   Dim b1 As Byte
   Dim b2 As Byte
@@ -268,6 +286,9 @@ Function bmpGetShort(fil As Integer) As Integer  '10.26.00 GH function rewritten
   bmpGetShort = res
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Function bmpGetLong(fil As Integer) As Long '10.26.00 GH function rewritten
   Dim res As Long
   Dim b1 As Byte
@@ -282,6 +303,9 @@ Function bmpGetLong(fil As Integer) As Long '10.26.00 GH function rewritten
   bmpGetLong = res
 End Function
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub SetFileName(Optional newPath As String = "")
    If Len(Path) = 0 And Len(newPath) <> 0 Then
       Path = newPath
@@ -289,23 +313,38 @@ Public Sub SetFileName(Optional newPath As String = "")
    FileName = Mid(Path, InStrRev(Path, "\") + 1)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let IdNo(ByVal nIdNo As Integer)
    m_nIdNo = nIdNo
    If m_nIdNo Then Name = "BmpFile" & m_nIdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get IdNo() As Integer
    IdNo = m_nIdNo
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Project() As CProject
    Set Project = m_Project
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Let Project(prj As CProject)
    Set m_Project = prj
 End Property
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Sub GetProperty()
 Static nProp As Integer
 
@@ -330,6 +369,9 @@ Static nProp As Integer
    nProp = nProp + 1
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Property Get Tag() As String
    Tag = Join(Array("bitmap", m_Project.Name, IdNo), "|")
 End Property

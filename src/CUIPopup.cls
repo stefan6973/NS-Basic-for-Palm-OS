@@ -193,34 +193,36 @@ Dim arrList() As String
    Next
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
-Dim s As String
+Public Sub Restore(ByVal nFileNumber as integer)
 
-   Input #1, version
+   Dim version As Integer
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3294) + version '"Error: Invalid Popup Trigger Version (" & version & ")"
       End
    End If
 
-   Input #1, m_bAnchorLeft, m_nResourceID, m_nVisibleItems
+   Input #nFileNumber, m_bAnchorLeft, m_nResourceID, m_nVisibleItems
    If version > 1 Then
-      Input #1, s
+      Dim s As String
+      Input #nFileNumber, s
       ProcessScript s, FromDisk
       m_strList = s
    End If
-   obj.Restore
+   obj.Restore #nFileNumber
 End Sub
 
-Public Sub Save()
-Dim s As String
-   Write #1, obj.Kind
-   Write #1, kVersion
-   Write #1, AnchorLeft, ResourceId, VisibleItems
+Public Sub Save(ByVal nFileNumber as integer)
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, AnchorLeft, ResourceId, VisibleItems
+   
+   Dim s As String
    s = m_strList
    ProcessScript s, ToDisk
-   Write #1, s
-   obj.Save
+   Write #nFileNumber, s
+   
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String

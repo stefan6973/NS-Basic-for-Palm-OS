@@ -125,35 +125,35 @@ Dim arrList() As String
    Next
 End Sub
 
-Public Sub Restore()
+Public Sub Restore(ByVal nFileNumber as integer)
 Dim version As Integer
 Dim s As String
 
-   Input #1, version
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3291) + version '"Error: Invalid List Version (" & version & ")"
       End
    End If
 
-   Input #1, m_nVisibleItems
+   Input #nFileNumber, m_nVisibleItems
    If version > 1 Then
-      Input #1, s
+      Input #nFileNumber, s
       ProcessScript s, FromDisk
       m_strList = s
    End If
-   obj.Restore
+   obj.Restore #nFileNumber
 End Sub
 
-Public Sub Save()
+Public Sub Save(ByVal nFileNumber as integer)
 Dim s As String
    
-   Write #1, obj.Kind
-   Write #1, kVersion
-   Write #1, VisibleItems
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, VisibleItems
    s = m_strList
    ProcessScript s, ToDisk
-   Write #1, s
-   obj.Save
+   Write #nFileNumber, s
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String

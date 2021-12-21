@@ -30,15 +30,15 @@ Public Sub class_initialize()
 '   idno = gtarget.HighestSeqNo
 End Sub
 
-Public Sub save()
-Dim mElem As CMenuElem
+Public Sub Save(ByVal nFileNumber as integer)
+   Dim mElem As CMenuElem
 
-   Write #1, "menu"
-   Write #1, kVersion
-   Write #1, caption, command, IdNo
-   Write #1, MenuElems.count
+   Write #nFileNumber, "menu"
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, caption, command, IdNo
+   Write #nFileNumber, MenuElems.count
    For Each mElem In MenuElems
-      mElem.save
+      mElem.save #nFileNumber
    Next
 End Sub
 
@@ -102,20 +102,20 @@ Dim i As Integer
 Dim cnt As Integer
 Dim mElem As CMenuElem
 
-   Input #1, ignore 'menu
-   Input #1, version
+   Input #nFileNumber, ignore 'menu
+   Input #nFileNumber, version
    If version <> kVersion Then
       MsgBox gStringTable(3244) + version '"Error: Invalid MenuBar Version (" & version & ")"
       End
    End If
 
-   Input #1, caption, command, IdNo
-   Input #1, cnt
+   Input #nFileNumber, caption, command, IdNo
+   Input #nFileNumber, cnt
    SetGlobalID ""
 '   If cnt > 0 Then
    For i = 1 To cnt
       Set mElem = New CMenuElem
-      mElem.restore
+      mElem.restore #nFileNumber
       MenuElems.Add mElem, Trim(str(mElem.IdNo))
       mElem.SetGlobalID GlobalID
    Next

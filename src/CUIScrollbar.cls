@@ -76,30 +76,31 @@ Dim scr As scrollbarOut
    Put #9, , scr
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
-Dim bOld1 As Boolean, bOld2 As Boolean
+Public Sub Restore(ByVal nFileNumber as integer)
 
-   Input #1, version
+   Dim version As Integer
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3300) + version '"Error: Invalid Scrollbar Version (" & version & ")"
       End
    End If
 
    Select Case version
-   Case 1
-      Input #1, m_nValue, m_nMinValue, m_nMaxValue, m_nPageSize, bOld1, bOld2
-   Case kVersion
-      Input #1, m_nValue, m_nMinValue, m_nMaxValue, m_nPageSize
+      Case 1
+         Dim bOld1 As Boolean, bOld2 As Boolean
+         Input #nFileNumber, m_nValue, m_nMinValue, m_nMaxValue, m_nPageSize, bOld1, bOld2
+      Case kVersion
+         Input #nFileNumber, m_nValue, m_nMinValue, m_nMaxValue, m_nPageSize
    End Select
-   obj.Restore
+
+   obj.Restore #nFileNumber
 End Sub
 
-Public Sub Save()
-   Write #1, obj.Kind
-   Write #1, kVersion
-   Write #1, Value, MinValue, MaxValue, PageSize
-   obj.Save
+Public Sub Save(ByVal nFileNumber as integer)
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, Value, MinValue, MaxValue, PageSize
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String

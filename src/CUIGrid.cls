@@ -169,36 +169,40 @@ End Property
 Public Property Get VisibleRows() As Integer
    VisibleRows = m_nVisibleRows
 End Property
-Public Sub Restore()
-  Dim i As Integer
+
+Public Sub Restore(ByVal nFileNumber as integer)
   
   Dim version As Integer
-  Input #1, version
+  Input #nFileNumber, version
   
    If version <> kVersion Then
       MsgBox gStringTable(3392) + str(version) '"Error: Invalid Grid Version " & version & ")"
       End
    End If
    
-   Input #1, m_nVisibleRows, m_nCols, m_bHasScrollbar
+   Input #nFileNumber, m_nVisibleRows, m_nCols, m_bHasScrollbar
      
-     'For i = 1 To mvarColumns
-     '   Input #1, mvarColumnWidth(i)
-     'Next
-   obj.Restore
+   'Dim i As Integer
+   'For i = 1 To mvarColumns
+   '   Input #nFileNumber, mvarColumnWidth(i)
+   'Next
+
+   obj.Restore #nFileNumber
 End Sub
-Public Sub Save()
+
+Public Sub Save(ByVal nFileNumber as integer)
   Dim version As Integer
-  Dim i As Integer
   version = 2
-  Write #1, obj.Kind
-  Write #1, version
-  Write #1, m_nVisibleRows, m_nCols, m_bHasScrollbar
+
+  Write #nFileNumber, obj.Kind
+  Write #nFileNumber, version
+  Write #nFileNumber, m_nVisibleRows, m_nCols, m_bHasScrollbar
       
+  'Dim i As Integer
   'For i = 1 To m_nCols
-  '   Write #1, colwidth(i)
+  '   Write #nFileNumber, colwidth(i)
   'Next
-  obj.Save
+  obj.Save #nFileNumber
 End Sub
 
 

@@ -48,22 +48,22 @@ Dim si As shiftIndicOut
    Put #9, , si
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim version As Integer
 
-   Input #1, version
+   Input #nFileNumber, version
    If version <> kVersion Then
       MsgBox gStringTable(3285) + version '"Error: Invalid Graffiti Shift Indicator Version (" & version & ")"
       End
    End If
 
-   obj.Restore
+   obj.Restore #nFileNumber
 End Sub
 
-Public Sub Save()
-   Write #1, obj.Kind
-   Write #1, kVersion
-   obj.Save
+Public Sub Save(ByVal nFileNumber as integer)
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, kVersion
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String

@@ -699,22 +699,22 @@ Public Function SnapToGrid(nVal As Integer) As Integer
    End If
 End Function
 
-Public Sub Save()
-Dim frm As Form
-Dim obj As Object
+Public Sub Save(ByVal nFileNumber as interger)
 
    'Save any open code windows that belong to this form
+   Dim frm As Form
    Set frm = frmMain.GetMDIChild(m_Form.GlobalID & "|before")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
    Set frm = frmMain.GetMDIChild(m_Form.GlobalID & "|after")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
    Set frm = frmMain.GetMDIChild(m_Form.GlobalID & "|event")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
 
    'Save any open code windows of objects from this form
+   Dim obj As Object
    For Each obj In m_Form.ObjectCollection
       Set frm = frmMain.GetMDIChild(obj.obj.GlobalID & "|code")
-      If Not frm Is Nothing Then frm.Save
+      If Not frm Is Nothing Then frm.Save #nFileNumber
    Next
 End Sub
 

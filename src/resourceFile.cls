@@ -38,29 +38,29 @@ Dim i As Integer
    m_nIdNo = 0
 End Sub
 
-Public Sub Save()
-   Write #1, "resfile"
-   Write #1, kVersion
-   Write #1, Name
-   Write #1, IdNo
-   Write #1, ResourceType
-   Write #1, GetRelativePath(gTarget.pathname, ResourcePath)
+Public Sub Save(ByVal nFileNumber as interger)
+   Write #nFileNumber, "resfile"
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, Name
+   Write #nFileNumber, IdNo
+   Write #nFileNumber, ResourceType
+   Write #nFileNumber, GetRelativePath(gTarget.pathname, ResourcePath)
 End Sub
 
-Public Sub Restore()
+Public Sub Restore(ByVal nFileNumber as integer)
 Dim version As Integer
 Dim nID As Integer
 
-   Input #1, version
+   Input #nFileNumber, version
    If version <> kVersion Then
       MsgBox gStringTable(3307) + version '"Error: Invalid resource File Version (" & version & ")"
       End
    End If
 
-   Input #1, Name
-   Input #1, m_nIdNo
-   Input #1, m_ResourceType
-   Input #1, m_ResourcePath
+   Input #nFileNumber, Name
+   Input #nFileNumber, m_nIdNo
+   Input #nFileNumber, m_ResourceType
+   Input #nFileNumber, m_ResourcePath
    SetFileName ""
 End Sub
 

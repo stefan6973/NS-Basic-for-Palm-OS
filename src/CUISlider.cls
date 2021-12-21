@@ -53,9 +53,9 @@ Private Sub class_initialize()
 End Sub
 
 Public Sub PrcOut()
-Dim slider As SliderOut
-Dim c As Byte
-Dim templen As Integer
+   Dim c As Byte
+   Dim slider As SliderOut
+   Dim templen As Integer
    
    slider.id.w = cvtWord(obj.IdNo)
    slider.bounds.topleft.x = cvtWord(obj.OrigLeft)
@@ -87,6 +87,7 @@ Dim templen As Integer
    slider.Value.w = cvtWord(Value)
    slider.Reserved = &H0
    slider.activeSliderPtr.c = 0
+
    c = &HE
    Put #8, , c
    c = &H0
@@ -102,12 +103,12 @@ Dim templen As Integer
    'Put #9, , c
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
+Public Sub Restore(ByVal nFileNumber as integer)
   
-   Input #1, version
+   Dim version As Integer
+   Input #nFileNumber, version
    If version = 1 Then
-      Input #1, _
+      Input #nFileNumber, _
                mvarAnchorLeft, _
                mvarFrame, _
                mvarNonBoldFrame, _
@@ -118,20 +119,20 @@ Dim version As Integer
                m_nValue, _
                thumbBitmapID, _
                backgroundBitmapID
-      obj.Restore
+      obj.Restore #nFileNumber
    Else
       MsgBox gStringTable(3416) + str(version) '"Error: Invalid Slider Version " & version & ")"
       End
    End If
 End Sub
 
-Public Sub Save()
-Dim version As Integer
+Public Sub Save(ByVal nFileNumber as integer)
   
+   Dim version As Integer
    version = 1
-   Write #1, obj.Kind
-   Write #1, version
-   Write #1, _
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, version
+   Write #nFileNumber, _
             mvarAnchorLeft, _
             mvarFrame, _
             mvarNonBoldFrame, _
@@ -142,11 +143,11 @@ Dim version As Integer
             m_nValue, _
             thumbBitmapID, _
             backgroundBitmapID
-   obj.Save
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String
-Dim temp As String
+   Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf

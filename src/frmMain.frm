@@ -1855,7 +1855,7 @@ Dim proj As CProject
 End Sub
 
 Private Sub mnuFileSaveProject_Click()
-Dim proj As CProject
+   Dim proj As CProject
 
    ShowStatus gStringTable(3231), True '"Saving..."
    'If Not ActiveForm Is Nothing Then Set proj = LocateProject(ActiveForm.GlobalID)
@@ -1867,9 +1867,9 @@ Dim proj As CProject
 End Sub
 
 Private Sub SaveProject(ByVal proj As CProject)
-Dim i As Integer
-Dim k As Integer
-Dim strRecent(20) As String
+   Dim i As Integer
+   Dim k As Integer
+   Dim strRecent(20) As String
 
    'Check this flag, sending to Save As if project has never been saved
    If Not proj.Saved Then
@@ -1888,7 +1888,7 @@ Dim strRecent(20) As String
    Else
       Open fileDirectory + "\recent.dat" For Input As #1
       For i = 1 To UBound(strRecent)
-         Input #1, strRecent(i)
+         Input #nFileNumber, strRecent(i)
       Next
       Close #1
    End If
@@ -1904,11 +1904,11 @@ Dim strRecent(20) As String
    For i = 0 To UBound(strRecent)
       If strRecent(i) <> "" Then
          k = k + 1
-         Write #1, strRecent(i)
+         Write #nFileNumber, strRecent(i)
       End If
    Next
    Do While k < UBound(strRecent)
-      Write #1, ""
+      Write #nFileNumber, ""
       k = k + 1
    Loop
    Close #1
@@ -2890,7 +2890,7 @@ Private Sub mnuFileProperties_Click()
 End Sub
 
 Private Sub mnuFileSaveAll_Click()
-Dim proj As CProject
+   Dim proj As CProject
 
    For Each proj In gProjects
       SaveProject proj
@@ -3788,7 +3788,7 @@ Dim strPath As String
 
    Open fileDirectory + "\recent.dat" For Input As #1
    For i = 1 To mnuFileMRU.UBound
-      Input #1, strPath
+      Input #nFileNumber, strPath
       If strPath <> "" Then
          mnuFileMRU(i).caption = "&" & i & " " & Mid(strPath, InStrRev(strPath, "\") + 1)
          mnuFileMRU(i).Tag = strPath
@@ -3967,7 +3967,7 @@ If trace Then MsgBox "ShowNewOpen" & 1
    If Dir(fileDirectory + "\recent.dat", vbNormal) <> "" Then
       Open fileDirectory + "\recent.dat" For Input As #1
       For i = 1 To 20
-         Input #1, strRecent
+         Input #nFileNumber, strRecent
          If strRecent <> "" Then
             strRecentFile = Mid(strRecent, InStrRev(strRecent, "\") + 1)
             strRecentPath = Left(strRecent, Len(strRecent) - Len(strRecentFile))

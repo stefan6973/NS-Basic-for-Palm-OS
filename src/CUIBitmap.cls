@@ -121,23 +121,23 @@ Dim bBitmapOk As Boolean
    Put #9, , bmp
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
-Dim properties As String
-Dim proplist() As String
-Dim i As Integer
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim version As Integer
+   Dim properties As String
+   Dim proplist() As String
+   Dim i As Integer
 
-   Input #1, version
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3267) + version '"Error: Invalid bitmap version (" & version & ")"
       End
    End If
 
-   Input #1, m_nResourceID
+   Input #nFileNumber, m_nResourceID
    If version > 1 Then
-      Input #1, properties
+      Input #nFileNumber, properties
    End If
-   obj.Restore
+   obj.Restore #nFileNumber
    If m_nResourceID = 0 Then m_nResourceID = obj.IdNo
    
    If version > 1 Then
@@ -148,12 +148,12 @@ Dim i As Integer
    End If
 End Sub
 
-Public Sub Save()
-   Write #1, obj.Kind
-   Write #1, kVersion
-   Write #1, m_nResourceID
-   Write #1, getAllProperties
-   obj.Save
+Public Sub Save(ByVal nFileNumber as integer)
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, m_nResourceID
+   Write #nFileNumber, getAllProperties
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String

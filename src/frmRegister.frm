@@ -78,27 +78,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Private Sub butDone_Click()
-Dim oldDemoSW As String
-   'MsgBox "butDone_Click() " & DemoSw & allowRegistration
-
-   If allowRegistration = True Then
-      oldDemoSW = DemoSw
-      glSerialNumber = fldSerialNumber.Text
-      CheckSerialNumber
-      'MsgBox "butDone_Click() demosw=" & DemoSw
-      If DemoSw = "n" Then 'save the serial number
-         res = MWinReg.SetRegValue(MWinReg.hKey, MWinReg.SubKey, "SerialNumber", glSerialNumber)
-      End If
-      If oldDemoSW = "y" And DemoSw = "n" Then MsgBox gStringTable(3263) '"Congratulations!  You now have a full licenced version."
-      If oldDemoSW = "n" And DemoSw = "y" Then
-         MsgBox gStringTable(3264) '"Reverting to Unregistered Demo.  Please reenter your Serial Number."
-         glSerialNumber = "Unregistered Demo"
-         res = MWinReg.SetRegValue(MWinReg.hKey, MWinReg.SubKey, "SerialNumber", glSerialNumber)
-         Exit Sub
-      End If
-   Else
-      MsgBox gStringTable(3265) '"This is a Demo copy - it cannot be registered.  Please contact NS Basic Corporation to obtain a full copy with all the latest features."
-   End If
+   glSerialNumber = fldSerialNumber.Text
+   CheckSerialNumber
+   res = MWinReg.SetRegValue(MWinReg.hKey, MWinReg.SubKey, "SerialNumber", glSerialNumber)
    Unload Me
 End Sub
 

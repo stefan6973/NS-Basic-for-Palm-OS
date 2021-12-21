@@ -45,35 +45,40 @@ Public Sub PrcOut()
 
    Put #9, , tbl
 End Sub
-Public Sub restore()
-   Dim i As Integer
-   Dim version As Integer
 
-   Input #1, version
+Public Sub Restore(ByVal nFileNumber as integer)
+
+   Dim version As Integer
+   Input #nFileNumber, version
    If version = 1 Then
-      Input #1, mvarRows, mvarColumns
+      Input #nFileNumber, mvarRows, mvarColumns
+      Dim i As Integer
       For i = 1 To mvarColumns
-         Input #1, mvarColumnWidth(i)
+         Input #nFileNumber, mvarColumnWidth(i)
       Next
-      obj.restore
+      obj.Restore #nFileNumber
    Else
       MsgBox "error -- version " & version & " is invalid for 'UITable'"
       End
    End If
 End Sub
-Public Sub save()
-   Dim version As Integer
-   Dim i As Integer
 
+Public Sub Save(ByVal nFileNumber as integer)
+
+   Dim version As Integer
    version = 1
-   Write #1, obj.Kind
-   Write #1, version
-   Write #1, Rows, Columns
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, version
+   Write #nFileNumber, Rows, Columns
+
+   Dim i As Integer
    For i = 1 To Columns
-      Write #1, GetColumnWidth(i)
+      Write #nFileNumber, GetColumnWidth(i)
    Next
-   obj.save
+
+   obj.Save #nFileNumber
 End Sub
+
 Public Function Copy() As String
    Dim version As Integer
    Dim i As Integer

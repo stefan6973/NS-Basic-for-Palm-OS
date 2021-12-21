@@ -219,46 +219,49 @@ Dim obj As Object, o2 As Object
    Close 7
 End Sub
 
-Public Sub Restore()
-Dim theNoItems As Integer
-Dim i As Integer
-Dim version As Integer
-Dim strname As String
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim theNoItems As Integer
+   Dim i As Integer
+   Dim version As Integer
+   Dim strname As String
 
-   Input #1, version
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3237) & version '"Error: Invalid Form Version
       End
    End If
 
-   Input #1, m_nIdNo, m_bModal, m_bFrame, m_bSaveBehind, m_nDefaultButtonId, _
+   Input #nFileNumber, m_nIdNo, m_bModal, m_bFrame, m_bSaveBehind, m_nDefaultButtonId, _
          m_nOriginLeft, m_nOriginTop, m_nWidth, m_nHeight, m_nTipsIdNo, _
          m_bIsDefaultForm, m_bOptTitle
-   Input #1, Title
+   Input #nFileNumber, Title
    If version > 1 Then
       'To allow property validation
-      Input #1, strname
+      Input #nFileNumber, strname
    End If
    
-   Input #1, pgm_script
+   Input #nFileNumber, pgm_script
    ProcessScript pgm_script, FromDisk
-   Input #1, m_nTipsIdNo 'yes, it's read in twice no. No harm done...
+   Input #nFileNumber, m_nTipsIdNo 'yes, it's read in twice no. No harm done...
 
-   Input #1, pgm_script_after
+   Input #nFileNumber, pgm_script_after
    ProcessScript pgm_script_after, FromDisk
 
    If version > 2 Then
-      Input #1, event_script
+      Input #nFileNumber, event_script
       ProcessScript event_script, FromDisk
    End If
    
    If Not TipsIdNo = 0 Then
-      Input #1, m_sTips
+      Input #nFileNumber, m_sTips
    End If
    obj_code_id = IdNo - 1
    
    If version > 3 Then '10.16.06 GH Navigation info
-      Input #1, m_nNavFlags, m_nNavFirstID, m_nNavJumpToID, m_nNavBottomLeftID
+      Input #nFileNumber, m_nNavFlags, m_nNavFirstID, m_nNavJumpToID, m_nNavBottomLeftID
    End If
    
    'For property validation and script renaming
@@ -269,52 +272,52 @@ Dim strname As String
    End If
 End Sub
 
-Public Sub Save()
-Dim strTemp As String
-Dim obj As Object
-Dim frm As frmCode
+Public Sub Save(ByVal nFileNumber as interger)
+   Dim strTemp As String
+   Dim obj As Object
+   Dim frm As frmCode
 
    If Tips <> "" And TipsIdNo = 0 Then
       TipsIdNo = Project.GetNextSeqNo
    End If
 
-   Write #1, "vew"
-   Write #1, kVersion, IdNo, Modal, Frame, SaveBehind, DefaultButtonID, _
+   Write #nFileNumber, "vew"
+   Write #nFileNumber, kVersion, IdNo, Modal, Frame, SaveBehind, DefaultButtonID, _
          OriginLeft, OriginTop, Width, Height, TipsIdNo, _
          IsDefaultForm, OptTitle
-   Write #1, Title
-   Write #1, Name
+   Write #nFileNumber, Title
+   Write #nFileNumber, Name
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|before")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
    strTemp = pgm_script
    ProcessScript strTemp, ToDisk
-   Write #1, strTemp
-   Write #1, TipsIdNo 'yes, it's written out twice. No real harm...
+   Write #nFileNumber, strTemp
+   Write #nFileNumber, TipsIdNo 'yes, it's written out twice. No real harm...
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|after")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
    strTemp = pgm_script_after
    ProcessScript strTemp, ToDisk
-   Write #1, strTemp
+   Write #nFileNumber, strTemp
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|event")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
    strTemp = event_script
    ProcessScript strTemp, ToDisk
-   Write #1, strTemp
+   Write #nFileNumber, strTemp
    
    If TipsIdNo > 0 Then
-      Write #1, Tips
+      Write #nFileNumber, Tips
    End If
    
    '10.16.06 GH Navigation fields
-   Write #1, NavFlags, NavFirstID, NavJumpToID, NavBottomLeftID
+   Write #nFileNumber, NavFlags, NavFirstID, NavJumpToID, NavBottomLeftID
    
    For Each obj In ObjectCollection
       Set frm = frmMain.GetMDIChild(obj.obj.GlobalID & "|code")
-      If Not frm Is Nothing Then frm.Save
-      obj.Save
+      If Not frm Is Nothing Then frm.Save #nFileNumber
+      obj.Save #nFileNumber
    Next
 End Sub
 

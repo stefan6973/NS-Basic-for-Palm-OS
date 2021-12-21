@@ -26,41 +26,41 @@ Private Sub class_initialize()
    IdNo = 0
 End Sub
 
-Public Sub Restore()
+Public Sub Restore(ByVal nFileNumber as integer)
 Dim version As Integer
 Dim i As Integer
 Dim cnt As Integer
 Dim mBar As CMenuBar
 
-   Input #1, version
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3239) + version '"Error: Invalid Menu Version
       End
    End If
 
-   Input #1, Name
+   Input #nFileNumber, Name
 
-   If version > 1 Then Input #1, IdNo
+   If version > 1 Then Input #nFileNumber, IdNo
 
    SetGlobalID ""
-   Input #1, cnt
+   Input #nFileNumber, cnt
    For i = 1 To cnt
       Set mBar = New CMenuBar
       mBar.SetGlobalID GlobalID
-      mBar.Restore
+      mBar.Restore #nFileNumber
       MenuBars.Add mBar, str(mBar.IdNo)
    Next
 End Sub
 
-Public Sub Save()
-Dim mBar As CMenuBar
+Public Sub Save(ByVal nFileNumber as interger)
+   Dim mBar As CMenuBar
 
-   Write #1, "mnu"
-   Write #1, kVersion, Name
-   Write #1, IdNo
-   Write #1, MenuBars.count
+   Write #nFileNumber, "mnu"
+   Write #nFileNumber, kVersion, Name
+   Write #nFileNumber, IdNo
+   Write #nFileNumber, MenuBars.count
    For Each mBar In MenuBars
-      mBar.Save
+      mBar.Save #nFileNumber
    Next
 End Sub
 

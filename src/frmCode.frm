@@ -397,7 +397,7 @@ Public Sub ExecuteCommand()
    Editor.ExecuteCmd cmCmdChooseCmd, 0
 End Sub
 
-Public Sub Save()
+Public Sub Save(ByVal nFileNumber as interger)
    PutTheCodeBack
 End Sub
 

@@ -78,30 +78,30 @@ Private Sub class_initialize()
    obj_code_len = 0
 End Sub
 
-Public Sub Restore()
-Dim i As Integer
-Dim temp As String
-Dim version As Integer
-Dim strname As String
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim i As Integer
+   Dim temp As String
+   Dim version As Integer
+   Dim strname As String
 
-   Input #1, temp 'reads 'obj' tag
+   Input #nFileNumber, temp 'reads 'obj' tag
    If Not temp = "obj" Then
       MsgBox gStringTable(3248) + temp '"Error: Invalid Object Type
    End If
 
-   Input #1, version
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3249) + version '"Error: Invalid Object Version (" & version & ")"
       End
    End If
 
    If version >= 2 Then
-      Input #1, m_strKind, strname, m_nIdNo, m_nOrigLeft, m_nOrigTop, _
+      Input #nFileNumber, m_strKind, strname, m_nIdNo, m_nOrigLeft, m_nOrigTop, _
          m_nHeight, m_nWidth, m_bUsable, m_nFontId, m_strLabel
       If version >= 3 Then
-         Input #1, m_nNavFlags, m_nNavAboveID, m_nNavBelowID
+         Input #nFileNumber, m_nNavFlags, m_nNavAboveID, m_nNavBelowID
       End If
-      Input #1, m_strScript
+      Input #nFileNumber, m_strScript
       ProcessScript m_strScript, FromDisk
       'Set default name directly
       m_strName = "object" & IdNo
@@ -111,20 +111,20 @@ Dim strname As String
    End If
 End Sub
 
-Public Sub Save()
-Dim strTemp As String
+Public Sub Save(ByVal nFileNumber as integer)
+   Dim strTemp As String
 
-   Write #1, "obj"
-   Write #1, kVersion
-   Write #1, Kind, Name, IdNo, OrigLeft, OrigTop, Height, Width, Usable, FontID, Label, _
+   Write #nFileNumber, "obj"
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, Kind, Name, IdNo, OrigLeft, OrigTop, Height, Width, Usable, FontID, Label, _
       NavFlags, NavAboveID, NavBelowID
    strTemp = script
    ProcessScript strTemp, ToDisk
-   Write #1, strTemp
+   Write #nFileNumber, strTemp
 End Sub
 
 Public Function Copy() As String
-Dim strTemp As String
+   Dim strTemp As String
 
    Copy = Quote("obj") + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -137,9 +137,9 @@ Dim strTemp As String
 End Function
 
 Public Sub Paste(ByRef strLines() As String)
-Dim tokens() As String
-Dim i, nScriptEnd As Integer
-Dim oldIdNo As Integer
+   Dim tokens() As String
+   Dim i, nScriptEnd As Integer
+   Dim oldIdNo As Integer
 
    'Get obj and version
    If LCase(UnQuote(strLines(1))) <> "obj" Then

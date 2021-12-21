@@ -745,7 +745,7 @@ Public Sub SaveImages(p1 As String, p2 As String, p3 As String, p4 As String, p5
 Dim paths(9) As String
    
    If (p2 = "") And (p3 = "") And (p4 = "") And (p5 = "") And (p1h = "") And (p2h = "") And (p3h = "") And (p4h = "") And (p5h = "") Then
-      Write #1, GetRelativePath(gTarget.pathname, p1)
+      Write #nFileNumber, GetRelativePath(gTarget.pathname, p1)
    Else
       paths(0) = GetRelativePath(gTarget.pathname, p1)
       paths(1) = GetRelativePath(gTarget.pathname, p2)
@@ -757,7 +757,7 @@ Dim paths(9) As String
       paths(7) = GetRelativePath(gTarget.pathname, p3h)
       paths(8) = GetRelativePath(gTarget.pathname, p4h)
       paths(9) = GetRelativePath(gTarget.pathname, p5h)
-      Write #1, Join(paths, ",")
+      Write #nFileNumber, Join(paths, ",")
    End If
 End Sub
 
@@ -765,7 +765,7 @@ Public Sub RestoreImages(ByRef p1 As String, ByRef p2 As String, ByRef p3 As Str
 Dim paths() As String
 Dim s As String
 
-   Input #1, s
+   Input #nFileNumber, s
    paths = Split(s, ",")
    If UBound(paths) = 0 Then p1 = paths(0) Else p1 = ""
    If UBound(paths) > 0 Then  '07/19/01 gh

@@ -54,7 +54,6 @@ Global gCommandLineOptions As String
 Global typ As CTypeDef
 Global loadType As String
 Global LocalID As String
-Global DemoSw As String * 1
 Global installType As String
 Global compileOkSw As Boolean
 Global fileDirectory As String
@@ -12308,9 +12307,11 @@ LoopOnArg:
    End If
 
 End Sub
+
 Sub parse_beep()
    out_one_char &H5
 End Sub
+
 '06102002 added entire subroutine
 Sub parse_clearfields()
     Dim view2 As CForm
@@ -12343,6 +12344,7 @@ Sub parse_clearfields()
       print_err gStringTable(3365) '"NEXTFORM references an unknown screen name.")
    End If         '06102002
 End Sub
+
 '06102002 added entire subroutine ****
 Sub parse_setheapvariablecount()
   get_dataname_num
@@ -14618,11 +14620,9 @@ Dim serNo As Long
 If serNo > 0 Then
    'MsgBox "checkSerialNumber() serno>0"
    LitePro = "p"
-   DemoSw = "n"
 Else
    'MsgBox "checkSerialNumber() serno=0"
    LitePro = "l"
-   DemoSw = "y"
    glSerialNumber = "Unregistered Demo"
 End If
 End Sub

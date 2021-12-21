@@ -294,7 +294,7 @@ Private Sub Form_Load()
    If Dir(GlobalPath + "\recent.dat", vbNormal) <> "" Then
       Open GlobalPath + "\recent.dat" For Input As #1
       For i = 1 To 20
-         Input #1, strRecent
+         Input #nFileNumber, strRecent
          If strRecent <> "" Then
             strRecentFile = Mid(strRecent, InStrRev(strRecent, "\") + 1)
             strRecentPath = Left(strRecent, Len(strRecent) - Len(strRecentFile))

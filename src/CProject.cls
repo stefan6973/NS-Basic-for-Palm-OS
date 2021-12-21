@@ -100,17 +100,20 @@ Private Const kResStrings As Integer = 2000
 Private Const kResStrings2200 As Integer = 2200
 Private Const kErrStrings As Integer = 2050
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub class_initialize()
-Dim i As Integer
-Dim sv As CDataElement
-Dim av As CDataElement
+   Dim i As Integer
+   Dim sv As CDataElement
+   Dim av As CDataElement
 
-'   Set model = Me
+   '   Set model = Me
 
-'What the Hell is dummyObject??  03/07/2001 MMD
-'   Set dummyObject = New UIPushbutton
-'   dummyObject.obj.Name = "..dummy***"
-'   Set Nil = dummyObject
+   'What the Hell is dummyObject??  03/07/2001 MMD
+   '   Set dummyObject = New UIPushbutton
+   '   dummyObject.obj.Name = "..dummy***"
+   '   Set Nil = dummyObject
 
    Name = "Project1"
    ApplType = "appl"
@@ -163,103 +166,105 @@ Dim av As CDataElement
 'sgBox "after model init decnt=" + str(DataCollection.Count)
 End Sub
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Public Function PrcOut() As Long
-Dim db As cDatabase     'added 09242003
-Dim colNo As Integer  'added 09242003
-Dim saveHighestSeqNo As Long
-Dim eno As Integer
-Dim lvl As Integer
-Dim mnuBar As CMenuBar
-Dim mnuBar2 As CMenuBar
-Dim mnu As CMenuElem
-Dim mnu2 As CMenuElem
-'   Dim firstFormTOC As Long
-Dim c As Byte
-Dim cod As New CCodeModule
-Dim view2 As CForm
-Dim para As New CParaTbl
-Dim t1 As Byte
-Dim t2 As Byte
-Dim t3 As Byte
-Dim t4 As Byte
-Dim id1 As Byte
-Dim id2 As Byte
-Dim offset As Long
-Dim bmp As CBitmapFile
-Dim res As CResourceFile
-Dim tmploc As Long
-Dim firstTocLocRecord3 As Long
-'Dim firstTocLocRecord4 As Long
-Dim prcHdr As prcHeader
-Dim pdbHdr As prcHeader
-Dim i As Integer
-Dim j As Integer
-Dim o As Object
-Dim typerec As Byte
-Dim Dummy As Byte
-Dim dummy2 As Long
-Dim ident As Integer
-Dim noItems As Integer
-Dim ctl As ctlOut
-Dim fld As FieldOut
+   Dim db As cDatabase     'added 09242003
+   Dim colNo As Integer  'added 09242003
+   Dim saveHighestSeqNo As Long
+   Dim eno As Integer
+   Dim lvl As Integer
+   Dim mnuBar As CMenuBar
+   Dim mnuBar2 As CMenuBar
+   Dim mnu As CMenuElem
+   Dim mnu2 As CMenuElem
+   '   Dim firstFormTOC As Long
+   Dim c As Byte
+   Dim cod As New CCodeModule
+   Dim view2 As CForm
+   Dim para As New CParaTbl
+   Dim t1 As Byte
+   Dim t2 As Byte
+   Dim t3 As Byte
+   Dim t4 As Byte
+   Dim id1 As Byte
+   Dim id2 As Byte
+   Dim offset As Long
+   Dim bmp As CBitmapFile
+   Dim res As CResourceFile
+   Dim tmploc As Long
+   Dim firstTocLocRecord3 As Long
+   'Dim firstTocLocRecord4 As Long
+   Dim prcHdr As prcHeader
+   Dim pdbHdr As prcHeader
+   Dim i As Integer
+   Dim j As Integer
+   Dim o As Object
+   Dim typerec As Byte
+   Dim Dummy As Byte
+   Dim dummy2 As Long
+   Dim ident As Integer
+   Dim noItems As Integer
+   Dim ctl As ctlOut
+   Dim fld As FieldOut
 
-Dim slider As SliderOut
-Dim gad As gadgetOut
-Dim si As shiftIndicOut
-Dim lab As labelOut
-Dim lst As listOut
-Dim scr As scrollbarOut
-Dim tbl As tableOut
-Dim titl As titleOut
-Dim popup As popupOut
-Dim wkstr As String
-Dim frm As formOut
-Dim vv As CForm
-Dim wk As String
-Dim bite As Byte
-Dim byte1 As Byte
-Dim byte2 As Byte
-Dim byte3 As Byte
-Dim byte4 As Byte
-Dim de As CDataElement
-Dim work As String
-Dim one_num As Double
-Dim q As Integer
-Dim zeroTerm As Byte
-Dim n As Integer
-Dim x As Integer
-Dim haveMenu(21) As Boolean
-Dim menu2 As CMenu
-Dim bmpform As bitmapOut
-Dim randNo As Integer
-Dim theByte As Byte
-Dim jjj As Integer
-Dim ii, ij As Integer
-Dim icb As Byte
-Dim icx As Byte
-Dim icy As Byte
-Dim byt As Byte
-Dim nnn As Integer
-Dim secByte As Byte
-Dim intwk As Long
-Dim iwk As Integer
-Dim tocRecords As Byte '10/12/00 GH
-Dim tocRec As Integer '10/12/00 GH
-Dim oldWord As Long '10/12/00 GH
-Dim newWord As Long '10/12/00 GH
-Dim tocLoc As Integer '10/12/00 GH
-Dim tocRecord(9) As Byte  '10/12/00 GH
-Dim tocName As String '10/12/00 GH
-Dim largeIconAddr As Long '10/12/00 GH
-Dim iconRec As Integer '10/12/00 GH
-Dim workLen As Integer '01/15/00 GH
-Dim objCnt As Integer     'added 09092002
-Dim navArray() As Integer 'added 10.13.06 GH
+   Dim slider As SliderOut
+   Dim gad As gadgetOut
+   Dim si As shiftIndicOut
+   Dim lab As labelOut
+   Dim lst As listOut
+   Dim scr As scrollbarOut
+   Dim tbl As tableOut
+   Dim titl As titleOut
+   Dim popup As popupOut
+   Dim wkstr As String
+   Dim frm As formOut
+   Dim vv As CForm
+   Dim wk As String
+   Dim bite As Byte
+   Dim byte1 As Byte
+   Dim byte2 As Byte
+   Dim byte3 As Byte
+   Dim byte4 As Byte
+   Dim de As CDataElement
+   Dim work As String
+   Dim one_num As Double
+   Dim q As Integer
+   Dim zeroTerm As Byte
+   Dim n As Integer
+   Dim x As Integer
+   Dim haveMenu(21) As Boolean
+   Dim menu2 As CMenu
+   Dim bmpform As bitmapOut
+   Dim randNo As Integer
+   Dim theByte As Byte
+   Dim jjj As Integer
+   Dim ii, ij As Integer
+   Dim icb As Byte
+   Dim icx As Byte
+   Dim icy As Byte
+   Dim byt As Byte
+   Dim nnn As Integer
+   Dim secByte As Byte
+   Dim intwk As Long
+   Dim iwk As Integer
+   Dim tocRecords As Byte '10/12/00 GH
+   Dim tocRec As Integer '10/12/00 GH
+   Dim oldWord As Long '10/12/00 GH
+   Dim newWord As Long '10/12/00 GH
+   Dim tocLoc As Integer '10/12/00 GH
+   Dim tocRecord(9) As Byte  '10/12/00 GH
+   Dim tocName As String '10/12/00 GH
+   Dim largeIconAddr As Long '10/12/00 GH
+   Dim iconRec As Integer '10/12/00 GH
+   Dim workLen As Integer '01/15/00 GH
+   Dim objCnt As Integer     'added 09092002
+   Dim navArray() As Integer 'added 10.13.06 GH
 
    saveHighestSeqNo = HighestSeqNo
    formCount = 0
-   If glSerialNumber = "Unregistered Demo" And DemoSw = "n" Then Exit Function '02/28/01 GH defeat crack
-
+   
    If FormCollection.count < 1 Then
       MsgBox gStringTable(1412), vbCritical 'Project will not compile without at least one form
       Exit Function
@@ -347,16 +352,14 @@ Dim navArray() As Integer 'added 10.13.06 GH
    pdbHdr.version.w = cvtWord(0)  'pdb
 
    'if demo make diff 2 otherwise make rand # 0-9 but not 2
-   If DemoSw = "n" Then
-      Do
-         randNo = Rnd() * 10
-         If (Not randNo = 2) And (Not randNo = 0) Then
-            Exit Do
-         End If
-      Loop
-   Else
-      randNo = 2
-   End If
+   
+   Do
+      randNo = Rnd() * 10
+      If (Not randNo = 2) And (Not randNo = 0) Then
+         Exit Do
+      End If
+   Loop
+
    PalmDatesTwo randNo, pdbHdr.createTime(0), pdbHdr.createTime(1), pdbHdr.createTime(2), _
       pdbHdr.createTime(3), pdbHdr.modTime(0), pdbHdr.modTime(1), pdbHdr.modTime(2), _
       pdbHdr.modTime(3)
@@ -722,21 +725,13 @@ gotIt:
          secByte = Rnd() * 255
       Else
          intwk = prcHdr.createTime(3)
-         If DemoSw = "n" Then
-            intwk = ((intwk + 123) * 98765)
-         Else
-            intwk = ((intwk + 913) * 11314)
-         End If
+         intwk = ((intwk + 123) * 98765)
          secByte = intwk Mod 255
       End If
       Put #3, , secByte
    Next
 
-   If DemoSw = "n" Then
-      iwk = intwk Mod 128
-   Else
-      iwk = intwk Mod 128 + 128
-   End If
+   iwk = intwk Mod 128
    secByte = iwk
    Put #3, , secByte
    secByte = 255 - iwk
@@ -1437,42 +1432,45 @@ dontWriteInit:
 
 End Function
 
-Public Sub Restore()
-Dim i As Long
-Dim version As Integer
-Dim oldversion As Integer
-Dim oldFrac As Integer
-Dim iconList As String
-Dim Dummy As String
-Dim s() As String
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim i As Long
+   Dim version As Integer
+   Dim oldversion As Integer
+   Dim oldFrac As Integer
+   Dim iconList As String
+   Dim Dummy As String
+   Dim s() As String
 
-   Input #1, version
+   Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3255) & version '"Error: Invalid Project Version (" & version & ")"
       End
    End If
 
-   Input #1, Name, m_strApplType, m_strCreatorID, HighestSeqNo
+   Input #nFileNumber, Name, m_strApplType, m_strCreatorID, HighestSeqNo
    If m_strApplType = "Test" Then ApplType = "appl"
 
-   If version > 4 Then Input #1, oldversion, oldFrac
+   If version > 4 Then Input #nFileNumber, oldversion, oldFrac
 
-   Input #1, pgm_script
+   Input #nFileNumber, pgm_script
    ProcessScript pgm_script, FromDisk
 
    If version > 1 Then
       RestoreImages SIF1, SIF2, SIF4, SIF8, SIF16, SIF1h, SIF2h, SIF4h, SIF8h, SIF16h
       RestoreImages LIF1, LIF2, LIF4, LIF8, LIF16, LIF1h, LIF2h, LIF4h, LIF8h, LIF16h
    End If
-   If version > 2 Then Input #1, launcherName
-   If version > 3 Then Input #1, LaunchVersion
+   If version > 2 Then Input #nFileNumber, launcherName
+   If version > 3 Then Input #nFileNumber, LaunchVersion
 #If NSBSymbian Then
    If version > 7 Then
-      Input #1, Company
-      Input #1, installFolder
+      Input #nFileNumber, Company
+      Input #nFileNumber, installFolder
       If installFolder = "" Then installFolder = "Installat."
-      Input #1, iconList
-      Input #1, UID3
+      Input #nFileNumber, iconList
+      Input #nFileNumber, UID3
       If UID3 = "" Then
          UID3 = gstrNextUID3
          gstrNextUID3 = Hex(CLng("&h" & gstrNextUID3) + 3)
@@ -1512,19 +1510,19 @@ Dim s() As String
    End If
 #Else
    If version > 7 Then
-      Input #1, Dummy
-      Input #1, Dummy
-      Input #1, Dummy
-      Input #1, Dummy
+      Input #nFileNumber, Dummy
+      Input #nFileNumber, Dummy
+      Input #nFileNumber, Dummy
+      Input #nFileNumber, Dummy
    End If
 #End If
    If version > 8 Then
-      Input #1, theme
+      Input #nFileNumber, theme
    End If
    gsTheme = theme
 
    If version > 5 Then
-      Input #1, termination_script
+      Input #nFileNumber, termination_script
       ProcessScript termination_script, FromDisk
    End If
    If version > 6 Then
@@ -1534,69 +1532,71 @@ Dim s() As String
    Saved = True
 End Sub
 
-Public Sub Save()
-Dim i As Integer
-Dim strTemp As String
-Dim obj As Object, o2 As Object
-Dim frm As frmCode
+Public Sub Save(ByVal nFileNumber as interger)
+   Dim i As Integer
+   Dim strTemp As String
+   Dim obj As Object, o2 As Object
+   Dim frm As frmCode
 
    On Error GoTo SaveError
-   Open Me.pathname For Output As #1
+   Dim nFileNumber as integer
+   nFileNumber = #1 'FreeFile
+   Open Me.pathname For Output As #nFileNumber
 
-   Write #1, "mdl"
-   Write #1, kVersion
-   Write #1, Name, ApplType, CreatorID, HighestSeqNo, VersionInteg, VersionFrac
+   Write #nFileNumber, "mdl"
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, Name, ApplType, CreatorID, HighestSeqNo, VersionInteg, VersionFrac
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|startup")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
    strTemp = pgm_script
    ProcessScript strTemp, ToDisk
-   Write #1, strTemp
+   Write #nFileNumber, strTemp
 
 '   SaveImages SIF1, SIF2, SIF4, SIF8
 '   SaveImages LIF1, LIF2, LIF4, LIF8
-   Write #1, m_nLargeIconID
-   Write #1, m_nSmallIconID
-   Write #1, launcherName
-   Write #1, LaunchVersion
+   Write #nFileNumber, m_nLargeIconID
+   Write #nFileNumber, m_nSmallIconID
+   Write #nFileNumber, launcherName
+   Write #nFileNumber, LaunchVersion
 #If NSBSymbian Then
-   Write #1, Company
-   Write #1, installFolder
-   Write #1, Join(Array(GetRelativePath(gTarget.pathname, LauncherIconS60), _
+   Write #nFileNumber, Company
+   Write #nFileNumber, installFolder
+   Write #nFileNumber, Join(Array(GetRelativePath(gTarget.pathname, LauncherIconS60), _
                         GetRelativePath(gTarget.pathname, LauncherIconUIQ), _
                         GetRelativePath(gTarget.pathname, License)), ",")
-   Write #1, UID3
+   Write #nFileNumber, UID3
 #Else
-   Write #1, ""
-   Write #1, ""
-   Write #1, ""
-   Write #1, ""
+   Write #nFileNumber, ""
+   Write #nFileNumber, ""
+   Write #nFileNumber, ""
+   Write #nFileNumber, ""
 #End If
-   Write #1, GetRelativePath(gTarget.pathname, theme)
+   Write #nFileNumber, GetRelativePath(gTarget.pathname, theme)
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|termination")
-   If Not frm Is Nothing Then frm.Save
+   If Not frm Is Nothing Then frm.Save #nFileNumber
    strTemp = termination_script
    ProcessScript strTemp, ToDisk
-   Write #1, strTemp
+   Write #nFileNumber, strTemp
 
    For Each obj In BitmapCollection
-      obj.Save
+      obj.Save #nFileNumber
    Next
    For Each obj In ResourceCollection
-      obj.Save
+      obj.Save #nFileNumber
    Next
    For Each obj In MenuCollection
-      obj.Save
+      obj.Save #nFileNumber
    Next
    For Each obj In CodeCollection
-      obj.Save
+      obj.Save #nFileNumber
    Next
    For Each obj In FormCollection
-      obj.Save
+      obj.Save #nFileNumber
    Next
-   Write #1, "end"
-   Close #1
+   Write #nFileNumber, "end"
+   Close #nFileNumber
    Saved = True
    Exit Sub
 
@@ -1605,9 +1605,9 @@ SaveError:
 End Sub
 
 Public Sub Paste(ByRef strLines() As String)
-Dim frm As CForm
-Dim mnu As New CMenu
-Dim obj As Object
+   Dim frm As CForm
+   Dim mnu As New CMenu
+   Dim obj As Object
 
    If strLines(0) <> kClipboardHeader Then Exit Sub
    Select Case LCase(UnQuote(strLines(1)))
@@ -1983,17 +1983,21 @@ Public Function GetNextSeqNo() As Integer
 End Function
 
 Public Function OpenProject(ByVal strPath As String) As Boolean
-Dim o As Object
-Dim bmp As CBitmapFile
-Dim Kind As String
-Dim saveHighSeqNo As Integer
-Dim frm As CForm
-Dim projectDir As String
+   Dim o As Object
+   Dim bmp As CBitmapFile
+   Dim Kind As String
+   Dim saveHighSeqNo As Integer
+   Dim frm As CForm
+   Dim projectDir As String
 
-'MMD   stage = "l"
+
+   'MMD   stage = "l"
    OpenProject = False
    On Error GoTo gotCancel
-   Open strPath For Input As #1
+
+   Dim nFileNumber As Integer
+   nFileNumber = #1 'FreeFile
+   Open strPath For Input As #nFileNumber
    
    'Change the current directory to the project file directory
    projectDir = Left(strPath, InStrRev(strPath, "\"))
@@ -2001,103 +2005,103 @@ Dim projectDir As String
    ChDir projectDir
    
    Do
-      Input #1, Kind
+      Input #nFileNumber, Kind
       Select Case Kind
-      Case "mdl", "proj"
-         Restore
-'         saveHighSeqNo = o.HighestSeqNo
-'         o.HighestSeqNo = 0
-      Case "bmpfile"
-         Set o = New CBitmapFile
-         o.Restore
-         o.Project = Me
-         AddBitmap o, o.IdNo
-      Case "resfile"
-         Set o = New CResourceFile
-         o.Restore
-         o.Project = Me
-         AddResource o, o.IdNo
-      Case "mnu"
-         Set o = New CMenu
-'         Set menu = o
-         o.SetGlobalID GlobalID
-         o.Restore
-'         MenuCollection.Add o
-         AddMenu o
-      Case "mod"
-         Set o = New CCodeModule
-'         Set cod = o
-         'o.IdNo = GetNextSeqNo     '12.04.06 GH
-         o.Restore
-         If Len(o.path) = 0 Then
-'            Set cod = Nothing
-            Set o = Nothing
-         Else
-            CodeCollection.Add o
-         End If
-      Case "vew", "form"
-         Set frm = New CForm
-         frm.Restore
-         frm.Project = Me
-         FormCollection.Add frm
-      Case "bmp", "bitmap"
-         Set o = New CUIBitmap
-         RestoreUIObject frm, o
-      Case "but", "button"
-         Set o = New CUIButton
-         RestoreUIObject frm, o
-      Case "chk", "checkbox"
-         Set o = New CUICheckbox
-         RestoreUIObject frm, o
-      Case "cho", "choicebox", "pus", "pushbutton"
-         Set o = New CUIPushbutton
-         RestoreUIObject frm, o
-      Case "fld", "field"
-         Set o = New CUIField
-         RestoreUIObject frm, o
-      Case "gad", "gadget"
-         Set o = New CUIGadget
-         RestoreUIObject frm, o
-      Case "lbl", "label"
-         Set o = New CUILabel
-         RestoreUIObject frm, o
-      Case "lst", "list"
-         Set o = New CUIList
-         RestoreUIObject frm, o
-      Case "pop", "popup"
-         Set o = New CUIPopup
-         RestoreUIObject frm, o
-      Case "rpt", "repeater"
-         Set o = New CUIRepeater
-         RestoreUIObject frm, o
-      Case "scr", "scrollbar"
-         Set o = New CUIScrollbar
-         RestoreUIObject frm, o
-      Case "sel", "selector"
-         Set o = New CUISelector
-         RestoreUIObject frm, o
-      Case "shf", "gsi"
-         Set o = New CUIGraffitiShiftIndicator
-         RestoreUIObject frm, o
-      Case "sli", "slider"
-         Set o = New CUISlider
-         RestoreUIObject frm, o
-      Case "grd", "grid"
-         Set o = New CUIGrid
-         RestoreUIObject frm, o
-      Case "end"
-         Exit Do
-      Case "data"
-         Set o = New CDataElement
-         o.Restore
-         AddDataElement o
-      Case Else
-         MsgBox gStringTable(3258) + Kind '"Error: Illegal Object Type (" + Kind + ")"
-         End
+         Case "mdl", "proj"
+            Me.Restore #nFileNumber
+   '         saveHighSeqNo = o.HighestSeqNo
+   '         o.HighestSeqNo = 0
+         Case "bmpfile"
+            Set o = New CBitmapFile
+            o.Restore #nFileNumber
+            o.Project = Me
+            AddBitmap o, o.IdNo
+         Case "resfile"
+            Set o = New CResourceFile
+            o.Restore #nFileNumber
+            o.Project = Me
+            AddResource o, o.IdNo
+         Case "mnu"
+            Set o = New CMenu
+   '         Set menu = o
+            o.SetGlobalID GlobalID
+            o.Restore #nFileNumber
+   '         MenuCollection.Add o
+            AddMenu o
+         Case "mod"
+            Set o = New CCodeModule
+   '         Set cod = o
+            'o.IdNo = GetNextSeqNo     '12.04.06 GH
+            o.Restore #nFileNumber
+            If Len(o.path) = 0 Then
+   '            Set cod = Nothing
+               Set o = Nothing
+            Else
+               CodeCollection.Add o
+            End If
+         Case "vew", "form"
+            Set frm = New CForm
+            frm.Restore #nFileNumber
+            frm.Project = Me
+            FormCollection.Add frm
+         Case "bmp", "bitmap"
+            Set o = New CUIBitmap
+            RestoreUIObject #nFileNumber, frm, o
+         Case "but", "button"
+            Set o = New CUIButton
+            RestoreUIObject #nFileNumber, frm, o
+         Case "chk", "checkbox"
+            Set o = New CUICheckbox
+            RestoreUIObject #nFileNumber, frm, o
+         Case "cho", "choicebox", "pus", "pushbutton"
+            Set o = New CUIPushbutton
+            RestoreUIObject #nFileNumber, frm, o
+         Case "fld", "field"
+            Set o = New CUIField
+            RestoreUIObject #nFileNumber, frm, o
+         Case "gad", "gadget"
+            Set o = New CUIGadget
+            RestoreUIObject #nFileNumber, frm, o
+         Case "lbl", "label"
+            Set o = New CUILabel
+            RestoreUIObject #nFileNumber, frm, o
+         Case "lst", "list"
+            Set o = New CUIList
+            RestoreUIObject #nFileNumber, frm, o
+         Case "pop", "popup"
+            Set o = New CUIPopup
+            RestoreUIObject #nFileNumber, frm, o
+         Case "rpt", "repeater"
+            Set o = New CUIRepeater
+            RestoreUIObject #nFileNumber, frm, o
+         Case "scr", "scrollbar"
+            Set o = New CUIScrollbar
+            RestoreUIObject #nFileNumber, frm, o
+         Case "sel", "selector"
+            Set o = New CUISelector
+            RestoreUIObject #nFileNumber, frm, o
+         Case "shf", "gsi"
+            Set o = New CUIGraffitiShiftIndicator
+            RestoreUIObject #nFileNumber, frm, o
+         Case "sli", "slider"
+            Set o = New CUISlider
+            RestoreUIObject #nFileNumber, frm, o
+         Case "grd", "grid"
+            Set o = New CUIGrid
+            RestoreUIObject #nFileNumber, frm, o
+         Case "end"
+            Exit Do
+         Case "data"
+            Set o = New CDataElement
+            o.Restore #nFileNumber
+            AddDataElement o
+         Case Else
+            MsgBox gStringTable(3258) + Kind '"Error: Illegal Object Type (" + Kind + ")"
+            End
       End Select
    Loop
    
-   Close #1
+   Close #nFileNumber
    On Error GoTo 0
    pathname = strPath
    OpenProject = True
@@ -2109,8 +2113,8 @@ gotCancel:
    End
 End Function
 
-Private Sub RestoreUIObject(ByVal frm As CForm, ByVal obj As Object)
-   obj.Restore
+Private Sub RestoreUIObject(ByVal nFileNumber as integer, ByVal frm As CForm, ByVal obj As Object)
+   obj.Restore #nFileNumber
    frm.ObjectCollection.Add obj
    obj.obj.Form = frm
 End Sub

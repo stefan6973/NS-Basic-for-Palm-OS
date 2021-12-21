@@ -127,26 +127,26 @@ Dim templen As Integer
    End If
 End Sub
 
-Public Sub Restore()
-Dim version As Integer
+Public Sub Restore(ByVal nFileNumber as integer)
+   Dim version As Integer
    
-   Input #1, version
+   Input #nFileNumber, version
    If version <> kVersion Then
       MsgBox gStringTable(3279) + version '"Error: Invalid Field Version (" & version & ")"
       End
    End If
 
-   Input #1, m_bEditable, m_bUnderline, m_bSingleLine, m_bDynamicSize, _
+   Input #nFileNumber, m_bEditable, m_bUnderline, m_bSingleLine, m_bDynamicSize, _
       m_bLeftJustified, m_nMaxCharacters, m_bAutoShift, m_bHasScrollbar, m_bNumeric
-   obj.Restore
+   obj.Restore #nFileNumber
 End Sub
 
-Public Sub Save()
-   Write #1, obj.Kind
-   Write #1, kVersion
-   Write #1, Editable, Underline, SingleLine, DynamicSize, LeftJustified, _
+Public Sub Save(ByVal nFileNumber as integer)
+   Write #nFileNumber, obj.Kind
+   Write #nFileNumber, kVersion
+   Write #nFileNumber, Editable, Underline, SingleLine, DynamicSize, LeftJustified, _
       MaxCharacters, AutoShift, HasScrollbar, Numeric
-   obj.Save
+   obj.Save #nFileNumber
 End Sub
 
 Public Function Copy() As String
