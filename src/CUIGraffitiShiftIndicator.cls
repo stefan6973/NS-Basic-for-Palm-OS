@@ -27,9 +27,9 @@ Private Const kMethods As String = "Hide-Show"
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "GSI"
+   obj.Name = "GSI"
    obj.Kind = "shf"
    obj.Width = 8
    obj.Height = 8
@@ -39,8 +39,8 @@ End Sub
 '
 '------------------------------------------------------------
 Sub PrcOut()
-	Dim c As Byte
-	Dim si As shiftIndicOut
+   Dim c As Byte
+   Dim si As shiftIndicOut
 
    si.pos.x = cvtWord(obj.OrigLeft)
    si.pos.y = cvtWord(obj.OrigTop)
@@ -57,7 +57,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim version As Integer
 
    Input #nFileNumber, version
@@ -66,16 +66,16 @@ Public Sub Restore(ByVal nFileNumber as integer)
       End
    End If
 
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
@@ -91,8 +91,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "shf" Then
@@ -118,7 +118,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-	Dim i As Integer, h As Integer, w As Integer
+   Dim i As Integer, h As Integer, w As Integer
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -143,10 +143,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -159,7 +159,7 @@ Public Sub GetProperty()
    Case kUserProps + 3: obj.GetProperty "Left"
    Case kUserProps + 4: obj.GetProperty "Top"
    End Select
-   gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+   gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    nProp = nProp + 1
 End Sub
 

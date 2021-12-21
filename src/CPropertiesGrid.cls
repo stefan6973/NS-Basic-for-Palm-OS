@@ -138,7 +138,7 @@ Public Sub HideEditors()
    mEdit.Visible = False
    mList.Visible = False
    mButton.Visible = False
-   mButton.Value = 0
+   mButton.value = 0
    mListProp.Visible = False
    mEllipsis.Visible = False
    m_bList = False
@@ -197,7 +197,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub SetList()
-	Dim strItems() As String, strItem As Variant
+   Dim strItems() As String, strItem As Variant
 
    HideEditors
    SetEdit
@@ -248,7 +248,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mButton_Click()
 '   If mButton.Value = 1 Then mButton.Value = 0
-   If mButton.Value = 0 Then
+   If mButton.value = 0 Then
       mListProp.Visible = False
       mEdit.Visible = False
       Exit Sub
@@ -335,7 +335,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mEdit_LostFocus()
-	Dim prevValue As String
+   Dim prevValue As String
     
    mButton.Visible = False
    If Not mEdit.Enabled Then Exit Sub
@@ -350,94 +350,119 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mEllipsis_Click()
-	Dim strData() As String
-	Dim filename As String
-	Dim fontname As String
-	Dim oleNewColor As OLE_COLOR
-	Dim obj As Object
-	Dim fTextEditDlg As New frmTextEditDlg
-	Dim sFile() As String
-	Dim trace As Boolean
-sFile = Split(gStringTable(2200), ">") 'get "File"
-trace = True
+   Dim filename As String
+   Dim fontname As String
+   Dim oleNewColor As OLE_COLOR
+   Dim obj As Object
+   Dim fTextEditDlg As New frmTextEditDlg
+
+   enableTracing False, False, "mEllipsis"
+   
+   Dim sFile() As String
+   sFile = Split(gStringTable(2200), ">") 'get "File"
 
    If mEllipsis.Tag = "" Then mEllipsis.Tag = "Resource" 'this is definitely the wrong fix for the bug
+   
+   Dim strData() As String
    strData = Split(mEllipsis.Tag, ">")
-   If trace Then MsgBox "mEllipsis_Click 1 " & strData(0)
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1, strData(0)
+   '~~~~~~~~~~~~~~~~~~~~
+
    Select Case strData(0)
-   Case sFile(0), "File" 'File
-      If trace Then MsgBox "mEllipsis_Click 2"
-      frmMain.dlgCommonDialog.DialogTitle = strData(1)
-      If InStr(strData(1), "Theme") Then
-         frmMain.dlgCommonDialog.InitDir = fileDirectory + "\themes"
-         frmPalmScreen.ClearSelection (False) 'works together with "Perhaps inelegant" below.
-      If trace Then MsgBox "mEllipsis_Click 3" & fileDirectory + "\themes"
-      End If
-      If InStr(strData(1), "Load Image") Then
-         frmMain.dlgCommonDialog.InitDir = fileDirectory + "\bitmaps"
-      End If
-      If InStr(strData(1), "License") Then
-         frmMain.dlgCommonDialog.InitDir = fileDirectory
-      End If
-      frmMain.dlgCommonDialog.Filter = strData(2)
-      frmMain.dlgCommonDialog.DefaultExt = strData(3)
-      frmMain.dlgCommonDialog.flags = cdlOFNNoChangeDir
-      frmMain.dlgCommonDialog.CancelError = True
-      frmMain.dlgCommonDialog.filename = strData(4)
-      If trace Then MsgBox "mEllipsis_Click 4"
-      On Error GoTo gotCancel
-      frmMain.dlgCommonDialog.ShowOpen
-      On Error GoTo 0
-      If trace Then MsgBox "mEllipsis_Click 5"
-      filename = frmMain.dlgCommonDialog.filename
-      mEdit.Text = filename
-      'This next line allows the display refresh properly. Perhaps inelegant...
-      'If InStr(strData(1), "Theme") Then MsgBox gStringTable(3535) & filename 'Theme changed to
-      UpdateValue mEdit.Tag, filename
-   Case "bitmap"
-      mEllipsisBitmapAction
-   Case "Resource"
-      mEllipsisResourceAction
-   Case "List Items"
-      fTextEditDlg.caption = strData(0)
-      fTextEditDlg.Text = Mid(mEllipsis.Tag, Len(strData(0)) + 2)
-      fTextEditDlg.Show vbModal, frmMain
-      If Not fTextEditDlg.Cancelled Then
-         UpdateValue mEdit.Tag, fTextEditDlg.Text
-         mEdit.Text = GetVal(mEdit.Tag)
-         mEllipsis.Tag = mForm.Object.GetStringList
-      End If
-   Case "Modal Tips"
-      fTextEditDlg.caption = strData(0)
-      fTextEditDlg.Text = Mid(mEllipsis.Tag, Len(strData(0)) + 2)
-      fTextEditDlg.Show vbModal, frmMain
-      If Not fTextEditDlg.Cancelled Then
-         UpdateValue mEdit.Tag, fTextEditDlg.Text
-         mEdit.Text = GetVal(mEdit.Tag)
-         mEllipsis.Tag = mForm.Object.GetStringList
-      End If
-   Case "Color"
-      oleNewColor = ShowColorDialog(frmProperties.hWnd, True, Val("&h" & strData(1)))
-      If oleNewColor >= 0 Then
-         mEdit.Text = Hex(oleNewColor)
-         UpdateValue mEdit.Tag, str(oleNewColor)
-      End If
-   Case "Font"
-      frmMain.dlgCommonDialog.DialogTitle = strData(1)
-      frmMain.dlgCommonDialog.CancelError = True
-      frmMain.dlgCommonDialog.flags = cdlCFScreenFonts
-      frmMain.dlgCommonDialog.fontname = GetVal(mEdit.Tag)
-      On Error GoTo gotCancel
-      frmMain.dlgCommonDialog.ShowFont
-      On Error GoTo 0
-      fontname = frmMain.dlgCommonDialog.fontname
-      mEdit.Text = fontname
-      UpdateValue mEdit.Tag, fontname
-   Case Else
+      Case sFile(0), "File" 'File
+      
+         '~~~~~~~~~~~~~~~~~~~~
+         traceStep 2
+         '~~~~~~~~~~~~~~~~~~~~
+
+         frmMain.dlgCommonDialog.DialogTitle = strData(1)
+         If InStr(strData(1), "Theme") Then
+            frmMain.dlgCommonDialog.InitDir = fileDirectory + "\themes"
+            frmPalmScreen.ClearSelection (False) 'works together with "Perhaps inelegant" below.
+
+         '~~~~~~~~~~~~~~~~~~~~
+         traceStep 3, fileDirectory + "\themes"
+         '~~~~~~~~~~~~~~~~~~~~
+
+         End If
+         If InStr(strData(1), "Load Image") Then
+            frmMain.dlgCommonDialog.InitDir = fileDirectory + "\bitmaps"
+         End If
+         If InStr(strData(1), "License") Then
+            frmMain.dlgCommonDialog.InitDir = fileDirectory
+         End If
+         frmMain.dlgCommonDialog.Filter = strData(2)
+         frmMain.dlgCommonDialog.DefaultExt = strData(3)
+         frmMain.dlgCommonDialog.flags = cdlOFNNoChangeDir
+         frmMain.dlgCommonDialog.CancelError = True
+         frmMain.dlgCommonDialog.filename = strData(4)
+
+         '~~~~~~~~~~~~~~~~~~~~
+         traceStep 4
+         '~~~~~~~~~~~~~~~~~~~~
+
+         On Error GoTo gotCancel
+         frmMain.dlgCommonDialog.ShowOpen
+         On Error GoTo 0
+
+         '~~~~~~~~~~~~~~~~~~~~
+         traceStep 5
+         '~~~~~~~~~~~~~~~~~~~~
+
+         filename = frmMain.dlgCommonDialog.filename
+         mEdit.Text = filename
+         'This next line allows the display refresh properly. Perhaps inelegant...
+         'If InStr(strData(1), "Theme") Then MsgBox gStringTable(3535) & filename 'Theme changed to
+         UpdateValue mEdit.Tag, filename
+      Case "bitmap"
+         mEllipsisBitmapAction
+      Case "Resource"
+         mEllipsisResourceAction
+      Case "List Items"
+         fTextEditDlg.caption = strData(0)
+         fTextEditDlg.Text = Mid(mEllipsis.Tag, Len(strData(0)) + 2)
+         fTextEditDlg.Show vbModal, frmMain
+         If Not fTextEditDlg.Cancelled Then
+            UpdateValue mEdit.Tag, fTextEditDlg.Text
+            mEdit.Text = GetVal(mEdit.Tag)
+            mEllipsis.Tag = mForm.Object.GetStringList
+         End If
+      Case "Modal Tips"
+         fTextEditDlg.caption = strData(0)
+         fTextEditDlg.Text = Mid(mEllipsis.Tag, Len(strData(0)) + 2)
+         fTextEditDlg.Show vbModal, frmMain
+         If Not fTextEditDlg.Cancelled Then
+            UpdateValue mEdit.Tag, fTextEditDlg.Text
+            mEdit.Text = GetVal(mEdit.Tag)
+            mEllipsis.Tag = mForm.Object.GetStringList
+         End If
+      Case "Color"
+         oleNewColor = ShowColorDialog(frmProperties.hWnd, True, Val("&h" & strData(1)))
+         If oleNewColor >= 0 Then
+            mEdit.Text = Hex(oleNewColor)
+            UpdateValue mEdit.Tag, str(oleNewColor)
+         End If
+      Case "Font"
+         frmMain.dlgCommonDialog.DialogTitle = strData(1)
+         frmMain.dlgCommonDialog.CancelError = True
+         frmMain.dlgCommonDialog.flags = cdlCFScreenFonts
+         frmMain.dlgCommonDialog.fontname = GetVal(mEdit.Tag)
+         On Error GoTo gotCancel
+         frmMain.dlgCommonDialog.ShowFont
+         On Error GoTo 0
+         fontname = frmMain.dlgCommonDialog.fontname
+         mEdit.Text = fontname
+         UpdateValue mEdit.Tag, fontname
+      Case Else
    End Select
 
 gotCancel:
-   If trace Then MsgBox "mEllipsis_Click 6"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 6
+   '~~~~~~~~~~~~~~~~~~~~
+
    Set obj = mForm.Object
    DoEvents
    mForm.Object = obj
@@ -447,8 +472,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mGrid_Click()
-	Dim lStyle As Long
-	Dim ScrollWidth As Long
+   Dim lStyle As Long
+   Dim ScrollWidth As Long
 
    If mGrid.row = curRow Then
       If mGrid.ColSel <> mGrid.col Then mGrid.ColSel = mGrid.col
@@ -529,7 +554,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function ScrollBarWidth() As Long
-	Dim lStyle As Long
+   Dim lStyle As Long
 
    'Check if scrollbar is showing
    lStyle = GetWindowLong(mGrid.hWnd, (-16))
@@ -559,7 +584,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mListProp_click()
    mListProp.Visible = False
-   mButton.Value = 0
+   mButton.value = 0
    If mListProp.ListIndex < 0 Then Exit Sub
    If GetType = pgNumlist Then
       UpdateValue mButton.Tag, Val(mListProp.List(mListProp.ListIndex))
@@ -577,7 +602,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddItem(nType As Integer, ByVal strProp As String, ByVal strVal As String, Optional ByVal strData As String)
-	Static nCol1 As Integer
+        Static nCol1 As Integer
 
    If m_nRows = 0 Then nCol1 = 0
    mForm.font = mGrid.font
@@ -657,7 +682,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mEllipsisBitmapAction()
 'Dim filedirectory As String 'temp
-	Dim filename As String
+   Dim filename As String
 
 '   filedirectory = "c:\nsbasic" 'temp
    On Error GoTo gotCancel
@@ -687,7 +712,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mEllipsisResourceAction()
 'Dim filedirectory As String 'temp
-	Dim filename As String
+   Dim filename As String
 
 '   filedirectory = "c:\nsbasic" 'temp
    On Error GoTo gotCancel
@@ -726,8 +751,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub UpdateValue(nRow As Integer, strVal As String)
-	Dim strOrig As String
-	Dim frm As Form
+   Dim strOrig As String
+   Dim frm As Form
 
    strOrig = GetVal(nRow)
    If strOrig = strVal Then Exit Sub
@@ -756,7 +781,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub UpdateAllValues()
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To m_nRows
       LetVal mForm.Object.GetPropertyVal(GetProp(i)), i

@@ -8,7 +8,7 @@ Global Const CM_NSB_EDITFIND = 4401
 Global cmGlobals As CodeMax4Ctl.Globals
 Global cmLanguage As New CodeMax4Ctl.Language
 
-	Const kKeywords = " Let If Then Else ElseIf EndIf Do Loop Exit For Next GoTo" & _
+        Const kKeywords = " Let If Then Else ElseIf EndIf Do Loop Exit For Next GoTo" & _
 " GoSub Return NextScreen NextForm Select Case Stop Where" & _
 " Sub Function End Call" & _
 " CreateWindow DestroyWindow DrawBitmap DrawChars DrawLine" & _
@@ -22,16 +22,20 @@ Global cmLanguage As New CodeMax4Ctl.Language
 " nsbKeyOrButton nsbPenDown nsbPenUp nsbWait nsbNoWait nsbSerialIn nsbHandEraJog" & _
 " nsbYes nsbNo"
 
-	Const kOperators = "^  -  *  /  \  +  =  <>  <  >  <=  >=  Mod  Is  Like  And  Eqv  Imp  Not  Or  Xor"
-	Const kIntrinsics = "bmp but chk fld gad shf grd lbl lst pop cho rpt scr sel sli"
+        Const kOperators = "^  -  *  /  \  +  =  <>  <  >  <=  >=  Mod  Is  Like  And  Eqv  Imp  Not  Or  Xor"
+        Const kIntrinsics = "bmp but chk fld gad shf grd lbl lst pop cho rpt scr sel sli"
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Sub CreateLanguage()
-	Dim trace As Boolean
-   trace = True
-   If trace Then MsgBox "CreateLanguage " & 1
+        
+   enableTracing False, False, "Create Language"
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1
+   '~~~~~~~~~~~~~~~~~~~~
+
    '------------------------------------------------------------
    ' create A new language
    'Dim l As New CodeMax4Ctl.Language
@@ -58,7 +62,10 @@ Sub CreateLanguage()
    Call Whitespace.tokens.Add("\s+", True)
    ' add 'Whitespace' to the language
    Call cmLanguage.TokenSets.Add(Whitespace)
-   If trace Then MsgBox "CreateLanguage " & 2
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 2
+   '~~~~~~~~~~~~~~~~~~~~
+
     
     '------------------------------------------------------------
     ' create a 'Scope Keywords' scope tokenset
@@ -95,7 +102,10 @@ Sub CreateLanguage()
     ' add 'Scope Keywords' to the language
     Call cmLanguage.TokenSets.Add(ScopeKeywords)
     Call Whitespace.ValidScopes.Add(ScopeKeywords)
-    If trace Then MsgBox "CreateLanguage " & 3
+    '~~~~~~~~~~~~~~~~~~~~
+    traceStep 3
+    '~~~~~~~~~~~~~~~~~~~~
+
 
     '------------------------------------------------------------
     ' create an empty 'Text' tokenset as a catch-all
@@ -109,7 +119,10 @@ Sub CreateLanguage()
     Text.id = cmTsIdText
     Call Text.ValidScopes.Add(ScopeKeywords)
     Call Text.ValidScopes.Add(Nothing)
-   If trace Then MsgBox "CreateLanguage " & 4
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 4
+   '~~~~~~~~~~~~~~~~~~~~
+
 
     '------------------------------------------------------------
     ' create a 'Parameter Block' scope tokenset.
@@ -129,7 +142,10 @@ Sub CreateLanguage()
     ParamBlock.Hidden = True    'this tokenset is hidden -- the user should be able to change its properties
     ParamBlock.InheritFrom = Text 'inherit color settings from 'Text'
     Dim t As CodeMax4Ctl.IToken
-    If trace Then MsgBox "CreateLanguage " & 5
+    '~~~~~~~~~~~~~~~~~~~~
+    traceStep 5
+    '~~~~~~~~~~~~~~~~~~~~
+
    
     Set t = ParamBlock.tokens.Add("(")
     t.Action = cmCmdParameterInfo   'invoke parameter help when starting a parameter block
@@ -155,7 +171,10 @@ Sub CreateLanguage()
     Comments.tokens.Add ("Rem")
     ' add 'Comments' to the language
     Call cmLanguage.TokenSets.Add(Comments)
-   If trace Then MsgBox "CreateLanguage " & 6
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 6
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    '------------------------------------------------------------
     ' create a 'Escape Sequences' tokenset for embedded quotes in strings
@@ -185,7 +204,10 @@ Sub CreateLanguage()
     Call Strings.Tokens2.Add(Chr(34))   ' double quotes (")
     ' add 'Strings' to the language
     Call cmLanguage.TokenSets.Add(Strings)
-   If trace Then MsgBox "CreateLanguage " & 7
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 7
+   '~~~~~~~~~~~~~~~~~~~~
+
 
     ' EscSequence can be nested within strings
     Call EscSequence.ValidScopes.Add(Strings)
@@ -255,7 +277,10 @@ Sub CreateLanguage()
     Next
     ' add 'Operators' to the language
     Call cmLanguage.TokenSets.Add(Operators)
-   If trace Then MsgBox "CreateLanguage " & 8
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 8
+   '~~~~~~~~~~~~~~~~~~~~
+
 
     '------------------------------------------------------------
     ' create a 'Argument Separater' scope tokenset.
@@ -285,12 +310,18 @@ Sub CreateLanguage()
     ' precedence and therefore not override all
     ' other tokensets
     Call cmLanguage.TokenSets.Add(Text)
-   If trace Then MsgBox "CreateLanguage " & 9
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 9
+   '~~~~~~~~~~~~~~~~~~~~
+
 
     '------------------------------------------------------------
     ' make the language available to the user
     Call cmLanguage.Register
-   If trace Then MsgBox "CreateLanguage " & 10
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 10
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    '------------------------------------------------------------
    ' create a memberlist for the Err global
@@ -319,7 +350,10 @@ Sub CreateLanguage()
    Set mem = ErrMethods.Add("Raise", "Raise(Number, [Source[, Description[, HelpFile[, HelpDescription]]]])", cmImgMethod)
       mem.HelpString = "force an error"
    Call ErrMethods.Register
-   If trace Then MsgBox "CreateLanguage " & 11
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 11
+   '~~~~~~~~~~~~~~~~~~~~
+
     
    '------------------------------------------------------------
    ' create a memberlist for global functions.
@@ -347,7 +381,10 @@ Sub CreateLanguage()
       mem.HelpString = comment
    Next
    Call GblMethods.Register
-   If trace Then MsgBox "CreateLanguage " & 12
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 12
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    '------------------------------------------------------------
    ' create member lists for intrinsic objects
@@ -359,41 +396,68 @@ Sub CreateLanguage()
    
    strsIntrinsics = Split(kIntrinsics & " frm", " ")
    For i = 0 To UBound(strsIntrinsics) - 1
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 1"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 1"
+      '~~~~~~~~~~~~~~~~~~~~
+
 
       Set objSic = CreateObjectEx(strsIntrinsics(i))
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 1.1"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 1.1"
+      '~~~~~~~~~~~~~~~~~~~~
+
       Set intrinMems = New CodeMax4Ctl.MemberList
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 2"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 2"
+      '~~~~~~~~~~~~~~~~~~~~
+
       intrinMems.Language = cmLanguage
       intrinMems.Name = strsIntrinsics(i)
       intrinMems.CaseSensitive = False
       strsMems = objSic.PropertyList
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 3"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 3"
+      '~~~~~~~~~~~~~~~~~~~~
+
       For j = 0 To UBound(strsMems)
          Set mem = intrinMems.Add(strsMems(j), "", cmImgProperty)
          'mem.helpstring = foo
          Set mem = Nothing
       Next
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 4"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 4"
+      '~~~~~~~~~~~~~~~~~~~~
+
       intrinMems.Add "Left", "", cmImgProperty
       intrinMems.Add "Top", "", cmImgProperty
       intrinMems.Add "Width", "", cmImgProperty
       intrinMems.Add "Height", "", cmImgProperty
       strsMems = objSic.MethodList
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 5"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 5"
+      '~~~~~~~~~~~~~~~~~~~~
+
       For j = 0 To UBound(strsMems)
          Set mem = intrinMems.Add(strsMems(j), "", cmImgMethod)
          'mem.helpstring = foo
          Set mem = Nothing
       Next
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 6"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 6"
+      '~~~~~~~~~~~~~~~~~~~~
+
       Call intrinMems.Register
       Set objSic = Nothing
       Set intrinMems = Nothing
-      If trace Then MsgBox "CreateLanguage 12 " & strsIntrinsics(i) & " 7"
+      '~~~~~~~~~~~~~~~~~~~~
+      traceMsg "CreateLanguage 12 " & strsIntrinsics(i) & " 7"
+      '~~~~~~~~~~~~~~~~~~~~
+
    Next
-   If trace Then MsgBox "CreateLanguage " & 13
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 13
+   '~~~~~~~~~~~~~~~~~~~~
+
 
 End Sub
 
@@ -403,11 +467,14 @@ End Sub
 '
 '------------------------------------------------------------
 Sub MNSBCodeMax_Initialize()
-	Dim hotKey As New CodeMax4Ctl.hotKey
-	Dim trace As Boolean
-trace = True
+   Dim hotKey As New CodeMax4Ctl.hotKey
+        
+   enableTracing False, False, "CodeNax init"
    
-   If trace Then MsgBox "MNSBCodeMax_Initialize " & 1
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "MNSBCodeMax_Initialize " & 1
+   '~~~~~~~~~~~~~~~~~~~~
+
    If Not cmGlobals Is Nothing Then
       MsgBox "MNSBCodeMax_Initialize recall"
       Exit Sub
@@ -440,10 +507,16 @@ trace = True
    'Register Find, Find Next, Replace
 '   Call CMGlobals.RegisterCommand(cmCmdFind, "NS Basic Find", "Help out NS Basic Find")
 '   Call CMGlobals.UnregisterCommand(cmCmdFind)
-   If trace Then MsgBox "MNSBCodeMax_Initialize " & 2
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "MNSBCodeMax_Initialize " & 2
+   '~~~~~~~~~~~~~~~~~~~~
+
    
    MNSBCodeMax_CreateNSBasicLanguage
-   If trace Then MsgBox "MNSBCodeMax_Initialize " & 3
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "MNSBCodeMax_Initialize " & 3
+   '~~~~~~~~~~~~~~~~~~~~
+
 
 End Sub
 
@@ -588,7 +661,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub MNSBCodeMax_SavePrefs(scriptObj As CodeMax4Ctl.CodeMax)
-	Dim key As String
+   Dim key As String
    #If NSBSymbian Then
       key = "HKCU\Software\NSBasic\Symbian\Editor"
    #Else
@@ -603,7 +676,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub MNSBCodeMax_SetScriptPrefs(ByRef scriptObj As CodeMax4Ctl.CodeMax)
-	Dim key As String
+   Dim key As String
 'Dim oldhKey As Long
 'Dim oldSubKey As String
 

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmProjectExplorer 
-   BorderStyle     =   4  'Fixed ToolWindow
+   BorderStyle     =   4  'Festes Werkzeugfenster
    Caption         =   "Project Explorer"
    ClientHeight    =   2460
    ClientLeft      =   45
@@ -107,7 +107,7 @@ Private m_strSelection As String
 '------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
-	Dim lRet As Long
+   Dim lRet As Long
 
    Me.Visible = False
 
@@ -131,17 +131,17 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub DisplayExplorer()
-	Dim i As Integer
-	Dim wk, wk2 As String
-	Dim tempString As String
-	Dim proj As CProject
-	Dim frm As CForm
-	Dim ob As Object
-	Dim Module As CCodeModule
-	Dim Bitmap As CBitmapFile
-	Dim resource As CResourceFile
-	Dim nProject As Integer
-	Dim nForm As Integer
+   Dim i As Integer
+   Dim wk, wk2 As String
+   Dim tempString As String
+   Dim proj As CProject
+   Dim frm As CForm
+   Dim ob As Object
+   Dim Module As CCodeModule
+   Dim Bitmap As CBitmapFile
+   Dim resource As CResourceFile
+   Dim nProject As Integer
+   Dim nForm As Integer
 
 repeat:
    If expl.Nodes.count <> 0 Then
@@ -243,7 +243,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub FillProjectNode(nProject As Integer, ByVal proj As CProject)
-	Dim wk As String
+   Dim wk As String
 
    wk = ""
    If proj.pgm_script <> "" Then wk = wk + "Startup"
@@ -266,7 +266,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub FillFormNode(nForm As Integer, ByVal frm As CForm, ByVal proj As CProject)
-	Dim wk As String
+   Dim wk As String
 
    wk = ""
    If frm.pgm_script <> "" Then wk = wk + "Before"
@@ -314,7 +314,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub FillMenuElemNode(nMenuElem As Integer, ByVal mElem As CMenuElem)
-	Dim wk As String
+   Dim wk As String
 
    wk = mElem.caption
    If mElem.command <> "" Then wk = wk & "[/" & mElem.command & "]"
@@ -363,12 +363,12 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Expl_DblClick()
-	Dim index As Integer
-	Dim arrNode() As String
-	Dim obj As Object
-	Dim frm As Form
-	Dim proj As CProject
-	Dim fMenuEditor As New frmMenuEditor
+   Dim index As Integer
+   Dim arrNode() As String
+   Dim obj As Object
+   Dim frm As Form
+   Dim proj As CProject
+   Dim fMenuEditor As New frmMenuEditor
 
    Set obj = LocateObject(expl.SelectedItem.Tag)
    Select Case typename(obj)
@@ -416,10 +416,10 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub expl_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-	Dim o2 As Object
-	Dim v2 As Object
-	Dim tempIndex As Integer
-	Dim arrTag() As String
+   Dim o2 As Object
+   Dim v2 As Object
+   Dim tempIndex As Integer
+   Dim arrTag() As String
 
    'Mouse coordinates are sent in as negative from KeyUp-Key=93
    'The is the Windows "Menu" key.
@@ -510,7 +510,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function GetNode(ByVal strTag As String) As MSComctlLib.Node
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To expl.Nodes.count
       If expl.Nodes(i).Tag = strTag Then
@@ -524,7 +524,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveNode(ByVal strID As String)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode(strID).Parent
    expl.Nodes.Remove GetNode(strID).index
@@ -536,7 +536,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewForm(ByRef frm As CForm, ByRef proj As CProject)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode("Forms|" & proj.GlobalID)   'Forms folder
    Set nod = expl.Nodes.Add(nod.index, tvwChild, , "")
@@ -550,7 +550,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewControl(ByVal obj As Object, ByVal frm As CForm)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode(frm.GlobalID)  'Parent Form
    nod.Expanded = True
@@ -565,7 +565,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewMenu(ByRef mnu As CMenu, ByRef proj As CProject)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode("Menus|" & proj.GlobalID)  'Menus Folder
    nod.Expanded = True
@@ -580,7 +580,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewMenuBar(ByRef mBar As CMenuBar, ByRef mnu As CMenu)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode(mnu.GlobalID)  'Parent Menu
    nod.Expanded = True
@@ -595,7 +595,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewMenuElem(ByRef mElem As CMenuElem, ByRef mBar As CMenuBar)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode(mBar.GlobalID) 'Parent MenuBar
    nod.Expanded = True
@@ -610,7 +610,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewBitmap(ByRef bmp As CBitmapFile, ByRef proj As CProject)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode("Bitmaps|" & proj.GlobalID)   'Bitmaps folder
    nod.Expanded = True
@@ -625,7 +625,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewResource(ByRef bmp As CResourceFile, ByRef proj As CProject)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode("Resources|" & proj.GlobalID)   'Resources folder
    nod.Expanded = True
@@ -640,7 +640,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub AddNewModule(ByRef cMod As CCodeModule, ByRef proj As CProject)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode("Modules|" + proj.GlobalID) 'Modules folder
    nod.Expanded = True
@@ -655,7 +655,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub UpdateTarget()
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To gProjects.count
       FillProjectNode GetNode(gProjects(i).GlobalID).index, gProjects(i)
@@ -696,7 +696,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub UpdateObjectNode(ByVal obj As Object, ByVal strGlobalID As String)
-	Dim nod As MSComctlLib.Node
+   Dim nod As MSComctlLib.Node
 
    Set nod = GetNode(strGlobalID)
    If nod Is Nothing Then Exit Sub
@@ -717,8 +717,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub UpdateProjectMenus(ByVal proj As CProject)
-	Dim nod As MSComctlLib.Node
-	Dim i As Integer
+   Dim nod As MSComctlLib.Node
+   Dim i As Integer
 
    Set nod = GetNode("Menus|" & proj.GlobalID)
    Set nod = nod.Child
@@ -734,12 +734,12 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub DisplayProjectMenus(ByVal proj As CProject, nMenusFolder As Integer)
-	Dim nod As MSComctlLib.Node
-	Dim nMenu As Integer
-	Dim nMenuBar As Integer
-	Dim mnu As CMenu
-	Dim mBar As CMenuBar
-	Dim mElem As CMenuElem
+   Dim nod As MSComctlLib.Node
+   Dim nMenu As Integer
+   Dim nMenuBar As Integer
+   Dim mnu As CMenu
+   Dim mBar As CMenuBar
+   Dim mElem As CMenuElem
 
    'Add Each menu
    For Each mnu In proj.MenuCollection

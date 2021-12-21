@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmNewOpen 
    Caption         =   "Open"
    ClientHeight    =   5550
@@ -18,7 +18,7 @@ Begin VB.Form frmNewOpen
       Top             =   5040
    End
    Begin VB.PictureBox m_Controls 
-      BorderStyle     =   0  'None
+      BorderStyle     =   0  'Kein
       Height          =   5370
       Left            =   60
       ScaleHeight     =   5370
@@ -236,40 +236,40 @@ Private m_iExistCOunt As Long
 '
 '------------------------------------------------------------
 Public Function SetBackwardFocus() As Long
-	Dim CurHnd As Long
-	Dim NewHnd As Long
+   Dim CurHnd As Long
+   Dim NewHnd As Long
 
    CurHnd = GetFocusAPI()
         
    If tabMain.SelectedItem = gStringTable(1141) Then 'new
   
       Select Case CurHnd
-      Case tabMain.hwnd
-         SetFocusAPI CmdNewCancel.hwnd
-      Case lvwNew.hwnd
-         SetFocusAPI tabMain.hwnd
-      Case cmdNewOpen.hwnd
-         SetFocusAPI lvwNew.hwnd
-      Case CmdNewCancel.hwnd
-          SetFocusAPI cmdNewOpen.hwnd
+      Case tabMain.hWnd
+         SetFocusAPI CmdNewCancel.hWnd
+      Case lvwNew.hWnd
+         SetFocusAPI tabMain.hWnd
+      Case cmdNewOpen.hWnd
+         SetFocusAPI lvwNew.hWnd
+      Case CmdNewCancel.hWnd
+          SetFocusAPI cmdNewOpen.hWnd
       Case Else
-         SetFocusAPI tabMain.hwnd
+         SetFocusAPI tabMain.hWnd
       End Select
   
       NewHnd = 1
   
    ElseIf tabMain.SelectedItem = gStringTable(1143) Then 'recent
       Select Case CurHnd
-      Case tabMain.hwnd
+      Case tabMain.hWnd
          Exit Function
       Case GetDlgItem(m_hwnd, fdlgIDCANCEL)
          Exit Function
       Case GetDlgItem(m_hwnd, fdlgIDOK)
-         SetFocusAPI lvwRecent.hwnd
-      Case lvwRecent.hwnd
-         SetFocusAPI tabMain.hwnd
+         SetFocusAPI lvwRecent.hWnd
+      Case lvwRecent.hWnd
+         SetFocusAPI tabMain.hWnd
       Case Else
-         SetFocusAPI tabMain.hwnd
+         SetFocusAPI tabMain.hWnd
       End Select
       
       NewHnd = 1
@@ -289,10 +289,10 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub SetControlPos(ByVal hd As Long, ByVal SFlags As Long, Optional ByVal lID As Long = -1)
-	Dim tdr As RECT
-	Dim wLp As POINTAPI
-	Dim lShiftX As Long
-	Dim lShiftY As Long
+   Dim tdr As RECT
+   Dim wLp As POINTAPI
+   Dim lShiftX As Long
+   Dim lShiftY As Long
  
    GetWindowRect hd, tdr
    ScreenToClient m_hwnd, wLp
@@ -323,27 +323,27 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function SetForwardFocus() As Long
-	Dim CurHnd As Long
-	Dim NewHnd As Long
+   Dim CurHnd As Long
+   Dim NewHnd As Long
     
    CurHnd = GetFocusAPI()
  
    If tabMain.SelectedItem = gStringTable(1141) Then 'new
   
       Select Case CurHnd
-      Case tabMain.hwnd
-         SetFocusAPI cmdNewOpen.hwnd
+      Case tabMain.hWnd
+         SetFocusAPI cmdNewOpen.hWnd
          If lvwNew.ListItems.count > 0 Then
-            SetFocusAPI lvwNew.hwnd
+            SetFocusAPI lvwNew.hWnd
          End If
-      Case lvwNew.hwnd
-         SetFocusAPI cmdNewOpen.hwnd
-      Case cmdNewOpen.hwnd
-         SetFocusAPI CmdNewCancel.hwnd
-      Case CmdNewCancel.hwnd
-         SetFocusAPI tabMain.hwnd
+      Case lvwNew.hWnd
+         SetFocusAPI cmdNewOpen.hWnd
+      Case cmdNewOpen.hWnd
+         SetFocusAPI CmdNewCancel.hWnd
+      Case CmdNewCancel.hWnd
+         SetFocusAPI tabMain.hWnd
       Case Else
-         SetFocusAPI tabMain.hwnd
+         SetFocusAPI tabMain.hWnd
       End Select
       
       NewHnd = 1
@@ -351,14 +351,14 @@ Public Function SetForwardFocus() As Long
    ElseIf tabMain.SelectedItem = gStringTable(1143) Then 'recent
   
       Select Case CurHnd
-      Case tabMain.hwnd
+      Case tabMain.hWnd
          If lvwRecent.ListItems.count > 0 Then
-            SetFocusAPI lvwRecent.hwnd
+            SetFocusAPI lvwRecent.hWnd
          Else
             SetFocusAPI GetDlgItem(m_hwnd, fdlgIDCANCEL)
             Exit Function
          End If
-      Case lvwRecent.hwnd
+      Case lvwRecent.hWnd
          If lvwRecent.ListItems.count > 0 Then
             SetFocusAPI GetDlgItem(m_hwnd, fdlgIDOK)
          Else
@@ -370,7 +370,7 @@ Public Function SetForwardFocus() As Long
       Case GetDlgItem(m_hwnd, fdlgIDCANCEL)
          Exit Function
       Case Else
-         SetFocusAPI tabMain.hwnd
+         SetFocusAPI tabMain.hWnd
       End Select
   
       NewHnd = 1
@@ -401,8 +401,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub cD_FolderChange(ByVal hDlg As Long)
-	Static DoOnce As Boolean
-	Dim hd As Long
+        Static DoOnce As Boolean
+   Dim hd As Long
  
    If Not DoOnce Then
       'We do this because the file listvw was not_
@@ -412,7 +412,7 @@ Private Sub cD_FolderChange(ByVal hDlg As Long)
          hd = GetDlgItem(m_hwnd, fdlgLVLstFiles)
          SetControlPos hd, SWP_MOVEHIDE Or SWP_NOMOVE Or SWP_NOZORDER
       Else
-         SetFocusAPI m_Controls.hwnd
+         SetFocusAPI m_Controls.hWnd
       End If
       
       m_Controls.Visible = True
@@ -425,9 +425,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub cD_InitDialog(ByVal hDlg As Long)
-	Dim hd As Long
-	Dim tR As RECT, tTR As RECT
-	Dim lW As Long, lH As Long
+   Dim hd As Long
+   Dim tR As RECT, tTR As RECT
+   Dim lW As Long, lH As Long
     
    m_hDlg = hDlg
    ' For Open/Save dialog we need the parent of the supplied dialog handle:
@@ -551,7 +551,7 @@ Private Sub cD_InitDialog(ByVal hDlg As Long)
    lblSplash.Left = (imgSplash.Width - lblSplash.Width) \ 2
 
    'move our controls container to dialog
-   SetParent m_Controls.hwnd, m_hwnd
+   SetParent m_Controls.hWnd, m_hwnd
 
    InstallHook
 End Sub
@@ -586,8 +586,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Load()
-	Dim itmX As ListItem
-	Dim i As Long
+   Dim itmX As ListItem
+   Dim i As Long
    LoadResStrings Me
    'Signal default of cancelled:
    m_bCancel = True
@@ -655,7 +655,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
       'Cancel Common Dialog box if loaded:
       
       'Put m_Controls back on Me
-      SetParent m_Controls.hwnd, Me.hwnd
+      SetParent m_Controls.hWnd, Me.hWnd
       
       'Send Close command to the dialog:
       SendMessageLong m_hwnd, WM_COMMAND, fdlgIDCANCEL, 1
@@ -672,7 +672,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub lvwNew_DblClick()
    If Not (lvwNew.SelectedItem Is Nothing) And Not (lvwNew.DropHighlight Is Nothing) Then
-      cmdNewOpen.Value = True
+      cmdNewOpen.value = True
    End If
 End Sub
 
@@ -726,12 +726,12 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub m_Controls_GotFocus()
-   If GetFocusAPI <> tabMain.hwnd Then
+   If GetFocusAPI <> tabMain.hWnd Then
       If tabMain.SelectedItem.caption = "New" Then
          'We do this to make cmdnewopen the show as default else it won't
-         SetFocusAPI cmdNewOpen.hwnd
+         SetFocusAPI cmdNewOpen.hWnd
       End If
-      SetFocusAPI tabMain.hwnd
+      SetFocusAPI tabMain.hWnd
    End If
 End Sub
 
@@ -746,8 +746,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub tabMain_Click()
-	Dim iTab As String
-	Dim hd  As Long
+   Dim iTab As String
+   Dim hd  As Long
 
    'Show the relevant picture box for the
    'selected tab:
@@ -757,7 +757,7 @@ Private Sub tabMain_Click()
    Select Case LastTabFocus
    Case gStringTable(1141) 'New
       m_bIsNew = False
-      ShowWindow lvwNew.hwnd, 0&
+      ShowWindow lvwNew.hWnd, 0&
 
       cmdNewOpen.Visible = False
       CmdNewCancel.Visible = False
@@ -788,14 +788,14 @@ Private Sub tabMain_Click()
       hd = GetDlgItem(m_hwnd, fdlgcmbSaveAsType)
       ShowWindow hd, 0&
    Case gStringTable(1143) '"Recent"
-      ShowWindow lvwRecent.hwnd, 0&
+      ShowWindow lvwRecent.hWnd, 0&
    End Select
 
    Select Case iTab
    Case gStringTable(1141) '"New"
       m_bIsNew = True
-      ShowWindow lvwNew.hwnd, 1&
-      SetFocusAPI tabMain.hwnd
+      ShowWindow lvwNew.hWnd, 1&
+      SetFocusAPI tabMain.hWnd
 
       hd = GetDlgItem(m_hwnd, fdlgIDCANCEL)
       ShowWindow hd, 0&
@@ -813,7 +813,7 @@ Private Sub tabMain_Click()
          m_sFileName = ""
       End If
 
-      SetFocusAPI tabMain.hwnd
+      SetFocusAPI tabMain.hWnd
    Case gStringTable(1142) '"Existing"
       hd = GetDlgItem(m_hwnd, fdlgIDCANCEL)
       ShowWindow hd, 1&
@@ -848,7 +848,7 @@ Private Sub tabMain_Click()
 
       m_sFileName = TmpFileTxt
 
-      SetFocusAPI tabMain.hwnd
+      SetFocusAPI tabMain.hWnd
       SetDlgItemText m_hwnd, fdlgEdtFileName, TmpFileTxt
    Case gStringTable(1143) '"Recent"
       hd = GetDlgItem(m_hwnd, fdlgIDCANCEL)
@@ -857,8 +857,8 @@ Private Sub tabMain_Click()
       hd = GetDlgItem(m_hwnd, fdlgIDOK)
       ShowWindow hd, 1&
 
-      ShowWindow lvwRecent.hwnd, 1&
-      SetFocusAPI tabMain.hwnd
+      ShowWindow lvwRecent.hWnd, 1&
+      SetFocusAPI tabMain.hWnd
 
       If lvwRecent.ListItems.count = 0 Then
          hd = GetDlgItem(m_hwnd, fdlgIDOK)
@@ -956,10 +956,10 @@ End Property
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Property Get fileName() As String
+Public Property Get filename() As String
    'Property to allow the caller to retrieve the
    'selected file name:
-   fileName = m_sFileName
+   filename = m_sFileName
 End Property
 
 '------------------------------------------------------------

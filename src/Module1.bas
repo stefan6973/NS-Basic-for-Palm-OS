@@ -5,12 +5,12 @@ Option Explicit
 '
 '------------------------------------------------------------
 Sub LoadStringTable()
-	Dim message As String
-	Dim i As Integer
-	Dim chan As Integer
+   Dim message As String
+   Dim i As Integer
+   Dim chan As Integer
    
    chan = 98
-   Open ProgramsDirectory & "\Lang\StrTable_English.txt" For Input As #chan
+   Open AppInfo.LangFolder & "StrTable_English.txt" For Input As #chan
    
    For i = 0 To 4000
     gStringTable(i) = "String Table: " & i
@@ -25,7 +25,7 @@ Sub LoadStringTable()
    
    If gLanguage <> "English" Then 'override English with other language
       On Error GoTo exitSub
-      Open ProgramsDirectory & "\Lang\StrTable_" & gLanguage & ".txt" For Input As #chan
+      Open AppInfo.LangFolder & "StrTable_" & gLanguage & ".txt" For Input As #chan
       On Error GoTo 0
       
       Do Until EOF(chan)
@@ -48,11 +48,11 @@ End Sub
 '
 '------------------------------------------------------------
 Sub LoadResStrings(frm As Form, Optional bLoadFont As Boolean = True)
-	Dim ctl As Control
-	Dim obj As Object
-	Dim fnt As Object
-	Dim sCtlType As String
-	Dim nVal As Integer
+   Dim ctl As Control
+   Dim obj As Object
+   Dim fnt As Object
+   Dim sCtlType As String
+   Dim nVal As Integer
 
    On Error Resume Next
    
@@ -64,7 +64,7 @@ Sub LoadResStrings(frm As Form, Optional bLoadFont As Boolean = True)
    'for all other controls
    For Each ctl In frm.Controls
       'If bLoadFont Then Set ctl.font = fnt
-      ctl.fontName = gLabelFontName
+      ctl.fontname = gLabelFontName
       ctl.font.Charset = gLabelCharset
       If ctl.font.Size < gLabelFontSize Then ctl.font.Size = gLabelFontSize
       Select Case typename(ctl)

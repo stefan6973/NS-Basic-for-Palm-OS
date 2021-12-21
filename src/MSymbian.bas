@@ -37,8 +37,8 @@ Sub compileSymbian()
    Dim nFileNumber As Integer
    Dim fileLen As Integer
    Dim res
-   trace = True
-   nFileNumber = FreeFile
+   enableTracing False, False, ""
+   nFileNumber = FileSystem.FreeFile '#1
    deleteWorkFiles
    
    If gbCreateS60 Then
@@ -108,7 +108,7 @@ Sub initFileNames(pform As String)
    platform = pform
    executableName = "StyleTapLauncher" & platform
    
-   toolsDir = ProgramsDirectory & "\BuildTools\"
+   toolsDir = AppInfo.SubFolder("BuildTools")
    outputDir = fileDirectory & "\Download\"
    logFile = outputDir & "compile.log"
    errLogFile = outputDir & "error.log"
@@ -216,7 +216,7 @@ Sub modifyPKGfile(platform As String)
    
    ShowStatus "Modifying PKG File", True
    infile = toolsDir & "template.pkg"
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    Open infile For Binary Access Read As #nFileNumber
    data = String$(LOF(nFileNumber), 32) 'fill buffer before reading
    Get #nFileNumber, , data
@@ -260,7 +260,7 @@ Sub modifyPKGfile(platform As String)
    s = fileDirectory & "\Download"
    data = Replace(data, "***prcdir***", s)
    
-   s = ProgramsDirectory & "\BuildTools"
+   s = AppInfo.SubFolder("BuildTools")
    data = Replace(data, "***buildtoolsdir***", s)
    
    s = GetTemporaryPath()
@@ -318,7 +318,7 @@ Sub compileResourceFile(rppname As String)
       
    ShowStatus "Compiling Resource " & rppname, True
    infile = toolsDir & "template" & platform & rppname & ".rpp"
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    Open infile For Binary Access Read As #nFileNumber
    data = String$(LOF(nFileNumber), 32) 'fill buffer before reading
    Get #nFileNumber, , data
@@ -398,7 +398,7 @@ Sub modifyEXEfile(filename As String, UID3 As String)
    Dim uid1 As String
    Dim uid2 As String
    Dim resBytes() As Byte
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    
    'create fontconv.exe
    resBytes = LoadResData(101, "custom")
@@ -477,14 +477,14 @@ End Sub
 '
 '------------------------------------------------------------
 Sub makeCMDfile()
-'This file contains the name of the NS Basic app that StyleTap will launch
+   'This file contains the name of the NS Basic app that StyleTap will launch
 
-   Dim nFileNumber As Integer
-   Dim data As String
-   
    ShowStatus "Modifying CMD File", True
-   nFileNumber = FreeFile
    
+   Dim nFileNumber As Integer
+   nFileNumber = FileSystem.FreeFile '#1
+   
+   Dim data As String
    data = "StyleTapSymbian_" & uid3plus(1) & ".dll StyleTap_" & uid3plus(2) & ".dll /launch " & q(gTarget.Name)
       
    Open cmdFile For Binary As #nFileNumber
@@ -497,11 +497,11 @@ End Sub
 '
 '------------------------------------------------------------
 Sub convertIconS60()
-'This creates the icon file in MIF form (Multi Image Format).
-'It takes an svgt file (Scalar Vector Graphics - Tiny) file and feeds it to the mifconv utility
-'to produce the .mif file.
-'The mif file is included in the installer.
-'The rsc file contains the path to the mif file so the Symbian Launcher can find it.
+   'This creates the icon file in MIF form (Multi Image Format).
+   'It takes an svgt file (Scalar Vector Graphics - Tiny) file and feeds it to the mifconv utility
+   'to produce the .mif file.
+   'The mif file is included in the installer.
+   'The rsc file contains the path to the mif file so the Symbian Launcher can find it.
 
    ShowStatus "Converting S60 Icon", True
    Dim data As String
@@ -520,7 +520,7 @@ Sub convertIconS60()
    data = data & " /B" & q(Left(toolsDir, Len(toolsDir) - 1))
    data = data & " /X /c32 " & q(icon)
    
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    Open convertIconBatFile For Output As #nFileNumber
    Print #nFileNumber, data
    Close #nFileNumber
@@ -551,7 +551,7 @@ Sub convertIconUIQ()
    data = data & " /c8" & q(s & "40.bmp") & " /c8" & q(toolsDir & "40.bmp")
    data = data & " /c8" & q(s & "18.bmp") & " /c8" & q(toolsDir & "18.bmp")
    
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    Open convertIconBatFile For Output As #nFileNumber
    Print #nFileNumber, data
    Close #nFileNumber
@@ -605,7 +605,7 @@ Sub createInstaller(platform As String)
       data = data & "move " & q(sisxFile & platform) & " " & q(sisFileUIQss) & vbCrLf               'signed
    End If
 
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    Open createInstallerBatFile For Output As #nFileNumber
    Print #nFileNumber, data
    Close #nFileNumber
@@ -639,7 +639,7 @@ End Sub
 Function readInputFile(inputfile As String, s() As Byte) As Long
    Dim i As Long
    Dim nFileNumber As Integer
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    i = -1
    Open inputfile For Binary As #nFileNumber
    While EOF(nFileNumber) = False

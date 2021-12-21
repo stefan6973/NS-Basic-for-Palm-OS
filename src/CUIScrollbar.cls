@@ -36,9 +36,9 @@ Private Const kMethods As String = "Hide-Show-Redraw"
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "Scrollbar"
+   obj.Name = "Scrollbar"
    obj.Kind = "scr"
    obj.Width = 7
    obj.Height = 100
@@ -52,8 +52,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-	Dim c As Byte
-	Dim scr As scrollbarOut
+   Dim c As Byte
+   Dim scr As scrollbarOut
 
    scr.id.w = cvtWord(obj.IdNo)
    scr.bounds.topleft.x = cvtWord(obj.OrigLeft)
@@ -65,7 +65,7 @@ Public Sub PrcOut()
    Else
       scr.attr = 0
    End If
-   scr.Value = cvtWord(m_nValue)
+   scr.value = cvtWord(m_nValue)
    scr.MinValue = cvtWord(m_nMinValue)
    scr.MaxValue = cvtWord(m_nMaxValue)
    scr.PageSize = cvtWord(m_nPageSize)
@@ -85,7 +85,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
 
    Dim version As Integer
    Input #nFileNumber, version
@@ -96,34 +96,34 @@ Public Sub Restore(ByVal nFileNumber as integer)
 
    Select Case version
       Case 1
-         Dim bOld1 As Boolean, bOld2 As Boolean
+    Dim bOld1 As Boolean, bOld2 As Boolean
          Input #nFileNumber, m_nValue, m_nMinValue, m_nMaxValue, m_nPageSize, bOld1, bOld2
       Case kVersion
          Input #nFileNumber, m_nValue, m_nMinValue, m_nMaxValue, m_nPageSize
    End Select
 
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
-   Write #nFileNumber, Value, MinValue, MaxValue, PageSize
-   obj.Save #nFileNumber
+   Write #nFileNumber, value, MinValue, MaxValue, PageSize
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-	Dim temp As String
+   Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
-   temp = Join(Array(Value, MinValue, MaxValue, PageSize), ",")
+   temp = Join(Array(value, MinValue, MaxValue, PageSize), ",")
    Copy = Copy + temp + vbCrLf
    Copy = Copy + obj.Copy()
 End Function
@@ -132,8 +132,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "scr" Then
@@ -147,7 +147,7 @@ Public Sub Paste(ByRef strLines() As String)
 
    'Restore properties
    tokens = Split(strLines(3), ",")
-   Value = tokens(0)
+   value = tokens(0)
    MinValue = tokens(1)
    MaxValue = tokens(2)
    PageSize = tokens(3)
@@ -164,7 +164,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-	Dim i As Integer, h As Integer, w As Integer
+   Dim i As Integer, h As Integer, w As Integer
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -235,25 +235,25 @@ End Property
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Property Let Value(ByVal vData As Integer)
+Public Property Let value(ByVal vData As Integer)
    m_nValue = vData
 End Property
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Property Get Value() As Integer
-   Value = m_nValue
+Public Property Get value() As Integer
+   value = m_nValue
 End Property
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -261,17 +261,17 @@ Public Sub GetProperty()
    If nProp < kUserProps Then gPropInfo.Type = pgString
    Select Case nProp
    Case 0
-      gPropInfo.name = "Maximum"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Maximum"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    Case 1
-      gPropInfo.name = "Minimum"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Minimum"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    Case 2
-      gPropInfo.name = "Page Size"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Page Size"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    Case 3
-      gPropInfo.name = "Value"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Value"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    Case kUserProps + 0: obj.GetProperty "(Name)"
    Case kUserProps + 1: obj.GetProperty "Type"
    Case kUserProps + 2: obj.GetProperty "ID"
@@ -292,7 +292,7 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    Case "Maximum": GetPropertyVal = MaxValue
    Case "Minumum": GetPropertyVal = MinValue
    Case "Page Size": GetPropertyVal = PageSize
-   Case "Value": GetPropertyVal = Value
+   Case "Value": GetPropertyVal = value
    Case Else: GetPropertyVal = obj.GetPropertyVal(strProp)
    End Select
 End Function
@@ -301,10 +301,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim n As Integer
-	Dim bmp As CBitmapFile
-	Dim frm As CForm
-	Dim o As Object
+   Dim n As Integer
+   Dim bmp As CBitmapFile
+   Dim frm As CForm
+   Dim o As Object
 
    ValidateProperty = True
    Select Case strProp
@@ -335,7 +335,7 @@ Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String
          ValidateProperty = False
          Exit Function
       End If
-      Value = n
+      value = n
    Case Else: ValidateProperty = obj.ValidateProperty(strProp, strVal)
    End Select
    If ValidateProperty Then obj.Form.Project.Dirty = True

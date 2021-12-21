@@ -1,9 +1,9 @@
 VERSION 5.00
-Object = "{BCA00000-0F85-414C-A938-5526E9F1E56A}#4.0#0"; "cmax40.dll"
+Object = "{BCA00000-0F85-414C-A938-5526E9F1E56A}#4.0#0"; "cmax40m.dll"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmOptions 
-   BorderStyle     =   3  'Fixed Dialog
+   BorderStyle     =   3  'Fester Dialog
    Caption         =   "Options"
    ClientHeight    =   6000
    ClientLeft      =   2760
@@ -15,17 +15,17 @@ Begin VB.Form frmOptions
    ScaleHeight     =   6000
    ScaleWidth      =   8280
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  'CenterOwner
+   StartUpPosition =   1  'Fenstermitte
    Tag             =   "1150"
    Begin VB.PictureBox pbTab 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
+      Appearance      =   0  '2D
+      BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
       Height          =   4695
       Index           =   0
       Left            =   240
       ScaleHeight     =   4695
-      ScaleMode       =   0  'User
+      ScaleMode       =   0  'Benutzerdefiniert
       ScaleWidth      =   7815
       TabIndex        =   26
       TabStop         =   0   'False
@@ -168,8 +168,8 @@ Begin VB.Form frmOptions
       End
    End
    Begin VB.PictureBox pbTab 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
+      Appearance      =   0  '2D
+      BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
       Height          =   4695
       Index           =   1
@@ -192,8 +192,8 @@ Begin VB.Form frmOptions
       End
    End
    Begin VB.PictureBox pbTab 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
+      Appearance      =   0  '2D
+      BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
       Height          =   4695
       Index           =   2
@@ -250,7 +250,7 @@ Begin VB.Form frmOptions
          Top             =   120
          Width           =   5295
          Begin VB.Label lblExample 
-            Alignment       =   2  'Center
+            Alignment       =   2  'Zentriert
             BackColor       =   &H80000005&
             Caption         =   "Example"
             Height          =   375
@@ -261,7 +261,7 @@ Begin VB.Form frmOptions
             Width           =   5055
          End
          Begin VB.Label lblFontDisplay 
-            Alignment       =   2  'Center
+            Alignment       =   2  'Zentriert
             BackColor       =   &H80000005&
             Height          =   975
             Left            =   120
@@ -281,8 +281,8 @@ Begin VB.Form frmOptions
       End
    End
    Begin VB.PictureBox pbTab 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
+      Appearance      =   0  '2D
+      BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
       Height          =   4695
       Index           =   3
@@ -551,7 +551,7 @@ End Enum
 '
 '------------------------------------------------------------
 Private Sub butBrowseGlobalPath_Click()
-	Dim fBrowseFolder As New frmBrowseFolder
+   Dim fBrowseFolder As New frmBrowseFolder
 
    On Error GoTo err_butBrowsefiledirectory_Click
    fBrowseFolder.path = txtFilesDirectory.Text
@@ -666,9 +666,9 @@ Private Sub Form_Load()
    txtPOSEpath = gstrPOSEPath
    txtSimulatorPath = gstrSimulatorPath
    If MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "ShowSplash", True) Then
-      optShowSplash(0).Value = True
+      optShowSplash(0).value = True
    Else
-      optShowSplash(1).Value = True
+      optShowSplash(1).value = True
    End If
    getLanguages
    'Tab 2
@@ -748,14 +748,14 @@ Private Sub Form_Load()
       optDownload(3) = True
    End If
    If gbPOSErun Then
-      chkPOSErun.Value = 1
+      chkPOSErun.value = 1
    Else
-      chkPOSErun.Value = 0
+      chkPOSErun.value = 0
    End If
    If gbSimulatorRun Then
-      chkSimulatorRun.Value = 1
+      chkSimulatorRun.value = 1
    Else
-      chkSimulatorRun.Value = 0
+      chkSimulatorRun.value = 0
    End If
 #If NSBSymbian Then
    If gbCreateS60 Then
@@ -817,13 +817,13 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub getLanguages()
-	Dim s, Name
-	Dim hFile As Long
-	Dim WFD As WIN32_FIND_DATA
-	Dim i As Integer
+   Dim s, Name
+   Dim hFile As Long
+   Dim WFD As WIN32_FIND_DATA
+   Dim i As Integer
 
    i = 0
-   hFile = FindFirstFile(ProgramsDirectory & "\Lang\StrTable_*.txt", WFD)
+   hFile = FindFirstFile(AppInfo.LangFolder & "StrTable_*.txt", WFD)
    If hFile <> INVALID_HANDLE_VALUE Then
       Do
          Name = Left(WFD.cFileName, InStr(WFD.cFileName, Chr(0)) - 1)
@@ -840,7 +840,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub OKButton_Click()
-	Dim oldPath As String
+   Dim oldPath As String
 
    'Tab 1
    If Len(txtFilesDirectory) > 0 Then
@@ -870,7 +870,7 @@ Private Sub OKButton_Click()
    gbLaunchSimulator = chkLaunchSimulator
    MWinReg.SetRegValue MWinReg.hKey, MWinReg.SubKey, "LaunchSimulator", gbLaunchSimulator
    
-   MWinReg.SetRegValue MWinReg.hKey, MWinReg.SubKey, "ShowSplash", optShowSplash(0).Value
+   MWinReg.SetRegValue MWinReg.hKey, MWinReg.SubKey, "ShowSplash", optShowSplash(0).value
    If gLanguage <> lstLanguage.List(lstLanguage.ListIndex) Then
       gLanguage = lstLanguage.List(lstLanguage.ListIndex)
       LoadStringTable

@@ -29,10 +29,10 @@ Private Const kMethods As String = "Add-Clear-Hide-Redraw-Remove-Show-" _
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
     Dim i As Integer
      obj.Parent = Me
-     obj.name = "Grid" '+ Trim(str(obj.IdNo))
+     obj.Name = "Grid" '+ Trim(str(obj.IdNo))
      obj.Kind = "grd"
      m_bHasScrollbar = False
      'For i = 0 To 100
@@ -141,7 +141,7 @@ Public Sub PrcOut()
       'If mvarVisible = True Then scr.attr = scr.attr Or &H40
       scr.attr = scr.attr Or &H40 '4.25.2000
       'If mvarHilighted = True Then scr.attr = scr.attr Or &H20
-      scr.Value = 0
+      scr.value = 0
       scr.MinValue = cvtWord(0)
       scr.MaxValue = cvtWord(10)
       scr.PageSize = cvtWord(1)
@@ -204,7 +204,7 @@ End Property
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
   
   Dim version As Integer
   Input #nFileNumber, version
@@ -221,13 +221,13 @@ Public Sub Restore(ByVal nFileNumber as integer)
    '   Input #nFileNumber, mvarColumnWidth(i)
    'Next
 
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
   Dim version As Integer
   version = 2
 
@@ -239,15 +239,15 @@ Public Sub Save(ByVal nFileNumber as integer)
   'For i = 1 To m_nCols
   '   Write #nFileNumber, colwidth(i)
   'Next
-  obj.Save #nFileNumber
+  obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-	Dim x As Integer, y As Integer
-	Dim w As Integer, h As Integer
+   Dim x As Integer, y As Integer
+   Dim w As Integer, h As Integer
    
    If obj.Control Is Nothing Then Exit Sub
 
@@ -277,10 +277,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -290,11 +290,11 @@ Public Sub GetProperty()
 'Must be readonly to uncheck leftjustified
    Select Case nProp
    Case 0:
-      gPropInfo.name = "Cols"
+      gPropInfo.Name = "Cols"
       gPropInfo.Type = pgString
-   Case 1: gPropInfo.name = "Has Scrollbar"
+   Case 1: gPropInfo.Name = "Has Scrollbar"
    Case 2:
-      gPropInfo.name = "Visible Rows"
+      gPropInfo.Name = "Visible Rows"
       gPropInfo.Type = pgString
    Case kUserProps + 0: obj.GetProperty "(Name)"
    Case kUserProps + 1: obj.GetProperty "Type"
@@ -309,7 +309,7 @@ Public Sub GetProperty()
    Case kUserProps + 8: obj.GetProperty "Nav Above ID"
    Case kUserProps + 9: obj.GetProperty "Nav Below ID"
    End Select
-   If nProp < kUserProps Then gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+   If nProp < kUserProps Then gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    nProp = nProp + 1
 End Sub
 
@@ -329,7 +329,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim n As Double
+   Dim n As Double
 
    ValidateProperty = True
    Select Case strProp
@@ -360,7 +360,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-	Dim temp As String
+   Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -373,8 +373,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "grd" Then

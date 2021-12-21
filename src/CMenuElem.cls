@@ -28,7 +28,10 @@ Private m_strCaption As String
 Private Const kVersion As Integer = 1
 Private Const kTotalProps = 4
 
-Public Sub class_initialize()
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
+Public Sub Class_Initialize()
 '   Caption = ""
    command = ""
 
@@ -45,8 +48,8 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as interger)
-	Dim strTemp As String
+Public Sub Save(ByVal nFileNumber As Integer)
+   Dim strTemp As String
 
    Write #nFileNumber, "menu"
    Write #nFileNumber, kVersion
@@ -60,7 +63,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-	Dim strTemp As String
+   Dim strTemp As String
 
    Copy = Quote("menuelem") & vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -74,10 +77,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
-	Dim oldIdNo As Integer
-	Dim nScriptEnd As Integer
+   Dim tokens() As String
+   Dim i As Integer
+   Dim oldIdNo As Integer
+   Dim nScriptEnd As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "menuelem" Then
@@ -128,7 +131,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim ignore As String
    Dim version As Integer
    Dim strTemp As String
@@ -183,7 +186,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub PutScript(ByVal strText As String, ByVal strScript As String)
-	Dim proj As CProject
+   Dim proj As CProject
    menu_script = strText
    Set proj = LocateProject(GlobalID)
    proj.Dirty = True
@@ -193,8 +196,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
-	Dim i As Integer
+        Static nProp As Integer
+   Dim i As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -216,12 +219,12 @@ Public Sub GetProperty()
    Case 3
       gPropInfo.Name = "Shortcut"
       gPropInfo.Type = pgList
-      gPropInfo.Data = "(None)"
+      gPropInfo.data = "(None)"
       For i = 0 To 9
-         gPropInfo.Data = gPropInfo.Data & ">" & i
+         gPropInfo.data = gPropInfo.data & ">" & i
       Next
       For i = Asc("A") To Asc("Z")
-         gPropInfo.Data = gPropInfo.Data & ">" & Chr(i)
+         gPropInfo.data = gPropInfo.data & ">" & Chr(i)
       Next
    End Select
    If nProp < kTotalProps Then gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
@@ -244,7 +247,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim strCommand As String
+   Dim strCommand As String
 
    ValidateProperty = True
    Select Case strProp
@@ -287,16 +290,16 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Let caption(ByVal strCaption As String)
-	Dim strFont As String
-	Dim nFontSize As Integer
+   Dim strFont As String
+   Dim nFontSize As Integer
 
    m_strCaption = strCaption
-   strFont = frmMain.picBox.fontName
+   strFont = frmMain.picBox.fontname
    nFontSize = frmMain.picBox.fontSize
-   frmMain.picBox.fontName = gstrPalmFonts(0) 'NPalmText9
+   frmMain.picBox.fontname = gstrPalmFonts(0) 'NPalmText9
    frmMain.picBox.fontSize = 8
    m_nMenuWidth = frmMain.picBox.TextWidth(m_strCaption) \ 15
-   frmMain.picBox.fontName = strFont
+   frmMain.picBox.fontname = strFont
    frmMain.picBox.fontSize = nFontSize
 End Property
 

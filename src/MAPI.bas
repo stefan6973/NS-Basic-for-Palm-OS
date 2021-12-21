@@ -22,7 +22,7 @@ End Type
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Type Msg
+Type msg
    hWnd As Long
    message As Long
    wParam As Long
@@ -95,11 +95,11 @@ Public Declare Function UpdateWindow Lib "USER32" (ByVal hWnd As Long) As Long
 #If UNICODE Then
 Public Declare Function SetWindowLong Lib "USER32" Alias "SetWindowLongW" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Any) As Long
 Public Declare Function GetWindowLong Lib "USER32" Alias "GetWindowLongW" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
-Public Declare Function CallWindowProc Lib "USER32" Alias "CallWindowProcW" (ByVal lpPrevWndFunc As Long, ByVal hWnd As Long, ByVal Msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Public Declare Function CallWindowProc Lib "USER32" Alias "CallWindowProcW" (ByVal lpPrevWndFunc As Long, ByVal hWnd As Long, ByVal msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 #Else
 Public Declare Function SetWindowLong Lib "USER32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Any) As Long
 Public Declare Function GetWindowLong Lib "USER32" Alias "GetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
-Public Declare Function CallWindowProc Lib "USER32" Alias "CallWindowProcA" (ByVal lpPrevWndFunc As Long, ByVal hWnd As Long, ByVal Msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Public Declare Function CallWindowProc Lib "USER32" Alias "CallWindowProcA" (ByVal lpPrevWndFunc As Long, ByVal hWnd As Long, ByVal msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 #End If
 Public Declare Function GetSystemMetrics Lib "USER32" (ByVal nIndex As Long) As Long
 Public Declare Function GetTickCount Lib "kernel32" () As Long
@@ -470,21 +470,21 @@ Declare Function ChooseColor Lib "comdlg32.dll" Alias "ChooseColorA" _
 Declare Function OleTranslateColor Lib "oleaut32.dll" (ByVal lOleColor _
     As Long, ByVal lHPalette As Long, lColorRef As Long) As Long
     
-	Const CC_RGBINIT = &H1&
-	Const CC_FULLOPEN = &H2&
-	Const CC_PREVENTFULLOPEN = &H4&
-	Const CC_SHOWHELP = &H8&
-	Const CC_ENABLEHOOK = &H10&
-	Const CC_ENABLETEMPLATE = &H20&
-	Const CC_ENABLETEMPLATEHANDLE = &H40&
-	Const CC_SOLIDCOLOR = &H80&
-	Const CC_ANYCOLOR = &H100&
-	Const CLR_INVALID = &HFFFF
+        Const CC_RGBINIT = &H1&
+        Const CC_FULLOPEN = &H2&
+        Const CC_PREVENTFULLOPEN = &H4&
+        Const CC_SHOWHELP = &H8&
+        Const CC_ENABLEHOOK = &H10&
+        Const CC_ENABLETEMPLATE = &H20&
+        Const CC_ENABLETEMPLATEHANDLE = &H40&
+        Const CC_SOLIDCOLOR = &H80&
+        Const CC_ANYCOLOR = &H100&
+        Const CLR_INVALID = &HFFFF
 
 Public Function GetTemporaryPath() As String
-	Dim strPath As String
+   Dim strPath As String
 strPath = String(MAX_PATH, 0)
-	Dim lngResult As Long
+   Dim lngResult As Long
 
    lngResult = GetTempPath(MAX_PATH, strPath)
    If lngResult > 0 Then
@@ -562,9 +562,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Get GetCDlgFileName(ByVal hDlg As Long) As String
-	Dim sBuf As String
-	Dim iPos As Long
-	Dim hWnd As Long
+   Dim sBuf As String
+   Dim iPos As Long
+   Dim hWnd As Long
    hWnd = GetParent(hDlg)
    sBuf = String$(MAX_PATH, 0)
    SendMessageString hWnd, CDM_GETFILEPATH, 260, sBuf
@@ -608,7 +608,7 @@ Public Function TabKeyProc(ByVal nCode As Long, ByVal wParam As Long, ByVal lPar
    If frmNewOpen.IsNew Then
     If Not (frmNewOpen.lvwNew.SelectedItem Is Nothing) Then
      If frmNewOpen.lvwNew.SelectedItem.Text <> "" Then
-      frmNewOpen.cmdNewOpen.Value = True
+      frmNewOpen.cmdNewOpen.value = True
       TabKeyProc = 1: Exit Function
      End If
     End If
@@ -640,7 +640,7 @@ Sub openWebPage(pageName As String)
       ' First, create a known, temporary HTML file
       BrowserExec = Space(255)
       filename = "C:\temphtm.HTM"
-      nFileNumber = FreeFile                    ' Get unused file number
+      nFileNumber = FileSystem.FreeFile '#1     ' Get unused file number
       Open filename For Output As #nFileNumber  ' Create temp HTML file
           Write #nFileNumber, "<HTML> <\HTML>"  ' Output text
       Close #nFileNumber                        ' Close file
@@ -725,9 +725,9 @@ End Function
 '------------------------------------------------------------
 Public Function ReadFile(astrFile As String, ByRef astrText As String) As Boolean
 
-	Dim hFile As Long
-	Dim FBuf() As Byte
-	Dim bytesRead As Long
+   Dim hFile As Long
+   Dim FBuf() As Byte
+   Dim bytesRead As Long
 
 hFile = CreateFile(astrFile, GENERIC_READ, FILE_SHARE_READ, ByVal 0&, OPEN_EXISTING, 0, 0)
 If hFile <> INVALID_HANDLE_VALUE Then

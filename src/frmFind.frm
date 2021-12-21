@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmFind 
-   BorderStyle     =   1  'Fixed Single
+   BorderStyle     =   1  'Fest Einfach
    Caption         =   "Find"
    ClientHeight    =   2505
    ClientLeft      =   45
@@ -12,7 +12,7 @@ Begin VB.Form frmFind
    MinButton       =   0   'False
    ScaleHeight     =   2505
    ScaleWidth      =   7785
-   StartUpPosition =   1  'CenterOwner
+   StartUpPosition =   1  'Fenstermitte
    Begin VB.CheckBox chkWholeWord 
       Caption         =   "1132[Find Whole Word &Only]"
       Height          =   255
@@ -145,19 +145,19 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-	Dim saveCod As CCodeModule
-	Dim saveModel As CProject
-	Dim saveMnu As CMenuElem
-	Dim saveView As CForm
-	Dim saveObj As Object
-	Dim origType As String
-	Dim searchStart As Long
-	Dim searchLength As Long
-	Dim searchCnt As Long
-	Dim searchType As String
-	Dim searchPos As Long
-	Dim origComplete As Boolean
-	Dim m_Form As Form
+   Dim saveCod As CCodeModule
+   Dim saveModel As CProject
+   Dim saveMnu As CMenuElem
+   Dim saveView As CForm
+   Dim saveObj As Object
+   Dim origType As String
+   Dim searchStart As Long
+   Dim searchLength As Long
+   Dim searchCnt As Long
+   Dim searchType As String
+   Dim searchPos As Long
+   Dim origComplete As Boolean
+   Dim m_Form As Form
 Private m_strFind As String
 Private m_strReplace As String
 Private m_idSearchStart As String            'Replacing firstSearchModule
@@ -180,7 +180,7 @@ Private Sub Form_Load()
    LoadResStrings Me
    If m_Form Is Nothing Then
       optModule.Enabled = False
-      optProject.Value = True
+      optProject.value = True
       optSelected.Enabled = False
    Else
       optModule.Enabled = True
@@ -189,23 +189,23 @@ Private Sub Form_Load()
             'Nothing is selected, so disable selection searches, and set search scope to previously used
             optSelected.Enabled = False
             If gnFindFlags And kFindModule Then
-               optModule.Value = True
+               optModule.value = True
             Else
-               optProject.Value = True
+               optProject.value = True
             End If
          Else
             'Something is selected, so default to a selection search
             optSelected.Enabled = True
-            optSelected.Value = True
+            optSelected.value = True
          End If
          txtFind.Text = m_Form.GetFindText
       Else 'typename(m_Form) = "frmPalmScreen"
          'Palm Screen search, so disable selection searches, and set search scope to previously used
          optSelected.Enabled = False
          If gnFindFlags And kFindProject Then
-            optProject.Value = True
+            optProject.value = True
          Else
-            optModule.Value = True
+            optModule.value = True
          End If
          txtFind.Text = gstrFind
       End If
@@ -219,11 +219,11 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function butCommon_Click(bReplace As Boolean) As Boolean
-	Dim proj As CProject
-	Dim nFlags As Integer
-	Dim i As Integer
-	Dim strSearchStart As String
-	Dim arrStr() As String
+   Dim proj As CProject
+   Dim nFlags As Integer
+   Dim i As Integer
+   Dim strSearchStart As String
+   Dim arrStr() As String
 
    'Get find and replace strings, set globals and determine if this is a new search
    gstrFind = txtFind.Text
@@ -334,7 +334,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butReplace_Click()
-	Dim frm As frmCode
+   Dim frm As frmCode
 
    If Not butCommon_Click(True) Then
       Beep
@@ -366,10 +366,10 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub butReplaceAll_Click()
-	Dim frm As frmCode
-	Dim i As Integer
-	Dim bRepl As Boolean
-	Dim nIndex As Long
+   Dim frm As frmCode
+   Dim i As Integer
+   Dim bRepl As Boolean
+   Dim nIndex As Long
    
    'Screw elegance!
 
@@ -429,7 +429,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Let Form(frm As Form)
-	Dim rng As CodeMax4Ctl.range
+   Dim rng As CodeMax4Ctl.range
 
    Set m_Form = frm
    If typename(frm) = "frmCode" Then
@@ -458,8 +458,8 @@ Public Property Let FindReplace(bFindReplace As Boolean)
    butReplaceAll.Visible = bFindReplace
    If bFindReplace Then
       Me.caption = gStringTable(1304)
-      butFindNext.Enabled = Not optSelected.Value
-      butReplace.Enabled = Not optSelected.Value
+      butFindNext.Enabled = Not optSelected.value
+      butReplace.Enabled = Not optSelected.value
    Else
       Me.caption = gStringTable(1303)
    End If
@@ -471,8 +471,8 @@ End Property
 Private Sub optModule_Click()
    'Find next always enabled on Find Dialog
    If Not butReplace.Visible Then Exit Sub
-   butFindNext.Enabled = Not optSelected.Value
-   butReplace.Enabled = Not optSelected.Value
+   butFindNext.Enabled = Not optSelected.value
+   butReplace.Enabled = Not optSelected.value
 End Sub
 
 '------------------------------------------------------------
@@ -481,8 +481,8 @@ End Sub
 Private Sub optProject_Click()
    'Find next always enabled on Find Dialog
    If Not butReplace.Visible Then Exit Sub
-   butFindNext.Enabled = Not optSelected.Value
-   butReplace.Enabled = Not optSelected.Value
+   butFindNext.Enabled = Not optSelected.value
+   butReplace.Enabled = Not optSelected.value
 End Sub
 
 '------------------------------------------------------------
@@ -491,8 +491,8 @@ End Sub
 Private Sub optSelected_Click()
    'Find next always enabled on Find Dialog
    If Not butReplace.Visible Then Exit Sub
-   butFindNext.Enabled = Not optSelected.Value
-   butReplace.Enabled = Not optSelected.Value
+   butFindNext.Enabled = Not optSelected.value
+   butReplace.Enabled = Not optSelected.value
 End Sub
 
 '------------------------------------------------------------

@@ -9,7 +9,7 @@ Begin VB.Form frmThemeEditor
    LinkTopic       =   "Form1"
    ScaleHeight     =   6435
    ScaleWidth      =   10620
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   3  'Windows-Standard
    Begin VB.CommandButton btnImportColors 
       Caption         =   "Import Colors"
       Height          =   255
@@ -159,7 +159,7 @@ Private Sub btnSave_Click()
    Dim b3 As Integer
    Dim frm As Form
    Dim nFileNumber As Integer
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
   
    'does file exist already?
    On Error GoTo fileNotFound
@@ -216,7 +216,7 @@ Private Sub SaveThemeFile(Name As String, themeResource() As Byte)
    Dim data(212) As Byte
    Dim nFileNumber As Integer
    Dim i As Integer
-   nFileNumber = FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    Dim s As String
    
    For i = 0 To 212
@@ -292,7 +292,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub btnSaveAs_Click()
-	Dim filename As String
+   Dim filename As String
 
    frmMain.dlgCommonDialog.DialogTitle = gStringTable(2207)
    frmMain.dlgCommonDialog.InitDir = fileDirectory + "\themes"

@@ -81,7 +81,7 @@ Public obj_code_len As Long
 Public termin_obj_code As String
 Public termin_obj_code_len As Long
 'Dim formTOCLoc3 As Long
-	Dim TOCLoc3 As Long
+   Dim TOCLoc3 As Long
 'Dim TOCLoc4 As Long
 
 'IDE variables
@@ -103,7 +103,7 @@ Private Const kErrStrings As Integer = 2050
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    Dim i As Integer
    Dim sv As CDataElement
    Dim av As CDataElement
@@ -1435,15 +1435,13 @@ End Function
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim i As Long
-   Dim version As Integer
-   Dim oldversion As Integer
-   Dim oldFrac As Integer
    Dim iconList As String
    Dim Dummy As String
    Dim s() As String
 
+   Dim version As Integer
    Input #nFileNumber, version
    If version > kVersion Then
       MsgBox gStringTable(3255) & version '"Error: Invalid Project Version (" & version & ")"
@@ -1453,6 +1451,8 @@ Public Sub Restore(ByVal nFileNumber as integer)
    Input #nFileNumber, Name, m_strApplType, m_strCreatorID, HighestSeqNo
    If m_strApplType = "Test" Then ApplType = "appl"
 
+   Dim oldversion As Integer
+   Dim oldFrac As Integer
    If version > 4 Then Input #nFileNumber, oldversion, oldFrac
 
    Input #nFileNumber, pgm_script
@@ -1462,8 +1462,10 @@ Public Sub Restore(ByVal nFileNumber as integer)
       RestoreImages SIF1, SIF2, SIF4, SIF8, SIF16, SIF1h, SIF2h, SIF4h, SIF8h, SIF16h
       RestoreImages LIF1, LIF2, LIF4, LIF8, LIF16, LIF1h, LIF2h, LIF4h, LIF8h, LIF16h
    End If
+   
    If version > 2 Then Input #nFileNumber, launcherName
    If version > 3 Then Input #nFileNumber, LaunchVersion
+
 #If NSBSymbian Then
    If version > 7 Then
       Input #nFileNumber, Company
@@ -1535,15 +1537,16 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as interger)
+Public Sub Save()
    Dim i As Integer
    Dim strTemp As String
    Dim obj As Object, o2 As Object
    Dim frm As frmCode
 
    On Error GoTo SaveError
-   Dim nFileNumber as integer
-   nFileNumber = #1 'FreeFile
+   
+   Dim nFileNumber As Integer
+   nFileNumber = FileSystem.FreeFile '#1
    Open Me.pathname For Output As #nFileNumber
 
    Write #nFileNumber, "mdl"
@@ -1551,7 +1554,7 @@ Public Sub Save(ByVal nFileNumber as interger)
    Write #nFileNumber, Name, ApplType, CreatorID, HighestSeqNo, VersionInteg, VersionFrac
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|startup")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
    strTemp = pgm_script
    ProcessScript strTemp, ToDisk
    Write #nFileNumber, strTemp
@@ -1578,25 +1581,25 @@ Public Sub Save(ByVal nFileNumber as interger)
    Write #nFileNumber, GetRelativePath(gTarget.pathname, theme)
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|termination")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
    strTemp = termination_script
    ProcessScript strTemp, ToDisk
    Write #nFileNumber, strTemp
 
    For Each obj In BitmapCollection
-      obj.Save #nFileNumber
+      obj.Save nFileNumber
    Next
    For Each obj In ResourceCollection
-      obj.Save #nFileNumber
+      obj.Save nFileNumber
    Next
    For Each obj In MenuCollection
-      obj.Save #nFileNumber
+      obj.Save nFileNumber
    Next
    For Each obj In CodeCollection
-      obj.Save #nFileNumber
+      obj.Save nFileNumber
    Next
    For Each obj In FormCollection
-      obj.Save #nFileNumber
+      obj.Save nFileNumber
    Next
    Write #nFileNumber, "end"
    Close #nFileNumber
@@ -1637,10 +1640,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddNewForm() As CForm
-	Dim frm As New CForm
-	Dim tempForm As CForm
-	Dim i As Integer
-	Dim strTitle As String
+   Dim frm As New CForm
+   Dim tempForm As CForm
+   Dim i As Integer
+   Dim strTitle As String
 
    frm.obj_code_id = GetNextSeqNo
    frm.IdNo = GetNextSeqNo
@@ -1668,7 +1671,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveForm(ByVal strGlobalID As String)
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To FormCollection.count
       If FormCollection(i).GlobalID = strGlobalID Then
@@ -1685,7 +1688,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddNewBitmap(ByRef strFilename As String) As CBitmapFile
-	Dim bmp As New CBitmapFile
+   Dim bmp As New CBitmapFile
 
    bmp.IdNo = GetNextSeqNo
    bmp.SetFileName strFilename
@@ -1699,7 +1702,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveBitmap(ByVal strGlobalID As String)
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To BitmapCollection.count
       If BitmapCollection(i).GlobalID = strGlobalID Then
@@ -1714,7 +1717,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddNewResource(ByRef strFilename As String) As CResourceFile
-	Dim bmp As New CResourceFile
+   Dim bmp As New CResourceFile
 
    bmp.IdNo = GetNextSeqNo
    bmp.SetFileName strFilename
@@ -1728,7 +1731,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveResource(ByVal strGlobalID As String)
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To ResourceCollection.count
       If ResourceCollection(i).GlobalID = strGlobalID Then
@@ -1743,10 +1746,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function AddModule(Optional ByRef strFilename As String = "") As CCodeModule
-	Dim cMod As New CCodeModule
-	Dim cmod2 As CCodeModule
-	Dim strModule As String
-	Dim i As Integer
+   Dim cMod As New CCodeModule
+   Dim cmod2 As CCodeModule
+   Dim strModule As String
+   Dim i As Integer
 
    If Len(strFilename) <> 0 Then
       If Dir(strFilename, vbNormal) = "" Then
@@ -1782,7 +1785,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub RemoveModule(ByVal strGlobalID As String)
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To CodeCollection.count
       If CodeCollection(i).GlobalID = strGlobalID Then
@@ -1845,27 +1848,27 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub GenMenuTBAR(mn As CMenu, eno As Integer)
-	Dim mBar As PPmenuBar
-	Dim pull As menuPulldown
-	Dim itm As menuItem
-	Dim mnu As CMenuElem
-	Dim mnu2 As CMenuElem
-	Dim temp As Long
-	Dim p As Long
-	Dim i As Long
-	Dim startPull As Long
-	Dim startItem As Long
-	Dim startStrings As Long
-	Dim startMBAR As Long
-	Dim icnt As Integer
-	Dim pcnt As Integer
-	Dim n As Integer
-	Dim knt As Integer
-	Dim m As Integer
-	Dim titleOffset As Integer
-	Dim maxlen As Integer
-	Dim drop As Integer
-	Dim byte00 As Byte
+   Dim mBar As PPmenuBar
+   Dim pull As menuPulldown
+   Dim itm As menuItem
+   Dim mnu As CMenuElem
+   Dim mnu2 As CMenuElem
+   Dim temp As Long
+   Dim p As Long
+   Dim i As Long
+   Dim startPull As Long
+   Dim startItem As Long
+   Dim startStrings As Long
+   Dim startMBAR As Long
+   Dim icnt As Integer
+   Dim pcnt As Integer
+   Dim n As Integer
+   Dim knt As Integer
+   Dim m As Integer
+   Dim titleOffset As Integer
+   Dim maxlen As Integer
+   Dim drop As Integer
+   Dim byte00 As Byte
 
    byte00 = &H0
    wordBound 3
@@ -2036,131 +2039,163 @@ End Function
 '
 '------------------------------------------------------------
 Public Function OpenProject(ByVal strPath As String) As Boolean
-   Dim o As Object
+   
    Dim bmp As CBitmapFile
-   Dim Kind As String
+   
    Dim saveHighSeqNo As Integer
    Dim frm As CForm
-   Dim projectDir As String
-
+   
 
    'MMD   stage = "l"
    OpenProject = False
    On Error GoTo gotCancel
 
    Dim nFileNumber As Integer
-   nFileNumber = #1 'FreeFile
+   nFileNumber = FileSystem.FreeFile '#1
    Open strPath For Input As #nFileNumber
    
    'Change the current directory to the project file directory
+   Dim projectDir As String
    projectDir = Left(strPath, InStrRev(strPath, "\"))
    If Mid(projectDir, 2, 1) = ":" Then ChDrive Left(projectDir, 2) 'ignore network drives
+   
    ChDir projectDir
    
    Do
+      Dim o As Object
+      Dim Kind As String
+      
       Input #nFileNumber, Kind
+      
       Select Case Kind
+      
          Case "mdl", "proj"
-            Me.Restore #nFileNumber
+            Me.Restore nFileNumber
    '         saveHighSeqNo = o.HighestSeqNo
    '         o.HighestSeqNo = 0
+   
          Case "bmpfile"
             Set o = New CBitmapFile
-            o.Restore #nFileNumber
+            o.Restore nFileNumber
             o.Project = Me
             AddBitmap o, o.IdNo
+            
          Case "resfile"
             Set o = New CResourceFile
-            o.Restore #nFileNumber
+            o.Restore nFileNumber
             o.Project = Me
             AddResource o, o.IdNo
+            
          Case "mnu"
             Set o = New CMenu
    '         Set menu = o
             o.SetGlobalID GlobalID
-            o.Restore #nFileNumber
+            o.Restore nFileNumber
    '         MenuCollection.Add o
             AddMenu o
+            
          Case "mod"
             Set o = New CCodeModule
    '         Set cod = o
             'o.IdNo = GetNextSeqNo     '12.04.06 GH
-            o.Restore #nFileNumber
+            o.Restore nFileNumber
             If Len(o.path) = 0 Then
    '            Set cod = Nothing
                Set o = Nothing
             Else
                CodeCollection.Add o
             End If
+            
          Case "vew", "form"
             Set frm = New CForm
-            frm.Restore #nFileNumber
+            frm.Restore nFileNumber
             frm.Project = Me
             FormCollection.Add frm
+            
          Case "bmp", "bitmap"
             Set o = New CUIBitmap
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "but", "button"
             Set o = New CUIButton
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "chk", "checkbox"
             Set o = New CUICheckbox
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "cho", "choicebox", "pus", "pushbutton"
             Set o = New CUIPushbutton
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "fld", "field"
             Set o = New CUIField
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "gad", "gadget"
             Set o = New CUIGadget
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "lbl", "label"
             Set o = New CUILabel
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "lst", "list"
             Set o = New CUIList
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "pop", "popup"
             Set o = New CUIPopup
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "rpt", "repeater"
             Set o = New CUIRepeater
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "scr", "scrollbar"
             Set o = New CUIScrollbar
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "sel", "selector"
             Set o = New CUISelector
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "shf", "gsi"
             Set o = New CUIGraffitiShiftIndicator
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "sli", "slider"
             Set o = New CUISlider
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "grd", "grid"
             Set o = New CUIGrid
-            RestoreUIObject #nFileNumber, frm, o
+            RestoreUIObject nFileNumber, frm, o
+            
          Case "end"
             Exit Do
+            
          Case "data"
             Set o = New CDataElement
-            o.Restore #nFileNumber
+            o.Restore nFileNumber
             AddDataElement o
+            
          Case Else
             MsgBox gStringTable(3258) + Kind '"Error: Illegal Object Type (" + Kind + ")"
             End
+            
       End Select
    Loop
    
    Close #nFileNumber
+   
    On Error GoTo 0
    pathname = strPath
    OpenProject = True
    Saved = True
    Dirty = False
    Exit Function
+   
 gotCancel:
    MsgBox gStringTable(3259) + strPath '"Error Loading Project '" + strPath + "'"
    End
@@ -2169,8 +2204,8 @@ End Function
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub RestoreUIObject(ByVal nFileNumber as integer, ByVal frm As CForm, ByVal obj As Object)
-   obj.Restore #nFileNumber
+Private Sub RestoreUIObject(ByVal nFileNumber As Integer, ByVal frm As CForm, ByVal obj As Object)
+   obj.Restore nFileNumber
    frm.ObjectCollection.Add obj
    obj.obj.Form = frm
 End Sub
@@ -2207,7 +2242,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -2313,10 +2348,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim strWork As String
-	Dim proj As CProject
-	Dim n As Integer
-	Dim frm As Form
+   Dim strWork As String
+   Dim proj As CProject
+   Dim n As Integer
+   Dim frm As Form
 
    ValidateProperty = True
    Select Case strProp
@@ -2438,8 +2473,8 @@ Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String
    Case "Version"
       #If NSBSymbian Then
          'format must be #,#,#,#
-         Dim v() As String
-         Dim i As Integer
+    Dim v() As String
+    Dim i As Integer
          v = Split(strVal, ",")
          If UBound(v) <> 2 Then
             MsgBox gStringTable(3449) 'Version must be in format #,#,#
@@ -2474,7 +2509,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Property Get Form(nID As Integer) As CForm
-	Dim frm As CForm
+   Dim frm As CForm
 
    For Each frm In FormCollection
       If frm.IdNo = nID Then
@@ -2488,7 +2523,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get Bitmap(nID As Integer) As CBitmapFile
-	Dim bmp As CBitmapFile
+   Dim bmp As CBitmapFile
 
    For Each bmp In BitmapCollection
       If bmp.IdNo = nID Then
@@ -2502,7 +2537,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get resource(nID As Integer) As CResourceFile
-	Dim bmp As CResourceFile
+   Dim bmp As CResourceFile
 
    For Each bmp In ResourceCollection
       If bmp.IdNo = nID Then
@@ -2516,7 +2551,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get Module(nID As Integer) As CCodeModule
-	Dim cm As CCodeModule
+   Dim cm As CCodeModule
 
    For Each cm In CodeCollection
       If cm.IdNo = nID Then
@@ -2576,11 +2611,11 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub WriteOutBitmaps()
-	Dim bmp As CBitmapFile
-	Dim frm As Object
-	Dim obj As Object
-	Dim filename As String
-	Dim res As Double
+   Dim bmp As CBitmapFile
+   Dim frm As Object
+   Dim obj As Object
+   Dim filename As String
+   Dim res As Double
 
    For Each bmp In BitmapCollection
       If CheckBitmap(bmp.PathName1) And CheckBitmap(bmp.PathName2) And CheckBitmap(bmp.PathName4) And CheckBitmap(bmp.PathName8) And CheckBitmap(bmp.PathName16) And _
@@ -2617,7 +2652,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub WriteOutResources()
-	Dim resource As CResourceFile
+   Dim resource As CResourceFile
    For Each resource In ResourceCollection
          'ResIn resource.IdNo
    Next
@@ -2646,13 +2681,13 @@ End Function
 '
 '------------------------------------------------------------
 Public Function BuildMap() As String()
-	Dim strMap As String
-	Dim frm As CForm
-	Dim mnu As CMenu
-	Dim mBar As CMenuBar
-	Dim mElem As CMenuElem
-	Dim cMod As CCodeModule
-	Const kSep As String = ">"
+   Dim strMap As String
+   Dim frm As CForm
+   Dim mnu As CMenu
+   Dim mBar As CMenuBar
+   Dim mElem As CMenuElem
+   Dim cMod As CCodeModule
+        Const kSep As String = ">"
 
    strMap = Join(Array(GlobalID & "|startup", GlobalID & "|termination"), kSep)
    For Each frm In FormCollection
@@ -2677,7 +2712,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GetObjectType(astrName As String) As String
-	Dim frm As CForm
+   Dim frm As CForm
 
    For Each frm In FormCollection
       GetObjectType = frm.GetObjectType(astrName)

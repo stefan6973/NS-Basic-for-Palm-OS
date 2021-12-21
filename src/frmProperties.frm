@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "msflxgrd.ocx"
 Begin VB.Form frmProperties 
-   BorderStyle     =   4  'Fixed ToolWindow
+   BorderStyle     =   4  'Festes Werkzeugfenster
    Caption         =   "Properties"
    ClientHeight    =   6015
    ClientLeft      =   32805
@@ -35,11 +35,11 @@ Begin VB.Form frmProperties
       Width           =   255
    End
    Begin VB.TextBox txtList 
-      Appearance      =   0  'Flat
+      Appearance      =   0  '2D
       Height          =   285
       Left            =   3360
       MultiLine       =   -1  'True
-      ScrollBars      =   2  'Vertical
+      ScrollBars      =   2  'Vertikal
       TabIndex        =   5
       Top             =   480
       Visible         =   0   'False
@@ -58,14 +58,14 @@ Begin VB.Form frmProperties
       Height          =   240
       Left            =   4440
       Picture         =   "frmProperties.frx":0000
-      Style           =   1  'Graphical
+      Style           =   1  'Grafisch
       TabIndex        =   4
       Top             =   480
       UseMaskColor    =   -1  'True
       Width           =   240
    End
    Begin VB.ListBox lstProps 
-      Appearance      =   0  'Flat
+      Appearance      =   0  '2D
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -83,7 +83,7 @@ Begin VB.Form frmProperties
       Width           =   1275
    End
    Begin VB.TextBox txtEdit 
-      BorderStyle     =   0  'None
+      BorderStyle     =   0  'Kein
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -143,8 +143,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-	Dim m_PropGrid As New CPropertiesGrid
-	Dim m_obj As Object
+   Dim m_PropGrid As New CPropertiesGrid
+   Dim m_obj As Object
 
 '------------------------------------------------------------
 '
@@ -167,15 +167,15 @@ End Sub
 '------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
-	Dim lRet As Long
+   Dim lRet As Long
 
    Me.Visible = False
 
    'Make sure we keep the ToolWindow style
-   lRet = SetWindowLong(Me.hwnd, GWL_EXSTYLE, CLng(WS_EX_TOOLBOXWINDOW))
+   lRet = SetWindowLong(Me.hWnd, GWL_EXSTYLE, CLng(WS_EX_TOOLBOXWINDOW))
 
    'Set parent and resize the panel
-   SetParent Me.hwnd, frmMain.picProperties.hwnd
+   SetParent Me.hWnd, frmMain.picProperties.hWnd
    frmMain.picProperties_Resize
    frmMain.picPanel_Resize
 
@@ -183,7 +183,7 @@ Public Sub DockWindow()
    frmMain.picPanel.Visible = True
    DoEvents
    Me.Visible = True
-   SendMessage Me.hwnd, WM_NCACTIVATE, 1, 0
+   SendMessage Me.hWnd, WM_NCACTIVATE, 1, 0
    frmMain.mnuViewProperties.Checked = gbProperties
 
    ShowObject

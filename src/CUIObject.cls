@@ -58,7 +58,7 @@ Private Const kSelectBorderSize As Integer = 2
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
 '   Set NextObj = Nil
 '   Set PrevObj = Nil
    OrigLeft = 50
@@ -84,7 +84,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim i As Integer
    Dim temp As String
    Dim version As Integer
@@ -120,7 +120,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Dim strTemp As String
 
    Write #nFileNumber, "obj"
@@ -426,7 +426,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Let Name(ByVal vData As String)
-	Dim strSubName As String
+   Dim strSubName As String
 
    'Verify name
    If Len(vData) = 0 Then Exit Property
@@ -563,10 +563,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim n As Double
-	Dim i As Integer
-	Dim frm As CForm
-	Dim obj As Object
+   Dim n As Double
+   Dim i As Integer
+   Dim frm As CForm
+   Dim obj As Object
 
    ValidateProperty = True
    Select Case strProp
@@ -705,7 +705,7 @@ End Property
 '
 '------------------------------------------------------------
 Private Sub m_Control_DblClick()
-	Dim fCode As New frmCode
+   Dim fCode As New frmCode
 
    'm_Control.Tag = "1"
    m_Control.Refresh
@@ -717,7 +717,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function GetHandle(ByVal x As Integer, ByVal y As Integer)
-	Dim nMid As Integer
+   Dim nMid As Integer
       
    nMid = m_Control.Width \ 2 - 2
    If x <= kDragHandleSize Then
@@ -807,7 +807,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub m_Control_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-	Dim nX As Integer, nY As Integer, n As Integer
+   Dim nX As Integer, nY As Integer, n As Integer
 
    If Button = 0 Then
       m_nMousePointX = x
@@ -923,9 +923,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw(bDrawBorder As Boolean)
-	Dim fontname As String
-	Dim fontSize As Integer
-	Dim nMag As Integer
+   Dim fontname As String
+   Dim fontSize As Integer
+   Dim nMag As Integer
 
    'Choose your font here
    fontname = gstrPalmFonts(m_nFontId)
@@ -961,7 +961,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub DrawSelected()
-	Dim nMid As Integer
+   Dim nMid As Integer
 
    If Not Selected Then Exit Sub
    Control.DrawWidth = 1
@@ -984,8 +984,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Get Object(nID As Integer) As Object
-	Dim obj As Object
-	Dim frm As CForm
+   Dim obj As Object
+   Dim frm As CForm
 
 For Each frm In Form.Project.FormCollection
    For Each obj In frm.ObjectCollection

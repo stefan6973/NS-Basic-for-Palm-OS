@@ -27,9 +27,9 @@ Private Const kMethods As String = "Hide-Show-Redraw-EraseSignature-StartSignatu
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "Gadget"
+   obj.Name = "Gadget"
    obj.Kind = "gad"
    obj.Width = 40
    obj.Height = 40
@@ -39,8 +39,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-	Dim gad As gadgetOut
-	Dim c As Byte
+   Dim gad As gadgetOut
+   Dim c As Byte
 
    gad.id.w = cvtWord(obj.IdNo)
    If obj.Usable Then
@@ -65,7 +65,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim version As Integer
 
    Input #nFileNumber, version
@@ -74,16 +74,16 @@ Public Sub Restore(ByVal nFileNumber as integer)
       End
    End If
 
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
@@ -99,8 +99,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "gad" Then
@@ -140,10 +140,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -162,7 +162,7 @@ Public Sub GetProperty()
    Case kUserProps + 9: obj.GetProperty "Nav Above ID"
    Case kUserProps + 10: obj.GetProperty "Nav Below ID"
    End Select
-   gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+   gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    nProp = nProp + 1
 End Sub
 

@@ -9,7 +9,7 @@ Begin VB.Form frmAddWatchVariable
    LinkTopic       =   "Form1"
    ScaleHeight     =   6510
    ScaleWidth      =   5745
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   3  'Windows-Standard
    Begin MSComctlLib.TreeView Tree 
       Height          =   5655
       Left            =   240
@@ -65,7 +65,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 'entire form is new 04012005
 
-	Dim startIndex As Integer
+   Dim startIndex As Integer
 
 '------------------------------------------------------------
 '
@@ -187,26 +187,26 @@ Private Sub Form_Load()
     
     'Note to George -06112005 -- previously, this form had a listbox to display variables to choose from.
     '                            now, it has a tree (see form designer)
-	Dim s As String
-	Dim i As Integer
-	Dim n As Integer
-	Dim d As CDataElement
-	Dim highestN As Integer
+   Dim s As String
+   Dim i As Integer
+   Dim n As Integer
+   Dim d As CDataElement
+   Dim highestN As Integer
  
-	Dim tempLocalID As String
-	Dim tempVarName As String
-	Dim tempDataElemNo As Integer
+   Dim tempLocalID As String
+   Dim tempVarName As String
+   Dim tempDataElemNo As Integer
 
-	Dim lastModuleNode As Node
-	Dim debuggerLastSubscriptNode As Node
+   Dim lastModuleNode As Node
+   Dim debuggerLastSubscriptNode As Node
 
-	Dim s1 As Integer
-	Dim s2 As Integer
-	Dim s3 As Integer
+   Dim s1 As Integer
+   Dim s2 As Integer
+   Dim s3 As Integer
 
-	Dim strs1 As String
-	Dim strs2 As String
-	Dim strs3 As String
+   Dim strs1 As String
+   Dim strs2 As String
+   Dim strs3 As String
 
  Dim lst As ListImage
      

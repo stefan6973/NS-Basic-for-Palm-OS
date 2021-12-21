@@ -30,21 +30,21 @@ Private Const kMethods = "Hide-Show-Redraw"
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "Selector"
+   obj.Name = "Selector"
    obj.Kind = "sel"
    obj.Width = 45
-   obj.Label = obj.name
+   obj.Label = obj.Name
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-	Dim c As Byte
-	Dim sel As ctlOut
-	Dim templen As Integer
+   Dim c As Byte
+   Dim sel As ctlOut
+   Dim templen As Integer
 
    BuildControlPrc sel, obj
    sel.style.s = &H4
@@ -67,7 +67,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
 
    Dim version As Integer
    Input #nFileNumber, version
@@ -77,17 +77,17 @@ Public Sub Restore(ByVal nFileNumber as integer)
    End If
 
    Input #nFileNumber, m_bAnchorLeft
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
    Write #nFileNumber, AnchorLeft
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
@@ -104,8 +104,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "sel" Then
@@ -178,10 +178,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -189,7 +189,7 @@ Public Sub GetProperty()
    gPropInfo.Val = ""
    If nProp < kUserProps Then gPropInfo.Type = pgBoolean
    Select Case nProp
-   Case 0: gPropInfo.name = "Anchor Left"
+   Case 0: gPropInfo.Name = "Anchor Left"
    Case kUserProps + 0: obj.GetProperty "(Name)"
    Case kUserProps + 1: obj.GetProperty "Type"
    Case kUserProps + 2: obj.GetProperty "ID"
@@ -204,7 +204,7 @@ Public Sub GetProperty()
    Case kUserProps + 11: obj.GetProperty "Nav Above ID"
    Case kUserProps + 12: obj.GetProperty "Nav Below ID"
    End Select
-   If nProp < kUserProps Then gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+   If nProp < kUserProps Then gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    nProp = nProp + 1
 End Sub
 

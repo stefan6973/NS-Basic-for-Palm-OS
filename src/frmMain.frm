@@ -1,21 +1,21 @@
 VERSION 5.00
-Object = "{BCA00000-0F85-414C-A938-5526E9F1E56A}#4.0#0"; "cmax40.dll"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{6FBA474E-43AC-11CE-9A0E-00AA0062BB4C}#1.0#0"; "SYSINFO.OCX"
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.OCX"
+Object = "{BCA00000-0F85-414C-A938-5526E9F1E56A}#4.0#0"; "cmax40m.dll"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{6FBA474E-43AC-11CE-9A0E-00AA0062BB4C}#1.0#0"; "sysinfo.ocx"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
 Object = "{EFC9CC66-188E-11D5-9892-0000CB222337}#1.0#0"; "emulink.ocx"
 Begin VB.MDIForm frmMain 
    BackColor       =   &H8000000C&
    Caption         =   "1401[NS Basic for Palm]"
    ClientHeight    =   7905
-   ClientLeft      =   225
-   ClientTop       =   855
+   ClientLeft      =   165
+   ClientTop       =   735
    ClientWidth     =   11700
    Icon            =   "frmMain.frx":0000
    LinkTopic       =   "MDIForm1"
    Picture         =   "frmMain.frx":08CA
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   3  'Windows-Standard
    Tag             =   "1401"
    Begin MSWinsockLib.Winsock tcpServer 
       Left            =   3840
@@ -32,7 +32,7 @@ Begin VB.MDIForm frmMain
       _Version        =   393216
    End
    Begin VB.PictureBox picBox 
-      Align           =   1  'Align Top
+      Align           =   1  'Oben ausrichten
       Height          =   615
       Left            =   0
       ScaleHeight     =   555
@@ -74,10 +74,10 @@ Begin VB.MDIForm frmMain
       Top             =   1080
    End
    Begin VB.PictureBox picToolbox 
-      Align           =   3  'Align Left
-      Appearance      =   0  'Flat
+      Align           =   3  'Links ausrichten
+      Appearance      =   0  '2D
       BackColor       =   &H80000004&
-      BorderStyle     =   0  'None
+      BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
       Height          =   6660
       Left            =   0
@@ -88,10 +88,10 @@ Begin VB.MDIForm frmMain
       Width           =   840
    End
    Begin VB.PictureBox picPanel 
-      Align           =   4  'Align Right
-      Appearance      =   0  'Flat
+      Align           =   4  'Rechts ausrichten
+      Appearance      =   0  '2D
       BackColor       =   &H80000004&
-      BorderStyle     =   0  'None
+      BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
       Height          =   6660
       Left            =   8220
@@ -102,9 +102,9 @@ Begin VB.MDIForm frmMain
       Visible         =   0   'False
       Width           =   3480
       Begin VB.PictureBox picProperties 
-         Appearance      =   0  'Flat
+         Appearance      =   0  '2D
          BackColor       =   &H80000005&
-         BorderStyle     =   0  'None
+         BorderStyle     =   0  'Kein
          ForeColor       =   &H80000008&
          Height          =   855
          Left            =   240
@@ -116,9 +116,9 @@ Begin VB.MDIForm frmMain
          Width           =   495
       End
       Begin VB.PictureBox picProjectExplorer 
-         Appearance      =   0  'Flat
+         Appearance      =   0  '2D
          BackColor       =   &H80000005&
-         BorderStyle     =   0  'None
+         BorderStyle     =   0  'Kein
          ForeColor       =   &H80000008&
          Height          =   855
          Left            =   240
@@ -130,14 +130,14 @@ Begin VB.MDIForm frmMain
          Width           =   495
       End
       Begin VB.PictureBox picSplit 
-         Appearance      =   0  'Flat
+         Appearance      =   0  '2D
          BackColor       =   &H80000004&
-         BorderStyle     =   0  'None
+         BorderStyle     =   0  'Kein
          ForeColor       =   &H80000008&
          Height          =   135
          Left            =   240
          MouseIcon       =   "frmMain.frx":0A08
-         MousePointer    =   99  'Custom
+         MousePointer    =   99  'Benutzerdefiniert
          ScaleHeight     =   135
          ScaleWidth      =   495
          TabIndex        =   4
@@ -146,14 +146,14 @@ Begin VB.MDIForm frmMain
          Width           =   495
       End
       Begin VB.PictureBox picWidth 
-         Appearance      =   0  'Flat
+         Appearance      =   0  '2D
          BackColor       =   &H80000004&
-         BorderStyle     =   0  'None
+         BorderStyle     =   0  'Kein
          ForeColor       =   &H80000008&
          Height          =   2055
          Left            =   0
          MouseIcon       =   "frmMain.frx":0C1A
-         MousePointer    =   99  'Custom
+         MousePointer    =   99  'Benutzerdefiniert
          ScaleHeight     =   2055
          ScaleWidth      =   135
          TabIndex        =   3
@@ -169,7 +169,7 @@ Begin VB.MDIForm frmMain
       _Version        =   393216
    End
    Begin MSComctlLib.StatusBar sbStatusBar 
-      Align           =   2  'Align Bottom
+      Align           =   2  'Unten ausrichten
       Height          =   270
       Left            =   0
       TabIndex        =   0
@@ -182,7 +182,7 @@ Begin VB.MDIForm frmMain
          NumPanels       =   5
          BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   9843
+            Object.Width           =   9948
             Text            =   "Status"
             TextSave        =   "Status"
          EndProperty
@@ -194,17 +194,17 @@ Begin VB.MDIForm frmMain
          EndProperty
          BeginProperty Panel4 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
-            TextSave        =   "12/13/2010"
+            TextSave        =   "21.12.2021"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   5
             AutoSize        =   2
-            TextSave        =   "10:39 PM"
+            TextSave        =   "23:55"
          EndProperty
       EndProperty
    End
    Begin MSComctlLib.Toolbar tbToolBar 
-      Align           =   1  'Align Top
+      Align           =   1  'Oben ausrichten
       Height          =   360
       Left            =   0
       TabIndex        =   1
@@ -1345,17 +1345,20 @@ Private Declare Function SendMessage Lib "USER32" Alias "SendMessageA" (ByVal hW
 Private Declare Function OSWinHelp% Lib "USER32" Alias "WinHelpA" (ByVal hWnd&, ByVal helpFile$, ByVal wCommand%, dwData As Any)
 Private Declare Function AddFontResource Lib "GDI32" Alias "AddFontResourceA" (ByVal p1 As String) As Long
 Private Declare Function RemoveFontResource Lib "GDI32" Alias "RemoveFontResourceA" (ByVal p1 As String) As Long
-	Const EM_UNDO = &HC7
-	Const HWND_BROADCAST = &HFFFF
-	Const WM_FONTCHANGE = 29
 
-	Dim gnToolboxTool As Integer
-	Dim m_bSizing As Boolean
+Const EM_UNDO = &HC7
+Const HWND_BROADCAST = &HFFFF
+Const WM_FONTCHANGE = 29
+
+Dim gnToolboxTool As Integer
+Dim m_bSizing As Boolean
+
 Public Children As New Collection
 Public ActiveFormIsCode As Boolean
+Public bCMaxFindFlag As Boolean
+
 Private m_nGlobalIDSerial As Integer
 Private fCodeDebug As frmCode
-Public bCMaxFindFlag As Boolean
 
 '------------------------------------------------------------
 '
@@ -1411,7 +1414,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub cmaxFind_SelChange()
 'Private Sub cmaxFind_SelChange(ByVal Control As CodeMax4Ctl.CodeMax)
-	Dim sel As range
+   Dim sel As range
 
    If bCMaxFindFlag Then Exit Sub
    'Please review - MMD
@@ -1443,24 +1446,37 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub MDIForm_Load()
-	Dim strProj As String
-	Dim bShowSplash As Boolean
-	Dim trace As Boolean
-trace = True
+   Dim strProj As String
+   Dim bShowSplash As Boolean
+   
+   enableTracing True, False, "MDI Load"
 
-If trace Then MsgBox 1
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1
+   '~~~~~~~~~~~~~~~~~~~~
+
    If Not allowRegistration Then
       Load frmDemoSplash
       frmDemoSplash.Show 1
    End If
    CheckForPalmFonts
-If trace Then MsgBox 2
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 2
+   '~~~~~~~~~~~~~~~~~~~~
 
    m_nGlobalIDSerial = 1
-If trace Then MsgBox 3
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 3
+   '~~~~~~~~~~~~~~~~~~~~
 
    LoadResStrings Me
-If trace Then MsgBox 4
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 4
+   '~~~~~~~~~~~~~~~~~~~~
+
    gnToolboxTool = 1
    Me.Left = MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "MainLeft", 450)
    Me.Top = MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "MainTop", 450)
@@ -1469,49 +1485,102 @@ If trace Then MsgBox 4
    picPanel.Width = MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "MainPanel1", picPanel.Width)
    picSplit.Tag = MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "MainPanel2", 50)
    ShowStatus
-If trace Then MsgBox 5
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 5
+   '~~~~~~~~~~~~~~~~~~~~
 
    gbWinNT2000 = (SysInfo.OSPlatform = 2)
    gbWinNT2000 = True
 
    DoEvents
- If trace Then MsgBox 6
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 6
+   '~~~~~~~~~~~~~~~~~~~~
+
    gfToolbox.DockWindow
-If trace Then MsgBox 7
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 7
+   '~~~~~~~~~~~~~~~~~~~~
+
    gfProjectExplorer.DockWindow
-If trace Then MsgBox 8
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 8
+   '~~~~~~~~~~~~~~~~~~~~
+
   gfProperties.DockWindow
-If trace Then MsgBox 9
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 9
+   '~~~~~~~~~~~~~~~~~~~~
   
    ParseCommandLine 'Were we started from command line?
    If gCommandLineProject <> "" Then
-If trace Then MsgBox 9.1
+
+      '~~~~~~~~~~~~~~~~~~~~
+      traceStep 9.1
+      '~~~~~~~~~~~~~~~~~~~~
+
       OpenProject gCommandLineProject
    Else
-If trace Then MsgBox 9.2
+      '~~~~~~~~~~~~~~~~~~~~
+      traceStep 9.2
+      '~~~~~~~~~~~~~~~~~~~~
+
       bShowSplash = MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "ShowSplash", True)
-If trace Then MsgBox 9.3
+
+      '~~~~~~~~~~~~~~~~~~~~
+      traceStep 9.3
+      '~~~~~~~~~~~~~~~~~~~~
+
       If bShowSplash Then
-If trace Then MsgBox 9.4
+         '~~~~~~~~~~~~~~~~~~~~
+         traceStep 9.4
+         '~~~~~~~~~~~~~~~~~~~~
+
          strProj = ShowNewOpen(True)
          If StrComp(strProj, "Project File", vbTextCompare) = 0 Then
-If trace Then MsgBox 9.5
+
+         '~~~~~~~~~~~~~~~~~~~~
+         traceStep 9.5
+         '~~~~~~~~~~~~~~~~~~~~
+
             LoadNewProject
          Else
-If trace Then MsgBox 9.6
+         '~~~~~~~~~~~~~~~~~~~~
+         traceStep 9.6
+         '~~~~~~~~~~~~~~~~~~~~
+
             If Len(strProj) > 0 And Right(LCase(strProj), 4) = ".prj" Then OpenProject strProj
          End If
       Else
-If trace Then MsgBox 9.7
+      '~~~~~~~~~~~~~~~~~~~~
+      traceStep 9.7
+      '~~~~~~~~~~~~~~~~~~~~
+
          LoadNewProject
       End If
    End If
-If trace Then MsgBox 10
+
+        '~~~~~~~~~~~~~~~~~~~~
+        traceStep 10
+        '~~~~~~~~~~~~~~~~~~~~
    
    UpdateMRU
-If trace Then MsgBox 11
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 11
+   '~~~~~~~~~~~~~~~~~~~~
+
    UpdateTools
-If trace Then MsgBox 12
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 12
+   '~~~~~~~~~~~~~~~~~~~~
+
    SetWindowList
    #If NSBSymbian = 0 Then
    If gbLaunchPOSE Or gbLaunchSimulator Then mnuRunPOSEstart_Click
@@ -1519,7 +1588,11 @@ If trace Then MsgBox 12
    If InStr(gCommandLineOptions, "-compile") Then CompileImmediately
    Set fCodeDebug = New frmCode
    fCodeDebug.Visible = False
-If trace Then MsgBox 13
+
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 13
+   '~~~~~~~~~~~~~~~~~~~~
+
     'Load frmShowVariables   'added 04012005
     'Load frmShowCallStack   'added 04012005
     
@@ -1559,10 +1632,10 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub LoadNewProject()
-	Dim proj As New CProject
-	Dim openProj As CProject
-	Dim i As Integer
-	Dim strname As String
+   Dim proj As New CProject
+   Dim openProj As CProject
+   Dim i As Integer
+   Dim strname As String
 
    'Reset find when a new project is opened
    gbNewFind = True
@@ -1592,9 +1665,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub OpenProject(ByVal strProj As String)
-	Dim strPath As String
-	Dim proj As New CProject
-	Dim openProj As CProject
+   Dim strPath As String
+   Dim proj As New CProject
+   Dim openProj As CProject
 
    'Assign global ID #
    proj.GlobalID = m_nGlobalIDSerial
@@ -1628,8 +1701,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub AddProject(proj As CProject)
-	Dim frm As CForm, frmX As CForm
-	Dim fPalmScreen As New frmPalmScreen
+   Dim frm As CForm, frmX As CForm
+   Dim fPalmScreen As New frmPalmScreen
 
 '   'Assign global ID #
 '   proj.GlobalID = m_nGlobalIDSerial
@@ -1664,12 +1737,12 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function RemoveProject(ByVal proj As CProject) As Boolean
-	Dim frm As Form
-	Dim obj As Object
-	Dim nAction As Integer
-	Dim cMod As CCodeModule
-	Dim fCode As frmCode
-	Dim bDirty As Boolean
+   Dim frm As Form
+   Dim obj As Object
+   Dim nAction As Integer
+   Dim cMod As CCodeModule
+   Dim fCode As frmCode
+   Dim bDirty As Boolean
 
    'If nothing is open, remove is already successful
    If proj Is Nothing Then
@@ -1727,7 +1800,7 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub MDIForm_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-	Dim proj As CProject
+   Dim proj As CProject
 
    For Each proj In gProjects
       If proj.Dirty Then
@@ -1755,9 +1828,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub MDIForm_Unload(Cancel As Integer)
-	Dim fontDir As String
-	Dim lParam As Long
-	Dim i As Integer
+   Dim fontDir As String
+   Dim lParam As Long
+   Dim i As Integer
 
 '   If Not dlgCommonDialog Is Nothing Then Unload dlgCommonDialog
    If Me.WindowState = vbNormal Then
@@ -1772,10 +1845,10 @@ Private Sub MDIForm_Unload(Cancel As Integer)
    If frmMain.tcpServer.state = sckConnected Then frmMain.tcpServer.SendData "quit"
    frmMain.tcpServer.Close
       
-   fontDir = ProgramsDirectory & "\fonts\"
+   fontDir = AppInfo.FontsFolder
    lParam = 0
-   For i = 0 To 7
-      RemoveFontResource (fontDir & gstrPalmFonts(i) & ".fon")
+   For i = LBound(gstrPalmFonts) To UBound(gstrPalmFonts)
+      RemoveFontResource fontDir & gstrPalmFonts(i) & ".fon"
    Next
    SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, lParam
 End Sub
@@ -1785,7 +1858,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mnuHelpTechNotes_Click()
    Dim techNotes As String
-   techNotes = ProgramsDirectory & "\technotes\index.htm"
+   techNotes = AppInfo.SubFolder("technotes") & "index.htm"
    openWebPage techNotes
 End Sub
 
@@ -1793,7 +1866,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuEdit_Click()
-	Dim fCode As frmCode
+   Dim fCode As frmCode
 
    If ActiveForm Is Nothing Then
       mnuEditUndo.Enabled = False
@@ -1908,7 +1981,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuFileMRU_Click(index As Integer)
-	Dim proj As CProject
+   Dim proj As CProject
 
    For Each proj In gProjects
       If proj.pathname = mnuFileMRU(index).Tag And proj.Saved Then
@@ -1961,7 +2034,7 @@ Private Sub SaveProject(ByVal proj As CProject)
    Else
       Open fileDirectory + "\recent.dat" For Input As #1
       For i = 1 To UBound(strRecent)
-         Input #nFileNumber, strRecent(i)
+         Input #1, strRecent(i)
       Next
       Close #1
    End If
@@ -1977,11 +2050,11 @@ Private Sub SaveProject(ByVal proj As CProject)
    For i = 0 To UBound(strRecent)
       If strRecent(i) <> "" Then
          k = k + 1
-         Write #nFileNumber, strRecent(i)
+         Write #1, strRecent(i)
       End If
    Next
    Do While k < UBound(strRecent)
-      Write #nFileNumber, ""
+      Write #1, ""
       k = k + 1
    Loop
    Close #1
@@ -1995,7 +2068,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuFileSaveProjectAs_Click()
-	Dim proj As CProject
+   Dim proj As CProject
 
    
    If Not ActiveForm Is Nothing And typename(ActiveForm) <> "frmProperties" Then Set proj = LocateProject(ActiveForm.GlobalID)
@@ -2023,8 +2096,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuFormat_Click()
-	Dim bEnabled As Boolean
-	Dim i As Integer
+   Dim bEnabled As Boolean
+   Dim i As Integer
 
    If Not ActiveForm Is Nothing Then
       If typename(ActiveForm) = "frmPalmScreen" Then bEnabled = True
@@ -2130,7 +2203,7 @@ End Sub
 Private Sub mnuHelpTopics_Click()
    Dim helpFile As String
    
-   helpFile = ProgramsDirectory & "\Lang\" & gLanguage & ".chm"
+   helpFile = AppInfo.LangFolder & gLanguage & ".chm"
    On Error GoTo tryhlp
    Open helpFile For Input As #99
    Close #99
@@ -2139,7 +2212,7 @@ Private Sub mnuHelpTopics_Click()
 tryhlp:
    Resume tryhlp1
 tryhlp1:
-   helpFile = ProgramsDirectory & "\Lang\" & gLanguage & ".hlp"
+   helpFile = AppInfo.LangFolder & gLanguage & ".hlp"
    On Error GoTo useEnglish
    Open helpFile For Input As #99
    Close #99
@@ -2147,7 +2220,7 @@ tryhlp1:
    
 useEnglish:
    On Error GoTo 0
-   helpFile = ProgramsDirectory & "\Lang\English.chm"
+   helpFile = AppInfo.LangFolder & "English.chm"
    
 getHelp:
    On Error GoTo 0
@@ -2166,7 +2239,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mnuHelpBook_Click()
    Dim filename As String
-   filename = ProgramsDirectory & "\nsb4palmosfree.pdf"
+   filename = AppInfo.AppFolder & "nsb4palmosfree.pdf"
    err = ShellExecute(0, "Open", filename, vbNullString, vbNullString, 5)
 End Sub
 
@@ -2175,7 +2248,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mnuHelpHandbook_Click()
    Dim filename As String
-   filename = ProgramsDirectory & "\lang\Handbook.pdf"
+   filename = AppInfo.LangFolder & "Handbook.pdf"
    err = ShellExecute(0, "Open", filename, vbNullString, vbNullString, 5)
 End Sub
 
@@ -2184,7 +2257,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mnuHelpTutorials_Click()
    Dim tutorials As String
-   tutorials = ProgramsDirectory & "\technotes\TT.index.htm"
+   tutorials = AppInfo.AppFolder & "\technotes\TT.index.htm"
    openWebPage tutorials
 End Sub
 
@@ -2193,7 +2266,7 @@ End Sub
 '------------------------------------------------------------
 Private Sub mnuHelpReadme_Click()
    Dim tutorials As String
-   tutorials = ProgramsDirectory & "\Readme.htm"
+   tutorials = AppInfo.AppFolder & "\Readme.htm"
    openWebPage tutorials
 End Sub
 
@@ -2380,7 +2453,7 @@ End Sub
 '24 Add &Existing Module...   1517
 '25 Add &Resource             3355
 '26 -
-'27 &Close Project            1518
+'27 &Close Project       1518
 '28 Re&move Bitmap            1519
 '29 Re&move Module            1520
 '30 Re&move Resource          3356
@@ -2393,14 +2466,14 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuRightItem_Click(index As Integer)
-	Dim nClickSource As Integer
-	Dim strGlobalID As String
-	Dim obj As Object
-	Dim proj As CProject
-	Dim frm As frmCode
-	Dim mElem As CMenuElem
-	Dim fPalmScreen As frmPalmScreen
-	Dim nod As MSComctlLib.Node
+   Dim nClickSource As Integer
+   Dim strGlobalID As String
+   Dim obj As Object
+   Dim proj As CProject
+   Dim frm As frmCode
+   Dim mElem As CMenuElem
+   Dim fPalmScreen As frmPalmScreen
+   Dim nod As MSComctlLib.Node
 
 '   nClickSource = Left(mnuRight.Tag, 1)
    strGlobalID = Mid(mnuRight.Tag, 2)
@@ -2517,7 +2590,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuRun_Click()
-If gTarget Is Nothing Then
+   If gTarget Is Nothing Then
       mnuRunCompile.caption = mnuRunCompile.Tag
       mnuRunCompile.Enabled = False
       mnuRunHotsyncProject.caption = mnuRunHotsyncProject.Tag
@@ -2618,7 +2691,7 @@ Private Sub mnuRunHotsyncRuntime_Click()
    Dim runtime As String
    runtime = "NSBRuntime.prc"
    If gbIncludeArmNative = True Then runtime = "NSBRuntimeARM68K.prc"
-   DownloadFile ProgramsDirectory & "\BuildTools\" & runtime, "Hotsync"
+   DownloadFile AppInfo.AppFolder & "\BuildTools\" & runtime, "Hotsync"
 End Sub
 
 '------------------------------------------------------------
@@ -2653,9 +2726,13 @@ Private Sub mnuRunPoseRuntime_Click()
    runtime = "NSBRuntime.prc"
    If gbIncludeArmNative = True Then runtime = "NSBRuntimeARM68K.prc"
    If gbDebugMode = True And DownloadOption = "POSE" Then runtime = "NSBRuntimeDebug.prc"
-   DownloadFile ProgramsDirectory & "\BuildTools\" & runtime, DownloadOption
+   DownloadFile AppInfo.AppFolder & "\BuildTools\" & runtime, DownloadOption
 End Sub
+
 #If NSBSymbian = 1 Then
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuRunRunImmediately_Click()
    outputDir = fileDirectory & "\Download\"
    sisFile = outputDir & gTarget.Name & ".sis"
@@ -2664,6 +2741,9 @@ Private Sub mnuRunRunImmediately_Click()
 End Sub
 #End If
 
+'------------------------------------------------------------
+'
+'------------------------------------------------------------
 Private Sub mnuTools_Click()
    mnuToolsMenuEditor.Enabled = (gProjects.count > 0)
    mnuToolsThemeEditor.Enabled = (gProjects.count > 0)
@@ -2673,8 +2753,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuToolsList_Click(index As Integer)
-	Dim pathname As String
-	Dim err As Integer
+   Dim pathname As String
+   Dim err As Integer
 
    pathname = Chr(34) & fileDirectory & "\tools\" & mnuToolsList(index).Tag & Chr(34)
    err = ShellExecute(0, "Open", pathname, vbNullString, vbNullString, 5)
@@ -2698,7 +2778,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuToolsOptions_Click()
-	Dim fOptions As New frmOptions
+   Dim fOptions As New frmOptions
 
    fOptions.Show vbModal, Me
 End Sub
@@ -2768,7 +2848,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub picSplit_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-	Dim pt As POINTAPI
+   Dim pt As POINTAPI
 
    If m_bSizing Then
       GetCursorPos pt
@@ -2785,7 +2865,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub picSplit_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-	Dim pt As POINTAPI
+   Dim pt As POINTAPI
 
    m_bSizing = False
    GetCursorPos pt
@@ -2804,7 +2884,7 @@ End Sub
 '------------------------------------------------------------
 Public Sub picToolbox_Resize()
 ''   picToolbox.Width = tbToolbox.Width
-	Dim l As Long
+   Dim l As Long
 
    l = GetWindow(picToolbox.hWnd, GW_CHILD)
    If l <> 0 Then
@@ -2818,7 +2898,7 @@ End Sub
 '------------------------------------------------------------
 Public Sub picPanel_Resize()
 'On Error Resume Next
-	Dim nSplit As Integer
+   Dim nSplit As Integer
 
    If Me.WindowState = vbMinimized Then Exit Sub
    If Not gbProjectExplorer And Not gbProperties Then
@@ -2854,7 +2934,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub picProjectExplorer_Resize()
-	Dim l As Long
+   Dim l As Long
 
    l = GetWindow(picProjectExplorer.hWnd, GW_CHILD)
    If l <> 0 Then
@@ -2867,7 +2947,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub picProperties_Resize()
-	Dim l As Long
+   Dim l As Long
 
    l = GetWindow(picProperties.hWnd, GW_CHILD)
    If l <> 0 Then
@@ -2889,7 +2969,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub picWidth_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-	Dim pt As POINTAPI
+   Dim pt As POINTAPI
 
    If m_bSizing Then
       GetCursorPos pt
@@ -2904,8 +2984,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub picWidth_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-	Dim pt As POINTAPI
-	Dim NewWidth As Integer
+   Dim pt As POINTAPI
+   Dim NewWidth As Integer
 
    If m_bSizing Then
       GetCursorPos pt
@@ -3067,7 +3147,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuViewRefresh_Click()
-	Dim frm As Form
+   Dim frm As Form
 
    Set frm = ActiveForm
    If frm Is Nothing Then Exit Sub
@@ -3156,8 +3236,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuFilePrint_Click()
-	Dim strGID As String
-	Dim currentModule As Boolean
+   Dim strGID As String
+   Dim currentModule As Boolean
 
    'currentModule = MsgBox(gStringTable(3353), vbYesNo) 'Print the current module only?
    currentModule = False
@@ -3235,7 +3315,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuFileSaveAs_click()
-	Dim sFile As String
+   Dim sFile As String
 
    If ActiveForm Is Nothing Then Exit Sub
 
@@ -3266,7 +3346,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuFileOpenProject_click()
-	Dim strProj As String
+   Dim strProj As String
 'Dim fSelProj As New frmSelProj
 '
 '   fSelProj.ShowNew = False
@@ -3283,8 +3363,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuFileNewProject_click()
-	Dim fNewProject As New frmNewProject
-	Dim strNew As String
+   Dim fNewProject As New frmNewProject
+   Dim strNew As String
 
    If MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "ShowSplash", True) Then
       fNewProject.Show vbModal
@@ -3305,8 +3385,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub UpdateProjectList()
-	Dim i As Integer
-	Dim proj As CProject
+   Dim i As Integer
+   Dim proj As CProject
 
    'Update Target
 ''   For Each proj In gProjects
@@ -3341,8 +3421,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ActiveFormChange(nActivate As Integer)
-	Dim i As Integer
-	Dim fCode As frmCode
+   Dim i As Integer
+   Dim fCode As frmCode
 
    If nActivate Then
       'ActiveForm.DisplaySelection              '07.11.2005 GH
@@ -3379,7 +3459,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Get Project(ByVal strname As String) As CProject
-	Dim proj As CProject
+   Dim proj As CProject
 
    strname = "project|" & strname
    For Each proj In gProjects
@@ -3402,7 +3482,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function RemoveMDIChild(strGlobalID As String) As Form
-	Dim i As Integer
+   Dim i As Integer
 
    On Error GoTo ErrorRemovingMDIChild
    For i = 1 To Children.count
@@ -3422,7 +3502,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub CloseMDIChild(strGlobalID As String)
-	Dim frm As Form
+   Dim frm As Form
 
    Set frm = GetMDIChild(strGlobalID)
    If Not frm Is Nothing Then Unload frm
@@ -3432,8 +3512,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub SetWindowList()
-	Dim i As Integer
-	Dim frm As Form
+   Dim i As Integer
+   Dim frm As Form
 
    'Clear the menu first
    For i = 0 To mnuWindowList.UBound
@@ -3473,7 +3553,7 @@ End Function
 '------------------------------------------------------------
 Public Function ViewObject(strGlobalID As String) As frmPalmScreen
 'Dim frm As Form
-	Dim obj As Object
+   Dim obj As Object
 
    Set ViewObject = GetMDIChild(strGlobalID)
    If ViewObject Is Nothing Then
@@ -3504,8 +3584,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ViewCode(ByVal strGlobalID As String, Optional ByVal strScript As String = "", Optional ByVal bDebug As Boolean = False) As frmCode
-	Dim obj As Object
-	Dim strCode As String
+   Dim obj As Object
+   Dim strCode As String
 
    'If strScript = "" then the script name is already attached to the GID, separate and continue
    If strScript = "" Then
@@ -3561,8 +3641,8 @@ End Sub
 '
 '------------------------------------------------------------
 Private Function DownloadFile(filename As String, mode As String) As Boolean
-	Dim t As Double
-	Dim result As Boolean
+   Dim t As Double
+   Dim result As Boolean
 
    If mode = "" Then mode = DownloadOption
    DownloadFile = True
@@ -3608,11 +3688,11 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuRunCompile_Click()
-	Dim wk As String
-	Dim nFileSize As Long
-	Dim fFileSize As Double
-	Dim frm As Form
-	Dim startTime As Date
+   Dim wk As String
+   Dim nFileSize As Long
+   Dim fFileSize As Double
+   Dim frm As Form
+   Dim startTime As Date
 
    startTime = Time
    PutTheCodeBack
@@ -3691,7 +3771,7 @@ Private Sub mnuRunCompile_Click()
 End Sub
 #If NSBSymbian = 0 Then
 Private Sub mnuRunPOSEstart_Click()
-	Dim commandLineOptions As String
+   Dim commandLineOptions As String
    If DownloadOption = "POSE" And Not isPOSERunning() Then
        setupEmulatorIni
        On Error GoTo POSEerror
@@ -3864,8 +3944,8 @@ End Function
 #End If
 
 Public Sub PrintCode(strGlobalID As String)
-	Dim ob As Object
-	Dim strCode As String
+   Dim ob As Object
+   Dim strCode As String
 
    On Error GoTo err_PrintCode
 
@@ -3915,8 +3995,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrintForm(strGlobalID As String)
-	Dim frm As CForm
-	Dim ob As Object
+   Dim frm As CForm
+   Dim ob As Object
 
    On Error GoTo err_PrintForm
 
@@ -3955,11 +4035,11 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrintProject()
-	Dim cMod As CCodeModule
-	Dim mnu As CMenu
-	Dim mBar As CMenuBar
-	Dim mElem As CMenuElem
-	Dim frm As CForm
+   Dim cMod As CCodeModule
+   Dim mnu As CMenu
+   Dim mBar As CMenuBar
+   Dim mElem As CMenuElem
+   Dim frm As CForm
    
    On Error GoTo getOut
    'Printer.NewPage
@@ -4091,7 +4171,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub RightClickMenu(nClickSource As Integer, strGlobalID As String)
-	Dim i As Integer
+   Dim i As Integer
 
    'First hide all menu items
    'Skip last two because separator and "Properties..." is always visible
@@ -4202,12 +4282,12 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub UpdateMRU()
-	Dim i As Integer
-	Dim strPath As String
+   Dim i As Integer
+   Dim strPath As String
 
    Open fileDirectory + "\recent.dat" For Input As #1
    For i = 1 To mnuFileMRU.UBound
-      Input #nFileNumber, strPath
+      Input #1, strPath
       If strPath <> "" Then
          mnuFileMRU(i).caption = "&" & i & " " & Mid(strPath, InStrRev(strPath, "\") + 1)
          mnuFileMRU(i).Tag = strPath
@@ -4224,12 +4304,12 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub UpdateTools()
-	Dim i As Integer
-	Dim j As Integer
-	Dim strPath As String
-	Dim appName As String
-	Dim hFile As Long
-	Dim WFD As WIN32_FIND_DATA
+   Dim i As Integer
+   Dim j As Integer
+   Dim strPath As String
+   Dim appName As String
+   Dim hFile As Long
+   Dim WFD As WIN32_FIND_DATA
    
    i = 0
    hFile = FindFirstFile(fileDirectory & "\Tools\*.*", WFD)
@@ -4267,10 +4347,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub ReplaceAll(ByVal strGID As String)
-	Dim fCode As frmCode
-	Dim strScript As String
-	Dim bObject As Boolean
-	Dim obj As Object
+   Dim fCode As frmCode
+   Dim strScript As String
+   Dim bObject As Boolean
+   Dim obj As Object
 
    strScript = Mid(strGID, InStrRev(strGID, "|") + 1)
    If Left(strGID, Len("object")) = "object" Then bObject = True
@@ -4302,45 +4382,69 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub CheckForPalmFonts()
-	Dim tempFontName As String
-	Dim fontDir As String
-	Dim lParam As Long
-	Dim i As Integer
-	Dim trace As Boolean
+   
+   enableTracing True, False, "Palm fonts"
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1.1, "init palm fonts"
+   '~~~~~~~~~~~~~~~~~~~~
 
-   trace = True
-   If trace Then MsgBox 1.1
-   For i = 0 To 7
+   Dim i As Integer
+   For i = LBound(gstrPalmFonts) To UBound(gstrPalmFonts)
       gstrPalmFonts(i) = gStringTable(1450 + i)
       Select Case i
-      Case 0, 1, 3, 4: gnPalmFontSize(i) = 8
-      Case 2, 7: gnPalmFontSize(i) = 11
-      Case 5: gnPalmFontSize(i) = 6
-      Case 6: gnPalmFontSize(i) = 14
+         Case 0, 1, 3, 4:
+            gnPalmFontSize(i) = 8
+         
+         Case 2, 7:
+            gnPalmFontSize(i) = 11
+            
+         Case 5:
+            gnPalmFontSize(i) = 6
+            
+         Case 6:
+            gnPalmFontSize(i) = 14
       End Select
    Next
-   If trace Then MsgBox 1.2
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1.2, "check validity of palm fonts"
+   '~~~~~~~~~~~~~~~~~~~~
    
    On Error GoTo MissingFont1
 CheckFonts:
+   
+   Dim tempFontName As String
    tempFontName = picBox.fontname
-   For i = 0 To 7
+   For i = LBound(gstrPalmFonts) To UBound(gstrPalmFonts)
       picBox.fontname = gstrPalmFonts(i)
    Next
    picBox.fontname = tempFontName
-   If trace Then MsgBox 1.3
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1.3
+   '~~~~~~~~~~~~~~~~~~~~
+
    Exit Sub
 
 MissingFont1:
    On Error GoTo 0
-   If trace Then MsgBox 1.4
-   fontDir = ProgramsDirectory & "\Fonts\"
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1.4
+   '~~~~~~~~~~~~~~~~~~~~
+   
+   Dim lParam As Long
    lParam = 0
-   For i = 0 To 7
-      AddFontResource (fontDir & gstrPalmFonts(i) & ".fon")
+   
+   For i = LBound(gstrPalmFonts) To UBound(gstrPalmFonts)
+      AddFontResource (AppInfo.FontsFolder & gstrPalmFonts(i) & ".fon")
    Next
    SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, lParam
-   If trace Then MsgBox 1.5
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1.5
+   '~~~~~~~~~~~~~~~~~~~~
    
    On Error GoTo MissingFont2
    GoTo CheckFonts
@@ -4392,13 +4496,17 @@ End Function
 '
 '------------------------------------------------------------
 Private Function ShowNewOpen(bShowNew As Boolean) As String
-	Dim strRecent As String
-	Dim strRecentFile As String
-	Dim strRecentPath As String
-	Dim i As Integer
-	Dim trace As Boolean
-trace = True
-If trace Then MsgBox "ShowNewOpen" & 1
+   Dim strRecent As String
+   Dim strRecentFile As String
+   Dim strRecentPath As String
+   Dim i As Integer
+        
+   enableTracing False, False, "New/Open"
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 1
+   '~~~~~~~~~~~~~~~~~~~~
+
    frmNewOpen.ShowNew = bShowNew
 
    If frmNewOpen.ShowNew Then
@@ -4406,12 +4514,16 @@ If trace Then MsgBox "ShowNewOpen" & 1
 '      frmNewOpen.AddNewType "Text File", "TEXT"
       frmNewOpen.NewImageList = ilsIcons32
    End If
-If trace Then MsgBox "ShowNewOpen" & 1
+        
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 1
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    If Dir(fileDirectory + "\recent.dat", vbNormal) <> "" Then
       Open fileDirectory + "\recent.dat" For Input As #1
       For i = 1 To 20
-         Input #nFileNumber, strRecent
+         Input #1, strRecent
          If strRecent <> "" Then
             strRecentFile = Mid(strRecent, InStrRev(strRecent, "\") + 1)
             strRecentPath = Left(strRecent, Len(strRecent) - Len(strRecentFile))
@@ -4420,16 +4532,27 @@ If trace Then MsgBox "ShowNewOpen" & 1
       Next
       Close #1
    End If
-If trace Then MsgBox "ShowNewOpen" & 3
+        
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 3
+   '~~~~~~~~~~~~~~~~~~~~
+
 
 '   frmNewOpen.AddExistItem "Readme2.Txt", App.Path & "\", "9/21/98", "TEXT"
 '   frmNewOpen.AddExistItem "Deletedfile.Txt", App.Path & "\", "9/23/98", "PRJ"
 '   frmNewOpen.AddExistItem "ccnews.Htm", App.Path & "\", "9/25/98", "PRJ"
    frmNewOpen.ExistingImageList = ilsIcons16
-If trace Then MsgBox "ShowNewOpen" & 4
+        
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 4
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    Set frmNewOpen.cD = New cCommonDialog
-If trace Then MsgBox "ShowNewOpen" & 5
+        
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 5
+   '~~~~~~~~~~~~~~~~~~~~
 
    frmNewOpen.cD.InitDir = fileDirectory & "\Projects"
    frmNewOpen.cD.Filter = "Project Files (*.PRJ)|*.PRJ|All Files (*.*)|*.*"
@@ -4440,18 +4563,33 @@ If trace Then MsgBox "ShowNewOpen" & 5
 
    'Make Dialog owner Me
    frmNewOpen.cD.hWnd = Me.hWnd
-If trace Then MsgBox "ShowNewOpen" & 6
+   
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 6
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    Load frmNewOpen
-If trace Then MsgBox "ShowNewOpen" & 7
+        
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 7
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    frmNewOpen.cD.ShowOpen
-If trace Then MsgBox "ShowNewOpen" & 8
+        
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 8
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    If Not frmNewOpen.Cancelled Then
       ShowNewOpen = frmNewOpen.filename
    End If
-If trace Then MsgBox "ShowNewOpen" & 9
+        
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "ShowNewOpen" & 9
+   '~~~~~~~~~~~~~~~~~~~~
 
    Unload frmNewOpen
    Set frmNewOpen = Nothing
@@ -4479,7 +4617,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub SetCaptions()
-	Dim frm As Form
+   Dim frm As Form
 
    For Each frm In Children
       frm.SetCaption
@@ -4493,7 +4631,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PutTheCodeBack()
-	Dim frm As Form
+   Dim frm As Form
 
    For Each frm In Children
       If typename(frm) = "frmCode" Then frm.PutTheCodeBack
@@ -4534,39 +4672,39 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub tcpServer_DataArrival(ByVal bytesTotal As Long)
-	Dim strData As String
-	Dim pos As Integer
-	Dim stmtNo As Integer
-'Dim src As String
-	Dim view2 As CForm
-	Dim view As CForm
+   Dim strData As String
+   Dim pos As Integer
+   Dim stmtNo As Integer
+   'Dim src As String
+   Dim view2 As CForm
+   Dim view As CForm
 
-	Dim n As Integer
-	Dim lastN As Integer
-	Dim newNode As Node
+   Dim n As Integer
+   Dim lastN As Integer
+   Dim newNode As Node
 
-	Dim s1 As Long
-	Dim s2 As Long
-	Dim s3 As Long
+   Dim s1 As Long
+   Dim s2 As Long
+   Dim s3 As Long
 
-	Dim strs1 As String
-	Dim strs2 As String
-	Dim strs3 As String
-	Dim works As String
+   Dim strs1 As String
+   Dim strs2 As String
+   Dim strs3 As String
+   Dim works As String
 
-	Dim str1 As String   'added 06112005
-	Dim str2 As String   'added 06112005
-	Dim str3 As String  'added 06112005
-     
-	Dim calledID As Integer
-	Dim calledStmtNo As Integer
-	Dim callingID As Integer
-	Dim callingStmtNo As Integer
+   Dim str1 As String   'added 06112005
+   Dim str2 As String   'added 06112005
+   Dim str3 As String  'added 06112005
 
-	Dim i As Integer
-	Dim p As Integer
-	Dim d  As CDataElement
-	Dim fCode As frmCode
+   Dim calledID As Integer
+   Dim calledStmtNo As Integer
+   Dim callingID As Integer
+   Dim callingStmtNo As Integer
+
+   Dim i As Integer
+   Dim p As Integer
+   Dim d  As CDataElement
+   Dim fCode As frmCode
     
    '
    'process data from the device debugger
@@ -4680,7 +4818,7 @@ Private Sub tcpServer_DataArrival(ByVal bytesTotal As Long)
       'can't find source
       '----------------------------------------------
 foundModule:
-	Dim strLine As String
+   Dim strLine As String
 
       strLine = fCode.Editor.GetLine(debuggerStatementNumber - 1)
       If Left(Trim(strLine), 1) = "@" Then
@@ -4932,7 +5070,7 @@ skipToNewVar:
                                         + Right("000000" + Mid(str(s3), 2), 6))
    End If
 End Sub
-Function formatTree(source As String, varname As String, Value As String) As String
+Function formatTree(source As String, varname As String, value As String) As String
     Dim s As String
     Dim srcWidth As Integer
     Dim varNameWidth As Integer
@@ -4953,14 +5091,14 @@ Function formatTree(source As String, varname As String, Value As String) As Str
       s = s + "."
     Loop
     
-    s = s + "Value=" + Value
+    s = s + "Value=" + value
     formatTree = s
  
     
 End Function
 
 Function getModuleNameByID(id As Integer) As String
-        Dim view2 As CForm
+   Dim view2 As CForm
         debuggerModuleId = id
          
          
@@ -5029,12 +5167,12 @@ foundModule:
 End Function
 Function GetSubFuncNameBYStmtNO(calledID As Integer, calledStmtNo As Integer)
 
-        Dim view2 As CForm
-        Dim pos As Integer
-        Dim stmtNo As Integer
-        Dim j As Integer
-        Dim sdata As String
-        Dim slen As Integer
+   Dim view2 As CForm
+   Dim pos As Integer
+   Dim stmtNo As Integer
+   Dim j As Integer
+   Dim sdata As String
+   Dim slen As Integer
 
         debuggerModuleId = calledID
         debuggerStatementNumber = calledStmtNo
@@ -5216,11 +5354,11 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuCodeDebugBreakpointsClearAll_Click()
-	Dim strData As String
-	Dim pos As Integer
-	Dim stmtNo As Integer
-'Dim src As String
-	Dim view2 As CForm
+   Dim strData As String
+   Dim pos As Integer
+   Dim stmtNo As Integer
+   'Dim src As String
+   Dim view2 As CForm
     
    gTarget.pgm_script = RemoveBreakpoints(gTarget.pgm_script)
    gTarget.termination_script = RemoveBreakpoints(gTarget.termination_script)
@@ -5251,7 +5389,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub mnuCodeDebugBreakpointsClearThisModule_Click()
-	Dim fCode As frmCode
+   Dim fCode As frmCode
 
    'script.Text = removeBreakpoints(script.Text)  'Fixup!
    If typename(ActiveForm) = "frmCode" Then
@@ -5310,15 +5448,15 @@ Private Sub mnuCodeDebugStop_Click()
 
 Private Sub mnuCodeDebugVariables_Click()
 'this routine changed drastically 06112005
-	Dim s As String
-	Dim i As Integer
-	Dim n As Integer
-	Dim d As CDataElement
-	Dim highestN As Integer
+   Dim s As String
+   Dim i As Integer
+   Dim n As Integer
+   Dim d As CDataElement
+   Dim highestN As Integer
  
- Dim tempLocalID As String
- Dim tempVarName As String
-  Dim tempDataElemNo As Integer
+   Dim tempLocalID As String
+   Dim tempVarName As String
+   Dim tempDataElemNo As Integer
   
   Dim lastModuleNode As Node
   Dim debuggerLastSubscriptNode As Node

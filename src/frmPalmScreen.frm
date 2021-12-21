@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmPalmScreen 
-   BorderStyle     =   1  'Fixed Single
+   BorderStyle     =   1  'Fest Einfach
    Caption         =   "<Project> - Form [<FormName> - <FormTitle>]"
    ClientHeight    =   6870
    ClientLeft      =   45
@@ -13,7 +13,7 @@ Begin VB.Form frmPalmScreen
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   338
    Begin VB.PictureBox picSS 
-      Appearance      =   0  'Flat
+      Appearance      =   0  '2D
       BackColor       =   &H80000005&
       ForeColor       =   &H80000008&
       Height          =   1815
@@ -27,7 +27,7 @@ Begin VB.Form frmPalmScreen
       Width           =   4815
    End
    Begin VB.PictureBox pbPalmScreen 
-      Appearance      =   0  'Flat
+      Appearance      =   0  '2D
       BackColor       =   &H80000005&
       ForeColor       =   &H80000008&
       Height          =   4815
@@ -39,9 +39,9 @@ Begin VB.Form frmPalmScreen
       Top             =   120
       Width           =   4815
       Begin VB.PictureBox pbTitle 
-         Appearance      =   0  'Flat
+         Appearance      =   0  '2D
          BackColor       =   &H00000000&
-         BorderStyle     =   0  'None
+         BorderStyle     =   0  'Kein
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -70,12 +70,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-	Const kScreenLeft = 5
-	Const kScreenTop = 5
+        Const kScreenLeft = 5
+        Const kScreenTop = 5
 'Const kScreenWidth = 160  'Now a global, based on gbDana
-	Const kScreenHeight = 160
-	Const kTitleHeight = 13
-	Const kTitleLineHeight = 2
+        Const kScreenHeight = 160
+        Const kTitleHeight = 13
+        Const kTitleLineHeight = 2
 
 Public Selection As New Collection
 Private m_nMagFactor As Integer
@@ -93,7 +93,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Click()
-	Dim ob As Object
+   Dim ob As Object
 
    If Not gbWinNT2000 Then Exit Sub
    #If NSBSymbian = 0 Then
@@ -170,7 +170,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Property Let Object(theForm As CForm)
-	Dim obj As Object
+   Dim obj As Object
    
    Set m_Form = theForm
    SetCaption
@@ -215,7 +215,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Unload(Cancel As Integer)
-	Dim obj As Object
+   Dim obj As Object
    If m_Form Is Nothing Then Exit Sub
    
    ClearSelection
@@ -261,7 +261,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub pbPalmScreen_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-	Dim ob As Object
+   Dim ob As Object
 
    'Do nothing if shift key down, no tool selected, or outside screen bounds
    If Shift <> 0 Then Exit Sub
@@ -314,9 +314,9 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub pbPalmScreen_Paint()
-	Dim row As Integer
-	Dim col As Integer
-	Dim ob As Object
+   Dim row As Integer
+   Dim col As Integer
+   Dim ob As Object
 
    If m_Form Is Nothing Then Exit Sub
    gsCurrentFormGlobalID = m_Form.GlobalID
@@ -381,7 +381,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub pbTitle_DblClick()
-	Dim strTitle As String
+   Dim strTitle As String
 
    strTitle = InputBox(gStringTable(3262), , m_Form.Title) '"Enter new form title"
    If Len(strTitle) = 0 Then
@@ -439,7 +439,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub RemoveUIObject(ByVal obj As Object)
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 0 To Me.Controls.count - 1
       If Me.Controls(i) Is obj.obj.Control Then
@@ -470,8 +470,8 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub ClearSelection(Optional bDisplaySelection As Boolean = True)
-	Dim fileName As String
-	Dim dirName As String
+   Dim filename As String
+   Dim dirName As String
 
    While Selection.count > 0
       Selection(1).obj.Selected = False
@@ -482,8 +482,8 @@ Public Sub ClearSelection(Optional bDisplaySelection As Boolean = True)
             Set Selection(1).obj.Control.Picture = CaptureWindow(Selection(1).obj.Control.hWnd, True, 0, 0, Selection(1).obj.Control.Width, Selection(1).obj.Control.Height)
             dirName = fileDirectory & "\bitmaps\" & gTarget.Name
             If Dir(dirName, vbDirectory) = "" Then MkDir (dirName)
-            fileName = dirName & "\" & Selection(1).obj.IdNo & ".bmp"
-            SavePicture Selection(1).obj.Control.Picture, fileName
+            filename = dirName & "\" & Selection(1).obj.IdNo & ".bmp"
+            SavePicture Selection(1).obj.Control.Picture, filename
             'Debug.Print filename & " saved."
          End If
       End If
@@ -552,8 +552,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub MouseMoveSelection(ByRef x As Integer, ByRef y As Integer, nLeft As Integer, nTop As Integer, Optional ByVal obj As Object = Nothing, Optional nForceGrid As Integer = 0)
-	Dim baseX As Integer, baseY As Integer
-	Dim bGridPref As Boolean
+   Dim baseX As Integer, baseY As Integer
+   Dim bGridPref As Boolean
 
    'bGridPref allows temporary suspension/enforcement of grid
    bGridPref = gbWantGrid
@@ -585,7 +585,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ResizeSelectionToGrid(Optional ByVal obj As Object = Nothing, Optional nForceGrid As Integer = 0)
-	Dim bGridPref As Boolean
+   Dim bGridPref As Boolean
 
    'bGridPref allows temporary suspension/enforcement of grid
    bGridPref = gbWantGrid
@@ -613,9 +613,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Format(nType As Integer, nStyle As Integer)
-	Dim obj As Object
-	Dim i As Integer
-	Dim nMax As Integer, nMin As Integer, nSpc As Integer, nOff As Integer
+   Dim obj As Object
+   Dim i As Integer
+   Dim nMax As Integer, nMin As Integer, nSpc As Integer, nOff As Integer
 
    Select Case nType
    Case 0 'Align
@@ -801,22 +801,22 @@ End Function
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as interger)
+Public Sub Save(ByVal nFileNumber As Integer)
 
    'Save any open code windows that belong to this form
    Dim frm As Form
    Set frm = frmMain.GetMDIChild(m_Form.GlobalID & "|before")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
    Set frm = frmMain.GetMDIChild(m_Form.GlobalID & "|after")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
    Set frm = frmMain.GetMDIChild(m_Form.GlobalID & "|event")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
 
    'Save any open code windows of objects from this form
    Dim obj As Object
    For Each obj In m_Form.ObjectCollection
       Set frm = frmMain.GetMDIChild(obj.obj.GlobalID & "|code")
-      If Not frm Is Nothing Then frm.Save #nFileNumber
+      If Not frm Is Nothing Then frm.Save nFileNumber
    Next
 End Sub
 
@@ -824,7 +824,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Cut()
-	Dim obj As Object
+   Dim obj As Object
 
    If Selection.count = 0 Then Exit Sub
    Copy
@@ -835,8 +835,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Copy()
-	Dim strClip As String
-	Dim obj As Object
+   Dim strClip As String
+   Dim obj As Object
 
    If Selection.count = 0 Then
       strClip = m_Form.Copy
@@ -859,7 +859,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste()
-	Dim strLines() As String
+   Dim strLines() As String
 
    If ValidClipboard <> kClipboardObject Then Exit Sub
    strLines = Split(Clipboard.GetText, vbCrLf)
@@ -870,7 +870,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub Delete()
-	Dim obj As Object
+   Dim obj As Object
 
    If Selection.count = 0 Then Exit Sub
    For Each obj In Selection
@@ -882,7 +882,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub SelectAll()
-	Dim obj As Object
+   Dim obj As Object
 
    ClearSelection
    For Each obj In m_Form.ObjectCollection
@@ -922,7 +922,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub addImageToBitmap(obj)
-   Dim fileName As String
+   Dim filename As String
    Dim HiRes As Boolean
    Dim res As CBitmapFile
    
@@ -937,40 +937,40 @@ Public Sub addImageToBitmap(obj)
    If Val(obj.Label) <> res.IdNo Then Exit Sub
    
    'Determine which image to use: choose highest res available
-   fileName = res.PathName1
-   If res.PathName2 <> "" Then fileName = res.PathName2
-   If res.PathName4 <> "" Then fileName = res.PathName4
-   If res.PathName8 <> "" Then fileName = res.PathName8
-   If res.PathName16 <> "" Then fileName = res.PathName16
+   filename = res.PathName1
+   If res.PathName2 <> "" Then filename = res.PathName2
+   If res.PathName4 <> "" Then filename = res.PathName4
+   If res.PathName8 <> "" Then filename = res.PathName8
+   If res.PathName16 <> "" Then filename = res.PathName16
    If res.PathName1h <> "" Then
-      fileName = res.PathName1h
+      filename = res.PathName1h
       HiRes = True
    End If
    If res.PathName2h <> "" Then
-      fileName = res.PathName2h
+      filename = res.PathName2h
       HiRes = True
    End If
    If res.PathName4h <> "" Then
-      fileName = res.PathName4h
+      filename = res.PathName4h
       HiRes = True
    End If
    If res.PathName8h <> "" Then
-      fileName = res.PathName8h
+      filename = res.PathName8h
       HiRes = True
    End If
    If res.PathName16h <> "" Then
-      fileName = res.PathName16h
+      filename = res.PathName16h
       HiRes = True
    End If
-   If LCase(Right(fileName, 3)) <> "bmp" Then Exit Sub
+   If LCase(Right(filename, 3)) <> "bmp" Then Exit Sub
    obj.Control.AutoSize = True
-   obj.Control.Picture = LoadPicture(GetAbsolutePath(fileName, ""))
+   obj.Control.Picture = LoadPicture(GetAbsolutePath(filename, ""))
    obj.Height = obj.Control.Height
    obj.Width = obj.Control.Width
    If HiRes = False Then 'this code does not do anything. It should blow up the image to the full size of the control.
       obj.Control.AutoRedraw = True
       obj.Control.AutoSize = False
-      obj.Control.Picture = LoadPicture(GetAbsolutePath(fileName, ""))
+      obj.Control.Picture = LoadPicture(GetAbsolutePath(filename, ""))
       obj.Control.PaintPicture obj.Control.Picture, 0, 0, obj.Control.Width, obj.Control.Height
       obj.Control.Picture = obj.Control.Image
       obj.Control.AutoRedraw = False

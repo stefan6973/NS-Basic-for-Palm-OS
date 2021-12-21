@@ -18,7 +18,7 @@ Public m_strLibObj As String
 Public m_strPrcName As String
 Public m_idno As Integer
 Public m_arrGlobalMethods As Collection
-Public Sub class_initialize()
+Public Sub Class_Initialize()
    m_strLibObj = ""
 '   m_strLocalLib = ""
    m_strPrcName = ""
@@ -46,7 +46,7 @@ Public Function LoadNewLibrary(strInfPath As String, strLibObj As String) As Boo
    m_strLibObj = strLibObj
 
    'open the file
-   If ReadFile(filedirectory + "\lib\" + strInfPath, strFileContents) Then
+   If ReadFile(fileDirectory + "\lib\" + strInfPath, strFileContents) Then
       astrFileContents = Split(strFileContents, vbCrLf)
    
       ' Now, try to loop through file, reading
@@ -105,7 +105,7 @@ Public Function LoadNewLibrary(strInfPath As String, strLibObj As String) As Boo
 ParseError:
    print_err gStringTable(3223) + strInfPath + " " + strLine + " " + strLine
    '"Invalid method declaration in Library Declaration File: "
-   Close #nFileNumber
+   Close #1
    LoadNewLibrary = False
 End Function  'LoadNewLibrary
 

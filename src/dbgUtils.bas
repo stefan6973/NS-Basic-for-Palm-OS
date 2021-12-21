@@ -24,7 +24,7 @@ End Property
 '------------------------------------------------------------
 Private Property Let Prefix(value As String)
     If value <> "???" Then
-        trace_prefix = " - " & value & ": "
+        trace_prefix = value & ": "
     End If
 End Property
 
@@ -49,10 +49,10 @@ End Sub
 '------------------------------------------------------------
 ' prints a trace message in the debug console if tracing is enabled
 '------------------------------------------------------------
-Public Sub trace(ByVal Msg As String, Optional ByVal newPrefix As String = "???")
+Public Sub trace(ByVal msg As String, Optional ByVal newPrefix As String = "???")
     Prefix = newPrefix
     If trace_avtive Then
-        Debug.Print trace_prefix & Msg
+        Debug.Print trace_prefix & msg
     End If
 End Sub
 
@@ -60,10 +60,10 @@ End Sub
 ' Show trace message box and deactivates further showing
 ' of a trace message box in the cancel button was pressed
 '------------------------------------------------------------
-Public Sub traceMsg(ByVal Msg As String, Optional ByVal newPrefix As String = "???")
-    trace Msg, newPrefix
+Public Sub traceMsg(ByVal msg As String, Optional ByVal newPrefix As String = "???")
+    trace msg, newPrefix
     If msg_active Then
-        If MsgBox(trace_prefix & Msg, vbOKCancel) = vbCancel Then
+        If MsgBox(trace_prefix & msg, vbOKCancel) = vbCancel Then
             msg_active = False
         End If
     End If
@@ -73,6 +73,13 @@ End Sub
 ' Show trace message box and deactivates further showing
 ' of a trace message box in the cancel button was pressed
 '------------------------------------------------------------
-Public Sub traceStep(ByVal step As String, Optional ByVal newPrefix As String = "???")
-    traceMsg "#" & Trim(step), newPrefix
+Public Sub traceStep(ByVal step As Single, Optional ByVal msg As String = "", Optional ByVal newPrefix As String = "???")
+    traceMsg "#" & Trim(str(step)) & " " & msg, newPrefix
+End Sub
+
+'------------------------------------------------------------
+' Show current error
+'------------------------------------------------------------
+Public Sub traceError(Optional ByVal msg As String = "")
+   traceMsg msg & " -> Error: " & Error
 End Sub

@@ -35,12 +35,12 @@ Private Const kMethods As String = "Hide-Show-Redraw-Clear-Add-Delete"
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "Popup"
+   obj.Name = "Popup"
    obj.Kind = "pop"
    obj.Width = 45
-   obj.Label = obj.name
+   obj.Label = obj.Name
    m_bAnchorLeft = True
    m_nResourceID = 0
    m_nListID = 0
@@ -53,10 +53,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-	Dim c As Byte
-	Dim pop As ctlOut
-	Dim popup As popupOut
-	Dim templen As Integer
+   Dim c As Byte
+   Dim pop As ctlOut
+   Dim popup As popupOut
+   Dim templen As Integer
 
    BuildControlPrc pop, obj
    pop.style.s = &H3
@@ -98,17 +98,17 @@ End Sub
 '
 '------------------------------------------------------------
 Sub PutOutListElem()
-	Dim cnt As Integer
-	Dim c As Byte
-	Dim lst As listOut
-	Dim s As Variant
-	Dim ss As String
-	Dim templen As Integer
-	Dim Items As New Collection
-	Dim i As Integer
-	Dim listHeight As Integer
-	Dim strTemp As String
-	Dim arrList() As String
+   Dim cnt As Integer
+   Dim c As Byte
+   Dim lst As listOut
+   Dim s As Variant
+   Dim ss As String
+   Dim templen As Integer
+   Dim Items As New Collection
+   Dim i As Integer
+   Dim listHeight As Integer
+   Dim strTemp As String
+   Dim arrList() As String
 
    'Examine the list and make sure it contains enough items to satisy VisibleItems, padding with
    'a " " item where necessary
@@ -205,7 +205,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
 
    Dim version As Integer
    Input #nFileNumber, version
@@ -221,13 +221,13 @@ Public Sub Restore(ByVal nFileNumber as integer)
       ProcessScript s, FromDisk
       m_strList = s
    End If
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
    Write #nFileNumber, AnchorLeft, ResourceId, VisibleItems
@@ -237,7 +237,7 @@ Public Sub Save(ByVal nFileNumber as integer)
    ProcessScript s, ToDisk
    Write #nFileNumber, s
    
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
@@ -255,8 +255,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "pop" Then
@@ -287,9 +287,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-	Dim i As Integer
-	Const kDropArrowWidth = 8
-	Const kDropArrowSpace = 2
+   Dim i As Integer
+        Const kDropArrowWidth = 8
+        Const kDropArrowSpace = 2
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -368,10 +368,10 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -379,20 +379,20 @@ Public Sub GetProperty()
    gPropInfo.Val = ""
    Select Case nProp
    Case 0
-      gPropInfo.name = "Anchor Left"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Anchor Left"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
       gPropInfo.Type = pgBoolean
 '   Case 1 'List ID
 '      gPropInfo.Name = "List ID"
 '      gPropInfo.Val = GetPropertyVal("List ID")
 '      gPropInfo.Type = pgString
    Case 1 'Visible Rows
-      gPropInfo.name = "Visible Rows"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Visible Rows"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
       gPropInfo.Type = pgString
    Case 2
-      gPropInfo.name = "List"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "List"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
       gPropInfo.Type = pgStringList
       gPropInfo.data = GetStringList
    Case kUserProps + 0: obj.GetProperty "(Name)"
@@ -434,15 +434,15 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim nResID As Integer
-	Dim bmp As CBitmapFile
-	Dim frm As CForm
-	Dim o As Object
-	Dim n As Integer
-	Dim arrList() As String
-	Dim i As Integer
-	Dim j As Integer
-	Dim arrItems() As String
+   Dim nResID As Integer
+   Dim bmp As CBitmapFile
+   Dim frm As CForm
+   Dim o As Object
+   Dim n As Integer
+   Dim arrList() As String
+   Dim i As Integer
+   Dim j As Integer
+   Dim arrItems() As String
 
    ValidateProperty = True
    Select Case strProp

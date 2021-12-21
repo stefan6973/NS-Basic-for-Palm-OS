@@ -58,7 +58,7 @@ Private Const kMethods As String = ""
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    Dim i As Integer
    Dim temp As String
 
@@ -228,7 +228,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim theNoItems As Integer
    Dim i As Integer
    Dim strname As String
@@ -282,7 +282,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as interger)
+Public Sub Save(ByVal nFileNumber As Integer)
    Dim strTemp As String
    Dim obj As Object
    Dim frm As frmCode
@@ -299,20 +299,20 @@ Public Sub Save(ByVal nFileNumber as interger)
    Write #nFileNumber, Name
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|before")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
    strTemp = pgm_script
    ProcessScript strTemp, ToDisk
    Write #nFileNumber, strTemp
    Write #nFileNumber, TipsIdNo 'yes, it's written out twice. No real harm...
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|after")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
    strTemp = pgm_script_after
    ProcessScript strTemp, ToDisk
    Write #nFileNumber, strTemp
 
    Set frm = frmMain.GetMDIChild(GlobalID & "|event")
-   If Not frm Is Nothing Then frm.Save #nFileNumber
+   If Not frm Is Nothing Then frm.Save nFileNumber
    strTemp = event_script
    ProcessScript strTemp, ToDisk
    Write #nFileNumber, strTemp
@@ -326,8 +326,8 @@ Public Sub Save(ByVal nFileNumber as interger)
    
    For Each obj In ObjectCollection
       Set frm = frmMain.GetMDIChild(obj.obj.GlobalID & "|code")
-      If Not frm Is Nothing Then frm.Save #nFileNumber
-      obj.Save #nFileNumber
+      If Not frm Is Nothing Then frm.Save nFileNumber
+      obj.Save nFileNumber
    Next
 End Sub
 
@@ -335,9 +335,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-	Dim temp As String
-	Dim formObj As Object
-	Dim strTemp As String
+   Dim temp As String
+   Dim formObj As Object
+   Dim strTemp As String
 
    Copy = Quote("vew") + vbCrLf
    temp = Join(Array(kVersion, IdNo, BoolStr(Modal), BoolStr(Frame), _
@@ -371,10 +371,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
-	Dim nScriptStart, nScriptEnd As Integer
-	Dim oldIdNo As Integer
+   Dim tokens() As String
+   Dim i As Integer
+   Dim nScriptStart, nScriptEnd As Integer
+   Dim oldIdNo As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "vew" Then
@@ -444,8 +444,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PasteObject(ByRef strLines() As String, bPasteForm As Boolean)
-	Dim obj As Object
-	Dim fPalmScreen As frmPalmScreen
+   Dim obj As Object
+   Dim fPalmScreen As frmPalmScreen
 
    Select Case LCase(UnQuote(strLines(1)))
    Case "bmp": Set obj = New CUIBitmap
@@ -481,8 +481,8 @@ End Sub
 '------------------------------------------------------------
 Public Function RestoreScript(ByRef strLines() As String, ByVal nScriptStart As Integer, _
                               ByRef nScriptEnd As Integer) As String
-	Dim i As Integer
-	Dim tokens() As String
+   Dim i As Integer
+   Dim tokens() As String
 
    'Find end of script
    For i = nScriptStart To UBound(strLines)
@@ -507,7 +507,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function JoinFormCode() As String
-	Dim formObj As Object
+   Dim formObj As Object
 
    JoinFormCode = ""
    If Len(pgm_script) > 0 Then
@@ -533,10 +533,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub SplitFormCode(strCode As String)
-	Dim n1, n2, nModuleStart, nModuleEnd, nModule, nNewModule As Integer
-	Dim strLine, strModule, strSubName, strObjectName As String
-	Dim bNewObject As Boolean
-	Dim objTemp, objFormObj, objNewObj As Object
+   Dim n1, n2, nModuleStart, nModuleEnd, nModule, nNewModule As Integer
+   Dim strLine, strModule, strSubName, strObjectName As String
+   Dim bNewObject As Boolean
+   Dim objTemp, objFormObj, objNewObj As Object
 
    'nModule:
    '0 = none
@@ -873,8 +873,8 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Let Name(ByVal vData As String)
-	Dim strOldName As String
-	Dim strProcName As String
+   Dim strOldName As String
+   Dim strProcName As String
 
    'Verify name
    If Len(vData) = 0 Then Exit Property
@@ -927,7 +927,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Property Get Object(nID As Integer) As Object
-	Dim obj As Object
+   Dim obj As Object
 
    For Each obj In ObjectCollection
       If obj.obj.IdNo = nID Then
@@ -941,7 +941,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = 15 Then
       gPropInfo.Name = ""
@@ -1029,10 +1029,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim strWork As String
-	Dim frm As CForm
-	Dim n As Integer
-	Dim l As Long
+   Dim strWork As String
+   Dim frm As CForm
+   Dim n As Integer
+   Dim l As Long
 
    ValidateProperty = True
    Select Case strProp
@@ -1184,7 +1184,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub RemoveObject(ByVal obj As Object)
-	Dim i As Integer
+   Dim i As Integer
 
    For i = 1 To ObjectCollection.count
       If ObjectCollection(i).obj.GlobalID = obj.obj.GlobalID Then
@@ -1198,9 +1198,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function BuildMap() As String()
-	Dim strMap As String
-	Dim obj As Object
-	Const kSep As String = ">"
+   Dim strMap As String
+   Dim obj As Object
+        Const kSep As String = ">"
 
    strMap = Join(Array(GlobalID & "|before", GlobalID & "|event", GlobalID & "|after"), kSep)
    For Each obj In ObjectCollection
@@ -1227,7 +1227,7 @@ End Function
 '
 '------------------------------------------------------------
 Public Function GetObjectType(astrName As String) As String
-	Dim obj As Object
+   Dim obj As Object
 
    If StrComp(Name, astrName, vbTextCompare) = 0 Then
       GetObjectType = "frm"

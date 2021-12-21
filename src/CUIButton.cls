@@ -31,9 +31,9 @@ Private Const kMethods As String = "Hide-Show-Redraw"
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "Button"
+   obj.Name = "Button"
    obj.Kind = "but"
    obj.Width = 36
    obj.Label = "OK"
@@ -46,9 +46,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-	Dim but As ctlOut
-	Dim c As Byte
-	Dim templen As Integer
+   Dim but As ctlOut
+   Dim c As Byte
+   Dim templen As Integer
 
    BuildControlPrc but, obj
    but.style.s = &H0
@@ -79,7 +79,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim version As Integer
 
    Input #nFileNumber, version
@@ -89,25 +89,25 @@ Public Sub Restore(ByVal nFileNumber as integer)
    End If
 
    Input #nFileNumber, m_bAnchorLeft, m_bFrame, m_bNonBoldFrame
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
    Write #nFileNumber, m_bAnchorLeft, m_bFrame, m_bNonBoldFrame
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-	Dim version As Integer
-	Dim temp As String
+   Dim version As Integer
+   Dim temp As String
 
    Copy = Quote(obj.Kind) + vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -120,8 +120,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "but" Then
@@ -151,9 +151,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-	Dim rad As Integer
-	Dim w As Integer, h As Integer, dw As Integer
-	Const PI = 3.14159265
+   Dim rad As Integer
+   Dim w As Integer, h As Integer, dw As Integer
+        Const PI = 3.14159265
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -236,10 +236,10 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -247,9 +247,9 @@ Public Sub GetProperty()
    gPropInfo.Val = ""
    If nProp < kUserProps Then gPropInfo.Type = pgBoolean
    Select Case nProp
-   Case 0: gPropInfo.name = "Anchor Left"
-   Case 1: gPropInfo.name = "Frame"
-   Case 2: gPropInfo.name = "Non-bold Frame"
+   Case 0: gPropInfo.Name = "Anchor Left"
+   Case 1: gPropInfo.Name = "Frame"
+   Case 2: gPropInfo.Name = "Non-bold Frame"
    Case kUserProps + 0: obj.GetProperty "(Name)"
    Case kUserProps + 1: obj.GetProperty "Type"
    Case kUserProps + 2: obj.GetProperty "ID"
@@ -264,7 +264,7 @@ Public Sub GetProperty()
    Case kUserProps + 11: obj.GetProperty "Nav Above ID"
    Case kUserProps + 12: obj.GetProperty "Nav Below ID"
    End Select
-   If nProp < kUserProps Then gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+   If nProp < kUserProps Then gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    nProp = nProp + 1
 End Sub
 

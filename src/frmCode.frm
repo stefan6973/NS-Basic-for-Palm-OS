@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BCA00000-0F85-414C-A938-5526E9F1E56A}#4.0#0"; "cmax40.dll"
+Object = "{BCA00000-0F85-414C-A938-5526E9F1E56A}#4.0#0"; "cmax40m.dll"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmCode 
@@ -13,7 +13,7 @@ Begin VB.Form frmCode
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    ScaleHeight     =   5775
-   ScaleMode       =   0  'User
+   ScaleMode       =   0  'Benutzerdefiniert
    ScaleWidth      =   10800
    Visible         =   0   'False
    Begin CodeMax4Ctl.CodeMax Editor 
@@ -98,7 +98,7 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub editor_SelChange()
-	Dim rng As CodeMax4Ctl.range
+   Dim rng As CodeMax4Ctl.range
 
    If Editor.LineCount = 0 Then Exit Sub
    
@@ -220,7 +220,7 @@ End Sub
 '------------------------------------------------------------
 Sub SetCaption()
 'Dim strTitle As String
-	Dim proj As CProject
+   Dim proj As CProject
 
    If IsUIObject Then
       Set proj = LocateProject(m_object.obj.GlobalID)
@@ -237,7 +237,7 @@ Sub SetCaption()
       Case "termination": Me.caption = m_object.Name & " (Termination Code)"
       End Select
    Case "CCodeModule"
-      Me.caption = "Module - " & m_object.fileName
+      Me.caption = "Module - " & m_object.filename
    Case "CForm"
       Select Case Me.Tag
       Case "event": Me.caption = proj.Name & " - Form " & m_object.Name & " (Event Code)"
@@ -288,9 +288,9 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub EditorSel(SelStart As Long, SelLength As Long)
-	Dim line As Integer
-	Dim p As Long
-	Dim SelRange As CodeMax4Ctl.range
+   Dim line As Integer
+   Dim p As Long
+   Dim SelRange As CodeMax4Ctl.range
 
    'convert character position in buffer to line, col
    Set SelRange = Editor.GetSel(True)
@@ -312,9 +312,9 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function SelStart()
-	Dim SelRange As CodeMax4Ctl.range
-	Dim p As Integer
-	Dim i As Integer
+   Dim SelRange As CodeMax4Ctl.range
+   Dim p As Integer
+   Dim i As Integer
 
    Set SelRange = Editor.GetSel(True)
    p = SelRange.StartColNo
@@ -517,7 +517,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as interger)
+Public Sub Save(ByVal nFileNumber As Integer)
    PutTheCodeBack
 End Sub
 
@@ -591,9 +591,9 @@ End Function
 '
 '------------------------------------------------------------
 Private Sub editor_QueryMemberList(ByVal Cmd As CodeMax4Ctl.cmCommand, List As CodeMax4Ctl.IMemberList)
-	Dim p As CodeMax4Ctl.ILineParser
-	Dim sel As CodeMax4Ctl.range
-	Dim strType As String
+   Dim p As CodeMax4Ctl.ILineParser
+   Dim sel As CodeMax4Ctl.range
+   Dim strType As String
     
    Set p = Editor.CreateParser()
    Set sel = Editor.GetSel(True)
@@ -634,9 +634,9 @@ End Sub
 '
 '------------------------------------------------------------
 Sub SetAllDividers()
-	Dim i As Long
-	Dim nLastDivider As Long
-	Dim strLine As String
+   Dim i As Long
+   Dim nLastDivider As Long
+   Dim strLine As String
 
    ClearAllDividers
    For i = 0 To Editor.LineCount - 1
@@ -653,7 +653,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ClearAllDividers()
-	Dim i As Long
+   Dim i As Long
 
    For i = 0 To Editor.LineCount - 1
       Editor.SetDivider i, False
@@ -664,9 +664,9 @@ End Sub
 '
 '------------------------------------------------------------
 Sub SetNewDividers(nStartLine As Long)
-	Dim i As Long
-	Dim nLastDivider As Long
-	Dim strLine As String
+   Dim i As Long
+   Dim nLastDivider As Long
+   Dim strLine As String
 
    For i = nStartLine To 0 Step -1
       strLine = LCase(Trim(Editor.GetLine(i)))
@@ -691,7 +691,7 @@ End Sub
 '
 '------------------------------------------------------------
 Sub ClearLastDivider(nLastDivider As Long)
-	Dim i As Long
+   Dim i As Long
 
    i = nLastDivider + 1
    While i < Editor.LineCount
@@ -707,12 +707,12 @@ End Sub
 '
 '------------------------------------------------------------
 Sub CloseBlock(nStartLine As Long)
-	Dim i As Long
-	Dim strLine As String
-	Dim bFound As Boolean
-	Dim procType As String
-	Dim pos As New CodeMax4Ctl.position
-	Static bClosing As Boolean
+   Dim i As Long
+   Dim strLine As String
+   Dim bFound As Boolean
+   Dim procType As String
+   Dim pos As New CodeMax4Ctl.position
+        Static bClosing As Boolean
 
    If bClosing Then Exit Sub
    bClosing = True

@@ -44,55 +44,72 @@ Private Const kTotalProps As Integer = 28
 Private Const kProperties As String = "Left-Top"
 Private Const kMethods As String = "Hide-Show"
 
-Private Sub class_initialize()
-	Dim trace As Boolean
-trace = True
+Private Sub Class_Initialize()
+        
+   enableTracing False, False, "CUIBitmap init"
 
-   If trace Then MsgBox "CUIBitmap:class_initialize 1"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 1
+   '~~~~~~~~~~~~~~~~~~~~
+
    obj.Parent = Me
    obj.Name = "Bitmap"
    obj.Kind = "bmp"
-   If trace Then MsgBox "CUIBitmap:class_initialize 2"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 2
+   '~~~~~~~~~~~~~~~~~~~~
+
    m_nResourceID = obj.IdNo
-   If trace Then MsgBox "CUIBitmap:class_initialize 2.1"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 2.1
+   '~~~~~~~~~~~~~~~~~~~~
+
    m_nGradientColor1 = getUIColorTable(1)
    m_nGradientColor2 = getUIColorTable(1)
-   If trace Then MsgBox "CUIBitmap:class_initialize 3"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 3
+   '~~~~~~~~~~~~~~~~~~~~
+
    m_nGradientStyle = 1    '1=top to bottom
    m_sCaption = ""
    m_nAlignment = 2        '2=Center
    m_nBorderStyle = 0      '0=none
    m_nAppearance = 0       '0=Flat
-   If trace Then MsgBox "CUIBitmap:class_initialize 4"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 4
+   '~~~~~~~~~~~~~~~~~~~~
+
    m_bFontBold = False
    m_bFontItalic = False
    m_sFontName = "Arial"
    m_nFontSize = 10
-   If trace Then MsgBox "CUIBitmap:class_initialize 5"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 5
+   '~~~~~~~~~~~~~~~~~~~~
+
    m_bFontStrikethru = False
    m_bFontUnderline = False
    m_nForeColor = getUIColorTable(2)
    m_sPicture = ""
    m_bStretch = False
-   If trace Then MsgBox "CUIBitmap:class_initialize 6"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceStep 6
+   '~~~~~~~~~~~~~~~~~~~~
+
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-
-'------------------------------------------------------------
-'
-'------------------------------------------------------------
 Public Sub PrcOut()
-	Dim c As Byte
-	Dim i As Integer
-	Dim vw As CForm
-	Dim ob As Object
-	Dim bmp As bitmapOut
-	Dim bfl As CBitmapFile
-	Dim bValid As Boolean
-	Dim bBitmapOk As Boolean
+   Dim c As Byte
+   Dim i As Integer
+   Dim vw As CForm
+   Dim ob As Object
+   Dim bmp As bitmapOut
+   Dim bfl As CBitmapFile
+   Dim bValid As Boolean
+   Dim bBitmapOk As Boolean
 
    If obj.Usable Then
       bmp.Usable = &H80
@@ -131,11 +148,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-
-'------------------------------------------------------------
-'
-'------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim version As Integer
    Dim properties As String
    Dim proplist() As String
@@ -151,7 +164,7 @@ Public Sub Restore(ByVal nFileNumber as integer)
    If version > 1 Then
       Input #nFileNumber, properties
    End If
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
    If m_nResourceID = 0 Then m_nResourceID = obj.IdNo
    
    If version > 1 Then
@@ -165,12 +178,12 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
    Write #nFileNumber, m_nResourceID
    Write #nFileNumber, getAllProperties
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
@@ -188,8 +201,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim proplist() As String
-	Dim i As Integer
+   Dim proplist() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "bmp" Then
@@ -223,10 +236,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-	Dim filename As String
-	Dim w As Integer
-	Dim h As Integer
-	Dim properties() As String
+   Dim filename As String
+   Dim w As Integer
+   Dim h As Integer
+   Dim properties() As String
    Const cCaption = 0
    Const cAlignment = 1
    Const cGradientColor1 = 2
@@ -591,7 +604,7 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -754,11 +767,11 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim nResID As Integer
-	Dim bmp As CBitmapFile
-	Dim frm As CForm
-	Dim o As Object
-	Dim i As Long
+   Dim nResID As Integer
+   Dim bmp As CBitmapFile
+   Dim frm As CForm
+   Dim o As Object
+   Dim i As Long
 
    ValidateProperty = True
    Select Case strProp

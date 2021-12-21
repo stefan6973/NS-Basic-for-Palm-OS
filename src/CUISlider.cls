@@ -36,12 +36,12 @@ Private Const kMethods As String = "Hide-Show-Redraw"
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "Slider" '+ Trim(str(obj.IdNo))
+   obj.Name = "Slider" '+ Trim(str(obj.IdNo))
    obj.Width = 75
    'if (obj.OrigLeft+obj.width)*  magnific >
-   obj.Label = obj.name
+   obj.Label = obj.Name
    obj.Kind = "sli"
    mvarAnchorLeft = False
    mvarFrame = False
@@ -50,7 +50,7 @@ Private Sub class_initialize()
    minimum = 0
    maximum = 100
    PageSize = 10
-   Value = 0
+   value = 0
    thumbBitmapID = 0
    backgroundBitmapID = 0
 End Sub
@@ -90,7 +90,7 @@ Public Sub PrcOut()
    slider.minimum.w = cvtWord(minimum)
    slider.maximum.w = cvtWord(maximum)
    slider.PageSize.w = cvtWord(PageSize)
-   slider.Value.w = cvtWord(Value)
+   slider.value.w = cvtWord(value)
    slider.Reserved = &H0
    slider.activeSliderPtr.c = 0
 
@@ -112,7 +112,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
   
    Dim version As Integer
    Input #nFileNumber, version
@@ -128,7 +128,7 @@ Public Sub Restore(ByVal nFileNumber as integer)
                m_nValue, _
                thumbBitmapID, _
                backgroundBitmapID
-      obj.Restore #nFileNumber
+      obj.Restore nFileNumber
    Else
       MsgBox gStringTable(3416) + str(version) '"Error: Invalid Slider Version " & version & ")"
       End
@@ -138,7 +138,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
   
    Dim version As Integer
    version = 1
@@ -155,7 +155,7 @@ Public Sub Save(ByVal nFileNumber as integer)
             m_nValue, _
             thumbBitmapID, _
             backgroundBitmapID
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
@@ -184,8 +184,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "sli" Then
@@ -222,11 +222,11 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ScreenDraw()
-	Dim i As Integer
-	Dim h As Integer
-	Dim w As Integer
-	Dim wk As String
-	Dim rad As Integer
+   Dim i As Integer
+   Dim h As Integer
+   Dim w As Integer
+   Dim wk As String
+   Dim rad As Integer
 
    If obj.Control Is Nothing Then Exit Sub
 
@@ -303,15 +303,15 @@ End Property
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Property Let Value(ByVal vData As Integer)
+Public Property Let value(ByVal vData As Integer)
    m_nValue = vData
 End Property
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Property Get Value() As Integer
-   Value = m_nValue
+Public Property Get value() As Integer
+   value = m_nValue
 End Property
 
 '------------------------------------------------------------
@@ -332,10 +332,10 @@ End Property
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -343,20 +343,20 @@ Public Sub GetProperty()
    If nProp < kUserProps Then gPropInfo.Type = pgString
    Select Case nProp
    Case 0
-      gPropInfo.name = "Minimum"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Minimum"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
       gPropInfo.Type = pgString
    Case 1
-      gPropInfo.name = "Maximum"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Maximum"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
       gPropInfo.Type = pgString
    Case 2
-      gPropInfo.name = "Page Size"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Page Size"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
       gPropInfo.Type = pgString
    Case 3
-      gPropInfo.name = "Value"
-      gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+      gPropInfo.Name = "Value"
+      gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
       gPropInfo.Type = pgString
    Case kUserProps + 0: obj.GetProperty "(Name)"
    Case kUserProps + 1: obj.GetProperty "Type"
@@ -381,7 +381,7 @@ Public Function GetPropertyVal(ByVal strProp As String) As String
    Case "Minimum": GetPropertyVal = minimum
    Case "Maximum": GetPropertyVal = maximum
    Case "Page Size": GetPropertyVal = PageSize
-   Case "Value": GetPropertyVal = Value
+   Case "Value": GetPropertyVal = value
    Case Else: GetPropertyVal = obj.GetPropertyVal(strProp)
    End Select
 End Function
@@ -390,10 +390,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
-	Dim n As Integer
-	Dim bmp As CBitmapFile
-	Dim frm As CForm
-	Dim o As Object
+   Dim n As Integer
+   Dim bmp As CBitmapFile
+   Dim frm As CForm
+   Dim o As Object
 
    ValidateProperty = True
    Select Case strProp
@@ -424,7 +424,7 @@ Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String
          ValidateProperty = False
          Exit Function
       End If
-      Value = n
+      value = n
    Case Else: ValidateProperty = obj.ValidateProperty(strProp, strVal)
    End Select
    If ValidateProperty Then obj.Form.Project.Dirty = True

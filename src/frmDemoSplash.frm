@@ -8,13 +8,13 @@ Begin VB.Form frmDemoSplash
    LinkTopic       =   "Form1"
    ScaleHeight     =   6150
    ScaleWidth      =   7995
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   3  'Windows-Standard
    Tag             =   "1124"
    Begin VB.TextBox txtNotes 
       Height          =   2655
       Left            =   1320
       MultiLine       =   -1  'True
-      ScrollBars      =   2  'Vertical
+      ScrollBars      =   2  'Vertikal
       TabIndex        =   6
       Top             =   2640
       Width           =   5655
@@ -38,7 +38,7 @@ Begin VB.Form frmDemoSplash
       Width           =   1215
    End
    Begin VB.PictureBox Picture1 
-      BorderStyle     =   0  'None
+      BorderStyle     =   0  'Kein
       Height          =   1695
       Left            =   240
       Picture         =   "frmDemoSplash.frx":0000
@@ -49,7 +49,7 @@ Begin VB.Form frmDemoSplash
       Width           =   1455
    End
    Begin VB.Label timeleft 
-      Appearance      =   0  'Flat
+      Appearance      =   0  '2D
       BackColor       =   &H8000000A&
       Caption         =   "Days Remaining"
       ForeColor       =   &H80000008&
@@ -137,13 +137,19 @@ End Sub
 '
 '------------------------------------------------------------
 Private Sub Form_Load()
-	Dim checksum As String
-	Dim x, y As Double
-	Dim trace As Boolean
-   trace = True
-   If trace Then MsgBox "demoSpash " & 1
+   Dim checksum As String
+   Dim x, y As Double
+        
+   enableTracing False, False, ""
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 1
+   '~~~~~~~~~~~~~~~~~~~~
+
    LoadResStrings Me
-   If trace Then MsgBox "demoSpash " & 2
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 2
+   '~~~~~~~~~~~~~~~~~~~~
+
    txtNotes = gStringTable(3312) & vbCrLf & vbCrLf 'Welcome to NS Basic/Palm's Demonstration Edition!
    txtNotes = txtNotes & gStringTable(3313) & vbCrLf & vbCrLf 'Click the Buy button for more information or to get the latest version of NS Basic/Palm with full support and 140 page Handbook.
    txtNotes = txtNotes & gStringTable(3314) & vbCrLf 'This is the full version of NS Basic/Palm, with some restrictions:
@@ -152,7 +158,10 @@ Private Sub Form_Load()
    If Not bookEdition Then txtNotes = txtNotes & gStringTable(3317) & vbCrLf '3. This demo copy will only run for 30 days.
    txtNotes = txtNotes & gStringTable(3318) & vbCrLf & vbCrLf '4. Shared libraries are not included.
    txtNotes = txtNotes & gStringTable(3319) 'Be sure to read the release notes for full information on getting started.
-   If trace Then MsgBox "demoSpash " & 3
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3
+   '~~~~~~~~~~~~~~~~~~~~
+
 
    'check if timed out
    MWinReg.hKey = HKEY_CURRENT_USER
@@ -161,28 +170,55 @@ Private Sub Form_Load()
    #Else
       MWinReg.SubKey = "Software\NSBasic\Palm"
    #End If
-   If trace Then MsgBox "demoSpash 3.0"
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash 3.0"
+   '~~~~~~~~~~~~~~~~~~~~
+
    checksum = MWinReg.GetRegValue(MWinReg.hKey, MWinReg.SubKey, "checksum", "0")
-   If trace Then MsgBox "demoSpash " & 3.1 & " Date " & Date & " datediff " & DateDiff("d", "5/23/54", Date)
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3.1 & " Date " & Date & " datediff " & DateDiff("d", "5/23/54", Date)
+   '~~~~~~~~~~~~~~~~~~~~
+
    y = DateDiff("d", "5/23/1954", Date)
-   If trace Then MsgBox "demoSpash " & 3.2
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3.2
+   '~~~~~~~~~~~~~~~~~~~~
+
    If checksum = "0" Then 'start for first time
       checksum = str(y)
       MWinReg.SetRegValue MWinReg.hKey, MWinReg.SubKey, "checksum", checksum
    End If 'check if expired
-   If trace Then MsgBox "demoSpash " & 3.3
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3.3
+   '~~~~~~~~~~~~~~~~~~~~
+
    x = Val(checksum)
-   If trace Then MsgBox "demoSpash " & 3.4
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3.4
+   '~~~~~~~~~~~~~~~~~~~~
+
    daysRemaining = 30 - (y - x)
-   If trace Then MsgBox "demoSpash " & 3.5
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3.5
+   '~~~~~~~~~~~~~~~~~~~~
+
    If bookEdition Then daysRemaining = 4
-   If trace Then MsgBox "demoSpash " & 3.6
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3.6
+   '~~~~~~~~~~~~~~~~~~~~
+
    If Not bookEdition Then timeleft.caption = gStringTable(3311) & " " & daysRemaining ' "Days Remaining: "
-   If trace Then MsgBox "demoSpash " & 3.7
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 3.7
+   '~~~~~~~~~~~~~~~~~~~~
+
    If daysRemaining < 0 Then
       MsgBox gStringTable(3310) '"NS Basic/Palm Demonstration Edition has timed out. It is time to get your real copy!"
    End If
-   If trace Then MsgBox "demoSpash " & 4
+   '~~~~~~~~~~~~~~~~~~~~
+   traceMsg "demoSpash " & 4
+   '~~~~~~~~~~~~~~~~~~~~
+
 End Sub
 
 '------------------------------------------------------------

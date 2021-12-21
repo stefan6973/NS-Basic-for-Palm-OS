@@ -74,12 +74,10 @@ Type FILETIME
 End Type
 
 
-'Registry 
+'------------------------------------------------------------
+' Registry Function Prototypes
+'------------------------------------------------------------
 
-'------------------------------------------------------------
-'
-'------------------------------------------------------------
-Function Prototypes
 Declare Function RegOpenKeyEx Lib "advapi32" Alias "RegOpenKeyExA" _
   (ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, _
   ByVal samDesired As Long, phkResult As Long) As Long
@@ -139,7 +137,7 @@ Function CreateRegKey(NewSubKey As String) As Boolean
 
 On Error GoTo ERROR_HANDLER
 
-	Dim phkResult As Long, lResult As Long, SA As SECURITY_ATTRIBUTES
+   Dim phkResult As Long, lResult As Long, SA As SECURITY_ATTRIBUTES
     
   'Create key if it does not exist
   CreateRegKey = (RegCreateKeyEx(hKey, SubKey & NewSubKey, 0, "", REG_OPTION_NON_VOLATILE, _
@@ -164,8 +162,8 @@ Function GetRegValue(hKey As Long, lpszSubKey As String, szKey As String, _
 
 On Error GoTo ERROR_HANDLER
 
-	Dim phkResult As Long, lResult As Long, szBuffer As String, lBuffSize As Long
-	Dim p As Integer
+   Dim phkResult As Long, lResult As Long, szBuffer As String, lBuffSize As Long
+   Dim p As Integer
 
   'Create Buffer
   szBuffer = Space(255)

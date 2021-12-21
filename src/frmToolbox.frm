@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmToolbox 
-   BorderStyle     =   4  'Fixed ToolWindow
+   BorderStyle     =   4  'Festes Werkzeugfenster
    ClientHeight    =   6930
    ClientLeft      =   45
    ClientTop       =   285
@@ -218,16 +218,16 @@ Option Explicit
 '------------------------------------------------------------
 Public Sub DockWindow()
 'On Error Resume Next
-	Dim lRet As Long
+   Dim lRet As Long
 
    'Hide first
    Me.Visible = False
 
    'Make sure we keep the ToolWindow style
-   lRet = SetWindowLong(Me.hwnd, GWL_EXSTYLE, CLng(WS_EX_TOOLBOXWINDOW))
+   lRet = SetWindowLong(Me.hWnd, GWL_EXSTYLE, CLng(WS_EX_TOOLBOXWINDOW))
 
    'Set parent window and its size
-   SetParent Me.hwnd, frmMain.picToolbox.hwnd
+   SetParent Me.hWnd, frmMain.picToolbox.hWnd
    frmMain.picToolbox.Width = Me.Width
    frmMain.picToolbox_Resize
 '   Me.Move 0, 0
@@ -236,7 +236,7 @@ Public Sub DockWindow()
    frmMain.picToolbox.Visible = True
    DoEvents
    Me.Visible = True
-   SendMessage Me.hwnd, WM_NCACTIVATE, 1, 0
+   SendMessage Me.hWnd, WM_NCACTIVATE, 1, 0
 
    'Keep track of some info
    frmMain.mnuViewToolbox.Checked = True
@@ -272,15 +272,15 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub ToolboxSelect(nTool As Integer)
-	Dim nIndex As Integer
+   Dim nIndex As Integer
 
    If nTool = gnToolboxTool And nTool <> 1 Then
       nIndex = 1
    Else
       nIndex = nTool
    End If
-   tbToolbox.Buttons(gnToolboxTool).Value = tbrUnpressed
+   tbToolbox.Buttons(gnToolboxTool).value = tbrUnpressed
    gnToolboxTool = nIndex
-   tbToolbox.Buttons(gnToolboxTool).Value = tbrPressed
+   tbToolbox.Buttons(gnToolboxTool).value = tbrPressed
 End Sub
 

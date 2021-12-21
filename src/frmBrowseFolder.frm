@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmBrowseFolder 
-   BorderStyle     =   3  'Fixed Dialog
+   BorderStyle     =   3  'Fester Dialog
    Caption         =   "Browse Folder"
    ClientHeight    =   4545
    ClientLeft      =   2760
@@ -12,7 +12,7 @@ Begin VB.Form frmBrowseFolder
    ScaleHeight     =   4545
    ScaleWidth      =   5055
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  'CenterOwner
+   StartUpPosition =   1  'Fenstermitte
    Begin VB.DirListBox lstDir 
       Height          =   2790
       Left            =   240
@@ -46,7 +46,7 @@ Begin VB.Form frmBrowseFolder
       Width           =   1215
    End
    Begin VB.Label lblPath 
-      BorderStyle     =   1  'Fixed Single
+      BorderStyle     =   1  'Fest Einfach
       Height          =   375
       Left            =   240
       TabIndex        =   4
@@ -67,7 +67,7 @@ Public path As String
 '
 '------------------------------------------------------------
 Private Sub cmbdrive_Change()
-	Dim strDrive As String
+   Dim strDrive As String
 
    strDrive = Left(lstDir.path, 2)
    On Error GoTo BadDrive

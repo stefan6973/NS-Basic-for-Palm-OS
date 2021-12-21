@@ -18,12 +18,13 @@ Public caption As String
 Public command As String
 Public MenuElems As New Collection
 Public IdNo As Integer
+
 Private m_strGlobalID As String
 
 Private Const kVersion As Integer = 1
 Private Const kTotalProps = 2
 
-Public Sub class_initialize()
+Public Sub Class_Initialize()
    caption = "untitled"
    command = ""
 '   gtarget.HighestSeqNo = gtarget.HighestSeqNo + 1
@@ -33,7 +34,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Dim mElem As CMenuElem
 
    Write #nFileNumber, "menu"
@@ -41,7 +42,7 @@ Public Sub Save(ByVal nFileNumber as integer)
    Write #nFileNumber, caption, command, IdNo
    Write #nFileNumber, MenuElems.count
    For Each mElem In MenuElems
-      mElem.save #nFileNumber
+      mElem.Save nFileNumber
    Next
 End Sub
 
@@ -49,7 +50,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-	Dim mElem As CMenuElem
+   Dim mElem As CMenuElem
 
    Copy = Quote("menubar") & vbCrLf
    Copy = Copy & kVersion & vbCrLf
@@ -64,10 +65,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String, ByVal proj As CProject)
-	Dim tokens() As String
-	Dim i As Integer, nCount As Integer
-	Dim oldIdNo As Integer
-	Dim mElem As CMenuElem
+   Dim tokens() As String
+   Dim i As Integer, nCount As Integer
+   Dim oldIdNo As Integer
+   Dim mElem As CMenuElem
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) = "menuelem" Then
@@ -107,12 +108,12 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub restore()
-	Dim ignore As String
-	Dim version As Integer
-	Dim i As Integer
-	Dim cnt As Integer
-	Dim mElem As CMenuElem
+Public Sub Restore(ByVal nFileNumber As Integer)
+   Dim ignore As String
+   Dim version As Integer
+   Dim i As Integer
+   Dim cnt As Integer
+   Dim mElem As CMenuElem
 
    Input #nFileNumber, ignore 'menu
    Input #nFileNumber, version
@@ -124,14 +125,14 @@ Public Sub restore()
    Input #nFileNumber, caption, command, IdNo
    Input #nFileNumber, cnt
    SetGlobalID ""
-'   If cnt > 0 Then
-   For i = 1 To cnt
-      Set mElem = New CMenuElem
-      mElem.restore #nFileNumber
-      MenuElems.Add mElem, Trim(str(mElem.IdNo))
-      mElem.SetGlobalID GlobalID
-   Next
-'   End If
+   'If cnt > 0 Then
+      For i = 1 To cnt
+         Set mElem = New CMenuElem
+         mElem.Restore nFileNumber
+         MenuElems.Add mElem, Trim(str(mElem.IdNo))
+         mElem.SetGlobalID GlobalID
+      Next
+   'End If
 End Sub
 
 '------------------------------------------------------------
@@ -161,7 +162,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+   Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -187,8 +188,8 @@ End Sub
 '------------------------------------------------------------
 Public Function GetPropertyVal(ByVal strProp As String) As String
    Select Case strProp
-   Case "Caption": GetPropertyVal = caption
-   Case "ID": GetPropertyVal = IdNo
+      Case "Caption": GetPropertyVal = caption
+      Case "ID": GetPropertyVal = IdNo
    End Select
 End Function
 
@@ -198,12 +199,12 @@ End Function
 Public Function ValidateProperty(ByVal strProp As String, ByVal strVal As String) As Boolean
    ValidateProperty = True
    Select Case strProp
-   Case "Caption"
-      If Len(strVal) = 0 Then
-         ValidateProperty = False
-         Exit Function
-      End If
-      caption = strVal
+      Case "Caption"
+         If Len(strVal) = 0 Then
+            ValidateProperty = False
+            Exit Function
+         End If
+         caption = strVal
    End Select
    If ValidateProperty Then LocateProject(GlobalID).Dirty = True
 End Function

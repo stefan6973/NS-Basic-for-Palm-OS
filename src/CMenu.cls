@@ -21,7 +21,7 @@ Private m_strGlobalID As String
 Private Const kVersion As Integer = 2
 Private Const kTotalProps = 2
 
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    Name = ""
    IdNo = 0
 End Sub
@@ -29,7 +29,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
+Public Sub Restore(ByVal nFileNumber As Integer)
    Dim version As Integer
    Dim i As Integer
    Dim cnt As Integer
@@ -50,7 +50,7 @@ Public Sub Restore(ByVal nFileNumber as integer)
    For i = 1 To cnt
       Set mBar = New CMenuBar
       mBar.SetGlobalID GlobalID
-      mBar.Restore #nFileNumber
+      mBar.Restore nFileNumber
       MenuBars.Add mBar, str(mBar.IdNo)
    Next
 End Sub
@@ -58,7 +58,7 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as interger)
+Public Sub Save(ByVal nFileNumber As Integer)
    Dim mBar As CMenuBar
 
    Write #nFileNumber, "mnu"
@@ -66,7 +66,7 @@ Public Sub Save(ByVal nFileNumber as interger)
    Write #nFileNumber, IdNo
    Write #nFileNumber, MenuBars.count
    For Each mBar In MenuBars
-      mBar.Save #nFileNumber
+      mBar.Save nFileNumber
    Next
 End Sub
 
@@ -74,7 +74,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Function Copy() As String
-	Dim mBar As CMenuBar
+   Dim mBar As CMenuBar
 
    Copy = Quote("mnu") & vbCrLf
    Copy = Copy & kVersion & "," & Quote(Name) & vbCrLf
@@ -89,10 +89,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String, ByVal proj As CProject)
-	Dim tokens() As String
-	Dim i As Integer, nCount As Integer
-	Dim oldIdNo As Integer
-	Dim mBar As CMenuBar
+   Dim tokens() As String
+   Dim i As Integer, nCount As Integer
+   Dim oldIdNo As Integer
+   Dim mBar As CMenuBar
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) = "menubar" Then
@@ -156,7 +156,7 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
       gPropInfo.Name = ""
@@ -210,10 +210,10 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub MoveElement(ByVal Elem As CMenuElem, moveDir As Long)
-	Dim mBar As CMenuBar
-	Dim mElem As CMenuElem
-	Dim i As Integer
-	Dim j As Integer
+   Dim mBar As CMenuBar
+   Dim mElem As CMenuElem
+   Dim i As Integer
+   Dim j As Integer
 
    'Locate which Menu Bar contains the element
    For i = 1 To MenuBars.count
@@ -248,8 +248,8 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub MoveBar(ByVal bar As CMenuBar, moveDir As Long)
-	Dim mBar As CMenuBar
-	Dim i As Integer
+   Dim mBar As CMenuBar
+   Dim i As Integer
 
    'Locate the Menu Bar
    For i = 1 To MenuBars.count

@@ -27,20 +27,20 @@ Private Const kMethods As String = "Hide-Show-Redraw-Left-Top-Width-Height"
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Private Sub class_initialize()
+Private Sub Class_Initialize()
    obj.Parent = Me
-   obj.name = "Label"
+   obj.Name = "Label"
    obj.Kind = "lbl"
-   obj.Label = obj.name
+   obj.Label = obj.Name
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
 Public Sub PrcOut()
-	Dim lab As labelOut
-	Dim c As Byte
-	Dim templen As Integer
+   Dim lab As labelOut
+   Dim c As Byte
+   Dim templen As Integer
 
    lab.id.w = cvtWord(obj.IdNo)
    If obj.Usable Then
@@ -71,8 +71,8 @@ End Sub
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Restore(ByVal nFileNumber as integer)
-	Dim version As Integer
+Public Sub Restore(ByVal nFileNumber As Integer)
+   Dim version As Integer
 
    Input #nFileNumber, version
    If version <> kVersion Then
@@ -80,16 +80,16 @@ Public Sub Restore(ByVal nFileNumber as integer)
       End
    End If
 
-   obj.Restore #nFileNumber
+   obj.Restore nFileNumber
 End Sub
 
 '------------------------------------------------------------
 '
 '------------------------------------------------------------
-Public Sub Save(ByVal nFileNumber as integer)
+Public Sub Save(ByVal nFileNumber As Integer)
    Write #nFileNumber, obj.Kind
    Write #nFileNumber, kVersion
-   obj.Save #nFileNumber
+   obj.Save nFileNumber
 End Sub
 
 '------------------------------------------------------------
@@ -105,8 +105,8 @@ End Function
 '
 '------------------------------------------------------------
 Public Sub Paste(ByRef strLines() As String)
-	Dim tokens() As String
-	Dim i As Integer
+   Dim tokens() As String
+   Dim i As Integer
 
    'Ensure the proper object type and version
    If LCase(UnQuote(strLines(1))) <> "lbl" Then
@@ -160,10 +160,10 @@ End Sub
 '
 '------------------------------------------------------------
 Public Sub GetProperty()
-	Static nProp As Integer
+        Static nProp As Integer
 
    If nProp = kTotalProps Then
-      gPropInfo.name = ""
+      gPropInfo.Name = ""
       nProp = 0
       Exit Sub
    End If
@@ -179,7 +179,7 @@ Public Sub GetProperty()
    Case kUserProps + 6: obj.GetProperty "Font ID"
    Case kUserProps + 7: obj.GetProperty "Label"
    End Select
-   gPropInfo.Val = GetPropertyVal(gPropInfo.name)
+   gPropInfo.Val = GetPropertyVal(gPropInfo.Name)
    nProp = nProp + 1
 End Sub
 

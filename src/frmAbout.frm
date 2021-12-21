@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmAbout 
-   BorderStyle     =   3  'Fixed Dialog
+   BorderStyle     =   3  'Fester Dialog
    Caption         =   "About NS Basic"
    ClientHeight    =   4080
    ClientLeft      =   45
@@ -13,15 +13,15 @@ Begin VB.Form frmAbout
    ScaleHeight     =   4080
    ScaleWidth      =   8835
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  'CenterOwner
+   StartUpPosition =   1  'Fenstermitte
    Begin VB.PictureBox SymbianLogo 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
+      Appearance      =   0  '2D
+      BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
       Height          =   855
       Left            =   6120
       ScaleHeight     =   62.377
-      ScaleMode       =   0  'User
+      ScaleMode       =   0  'Benutzerdefiniert
       ScaleWidth      =   179.046
       TabIndex        =   6
       Top             =   240
@@ -43,7 +43,7 @@ Begin VB.Form frmAbout
       Left            =   240
       Locked          =   -1  'True
       MultiLine       =   -1  'True
-      ScrollBars      =   2  'Vertical
+      ScrollBars      =   2  'Vertikal
       TabIndex        =   4
       Tag             =   "1403"
       Text            =   "frmAbout.frx":0000
@@ -58,7 +58,7 @@ Begin VB.Form frmAbout
       Left            =   240
       Picture         =   "frmAbout.frx":0014
       ScaleHeight     =   1515
-      ScaleMode       =   0  'User
+      ScaleMode       =   0  'Benutzerdefiniert
       ScaleWidth      =   1290
       TabIndex        =   0
       TabStop         =   0   'False
@@ -105,7 +105,7 @@ Begin VB.Form frmAbout
    End
    Begin VB.Line Line1 
       BorderColor     =   &H00808080&
-      BorderStyle     =   6  'Inside Solid
+      BorderStyle     =   6  'Innen ausgefüllt
       Index           =   1
       X1              =   225
       X2              =   6480
@@ -147,7 +147,7 @@ Private Sub Form_Load()
    'put beta version message here...
    #If NSBSymbian Then
       lblVersion.caption = lblVersion.caption & " " & App.Major & "." & App.Minor & "." & App.Revision '& " Beta 1" 'beta
-      SymbianLogo.Picture = LoadPicture(ProgramsDirectory & "\images\symbian.gif")
+      SymbianLogo.Picture = LoadPicture(AppInfo.ImagesFolder & "symbian.gif")
       If isPro And glSerialNumber <> "Unregistered Demo" Then
          lblVersion.caption = lblVersion.caption & " Pro Edition"
       Else
