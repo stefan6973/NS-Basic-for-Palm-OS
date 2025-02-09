@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\dev\Lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe" Date="1398760406"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -gw2 -godwarfsets -gl -WG -l -vewnhibq &quot;-FiZ:\10 Projects\Retro\Palm\NS-Basic-for-Palm-OS\pas\lib\x86_64-win64&quot; -FuC:\dev\Lazarus\lcl\units\x86_64-win64\win32 -FuC:\dev\Lazarus\lcl\units\x86_64-win64 -FuC:\dev\Lazarus\components\freetype\lib\x86_64-win64 -FuC:\dev\Lazarus\components\lazutils\lib\x86_64-win64 -FuC:\dev\Lazarus\packager\units\x86_64-win64 &quot;-FuZ:\10 Projects\Retro\Palm\NS-Basic-for-Palm-OS\pas\&quot; &quot;-FUZ:\10 Projects\Retro\Palm\NS-Basic-for-Palm-OS\pas\lib\x86_64-win64\&quot; &quot;-FEZ:\10 Projects\Retro\Palm\NS-Basic-for-Palm-OS\pas\&quot; &quot;-oZ:\10 Projects\Retro\Palm\NS-Basic-for-Palm-OS\pas\NSBasic.exe&quot; -dLCL -dLCLwin32 NSBasic.lpr"/>
+  <Complete Value="False"/>
+</CONFIG>
