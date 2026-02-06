@@ -1,0 +1,122 @@
+name: NS Basic/Palm - Build and Test
+
+on:
+  push:
+    branches: [ main, develop, 'copilot/**' ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate-vb6-conversion:
+    name: Validate VB6 to Python Conversion
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        cd python
+        pip install PySide6>=6.6.0
+        pip install pytest pytest-cov
+    
+    - name: Run unit tests
+      run: |
+        cd python
+        python -m pytest tests/ -v
+    
+    - name: Generate coverage report
+      run: |
+        cd python
+        python -m pytest tests/ --cov=nsbasic_palm --cov-report=xml --cov-report=term
+    
+    - name: Check Palm OS model imports
+      run: |
+        cd python
+        python -c "from nsbasic_palm.models import PalmProject, PalmForm, PalmButton; print('✓ Palm OS models import successfully')"
+  
+  check-palm-os-constraints:
+    name: Verify Palm OS Compliance
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        cd python
+        pip install PySide6>=6.6.0
+    
+    - name: Verify resource ID management
+      run: |
+        cd python
+        python -c "
+        from nsbasic_palm.models import PalmProject
+        proj = PalmProject()
+        ids = [proj.allocate_resource_id() for _ in range(10)]
+        assert len(ids) == len(set(ids)), 'Resource IDs not unique'
+        print('✓ Resource ID allocation working correctly')
+        "
+    
+    - name: Verify creator code validation
+      run: |
+        cd python
+        python -c "
+        from nsbasic_palm.models import PalmProjectMetadata
+        meta = PalmProjectMetadata(creator_code='TEST')
+        assert meta.validate_creator_code(), 'Valid creator code rejected'
+        meta.creator_code = 'TOOLONG'
+        assert not meta.validate_creator_code(), 'Invalid creator code accepted'
+        print('✓ Creator code validation working correctly')
+        "
+    
+    - name: Verify widget positioning
+      run: |
+        cd python
+        python -c "
+        from nsbasic_palm.models import PalmButton
+        btn = PalmButton()
+        btn.set_position(10, 20)
+        assert btn.x_position == 10 and btn.y_position == 20
+        assert btn.contains_point(15, 25), 'Point detection failed'
+        print('✓ Widget positioning working correctly')
+        "
+  
+  package-validation:
+    name: Validate Python Package
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install build tools
+      run: |
+        pip install build twine
+    
+    - name: Build package
+      run: |
+        cd python
+        python -m build
+    
+    - name: Check package
+      run: |
+        cd python
+        twine check dist/*
