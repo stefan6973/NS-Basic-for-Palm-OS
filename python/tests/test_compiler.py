@@ -1,6 +1,7 @@
 """Unit tests for BASIC compiler scaffolding."""
 
 import json
+from pathlib import Path
 
 from nsbasic_palm.compiler import (
     Assignment,
@@ -47,7 +48,7 @@ def test_compiler_bytecode_output() -> None:
     assert payload["instructions"][0]["opcode"] == "LOAD_CONST"
 
 
-def test_project_compile_to_prc(tmp_path) -> None:
+def test_project_compile_to_prc(tmp_path: Path) -> None:
     project = PalmProject()
     project.initialization_script = 'PRINT "Ready"'
 

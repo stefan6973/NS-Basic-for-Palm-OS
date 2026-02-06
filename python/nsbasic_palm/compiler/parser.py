@@ -40,7 +40,11 @@ class BasicParser:
         if self._check(TokenType.IDENTIFIER) and self._check_next(TokenType.OPERATOR, "="):
             return self._parse_assignment()
         token = self._peek()
-        raise CompilationError("Expected statement", token.line, token.column)
+        raise CompilationError(
+            f"Expected statement (PRINT, LET, or assignment) but found: {token.value}",
+            token.line,
+            token.column,
+        )
 
     def _parse_assignment(self) -> Assignment:
         name_token = self._consume(TokenType.IDENTIFIER, "Expected variable name")
@@ -85,7 +89,12 @@ class BasicParser:
             self._consume(TokenType.RPAREN, "Expected ')' after expression")
             return expr
         token = self._peek()
-        raise CompilationError("Expected expression", token.line, token.column)
+        raise CompilationError(
+            "Expected expression (number, string, variable, or parenthesized expression) "
+            f"but found: {token.value}",
+            token.line,
+            token.column,
+        )
 
     def _consume_separators(self) -> None:
         while self._match(TokenType.NEWLINE, TokenType.COLON):

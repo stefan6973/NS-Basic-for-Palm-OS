@@ -54,8 +54,8 @@ class BasicLexer:
 
         def raise_decimal_error(partial_number: str, error_line: int, error_column: int) -> None:
             raise CompilationError(
-                "Decimal point must be followed by at least one digit in: "
-                f"{partial_number}",
+                "Invalid number literal: "
+                f"{partial_number}. Decimal point must be followed by at least one digit.",
                 error_line,
                 error_column,
             )
