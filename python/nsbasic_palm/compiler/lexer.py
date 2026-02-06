@@ -52,6 +52,12 @@ class BasicLexer:
         def add_token(token_type: TokenType, value: str, token_line: int, token_column: int) -> None:
             tokens.append(Token(token_type, value, token_line, token_column))
 
+        def skip_line_comment() -> None:
+            nonlocal index, column
+            while index < length and source[index] != "\n":
+                index += 1
+                column += 1
+
         while index < length:
             char = source[index]
 
@@ -68,9 +74,7 @@ class BasicLexer:
                 continue
 
             if char == "'":
-                while index < length and source[index] != "\n":
-                    index += 1
-                    column += 1
+                skip_line_comment()
                 continue
 
             if char == ":":
@@ -171,9 +175,7 @@ class BasicLexer:
                 identifier = "".join(identifier_chars)
                 upper_identifier = identifier.upper()
                 if upper_identifier == "REM":
-                    while index < length and source[index] != "\n":
-                        index += 1
-                        column += 1
+                    skip_line_comment()
                     continue
                 token_type = TokenType.KEYWORD if upper_identifier in self.KEYWORDS else TokenType.IDENTIFIER
                 add_token(token_type, identifier, start_line, start_column)

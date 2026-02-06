@@ -98,6 +98,8 @@ class PalmProject:
     Complete Palm OS project container.
     Equivalent to VB6 CProject class.
     """
+
+    MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
     
     metadata: PalmProjectMetadata = field(default_factory=PalmProjectMetadata)
     
@@ -148,16 +150,21 @@ class PalmProject:
         # Add code module scripts  
         for module in self.code_modules_list:
             # Collect module code
-            if isinstance(module, str):
-                scripts.append(module)
-                continue
-            for attribute_name in ("source_code", "code", "script"):
-                module_source = getattr(module, attribute_name, "")
-                if isinstance(module_source, str):
-                    scripts.append(module_source)
-                    break
+            module_source = self._extract_module_source(module)
+            if module_source:
+                scripts.append(module_source)
             
         return [s for s in scripts if s.strip()]
+
+    def _extract_module_source(self, module) -> str:
+        """Retrieve BASIC source code from a module representation."""
+        if isinstance(module, str):
+            return module
+        for attribute_name in self.MODULE_SOURCE_ATTRIBUTES:
+            module_source = getattr(module, attribute_name, "")
+            if isinstance(module_source, str):
+                return module_source
+        return ""
     
     def save_to_file(self, filepath: str):
         """
