@@ -49,8 +49,8 @@ class BasicLexer:
         column = 1
         length = len(source)
 
-        def add_token(token_type: TokenType, value: str, token_line: int, token_column: int) -> None:
-            tokens.append(Token(token_type, value, token_line, token_column))
+        def add_token(token_type: TokenType, value: str, line: int, column: int) -> None:
+            tokens.append(Token(token_type, value, line, column))
 
         def skip_line_comment() -> None:
             nonlocal index, column

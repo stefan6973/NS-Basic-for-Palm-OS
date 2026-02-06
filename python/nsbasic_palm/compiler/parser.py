@@ -88,7 +88,7 @@ class BasicParser:
 
     def _consume_separators(self) -> None:
         while self._match(TokenType.NEWLINE, TokenType.COLON):
-            continue
+            pass
 
     def _match_operator(self, *operators: str) -> bool:
         if self._check(TokenType.OPERATOR) and self._peek().value in operators:

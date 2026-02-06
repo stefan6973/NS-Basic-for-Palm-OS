@@ -19,6 +19,8 @@ from pathlib import Path
 from nsbasic_palm.compiler import BasicCompiler, CompilationError
 from nsbasic_palm.utils.logging_system import NSBasicLogger
 
+_MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
+
 
 class PalmResolution(Enum):
     """Palm screen resolution modes"""
@@ -99,8 +101,6 @@ class PalmProject:
     Equivalent to VB6 CProject class.
     """
 
-    _MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
-    
     metadata: PalmProjectMetadata = field(default_factory=PalmProjectMetadata)
     
     # Startup/shutdown scripts
@@ -160,7 +160,7 @@ class PalmProject:
         """Retrieve BASIC source code from a module representation."""
         if isinstance(module, str):
             return module
-        for attribute_name in self._MODULE_SOURCE_ATTRIBUTES:
+        for attribute_name in _MODULE_SOURCE_ATTRIBUTES:
             module_source = getattr(module, attribute_name, "")
             if isinstance(module_source, str):
                 return module_source
