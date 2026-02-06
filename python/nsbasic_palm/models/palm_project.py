@@ -14,6 +14,18 @@ Converted from VB6 CProject.cls
 from dataclasses import dataclass, field
 from typing import List
 from enum import Enum
+from pathlib import Path
+
+from nsbasic_palm.compiler import BasicCompiler, CompilationError
+from nsbasic_palm.utils.logging_system import NSBasicLogger
+
+FORM_SCRIPT_ATTRIBUTES = (
+    "before_open_script",
+    "event_handler_script",
+    "after_close_script",
+    "help_script",
+)
+MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
 
 
 class PalmResolution(Enum):
@@ -94,7 +106,7 @@ class PalmProject:
     Complete Palm OS project container.
     Equivalent to VB6 CProject class.
     """
-    
+
     metadata: PalmProjectMetadata = field(default_factory=PalmProjectMetadata)
     
     # Startup/shutdown scripts
@@ -134,14 +146,27 @@ class PalmProject:
         # Add form scripts
         for form in self.forms_list:
             # Collect form event handlers
-            pass  # To be implemented
+            for attribute_name in FORM_SCRIPT_ATTRIBUTES:
+                scripts.append(getattr(form, attribute_name, ""))
         
         # Add code module scripts  
         for module in self.code_modules_list:
             # Collect module code
-            pass  # To be implemented
+            module_source = self._extract_module_source(module)
+            if module_source:
+                scripts.append(module_source)
             
         return [s for s in scripts if s.strip()]
+
+    def _extract_module_source(self, module) -> str:
+        """Retrieve BASIC source code from a module representation."""
+        if isinstance(module, str):
+            return module
+        for attribute_name in MODULE_SOURCE_ATTRIBUTES:
+            module_source = getattr(module, attribute_name, "")
+            if isinstance(module_source, str):
+                return module_source
+        return ""
     
     def save_to_file(self, filepath: str):
         """
@@ -166,5 +191,17 @@ class PalmProject:
         Compile project to Palm OS .prc executable.
         This is the main build operation.
         """
-        # Implementation pending - will interface with compiler module
-        raise NotImplementedError("Compilation not yet implemented")
+        scripts = self.get_all_code_scripts()
+        NSBasicLogger.log_compilation_start(self.metadata.project_title, output_path)
+        compiler = BasicCompiler()
+        try:
+            program = compiler.compile_scripts(scripts)
+        except CompilationError as exc:
+            NSBasicLogger.log_compilation_error(exc.line, str(exc))
+            return False
+
+        self.compiled_bytecode = program.to_bytes()
+        output_file = Path(output_path)
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        output_file.write_bytes(self.compiled_bytecode)
+        return True
