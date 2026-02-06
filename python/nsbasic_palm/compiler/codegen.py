@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 import json
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 
 from .ast_nodes import (
     Assignment,
@@ -49,6 +49,7 @@ class BasicCodeGenerator:
     def __init__(self) -> None:
         self.instructions: List[BytecodeInstruction] = []
         self.constants: List[Union[int, float, str]] = []
+        self.constant_indices: Dict[Union[int, float, str], int] = {}
 
     def generate(self, program: Program) -> BytecodeProgram:
         for statement in program.statements:
@@ -90,7 +91,9 @@ class BasicCodeGenerator:
         raise ValueError(f"Unsupported expression type: {type(expression).__name__}")
 
     def _add_constant(self, value: Union[int, float, str]) -> int:
-        if value in self.constants:
-            return self.constants.index(value)
+        if value in self.constant_indices:
+            return self.constant_indices[value]
+        index = len(self.constants)
         self.constants.append(value)
-        return len(self.constants) - 1
+        self.constant_indices[value] = index
+        return index

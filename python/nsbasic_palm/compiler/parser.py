@@ -67,7 +67,13 @@ class BasicParser:
     def _parse_factor(self) -> Expression:
         if self._match(TokenType.NUMBER):
             token = self._previous()
-            value = float(token.value) if "." in token.value else int(token.value)
+            try:
+                value = int(token.value)
+            except ValueError:
+                try:
+                    value = float(token.value)
+                except ValueError as exc:
+                    raise CompilationError("Invalid numeric literal", token.line, token.column) from exc
             return Literal(value)
         if self._match(TokenType.STRING):
             return Literal(self._previous().value)

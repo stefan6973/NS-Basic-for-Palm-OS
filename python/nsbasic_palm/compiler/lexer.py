@@ -146,6 +146,12 @@ class BasicLexer:
                 while index < length:
                     current = source[index]
                     if current == "." and not has_decimal:
+                        if index + 1 >= length or not source[index + 1].isdigit():
+                            raise CompilationError(
+                                "Expected digit after decimal point",
+                                start_line,
+                                start_column,
+                            )
                         has_decimal = True
                         number_chars.append(current)
                         index += 1
