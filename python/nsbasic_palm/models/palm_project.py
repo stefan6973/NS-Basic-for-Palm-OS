@@ -99,7 +99,7 @@ class PalmProject:
     Equivalent to VB6 CProject class.
     """
 
-    MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
+    _MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
     
     metadata: PalmProjectMetadata = field(default_factory=PalmProjectMetadata)
     
@@ -160,7 +160,7 @@ class PalmProject:
         """Retrieve BASIC source code from a module representation."""
         if isinstance(module, str):
             return module
-        for attribute_name in self.MODULE_SOURCE_ATTRIBUTES:
+        for attribute_name in self._MODULE_SOURCE_ATTRIBUTES:
             module_source = getattr(module, attribute_name, "")
             if isinstance(module_source, str):
                 return module_source

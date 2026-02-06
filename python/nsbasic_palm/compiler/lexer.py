@@ -148,7 +148,7 @@ class BasicLexer:
                     if current == "." and not has_decimal:
                         if index + 1 >= length or not source[index + 1].isdigit():
                             raise CompilationError(
-                                "Expected digit after decimal point",
+                                "Decimal point must be followed by at least one digit",
                                 start_line,
                                 start_column,
                             )
