@@ -19,6 +19,12 @@ from pathlib import Path
 from nsbasic_palm.compiler import BasicCompiler, CompilationError
 from nsbasic_palm.utils.logging_system import NSBasicLogger
 
+FORM_SCRIPT_ATTRIBUTES = (
+    "before_open_script",
+    "event_handler_script",
+    "after_close_script",
+    "help_script",
+)
 MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
 
 
@@ -140,12 +146,8 @@ class PalmProject:
         # Add form scripts
         for form in self.forms_list:
             # Collect form event handlers
-            scripts.extend([
-                getattr(form, "before_open_script", ""),
-                getattr(form, "event_handler_script", ""),
-                getattr(form, "after_close_script", ""),
-                getattr(form, "help_script", ""),
-            ])
+            for attribute_name in FORM_SCRIPT_ATTRIBUTES:
+                scripts.append(getattr(form, attribute_name, ""))
         
         # Add code module scripts  
         for module in self.code_modules_list:

@@ -52,6 +52,14 @@ class BasicLexer:
         def add_token(token_type: TokenType, value: str, line: int, column: int) -> None:
             tokens.append(Token(token_type, value, line, column))
 
+        def raise_decimal_error(partial_number: str, error_line: int, error_column: int) -> None:
+            raise CompilationError(
+                "Decimal point must be followed by at least one digit in: "
+                f"{partial_number}",
+                error_line,
+                error_column,
+            )
+
         def skip_line_comment() -> None:
             nonlocal index, column
             while index < length and source[index] != "\n":
@@ -149,21 +157,11 @@ class BasicLexer:
                         next_index = index + 1
                         if next_index >= length:
                             partial_number = "".join(number_chars) + "."
-                            raise CompilationError(
-                                "Decimal point must be followed by at least one digit in: "
-                                f"{partial_number}",
-                                start_line,
-                                start_column,
-                            )
+                            raise_decimal_error(partial_number, start_line, start_column)
                         next_char = source[next_index]
                         if not next_char.isdigit():
                             partial_number = "".join(number_chars) + "."
-                            raise CompilationError(
-                                "Decimal point must be followed by at least one digit in: "
-                                f"{partial_number}",
-                                start_line,
-                                start_column,
-                            )
+                            raise_decimal_error(partial_number, start_line, start_column)
                         has_decimal = True
                         number_chars.append(current)
                         index += 1
