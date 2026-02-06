@@ -146,7 +146,8 @@ class BasicLexer:
                 while index < length:
                     current = source[index]
                     if current == "." and not has_decimal:
-                        if index + 1 >= length or not source[index + 1].isdigit():
+                        next_char = source[index + 1] if index + 1 < length else ""
+                        if not next_char or not next_char.isdigit():
                             partial_number = "".join(number_chars) + "."
                             raise CompilationError(
                                 "Decimal point must be followed by at least one digit in: "

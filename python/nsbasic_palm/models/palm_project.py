@@ -19,7 +19,7 @@ from pathlib import Path
 from nsbasic_palm.compiler import BasicCompiler, CompilationError
 from nsbasic_palm.utils.logging_system import NSBasicLogger
 
-_MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
+MODULE_SOURCE_ATTRIBUTES = ("source_code", "code", "script")
 
 
 class PalmResolution(Enum):
@@ -160,7 +160,7 @@ class PalmProject:
         """Retrieve BASIC source code from a module representation."""
         if isinstance(module, str):
             return module
-        for attribute_name in _MODULE_SOURCE_ATTRIBUTES:
+        for attribute_name in MODULE_SOURCE_ATTRIBUTES:
             module_source = getattr(module, attribute_name, "")
             if isinstance(module_source, str):
                 return module_source
