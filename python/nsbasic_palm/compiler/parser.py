@@ -73,7 +73,11 @@ class BasicParser:
                 try:
                     value = float(token.value)
                 except ValueError as exc:
-                    raise CompilationError("Invalid numeric literal", token.line, token.column) from exc
+                    raise CompilationError(
+                        f"Failed to parse numeric literal: {token.value}",
+                        token.line,
+                        token.column,
+                    ) from exc
             return Literal(value)
         if self._match(TokenType.STRING):
             return Literal(self._previous().value)
