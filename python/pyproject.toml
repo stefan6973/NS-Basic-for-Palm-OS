@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nsbasic-palm"
+version = "0.1.0"
+description = "NS Basic/Palm OS - Python modernization of Palm OS development IDE"
+readme = "README_CONVERSION.md"
+requires-python = ">=3.8"
+license = {text = "See LICENSE file"}
+authors = [
+    {name = "NS BASIC Corporation", email = ""},
+]
+keywords = ["palm-os", "ide", "basic", "legacy-modernization"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Embedded Systems",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "PySide6>=6.6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+]
+
+[project.urls]
+Repository = "https://github.com/stefan6973/NS-Basic-for-Palm-OS"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["nsbasic_palm*"]
+exclude = ["tests*"]
