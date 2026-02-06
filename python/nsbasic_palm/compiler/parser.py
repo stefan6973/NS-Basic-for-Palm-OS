@@ -68,16 +68,13 @@ class BasicParser:
         if self._match(TokenType.NUMBER):
             token = self._previous()
             try:
-                value = int(token.value)
-            except ValueError:
-                try:
-                    value = float(token.value)
-                except ValueError as exc:
-                    raise CompilationError(
-                        f"Failed to parse numeric literal: {token.value}",
-                        token.line,
-                        token.column,
-                    ) from exc
+                value = float(token.value) if "." in token.value else int(token.value)
+            except ValueError as exc:
+                raise CompilationError(
+                    f"Failed to parse numeric literal: {token.value}",
+                    token.line,
+                    token.column,
+                ) from exc
             return Literal(value)
         if self._match(TokenType.STRING):
             return Literal(self._previous().value)
